@@ -244,6 +244,7 @@
     <Content Include="Views\Mail\Create.cshtml" />
     <Content Include="Views\Mail\Edit.cshtml" />
     <Content Include="Views\Mail\Delete.cshtml" />
+    <Content Include="Views\UserInfo\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
