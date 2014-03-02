@@ -17,7 +17,7 @@ namespace Teshe.Models
 
         [DisplayName("用户名")]
         [Required(ErrorMessage = "请输入用户名")]
-        [MaxLength(40, ErrorMessage = "密码不得超过40个字符")]
+        [MaxLength(40, ErrorMessage = "用户名不得超过40个字符")]
         public string Name { get; set; }
 
         [DisplayName("会员密码")]

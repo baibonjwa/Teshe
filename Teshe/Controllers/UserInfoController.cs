@@ -170,7 +170,15 @@ namespace Teshe.Controllers
 
         private bool ValidateUser(string name, string password)
         {
-            throw new NotImplementedException();
+            UserInfo ui = db.UserInfoes.FirstOrDefault<UserInfo>(u => u.Name == name && u.Password == password);
+            if (ui != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private bool ValidateUserRepeat(string name)

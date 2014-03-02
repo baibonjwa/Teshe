@@ -142,6 +142,7 @@
     <Compile Include="Models\Stoppage.cs" />
     <Compile Include="Models\TesheContext.cs" />
     <Compile Include="Models\UserInfo.cs" />
+    <Compile Include="Models\UserInfoLoginViewModel.cs" />
     <Compile Include="Models\UserType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -254,6 +255,7 @@
     <Content Include="Views\Mail\Create.cshtml" />
     <Content Include="Views\Mail\Edit.cshtml" />
     <Content Include="Views\Mail\Delete.cshtml" />
+    <Content Include="Views\UserInfo\Login1.cshtml" />
     <Content Include="Views\UserInfo\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>

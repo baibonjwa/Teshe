@@ -88,6 +88,10 @@ body {
     margin-top: 15px;
 }
 
+.red {
+    color: red;
+}
+
 #user {
     margin-left: 40px;
     margin-top: 45px;
