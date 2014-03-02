@@ -203,6 +203,15 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="Images\bt_bg.gif" />
+    <Content Include="Content\login.css" />
+    <Content Include="Images\login_03.gif" />
+    <Content Include="Images\login_05.gif" />
+    <Content Include="Images\login_09.gif" />
+    <Content Include="Images\login_11.gif" />
+    <Content Include="Images\login_13.gif" />
+    <Content Include="Images\login_16.gif" />
+    <Content Include="Images\login_18.gif" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -218,6 +227,7 @@
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\UserInfo\login.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
