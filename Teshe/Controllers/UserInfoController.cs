@@ -121,12 +121,13 @@ namespace Teshe.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult Login(string returnUrl)
+        public ActionResult Login()
         {
-            ViewBag.ReturnUrl = returnUrl;
+            //ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
+        [HttpPost]
         public ActionResult Login(string name, string password, string returnUrl)
         {
             if (ValidateUser(name, password))
