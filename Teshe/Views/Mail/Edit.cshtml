@@ -1,0 +1,54 @@
+﻿@model Teshe.Models.Mail
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Mail</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Contents)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Contents)
+            @Html.ValidationMessageFor(model => model.Contents)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SendTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SendTime)
+            @Html.ValidationMessageFor(model => model.SendTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IsRead)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IsRead)
+            @Html.ValidationMessageFor(model => model.IsRead)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

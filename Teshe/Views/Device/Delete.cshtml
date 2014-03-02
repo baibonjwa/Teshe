@@ -1,0 +1,159 @@
+﻿@model Teshe.Models.Device
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Device</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Model)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Model)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.BarCode)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BarCode)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PhotoUrl)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PhotoUrl)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Company)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Company)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.District)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.District)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.City)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.City)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Province)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Province)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ManufactureDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ManufactureDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Factory)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Factory)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SetupTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SetupTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ExplosionProof)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ExplosionProof)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SecurityCertificateNo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SecurityCertificateNo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CheckState)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CheckState)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CheckTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CheckTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CheckCycle)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CheckCycle)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UseState)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UseState)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MaintenanceRecord)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MaintenanceRecord)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Remarks)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Remarks)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.InputTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.InputTime)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

@@ -1,0 +1,106 @@
+﻿@model Teshe.Models.UserInfo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>UserInfo</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Password)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Password)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.RegisterOn)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RegisterOn)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IsVerify)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IsVerify)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ResponsiblePerson)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ResponsiblePerson)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Company)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Company)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.District)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.District)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.City)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.City)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Province)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Province)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Tel)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Tel)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Email)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Email)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Remarks)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Remarks)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PhotoUrl)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PhotoUrl)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
