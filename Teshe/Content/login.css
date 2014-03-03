@@ -94,7 +94,7 @@ body {
 
 #user {
     margin-left: 40px;
-    margin-top: 45px;
+    margin-top: 35px;
     height: 25px;
 }
 
@@ -113,20 +113,16 @@ input {
 
 #btn {
     margin-left: 30px;
-    margin-top: 40px;
+    margin-top: 30px;
     height: 25px;
     margin-right: 28px;
     text-align: center;
 }
 
     #btn a {
-        display: block;
-        line-height: 25px;
-        background: url(bt_bg.gif);
-        border: solid 1px #b6b6b6;
-        width: 65px;
-        float: left;
-        margin-left: 15px;
+        width: 120px;
+        height: 18px;
+        color: #000000;
         text-decoration: none;
-        color: #000;
+        font-size: 9pt;
     }

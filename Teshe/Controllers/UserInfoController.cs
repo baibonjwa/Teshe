@@ -128,19 +128,12 @@ namespace Teshe.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(string name, string password, string returnUrl)
+        public ActionResult Login(string name, string password)
         {
             if (ValidateUser(name, password))
             {
                 FormsAuthentication.SetAuthCookie(name, false);
-                if (String.IsNullOrEmpty(returnUrl))
-                {
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    return Redirect(returnUrl);
-                }
+                return RedirectToAction("Home", "Index");
             }
 
             ModelState.AddModelError("", "您输入的账号或密码有错误");
