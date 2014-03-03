@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model System.String
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -14,28 +15,13 @@
         </div>
         <div class="center">
             @Html.Partial("_BackLeft")
+            @Html.Partial("_BackRightTop", @Model)
             <div class="right">
-                <div id="right_top">
-                    <div id="img">
-                        <img src="/Images/close.gif" />
-                    </div>
-                    <span class="imgtext">打开/关闭左栏</span>
-                    <div id="loginout">
-                        <div id="loginoutimg">
-                            <img src="/Images/loginout.gif" />
-                        </div>
-                        <span class="logintext">退出系统</span>
-                    </div>
-                </div>
-                <div id="right_font">
-                    <img src="/Images/main_14.gif" />
-                    您现在所在的位置：首页 → 用户信息 → <span class="bfont">操作日志</span>
-                </div>
-                @RenderBody();
+                @RenderBody()
             </div>
         </div>
     </div>
-    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquery") 
     @RenderSection("scripts", required: false)
 </body>
 </html>

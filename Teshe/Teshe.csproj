@@ -128,6 +128,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\DeviceController.cs" />
@@ -298,6 +299,9 @@
     <Content Include="Scripts\menu.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Shared\_BackRightTop.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -309,7 +313,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\UserInfo\Index.cshtml" />
     <Content Include="Views\UserInfo\Details.cshtml" />
     <Content Include="Views\UserInfo\Create.cshtml" />
     <Content Include="Views\UserInfo\Edit.cshtml" />
@@ -329,7 +332,10 @@
     <Content Include="Views\Shared\_BackTop.cshtml" />
     <Content Include="Views\Shared\_BackLeft.cshtml" />
     <Content Include="Views\Shared\_BackRight.cshtml" />
-    <Content Include="Views\Shared\_BackRightTop.cshtml" />
+    <Content Include="Views\Home\SystemInfo.cshtml">
+      <BrowseToURL>~/Home/SystemInfo</BrowseToURL>
+    </Content>
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
