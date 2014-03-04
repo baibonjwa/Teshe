@@ -91,6 +91,7 @@ H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\bin\zh-Hans\System.Web.Raz
 H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\bin\zh-Hans\System.Web.WebPages.resources.dll
 H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\bin\zh-Hans\System.Web.WebPages.Deployment.resources.dll
 H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
-H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\obj\Debug\Teshe.csprojResolveAssemblyReference.cache
 H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\obj\Debug\Teshe.dll
 H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\obj\Debug\Teshe.pdb
+H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\obj\Debug\Teshe.Migrations.InitialCreate.resources
+H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\obj\Debug\Teshe.csproj.GenerateResource.Cache

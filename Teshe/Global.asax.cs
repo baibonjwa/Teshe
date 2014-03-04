@@ -17,7 +17,8 @@ namespace Teshe
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-
+            System.Data.Entity.Database.SetInitializer(
+                new System.Data.Entity.MigrateDatabaseToLatestVersion<Models.TesheContext, Migrations.Configuration>());
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

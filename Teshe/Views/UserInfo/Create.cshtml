@@ -12,6 +12,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>Login</title>
     @Styles.Render("~/Content/main.css")
+    @Styles.Render("~/Content/Site.css")
 </head>
 <body>
     @using (Html.BeginForm())
@@ -47,6 +48,16 @@
                     @Html.ValidationMessageFor(model => model.Password)
                 </td>
             </tr>
+            <tr>
+                <td class="lefttd">
+                    @Html.LabelFor(model => model.RepPassword)：
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.RepPassword)
+                    @Html.ValidationMessageFor(model => model.RepPassword)
+                </td>
+            </tr>
+
             <tr>
                 <td class="lefttd">
                     @Html.LabelFor(model => model.ResponsiblePerson)：

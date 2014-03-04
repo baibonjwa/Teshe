@@ -54,7 +54,7 @@ namespace Teshe.Controllers
             {
                 db.UserInfoes.Add(userinfo);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return View("Login");
             }
 
             return View(userinfo);
