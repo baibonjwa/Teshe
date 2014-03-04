@@ -1,134 +1,144 @@
 ﻿@model Teshe.Models.UserInfo
-
+@{
+    Layout = null;
+}
 @{
     ViewBag.Title = "用户注册";
 }
+<!DOCTYPE html>
 
-@Styles.Render("~/Content/main.css")
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    @Styles.Render("~/Content/main.css")
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
 
-    <table class="register">
-        <tr>
-            <td style="font-size: 28px; text-align: center;" colspan="3">用户注册
-            </td>
-        </tr>
-        <tr>
-            <td colspan="3">请认真填写下列信息
-            </td>
-        </tr>
-        <tr>
-            <td class="lefttd">
-                @Html.LabelFor(model => model.Name)：
-            </td>
-            <td>
-                @Html.EditorFor(model => model.Name)
-                @Html.ValidationMessageFor(model => model.Name)
-            </td>
-        </tr>
+        <table class="register">
+            <tr>
+                <td style="font-size: 28px; text-align: center;" colspan="3">用户注册
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">请认真填写下列信息
+                </td>
+            </tr>
+            <tr>
+                <td class="lefttd">
+                    @Html.LabelFor(model => model.Name)：
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Name)
+                    @Html.ValidationMessageFor(model => model.Name)
+                </td>
+            </tr>
 
-        <tr>
-            <td class="lefttd">
-                @Html.LabelFor(model => model.Password)：
-            </td>
-            <td>
-                @Html.EditorFor(model => model.Password)
-                @Html.ValidationMessageFor(model => model.Password)
-            </td>
-        </tr>
-        <tr>
-            <td class="lefttd">
-                @Html.LabelFor(model => model.ResponsiblePerson)：
-            </td>
-            <td>
-                @Html.EditorFor(model => model.ResponsiblePerson)
-                @Html.ValidationMessageFor(model => model.ResponsiblePerson)
-            </td>
-        </tr>
-        <tr>
-            <td class="lefttd">
-                @Html.LabelFor(model => model.Company)：
-            </td>
-            <td>
-                @Html.EditorFor(model => model.Company)
-                @Html.ValidationMessageFor(model => model.Company)
-            </td>
-        </tr>
-        <tr>
-            <td class="lefttd">
-                @Html.LabelFor(model => model.District)：
-            </td>
-            <td>
-                @Html.EditorFor(model => model.District)
-                @Html.ValidationMessageFor(model => model.District)
-            </td>
-        </tr>
-        <tr>
-            <td class="lefttd">
-                @Html.LabelFor(model => model.City)：
-            </td>
-            <td>
-                @Html.EditorFor(model => model.City)
-                @Html.ValidationMessageFor(model => model.City)
-            </td>
-        </tr>
-        <tr>
-            <td class="lefttd">
-                @Html.LabelFor(model => model.Province)：
-            </td>
-            <td>
-                @Html.EditorFor(model => model.Province)
-                @Html.ValidationMessageFor(model => model.Province)
-            </td>
-        </tr>
-        <tr>
-            <td class="lefttd">
-                @Html.LabelFor(model => model.Tel)：
-            </td>
-            <td>
-                @Html.EditorFor(model => model.Tel)
-                @Html.ValidationMessageFor(model => model.Tel)
-            </td>
-        </tr>
-        <tr>
-            <td class="lefttd">
-                @Html.LabelFor(model => model.Email)：
-            </td>
-            <td>
-                @Html.EditorFor(model => model.Email)
-                @Html.ValidationMessageFor(model => model.Email)
-            </td>
-        </tr>
-        <tr>
-            <td class="lefttd">
-                @Html.LabelFor(model => model.Remarks)：
-            </td>
-            <td>
-                @Html.EditorFor(model => model.Remarks)
-                @Html.ValidationMessageFor(model => model.Remarks)
-            </td>
-        </tr>
-        <tr>
-            <td class="lefttd">
-                @Html.LabelFor(model => model.PhotoUrl)：
-            </td>
-            <td>
-                @Html.EditorFor(model => model.PhotoUrl)
-                @Html.ValidationMessageFor(model => model.PhotoUrl)
-            </td>
-        </tr>
-    </table>
-    <p>
-        <input type="submit" value="注册" />
-    </p>
-}
+            <tr>
+                <td class="lefttd">
+                    @Html.LabelFor(model => model.Password)：
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Password)
+                    @Html.ValidationMessageFor(model => model.Password)
+                </td>
+            </tr>
+            <tr>
+                <td class="lefttd">
+                    @Html.LabelFor(model => model.ResponsiblePerson)：
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.ResponsiblePerson)
+                    @Html.ValidationMessageFor(model => model.ResponsiblePerson)
+                </td>
+            </tr>
+            <tr>
+                <td class="lefttd">
+                    @Html.LabelFor(model => model.Company)：
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Company)
+                    @Html.ValidationMessageFor(model => model.Company)
+                </td>
+            </tr>
+            <tr>
+                <td class="lefttd">
+                    @Html.LabelFor(model => model.District)：
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.District)
+                    @Html.ValidationMessageFor(model => model.District)
+                </td>
+            </tr>
+            <tr>
+                <td class="lefttd">
+                    @Html.LabelFor(model => model.City)：
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.City)
+                    @Html.ValidationMessageFor(model => model.City)
+                </td>
+            </tr>
+            <tr>
+                <td class="lefttd">
+                    @Html.LabelFor(model => model.Province)：
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Province)
+                    @Html.ValidationMessageFor(model => model.Province)
+                </td>
+            </tr>
+            <tr>
+                <td class="lefttd">
+                    @Html.LabelFor(model => model.Tel)：
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Tel)
+                    @Html.ValidationMessageFor(model => model.Tel)
+                </td>
+            </tr>
+            <tr>
+                <td class="lefttd">
+                    @Html.LabelFor(model => model.Email)：
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Email)
+                    @Html.ValidationMessageFor(model => model.Email)
+                </td>
+            </tr>
+            <tr>
+                <td class="lefttd">
+                    @Html.LabelFor(model => model.Remarks)：
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Remarks)
+                    @Html.ValidationMessageFor(model => model.Remarks)
+                </td>
+            </tr>
+            <tr>
+                <td class="lefttd">
+                    @Html.LabelFor(model => model.PhotoUrl)：
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.PhotoUrl)
+                    @Html.ValidationMessageFor(model => model.PhotoUrl)
+                </td>
+            </tr>
+        </table>
+        <p>
+            <input type="submit" value="注册" />
+        </p>
+    }
 
-@*<div>
+    @*<div>
     @Html.ActionLink("Back to List", "Index")
 </div>*@
-
+</body>
+</html>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
