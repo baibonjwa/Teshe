@@ -1,0 +1,9 @@
+# git ignore file
+*.mdb
+*.ldb
+*.sln
+Debug/
+Release/
+obj/
+Log/
+FileUpload/
