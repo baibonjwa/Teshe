@@ -13,7 +13,8 @@ namespace Teshe.Models
         // 
         // System.Data.Entity.Database.SetInitializer(new System.Data.Entity.DropCreateDatabaseIfModelChanges<Teshe.Models.TesheContext>());
 
-        public TesheContext() : base("name=TesheContext")
+        public TesheContext()
+            : base("name=TesheContext")
         {
         }
 
@@ -22,5 +23,7 @@ namespace Teshe.Models
         public DbSet<Device> Devices { get; set; }
 
         public DbSet<Mail> Mails { get; set; }
+
+        public DbSet<UserType> UserTypes { get; set; }
     }
 }

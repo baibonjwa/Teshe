@@ -53,6 +53,7 @@ namespace Teshe.Controllers
         {
             if (ModelState.IsValid)
             {
+                userinfo.UserType = db.UserTypes.First<UserType>(u => u.Name == "客户");
                 db.UserInfoes.Add(userinfo);
                 db.SaveChanges();
                 log.Info("用户" + userinfo.Name + "于" + DateTime.Now.ToString() + "申请注册");

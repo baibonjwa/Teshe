@@ -28,6 +28,7 @@ namespace Teshe.Models
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
+        [NotMapped]
         [DisplayName("确认密码")]
         [Compare("Password", ErrorMessage = "两次输入的密码不一致")]
         [DataType(DataType.Password)]
