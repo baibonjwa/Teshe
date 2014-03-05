@@ -10,9 +10,10 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Login</title>
+    <title>用户注册</title>
     @Styles.Render("~/Content/main.css")
     @Styles.Render("~/Content/Site.css")
+    @Styles.Render("~/Content/uploadify.css")
     @*@Ajax.ActionLink("Run JavaScript", "JavaScript", new AjaxOptions())*@
 </head>
 <body>
@@ -138,6 +139,7 @@
                 <td>
                     @Html.EditorFor(model => model.PhotoUrl)
                     @Html.ValidationMessageFor(model => model.PhotoUrl)
+                    <input type="file" name="file_upload" id="file_upload" />
                 </td>
             </tr>
         </table>
@@ -147,6 +149,16 @@
     }
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/uploadify/jquery.uploadify.min.js")
+    <script>
+        $(function () {
+            $('#file_upload').uploadify({
+                'swf': '/Scripts/uploadify/uploadify.swf',
+                'uploader': '/UserInfo/UploadPhoto'
+                // Put your options here
+            });
+        });
+    </script>
     @*<div>
     @Html.ActionLink("Back to List", "Index")
 </div>*@

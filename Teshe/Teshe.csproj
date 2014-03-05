@@ -233,6 +233,7 @@
     <Content Include="Scripts\easyui1.3.2\themes\default\images\Thumbs.db" />
     <Content Include="Scripts\easyui1.3.2\themes\gray\images\Thumbs.db" />
     <Content Include="Scripts\easyui1.3.2\themes\metro\images\Thumbs.db" />
+    <Content Include="Photo\201310261411531323.xls" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Images\bar1.gif" />
     <Content Include="Images\body_background.png" />
@@ -789,6 +790,13 @@
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\menu.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\uploadify\Change Log.txt" />
+    <Content Include="Scripts\uploadify\jquery.uploadify.js" />
+    <Content Include="Scripts\uploadify\jquery.uploadify.min.js" />
+    <Content Include="Scripts\uploadify\license.txt" />
+    <Content Include="Scripts\uploadify\uploadify-cancel.png" />
+    <Content Include="Content\uploadify.css" />
+    <Content Include="Scripts\uploadify\uploadify.swf" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Shared\_BackRightTop.cshtml">
       <SubType>Code</SubType>
@@ -827,6 +835,9 @@
       <BrowseToURL>~/Home/SystemInfo</BrowseToURL>
     </Content>
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Scripts\uploadify\check-exists.php" />
+    <Content Include="Scripts\uploadify\index.php" />
+    <Content Include="Scripts\uploadify\uploadify.php" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

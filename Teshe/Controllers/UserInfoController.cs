@@ -7,6 +7,8 @@ using System.Web;
 using System.Web.Mvc;
 using Teshe.Models;
 using System.Web.Security;
+using System.Text;
+using System.IO;
 
 namespace Teshe.Controllers
 {
@@ -159,6 +161,29 @@ namespace Teshe.Controllers
                 return RedirectToAction("Index");
             }
             return View(userinfo);
+        }
+
+        public ActionResult UploadPhoto(HttpPostedFileBase FileData)
+        {
+            byte[] buffer = Encoding.GetEncoding("utf-8").GetBytes(FileData.FileName);
+            buffer = Encoding.Convert(Encoding.GetEncoding("utf-8"), Encoding.GetEncoding("gb2312"), buffer);
+            string fn = Encoding.UTF8.GetString(buffer);
+
+            string strUploadPath = Server.MapPath("/Photo/");
+
+            if (FileData != null)
+            {
+                if (!Directory.Exists(strUploadPath))
+                {
+                    Directory.CreateDirectory(strUploadPath);
+                }
+                FileData.SaveAs(strUploadPath + fn);
+                return Json(true);
+            }
+            else
+            {
+                return Json(false);
+            }
         }
 
         private bool ValidateUser(string name, string password)
