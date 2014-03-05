@@ -137,7 +137,8 @@
                     @Html.LabelFor(model => model.PhotoUrl)：
                 </td>
                 <td>
-                    @Html.EditorFor(model => model.PhotoUrl)
+                    @Html.Editor("fileName");
+                    @Html.HiddenFor(model => model.PhotoUrl)
                     @Html.ValidationMessageFor(model => model.PhotoUrl)
                     <input type="file" name="file_upload" id="file_upload" />
                 </td>
@@ -152,7 +153,7 @@
     @Scripts.Render("~/Scripts/uploadify/jquery.uploadify.min.js")
     <script>
         $(document).ready(function () {
-            $('#PhotoUrl').attr("readonly", true);
+            $('#fileName').attr("readonly", true);
         })
         $(function () {
             $('#file_upload').uploadify({
@@ -160,8 +161,10 @@
                 'uploader': '/UserInfo/UploadPhoto',
                 'onUploadSuccess': function (file, data, response) {
                     alert(data);
-                    $('#PhotoUrl').val(data.replace("\"", "").replace("\"", ""));
+                    $('#fileName').val(data.split(',')[0].replace("\"", ""));
+                    $('#PhotoUrl').val(data.split(',')[1].replace("\"", ""));
                 }
+
                 // Put your options here
             });
         });

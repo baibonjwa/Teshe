@@ -166,9 +166,19 @@ namespace Teshe.Controllers
 
         public ActionResult UploadPhoto(HttpPostedFileBase FileData)
         {
-            byte[] buffer = Encoding.GetEncoding("utf-8").GetBytes(FileData.FileName);
-            buffer = Encoding.Convert(Encoding.GetEncoding("utf-8"), Encoding.GetEncoding("gb2312"), buffer);
-            string fn = Encoding.UTF8.GetString(buffer);
+            //Response.HeaderEncoding = Encoding.UTF8; 
+            string oldFileName = FileData.FileName;
+            var sbFileName = new StringBuilder();
+            sbFileName.Append(DateTime.Now.Year);
+            sbFileName.Append(DateTime.Now.Month);
+            sbFileName.Append(DateTime.Now.Day);
+            sbFileName.Append(DateTime.Now.Hour);
+            sbFileName.Append(DateTime.Now.Minute);
+            sbFileName.Append(DateTime.Now.Second);
+            sbFileName.Append(DateTime.Now.Millisecond);
+            sbFileName.Append(Path.GetExtension(oldFileName));
+            string newFileName = sbFileName.ToString();
+
             string strUploadPath = Server.MapPath("/FileUpload/Photo/");
 
             if (FileData != null)
@@ -177,8 +187,8 @@ namespace Teshe.Controllers
                 {
                     Directory.CreateDirectory(strUploadPath);
                 }
-                FileData.SaveAs(strUploadPath + fn);
-                return Json(fn);
+                FileData.SaveAs(strUploadPath + newFileName);
+                return Json(oldFileName + "," + newFileName);
             }
             else
             {
