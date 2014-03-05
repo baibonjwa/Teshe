@@ -46,3 +46,6 @@ build/
 *.psess
 *.vsp
 *.vspx
+
+/FileUpload
+/Log
