@@ -13,6 +13,7 @@
     <title>Login</title>
     @Styles.Render("~/Content/main.css")
     @Styles.Render("~/Content/Site.css")
+    @*@Ajax.ActionLink("Run JavaScript", "JavaScript", new AjaxOptions())*@
 </head>
 <body>
     @using (Html.BeginForm())
@@ -144,12 +145,10 @@
             <input type="submit" value="注册" />
         </p>
     }
-
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
     @*<div>
     @Html.ActionLink("Back to List", "Index")
 </div>*@
 </body>
 </html>
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

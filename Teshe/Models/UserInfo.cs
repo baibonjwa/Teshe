@@ -19,6 +19,7 @@ namespace Teshe.Models
         [DisplayName("用户名")]
         [Required(ErrorMessage = "请输入用户名")]
         [MaxLength(40, ErrorMessage = "用户名不得超过40个字符")]
+        [Remote("ValidateUserRepeat", "UserInfo", HttpMethod = "POST", ErrorMessage = "用户名已被注册")]
         public string Name { get; set; }
 
         [DisplayName("会员密码")]
@@ -29,6 +30,7 @@ namespace Teshe.Models
 
         [DisplayName("确认密码")]
         [Compare("Password", ErrorMessage = "两次输入的密码不一致")]
+        [DataType(DataType.Password)]
         public virtual string RepPassword { get; set; }
 
         [DisplayName("用户注册时间")]

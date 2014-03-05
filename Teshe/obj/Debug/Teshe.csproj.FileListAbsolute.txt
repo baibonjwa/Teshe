@@ -95,3 +95,5 @@ H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\obj\Debug\Teshe.dll
 H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\obj\Debug\Teshe.pdb
 H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\obj\Debug\Teshe.Migrations.InitialCreate.resources
 H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\obj\Debug\Teshe.csproj.GenerateResource.Cache
+I:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\obj\Debug\Teshe.Migrations.InitialCreate.resources
+I:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\obj\Debug\Teshe.csproj.GenerateResource.Cache

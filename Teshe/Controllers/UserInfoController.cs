@@ -48,7 +48,7 @@ namespace Teshe.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(UserInfo userinfo)
+        public ActionResult Create([Bind(Exclude = "RegisterOn")] UserInfo userinfo)
         {
             if (ModelState.IsValid)
             {
@@ -174,9 +174,19 @@ namespace Teshe.Controllers
             }
         }
 
-        private bool ValidateUserRepeat(string name)
+
+        [HttpPost]
+        public ActionResult ValidateUserRepeat(string name)
         {
-            throw new NotImplementedException();
+            var userInfo = db.UserInfoes.FirstOrDefault<UserInfo>(u => u.Name == name);
+            if (userInfo != null)
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(true);
+            }
         }
     }
 }
