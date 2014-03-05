@@ -8,16 +8,16 @@
 
 # Build results
 
-[Dd]ebug/
-[Rr]elease/
-x64/
-build/
-[Bb]in/
-[Oo]bj/
+Teshe/[Dd]ebug/
+Teshe/[Rr]elease/
+Teshe/x64/
+Teshe/build/
+Teshe/[Bb]in/
+Teshe/[Oo]bj/
 
 # MSTest test Results
-[Tt]est[Rr]esult*/
-[Bb]uild[Ll]og.*
+Teshe/[Tt]est[Rr]esult*/
+Teshe/[Bb]uild[Ll]og.*
 
 *_i.c
 *_p.c
@@ -47,5 +47,5 @@ build/
 *.vsp
 *.vspx
 
-/FileUpload
-/Log
+Teshe/FileUpload
+Teshe/Log

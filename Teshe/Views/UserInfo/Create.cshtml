@@ -151,14 +151,16 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/Scripts/uploadify/jquery.uploadify.min.js")
     <script>
+        $(document).ready(function () {
+            $('#PhotoUrl').attr("disabled", true);
+        })
         $(function () {
             $('#file_upload').uploadify({
                 'swf': '/Scripts/uploadify/uploadify.swf',
                 'uploader': '/UserInfo/UploadPhoto',
                 'onUploadSuccess': function (file, data, response) {
-                    alert(file);
                     alert(data);
-                    alert(response);
+                    $('#PhotoUrl').val(data.replace("\"", "").replace("\"", ""));
                 }
                 // Put your options here
             });
