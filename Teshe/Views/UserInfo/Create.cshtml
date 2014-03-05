@@ -154,7 +154,12 @@
         $(function () {
             $('#file_upload').uploadify({
                 'swf': '/Scripts/uploadify/uploadify.swf',
-                'uploader': '/UserInfo/UploadPhoto'
+                'uploader': '/UserInfo/UploadPhoto',
+                'onUploadSuccess': function (file, data, response) {
+                    alert(file);
+                    alert(data);
+                    alert(response);
+                }
                 // Put your options here
             });
         });

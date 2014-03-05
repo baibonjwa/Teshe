@@ -10,12 +10,11 @@ using System.Web.Security;
 using System.Text;
 using System.IO;
 
+
 namespace Teshe.Controllers
 {
-    public class UserInfoController : Controller
+    public class UserInfoController : BaseController
     {
-        private TesheContext db = new TesheContext();
-
         //
         // GET: /UserInfo/
 
@@ -56,6 +55,7 @@ namespace Teshe.Controllers
             {
                 db.UserInfoes.Add(userinfo);
                 db.SaveChanges();
+                log.Info("用户" + userinfo.Name + "于" + DateTime.Now.ToString() + "申请注册");
                 return View("Login");
             }
 
@@ -168,8 +168,7 @@ namespace Teshe.Controllers
             byte[] buffer = Encoding.GetEncoding("utf-8").GetBytes(FileData.FileName);
             buffer = Encoding.Convert(Encoding.GetEncoding("utf-8"), Encoding.GetEncoding("gb2312"), buffer);
             string fn = Encoding.UTF8.GetString(buffer);
-
-            string strUploadPath = Server.MapPath("/Photo/");
+            string strUploadPath = Server.MapPath("/FileUpload/Photo/");
 
             if (FileData != null)
             {
@@ -178,7 +177,7 @@ namespace Teshe.Controllers
                     Directory.CreateDirectory(strUploadPath);
                 }
                 FileData.SaveAs(strUploadPath + fn);
-                return Json(true);
+                return Json(fn);
             }
             else
             {

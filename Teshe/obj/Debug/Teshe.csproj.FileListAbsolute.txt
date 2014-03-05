@@ -97,3 +97,6 @@ H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\obj\Debug\Teshe.Migrations
 H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\obj\Debug\Teshe.csproj.GenerateResource.Cache
 I:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\obj\Debug\Teshe.Migrations.InitialCreate.resources
 I:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\obj\Debug\Teshe.csproj.GenerateResource.Cache
+I:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\bin\log4net.dll
+I:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\bin\log4net.pdb
+I:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\bin\log4net.xml
