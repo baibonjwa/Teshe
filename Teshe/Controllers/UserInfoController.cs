@@ -136,7 +136,7 @@ namespace Teshe.Controllers
             if (ValidateUser(name, password))
             {
                 FormsAuthentication.SetAuthCookie(name, false);
-                return RedirectToAction("Home", "Index");
+                return RedirectToAction("Index", "Home");
             }
 
             ModelState.AddModelError("", "您输入的账号或密码有错误");
