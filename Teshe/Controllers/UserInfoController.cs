@@ -149,7 +149,7 @@ namespace Teshe.Controllers
 
             Session.Clear();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "UserInfo");
         }
 
         public ActionResult PassVerify(UserInfo userinfo)
