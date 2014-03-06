@@ -238,8 +238,6 @@
     <Content Include="Scripts\easyui1.3.2\themes\gray\images\Thumbs.db" />
     <Content Include="Scripts\easyui1.3.2\themes\metro\images\Thumbs.db" />
     <Content Include="log4net.config" />
-    <Content Include="FileUpload\Photo\201310261357482069.xls" />
-    <Content Include="FileUpload\Photo\201310261411531323.xls" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Images\bar1.gif" />
     <Content Include="Images\body_background.png" />
@@ -849,6 +847,7 @@
     <Content Include="Scripts\jquery.validate.min.js.map">
       <DependentUpon>jquery.validate.js</DependentUpon>
     </Content>
+    <Content Include="Views\UserInfo\Verify.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

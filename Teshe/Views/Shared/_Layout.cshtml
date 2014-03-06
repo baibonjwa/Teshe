@@ -7,7 +7,9 @@
     <title>@ViewBag.Title</title>
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/main.css")
-
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/easyui1.3.2/jquery.easyui.min.js")
+    @Styles.Render("~/Scripts/easyui/css")
 </head>
 <body>
     <div class="content">
@@ -22,8 +24,7 @@
             </div>
         </div>
     </div>
-    @Scripts.Render("~/bundles/jquery")
-    @Styles.Render("~/Content/easyui/css")
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

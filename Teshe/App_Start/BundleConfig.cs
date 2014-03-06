@@ -39,7 +39,7 @@ namespace Teshe
                         "~/Content/themes/base/jquery.ui.progressbar.css",
                         "~/Content/themes/base/jquery.ui.theme.css"));
 
-            bundles.Add(new StyleBundle("~/Content/easyui/css").Include(
+            bundles.Add(new StyleBundle("~/Scripts/easyui/css").Include(
                         "~/Scripts/easyui1.3.2/themes/bootstrap/easyui.css",
                         "~/Scripts/easyui1.3.2/themes/icon.css"));
         }

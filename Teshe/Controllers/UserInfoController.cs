@@ -152,6 +152,11 @@ namespace Teshe.Controllers
             return RedirectToAction("Login", "UserInfo");
         }
 
+        public ActionResult Verify()
+        {
+            return View();
+        }
+
         public ActionResult PassVerify(UserInfo userinfo)
         {
             if (ModelState.IsValid)
@@ -162,6 +167,12 @@ namespace Teshe.Controllers
                 return RedirectToAction("Index");
             }
             return View(userinfo);
+        }
+
+        public ActionResult GetNotVerifyUserInfos()
+        {
+            List<UserInfo> list = db.UserInfoes.Where<UserInfo>(u => u.IsVerify == 0).ToList<UserInfo>();
+            return Json(list);
         }
 
         public ActionResult UploadPhoto(HttpPostedFileBase FileData)

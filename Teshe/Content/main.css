@@ -148,6 +148,20 @@
     float: left;
 }
 
+    .logintext a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+        .logintext a:link {
+            color: #ffffff;
+        }
+
+        .logintext a:active {
+            color: #ffffff;
+        }
+
+
 #right_font {
     padding-top: 10px;
     height: 28px;
