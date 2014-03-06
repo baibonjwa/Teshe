@@ -76,7 +76,7 @@ namespace Teshe.Models
         public string PhotoUrl { get; set; }
 
         [DisplayName("用户类型")]
-        public UserType UserType { get; set; }
+        public virtual UserType UserType { get; set; }
 
     }
 }

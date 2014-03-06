@@ -9,6 +9,7 @@ using Teshe.Models;
 using System.Web.Security;
 using System.Text;
 using System.IO;
+using System.Data.Entity.Validation;
 
 
 namespace Teshe.Controllers
@@ -102,21 +103,27 @@ namespace Teshe.Controllers
             {
                 return HttpNotFound();
             }
-            return View(userinfo);
+            else
+            {
+                db.UserInfoes.Remove(userinfo);
+                db.SaveChanges();
+                log.Info(User.Identity.Name + "于" + DateTime.Now.ToString() + "审核未通过" + userinfo.Name + "用户");
+            }
+            return View("Verify");
         }
 
         //
         // POST: /UserInfo/Delete/5
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            UserInfo userinfo = db.UserInfoes.Find(id);
-            db.UserInfoes.Remove(userinfo);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    UserInfo userinfo = db.UserInfoes.Find(id);
+        //    db.UserInfoes.Remove(userinfo);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {
@@ -157,16 +164,18 @@ namespace Teshe.Controllers
             return View();
         }
 
-        public ActionResult PassVerify(UserInfo userinfo)
+        public ActionResult PassVerify(int id)
         {
+            UserInfo userinfo = db.UserInfoes.Find(id);
             if (ModelState.IsValid)
             {
                 userinfo.IsVerify = 1;
+                userinfo.RepPassword = userinfo.Password;
                 db.Entry(userinfo).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                log.Info(User.Identity.Name + "于" + DateTime.Now.ToString() + "审核通过" + userinfo.Name + "用户");
             }
-            return View(userinfo);
+            return View("Verify");
         }
 
         public ActionResult GetNotVerifyUserInfos()

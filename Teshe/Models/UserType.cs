@@ -16,7 +16,5 @@ namespace Teshe.Models
         [Required(ErrorMessage = "用户类型名称不能为空")]
         public string Name { get; set; }
 
-        public ICollection<UserInfo> UserInfos { get; set; }
-
     }
 }

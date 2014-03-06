@@ -26,10 +26,24 @@
 </table>
 
 <script>
-    function pass(val,row) {
-        return "<a href=\"/UserInfo/Verify\">通过</a>";
+    function pass(val, row) {
+        return "<a href=\"/UserInfo/PassVerify/" + row.Id + "\">通过</a>";
     }
-    function del(val,row) {
-        return "<a href=\"/UserInfo/Verify\">删除</a>";
+    function del(val, row) {
+        return "<a onclick=\"delConfirm()\" href=\"javascript:void(0)\">删除</a>";
+    }
+    function passConfirm(id) {
+        $.messager.confirm('确认', '您确定要通过审核吗？', function (r) {
+            if (r) {
+                window.location = "/UserInfo/PassVerify/" + id;
+            }
+        });
+    }
+    function delConfirm() {
+        $.messager.confirm('确认', '您确定要删除吗？', function (r) {
+            if (r) {
+                window.location = "/UserInfo/Delete/" + id;
+            }
+        });
     }
 </script>
