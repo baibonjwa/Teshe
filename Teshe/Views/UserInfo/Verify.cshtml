@@ -27,22 +27,22 @@
 
 <script>
     function pass(val, row) {
-        return "<a href=\"/UserInfo/PassVerify/" + row.Id + "\">通过</a>";
+        return "<a onclick=\"passConfirm(" + row.Id + ")\" href=\"javascript:void(0)\">通过</a>";
     }
     function del(val, row) {
-        return "<a onclick=\"delConfirm()\" href=\"javascript:void(0)\">删除</a>";
+        return "<a onclick=\"delConfirm(" + row.Id + ")\" href=\"javascript:void(0)\">删除</a>";
     }
     function passConfirm(id) {
         $.messager.confirm('确认', '您确定要通过审核吗？', function (r) {
             if (r) {
-                window.location = "/UserInfo/PassVerify/" + id;
+                window.location.href = "/UserInfo/PassVerify/" + id;
             }
         });
     }
-    function delConfirm() {
+    function delConfirm(id) {
         $.messager.confirm('确认', '您确定要删除吗？', function (r) {
             if (r) {
-                window.location = "/UserInfo/Delete/" + id;
+                window.location.href = "/UserInfo/Delete/" + id;
             }
         });
     }
