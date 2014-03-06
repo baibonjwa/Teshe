@@ -218,7 +218,7 @@ namespace Teshe.Controllers
 
         private bool ValidateUser(string name, string password)
         {
-            UserInfo ui = db.UserInfoes.FirstOrDefault<UserInfo>(u => u.Name == name && u.Password == password);
+            UserInfo ui = db.UserInfoes.FirstOrDefault<UserInfo>(u => u.Name == name && u.Password == password && u.IsVerify == 1);
             if (ui != null)
             {
                 return true;
