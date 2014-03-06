@@ -14,10 +14,5 @@ namespace Teshe.Controllers
         protected TesheContext db = new TesheContext();
         protected ILog log = LogManager.GetLogger("Log");
 
-        public ActionResult Index()
-        {
-            return View();
-        }
-
     }
 }
