@@ -848,6 +848,7 @@
       <DependentUpon>jquery.validate.js</DependentUpon>
     </Content>
     <Content Include="Views\UserInfo\Verify.cshtml" />
+    <Content Include="Views\UserInfo\PowerNotEnough.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

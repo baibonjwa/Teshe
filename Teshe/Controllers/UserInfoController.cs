@@ -95,7 +95,7 @@ namespace Teshe.Controllers
 
         //
         // GET: /UserInfo/Delete/5
-
+        [Authorize(Roles = "区（县）级管理员,市级管理员,省级管理员,系统管理员")]
         public ActionResult Delete(int id = 0)
         {
             UserInfo userinfo = db.UserInfoes.Find(id);
@@ -138,11 +138,11 @@ namespace Teshe.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(string name, string password)
+        public ActionResult Login(UserInfoLoginViewModel userinfo)
         {
-            if (ValidateUser(name, password))
+            if (ValidateUser(userinfo.Name, userinfo.Password))
             {
-                FormsAuthentication.SetAuthCookie(name, false);
+                FormsAuthentication.SetAuthCookie(userinfo.Name, false);
                 return RedirectToAction("Index", "Home");
             }
 
@@ -164,6 +164,7 @@ namespace Teshe.Controllers
             return View();
         }
 
+        [Authorize(Roles = "区（县）级管理员,市级管理员,省级管理员,系统管理员")]
         public ActionResult PassVerify(int id)
         {
             UserInfo userinfo = db.UserInfoes.Find(id);
@@ -242,6 +243,11 @@ namespace Teshe.Controllers
             {
                 return Json(true);
             }
+        }
+
+        public ActionResult PowerNotEnough()
+        {
+            return View();
         }
     }
 }
