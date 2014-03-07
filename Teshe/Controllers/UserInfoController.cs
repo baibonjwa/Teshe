@@ -112,6 +112,24 @@ namespace Teshe.Controllers
             return View("Verify");
         }
 
+
+        public ActionResult Cancel(String name)
+        {
+            UserInfo userinfo = db.UserInfoes.FirstOrDefault<UserInfo>(u => u.Name == name);
+            if (userinfo == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                db.UserInfoes.Remove(userinfo);
+                db.SaveChanges();
+                log.Info(User.Identity.Name + "于" + DateTime.Now.ToString() + "注销");
+                FormsAuthentication.SignOut();
+                Session.Clear();
+            }
+            return Redirect("/");
+        }
         //
         // POST: /UserInfo/Delete/5
 
