@@ -100,3 +100,7 @@ I:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\obj\Debug\Teshe.csproj.Gen
 I:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\bin\log4net.dll
 I:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\bin\log4net.pdb
 I:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\bin\log4net.xml
+H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\bin\log4net.dll
+H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\bin\log4net.pdb
+H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\bin\log4net.xml
+H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\obj\Debug\Teshe.csprojResolveAssemblyReference.cache

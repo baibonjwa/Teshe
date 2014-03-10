@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "ModifyUserInfo";
+}
+@model Teshe.Models.UserInfo
+<h2>会员信息修改</h2>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/Scripts/uploadify/jquery.uploadify.min.js")
+@Styles.Render("~/Content/uploadify.css")
+@UIHelper.ShowUploadify("file_upload")
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>会员信息</legend>
+
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.Name)
+        @Html.HiddenFor(model => model.Password)
+        @Html.HiddenFor(model => model.RepPassword)
+        @Html.HiddenFor(model => model.RegisterOn)
+        @Html.HiddenFor(model => model.IsVerify)
+        @Html.HiddenFor(model => model.PhotoUrl)
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ResponsiblePerson);
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ResponsiblePerson)
+            @Html.ValidationMessageFor(model => model.ResponsiblePerson)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Company)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Company)
+            @Html.ValidationMessageFor(model => model.Company)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.District)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.District)
+            @Html.ValidationMessageFor(model => model.District)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.City)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.City)
+            @Html.ValidationMessageFor(model => model.City)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Province)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Province)
+            @Html.ValidationMessageFor(model => model.Province)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Tel)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Tel)
+            @Html.ValidationMessageFor(model => model.Tel)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Email)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Remarks)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Remarks)
+            @Html.ValidationMessageFor(model => model.Remarks)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PhotoUrl)
+        </div>
+        <div class="editor-field">
+            @Html.Editor("fileName")
+
+            @Html.ValidationMessageFor(model => model.PhotoUrl)
+            <input type="file" name="file_upload" id="file_upload" />
+        </div>
+
+        <p>
+            <input type="submit" value="保存修改" />
+        </p>
+    </fieldset>
+}

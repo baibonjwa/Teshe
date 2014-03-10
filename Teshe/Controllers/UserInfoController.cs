@@ -63,7 +63,7 @@ namespace Teshe.Controllers
 
             return View(userinfo);
         }
-
+        
         //
         // GET: /UserInfo/Edit/5
 
@@ -75,6 +75,32 @@ namespace Teshe.Controllers
                 return HttpNotFound();
             }
             return View(userinfo);
+        }
+
+
+        public ActionResult ModifyUserInfo()
+        {           
+            UserInfo userinfo = new UserInfo();
+            userinfo = db.UserInfoes.FirstOrDefault<UserInfo>(u => u.Name == User.Identity.Name);
+            return View(userinfo);
+        }
+
+        [HttpPost]
+        public ActionResult ModifyUserInfo(UserInfo userinfo)
+        {
+            //UserInfo userinfo = new UserInfo();
+            //userinfo = db.UserInfoes.FirstOrDefault<UserInfo>(u => u.Name == User.Identity.Name);
+
+            ModelState.Remove("Name");
+            ModelState.Remove("Password");
+            ModelState.Remove("RepPassword");
+            userinfo.RepPassword = userinfo.Password;
+            if (ModelState.IsValid)
+            {
+                db.Entry(userinfo).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            return View("ModifyUserInfo", userinfo);
         }
 
         //

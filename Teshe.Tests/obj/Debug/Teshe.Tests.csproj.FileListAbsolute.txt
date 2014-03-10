@@ -101,3 +101,6 @@ I:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Tests\obj\Debug\Teshe.Test
 I:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Tests\bin\Debug\log4net.dll
 I:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Tests\bin\Debug\log4net.pdb
 I:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Tests\bin\Debug\log4net.xml
+H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Tests\bin\Debug\log4net.dll
+H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Tests\bin\Debug\log4net.pdb
+H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Tests\bin\Debug\log4net.xml
