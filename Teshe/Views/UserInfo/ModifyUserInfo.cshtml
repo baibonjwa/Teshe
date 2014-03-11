@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "ModifyUserInfo";
 }
-@model Teshe.Models.UserInfo
+@model Teshe.Models.ModifyUserInfoViewModel
 <h2>会员信息修改</h2>
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/jqueryval")
@@ -17,11 +17,6 @@
         <legend>会员信息</legend>
 
         @Html.HiddenFor(model => model.Id)
-        @Html.HiddenFor(model => model.Name)
-        @Html.HiddenFor(model => model.Password)
-        @Html.HiddenFor(model => model.RepPassword)
-        @Html.HiddenFor(model => model.RegisterOn)
-        @Html.HiddenFor(model => model.IsVerify)
         @Html.HiddenFor(model => model.PhotoUrl)
         <div class="editor-label">
             @Html.LabelFor(model => model.ResponsiblePerson);
@@ -92,13 +87,18 @@
         </div>
         <div class="editor-field">
             @Html.Editor("fileName")
-
             @Html.ValidationMessageFor(model => model.PhotoUrl)
             <input type="file" name="file_upload" id="file_upload" />
         </div>
-
         <p>
             <input type="submit" value="保存修改" />
+            @{
+    if (ViewBag.IsSuccess == true)
+    { 
+        <span style="color:green">修改成功</span> 
+    }
+                
+            }      
         </p>
     </fieldset>
 }

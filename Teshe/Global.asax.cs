@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Teshe.Models;
+using AutoMapper;
 
 namespace Teshe
 {
@@ -30,7 +31,7 @@ namespace Teshe
                 roles[0] = new TesheContext().UserInfoes.FirstOrDefault<UserInfo>(u => u.Name == id.Name).UserType.Name;
                 Context.User = new GenericPrincipal(id, roles);
             }
-        }   
+        }
 
         protected void Application_Start()
         {

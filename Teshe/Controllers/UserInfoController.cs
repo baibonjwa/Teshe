@@ -10,7 +10,10 @@ using System.Web.Security;
 using System.Text;
 using System.IO;
 using System.Data.Entity.Validation;
-
+using EmitMapper;
+using EmitMapper.MappingConfiguration;
+using System.Reflection;
+using Teshe.Common;
 
 namespace Teshe.Controllers
 {
@@ -18,7 +21,6 @@ namespace Teshe.Controllers
     {
         //
         // GET: /UserInfo/
-
         public ActionResult Index()
         {
             return View(db.UserInfoes.ToList());
@@ -63,7 +65,7 @@ namespace Teshe.Controllers
 
             return View(userinfo);
         }
-        
+
         //
         // GET: /UserInfo/Edit/5
 
@@ -77,33 +79,35 @@ namespace Teshe.Controllers
             return View(userinfo);
         }
 
-
         public ActionResult ModifyUserInfo()
-        {           
+        {
+            ViewBag.IsSuccess = false;
             UserInfo userinfo = new UserInfo();
             userinfo = db.UserInfoes.FirstOrDefault<UserInfo>(u => u.Name == User.Identity.Name);
-            return View(userinfo);
+
+            ModifyUserInfoViewModel vm = ObjectMapperManager.DefaultInstance.GetMapper<UserInfo, ModifyUserInfoViewModel>().Map(userinfo);
+            return View(vm);
         }
 
         [HttpPost]
-        public ActionResult ModifyUserInfo(UserInfo userinfo)
+        public ActionResult ModifyUserInfo(ModifyUserInfoViewModel viewModel)
         {
-            //UserInfo userinfo = new UserInfo();
-            //userinfo = db.UserInfoes.FirstOrDefault<UserInfo>(u => u.Name == User.Identity.Name);
-
-            ModelState.Remove("Name");
-            ModelState.Remove("Password");
-            ModelState.Remove("RepPassword");
-            userinfo.RepPassword = userinfo.Password;
+            UserInfo userinfo = db.UserInfoes.Find(viewModel.Id);
+            userinfo = Helper.ModifyMap<UserInfo, ModifyUserInfoViewModel>(userinfo, viewModel);
             if (ModelState.IsValid)
             {
                 db.Entry(userinfo).State = EntityState.Modified;
                 db.SaveChanges();
+                ViewBag.IsSuccess = true;
             }
-            return View("ModifyUserInfo", userinfo);
+            return View();
         }
 
-        //
+        public ActionResult ModifyPassword(UserInfo userinfo)
+        {
+
+            return View();
+        }//
         // POST: /UserInfo/Edit/5
 
         [HttpPost]
@@ -215,7 +219,6 @@ namespace Teshe.Controllers
             if (ModelState.IsValid)
             {
                 userinfo.IsVerify = 1;
-                userinfo.RepPassword = userinfo.Password;
                 db.Entry(userinfo).State = EntityState.Modified;
                 db.SaveChanges();
                 log.Info(User.Identity.Name + "于" + DateTime.Now.ToString() + "审核通过" + userinfo.Name + "用户");
