@@ -9,12 +9,12 @@ using System.Web.Mvc;
 
 namespace Teshe.Models
 {
-    public class RegisterViewModel : UserInfo
+    public class CreateViewModel : UserInfo
     {
         [NotMapped]
         [DisplayName("确认密码")]
         [Compare("Password", ErrorMessage = "两次输入的密码不一致")]
         [DataType(DataType.Password)]
-        public virtual string RepPassword { get; set; }
+        public string RepPassword { get; set; }
     }
 }

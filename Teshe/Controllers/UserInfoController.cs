@@ -66,6 +66,18 @@ namespace Teshe.Controllers
             return View(userinfo);
         }
 
+        public ActionResult CreateAdmin()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateAdmin(CreateAdminViewModel viewModel)
+        {
+            return View();
+        }
+
         //
         // GET: /UserInfo/Edit/5
 
@@ -101,7 +113,7 @@ namespace Teshe.Controllers
             }
             else
             {
-                ModelState.AddModelError("","原密码错误！");
+                ModelState.AddModelError("", "原密码错误！");
             }
             return View();
         }
