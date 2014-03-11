@@ -78,17 +78,43 @@ namespace Teshe.Controllers
             }
             return View(userinfo);
         }
+        public ActionResult ModifyPassword()
+        {
+            ViewBag.ModifyPasswordIsSuccess = false;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ModifyPassword(ModifyPasswordViewModel viewModel)
+        {
+            UserInfo userinfo = GetUser();
+            if (userinfo.Password == viewModel.OldPassword)
+            {
+                userinfo = Helper.ModifyMap<UserInfo, ModifyPasswordViewModel>(userinfo, viewModel);
+                if (ModelState.IsValid)
+                {
+                    db.Entry(userinfo).State = EntityState.Modified;
+                    db.SaveChanges();
+                    log.Info("用户" + User.Identity.Name + "于" + DateTime.Now.ToString() + "修改密码");
+                    ViewBag.ModifyPasswordIsSuccess = true;
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("","原密码错误！");
+            }
+            return View();
+        }
 
         public ActionResult ModifyUserInfo()
         {
-            ViewBag.IsSuccess = false;
+            ViewBag.ModifyInfoIsSuccess = false;
             UserInfo userinfo = new UserInfo();
             userinfo = db.UserInfoes.FirstOrDefault<UserInfo>(u => u.Name == User.Identity.Name);
 
             ModifyUserInfoViewModel vm = ObjectMapperManager.DefaultInstance.GetMapper<UserInfo, ModifyUserInfoViewModel>().Map(userinfo);
             return View(vm);
         }
-
         [HttpPost]
         public ActionResult ModifyUserInfo(ModifyUserInfoViewModel viewModel)
         {
@@ -98,16 +124,13 @@ namespace Teshe.Controllers
             {
                 db.Entry(userinfo).State = EntityState.Modified;
                 db.SaveChanges();
-                ViewBag.IsSuccess = true;
+                log.Info("用户" + User.Identity.Name + "于" + DateTime.Now.ToString() + "修改个人信息");
+                ViewBag.ModifyInfoIsSuccess = true;
             }
             return View();
         }
 
-        public ActionResult ModifyPassword(UserInfo userinfo)
-        {
 
-            return View();
-        }//
         // POST: /UserInfo/Edit/5
 
         [HttpPost]

@@ -14,5 +14,9 @@ namespace Teshe.Controllers
         protected TesheContext db = new TesheContext();
         protected ILog log = LogManager.GetLogger("Log");
 
+        protected UserInfo GetUser()
+        {
+            return db.UserInfoes.FirstOrDefault<UserInfo>(u => u.Name == User.Identity.Name);
+        }
     }
 }

@@ -104,3 +104,4 @@ H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Tests\bin\Debug\zh-Hans\Sy
 H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Tests\obj\Debug\Teshe.Tests.csprojResolveAssemblyReference.cache
 H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Tests\obj\Debug\Teshe.Tests.dll
 H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Tests\obj\Debug\Teshe.Tests.pdb
+H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Tests\bin\Debug\EmitMapper.dll
