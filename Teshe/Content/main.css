@@ -123,16 +123,15 @@
 .imgtext {
     float: left;
     display: block;
-    margin-top: 13px;
+    margin-top: 8px;
     margin-left: 3px;
 }
 
 #loginout {
     float: right;
-    margin-right: 35px;
+    margin-right: 60px;
     padding-top: 5px;
-    text-align: center;
-    width: 80px;
+    width: 150px;
 }
 
 #loginoutimg {
@@ -143,7 +142,7 @@
 
 .logintext {
     display: block;
-    padding-top: 9px;
+    padding-top: 3px;
     margin-left: 3px;
     float: left;
 }
