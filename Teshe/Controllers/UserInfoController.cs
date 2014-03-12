@@ -65,16 +65,75 @@ namespace Teshe.Controllers
 
             return View(userinfo);
         }
-
+        [Authorize(Roles = "区（县）级管理员,市级管理员,省级管理员,系统管理员")]
         public ActionResult CreateAdmin()
         {
+            ViewBag.CreateAdminIsSuccess = false;
+            List<SelectListItem> items = new List<SelectListItem>();
+            if (User.IsInRole("系统管理员"))
+            {
+                List<UserType> adminList = db.UserTypes.Where<UserType>(u => u.Name == "系统管理员" || u.Name == "省级管理员").ToList<UserType>();
+                if (adminList.Count == 2)
+                {
+                    SelectListItem sli = new SelectListItem();
+                    sli.Text = adminList[0].Name;
+                    sli.Value = adminList[0].Id.ToString();
+                    items.Add(sli);
+                    sli = new SelectListItem();
+                    sli.Text = adminList[1].Name;
+                    sli.Value = adminList[1].Id.ToString();
+                    items.Add(sli);
+                    ViewBag.UserTypeList = items;
+                }
+            }
+            else if (User.IsInRole("省级管理员"))
+            {
+                List<UserType> adminList = db.UserTypes.Where<UserType>(u => u.Name == "市级管理员").ToList<UserType>();
+                if (adminList.Count > 0)
+                {
+                    SelectListItem sli = new SelectListItem();
+                    sli.Text = adminList[0].Name;
+                    sli.Value = adminList[0].Id.ToString();
+                    items.Add(sli);
+                    ViewBag.UserTypeList = items;
+                }
+            }
+            else if (User.IsInRole("市级管理员"))
+            {
+                List<UserType> adminList = db.UserTypes.Where<UserType>(u => u.Name == "区（县）级管理员").ToList<UserType>();
+                if (adminList.Count > 0)
+                {
+                    SelectListItem sli = new SelectListItem();
+                    sli.Text = adminList[0].Name;
+                    sli.Value = adminList[0].Id.ToString();
+                    items.Add(sli);
+                    ViewBag.UserTypeList = items;
+                }
+            }
+
+
             return View();
         }
 
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "区（县）级管理员,市级管理员,省级管理员,系统管理员")]
         public ActionResult CreateAdmin(CreateAdminViewModel viewModel)
         {
+            UserInfo userinfo = ObjectMapperManager.DefaultInstance.GetMapper<CreateAdminViewModel, UserInfo>().Map
+(viewModel);
+            userinfo.UserType = db.UserTypes.Find(Convert.ToInt16(viewModel.UserType.Name));
+            userinfo.IsVerify = 1;
+            if (ModelState.IsValid)
+            {
+                db.UserInfoes.Add(userinfo);
+                db.SaveChanges();
+                log.Info("用户" + userinfo.Name + "于" + DateTime.Now.ToString() + "建立了管理员");
+                ViewBag.CreateAdminIsSuccess = false;
+                return View();
+            }
             return View();
         }
 

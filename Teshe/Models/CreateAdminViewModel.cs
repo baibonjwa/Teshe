@@ -56,5 +56,8 @@ namespace Teshe.Models
         [DisplayName("邮箱")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+
+        [DisplayName("用户类型")]
+        public virtual UserType UserType { get; set; }
     }
 }

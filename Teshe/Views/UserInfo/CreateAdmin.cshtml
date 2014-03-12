@@ -23,6 +23,14 @@
         </div>
 
         <div class="editor-label">
+            @Html.LabelFor(model => model.UserType.Name)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.UserType.Name, (List<SelectListItem>)ViewBag.UserTypeList)
+            @Html.ValidationMessageFor(model => model.UserType.Name)
+        </div>
+
+        <div class="editor-label">
             @Html.LabelFor(model => model.Password)
         </div>
         <div class="editor-field">
@@ -94,7 +102,8 @@
         </div>
 
         <p>
-            <input type="submit" value="Create" />
+            <input type="submit" value="添加管理员" />
+            @UIHelper.ModifyTips(ViewBag.CreateAdminIsSuccess)
         </p>
     </fieldset>
 }
