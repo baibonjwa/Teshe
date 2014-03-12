@@ -114,7 +114,34 @@ namespace Teshe.Controllers
 
             return View();
         }
+        public ActionResult Search()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        [Authorize(Roles = "区（县）级管理员,市级管理员,省级管理员,系统管理员")]
+        public ActionResult GetUserInfo()
+        {
+            List<UserInfo> list = null;
+            if (User.IsInRole("区（县）级管理员"))
+            {
+                list = db.UserInfoes.Where<UserInfo>(u => u.District == GetUser().District && u.UserType.Name == "客户" && u.IsVerify == 1).ToList<UserInfo>();
+            }
+            else if (User.IsInRole("市级管理员"))
+            {
+                list = db.UserInfoes.Where<UserInfo>(u => u.City == GetUser().City && u.UserType.Name == "客户" && u.IsVerify == 1).ToList<UserInfo>();
+            }
+            else if (User.IsInRole("省级管理员"))
+            {
+                list = db.UserInfoes.Where<UserInfo>(u => u.Province == GetUser().Province && u.UserType.Name == "客户" && u.IsVerify == 1).ToList<UserInfo>();
+            }
+            else if (User.IsInRole("系统管理员"))
+            {
+                list = db.UserInfoes.Where<UserInfo>(u => u.UserType.Name == "客户" && u.IsVerify == 1).ToList<UserInfo>();
+            }
+            return Json(list);
+        }
 
 
         [HttpPost]
@@ -220,9 +247,10 @@ namespace Teshe.Controllers
         //
         // GET: /UserInfo/Delete/5
         [Authorize(Roles = "区（县）级管理员,市级管理员,省级管理员,系统管理员")]
-        public ActionResult Delete(int id = 0)
+        public ActionResult Delete(int id = 0, String delType = "")
         {
             UserInfo userinfo = db.UserInfoes.Find(id);
+
             if (userinfo == null)
             {
                 return HttpNotFound();
@@ -231,9 +259,22 @@ namespace Teshe.Controllers
             {
                 db.UserInfoes.Remove(userinfo);
                 db.SaveChanges();
-                log.Info(User.Identity.Name + "于" + DateTime.Now.ToString() + "审核未通过" + userinfo.Name + "用户");
+                if (delType == "Verify")
+                {
+                    log.Info(User.Identity.Name + "于" + DateTime.Now.ToString() + "审核未通过" + userinfo.Name + "用户");
+                    return View("Verify");
+                }
+                else if (delType == "Search")
+                {
+                    log.Info(User.Identity.Name + "于" + DateTime.Now.ToString() + "删除" + userinfo.Name + "用户");
+                    return View("Search");
+                }
+                else
+                {
+                    log.Info(User.Identity.Name + "于" + DateTime.Now.ToString() + "删除" + userinfo.Name + "用户发生错误");
+                    return HttpNotFound();
+                }
             }
-            return View("Verify");
         }
 
 

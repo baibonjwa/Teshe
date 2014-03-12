@@ -863,6 +863,7 @@
     <Content Include="Views\UserInfo\ModifyUserInfo.cshtml" />
     <Content Include="Views\UserInfo\ModifyPassword.cshtml" />
     <Content Include="Views\UserInfo\CreateAdmin.cshtml" />
+    <Content Include="Views\UserInfo\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

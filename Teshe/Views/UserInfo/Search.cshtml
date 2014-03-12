@@ -1,11 +1,11 @@
 ﻿@{
-    ViewBag.Title = "审核用户";
+    ViewBag.Title = "管理员用户查询";
 }
 
-<h2>审核用户</h2>
+<h2>管理员用户查询</h2>
 
 <table class="easyui-datagrid" title="待审核的用户" style="width: 1000px; height: auto"
-    data-options="singleSelect:true,collapsible:true,url:'/UserInfo/GetNotVerifyUserInfos',method:'post',rownumbers:'true',pagination:'true'">
+    data-options="singleSelect:true,collapsible:true,url:'/UserInfo/GetUserInfo',method:'post',rownumbers:'true',pagination:'true'">
     <thead>
         <tr>
 
@@ -18,7 +18,8 @@
             <th data-options="field:'City',width:100">所在城市</th>
 
             <th data-options="field:'Province',width:100">所在省份</th>
-            <th data-options="field:'pass',width:60,formatter:pass">通过</th>
+
+            <th data-options="field:'details',width:60,formatter:details">查看</th>
             <th data-options="field:'del',width:60,formatter:del">删除</th>
 
         </tr>
@@ -26,24 +27,20 @@
 </table>
 
 <script>
-    function pass(val, row) {
-        return "<a onclick=\"passConfirm(" + row.Id + ")\" href=\"javascript:void(0)\">通过</a>";
+    function details(val, row) {
+        return "<a onclick=\"detailsConfirm(" + row.Id + ")\" href=\"javascript:void(0)\">查看</a>";
     }
     function del(val, row) {
         return "<a onclick=\"delConfirm(" + row.Id + ")\" href=\"javascript:void(0)\">删除</a>";
     }
-    function passConfirm(id) {
-        $.messager.confirm('确认', '您确定要通过审核吗？', function (r) {
-            if (r) {
-                window.location.href = "/UserInfo/PassVerify/" + id;
-            }
-        });
-    }
     function delConfirm(id) {
         $.messager.confirm('确认', '您确定要删除吗？', function (r) {
             if (r) {
-                window.location.href = "/UserInfo/Delete/" + id + "?delType=Verify";
+                window.location.href = "/UserInfo/Delete/" + id + "?delType=Search";
             }
         });
+    }
+    function detailsConfirm(id) {
+        window.location.href = "/UserInfo/Details/" + id;
     }
 </script>

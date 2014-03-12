@@ -1,8 +1,8 @@
 ﻿@{
-    ViewBag.Title = "ModifyUserInfo";
+    ViewBag.Title = "客户信息修改";
 }
 @model Teshe.Models.ModifyUserInfoViewModel
-<h2>会员信息修改</h2>
+<h2>客户信息修改</h2>
 @Scripts.Render("~/Scripts/uploadify/jquery.uploadify.min.js")
 @Styles.Render("~/Content/uploadify.css")
 @UIHelper.ShowUploadify("file_upload")
@@ -12,7 +12,7 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>会员信息</legend>
+        <legend>客户信息</legend>
 
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.PhotoUrl)
