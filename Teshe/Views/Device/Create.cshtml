@@ -1,17 +1,23 @@
 ﻿@model Teshe.Models.Device
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "添加设备";
 }
+@Styles.Render("~/Content/uploadify.css")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/Scripts/uploadify/jquery.uploadify.min.js")
+@Scripts.Render("~/Scripts/My97DatePicker/WdatePicker.js")
+@UIHelper.ShowUploadify("file_upload")
+<h2>添加设备</h2>
 
-<h2>Create</h2>
-
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Device</legend>
+        <legend>添加设备</legend>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Name)
@@ -41,8 +47,10 @@
             @Html.LabelFor(model => model.PhotoUrl)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.PhotoUrl)
+            @Html.Editor("fileName")
+            @Html.HiddenFor(model => model.PhotoUrl)
             @Html.ValidationMessageFor(model => model.PhotoUrl)
+            <input type="file" name="file_upload" id="file_upload" />
         </div>
 
         <div class="editor-label">
@@ -81,10 +89,9 @@
             @Html.LabelFor(model => model.ManufactureDate)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.ManufactureDate)
+            @Html.TextBoxFor(model => model.ManufactureDate, new { onclick = "WdatePicker()" })
             @Html.ValidationMessageFor(model => model.ManufactureDate)
         </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.Factory)
         </div>
@@ -97,7 +104,7 @@
             @Html.LabelFor(model => model.SetupTime)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.SetupTime)
+            @Html.TextBoxFor(model => model.SetupTime, new { onclick = "WdatePicker()" })
             @Html.ValidationMessageFor(model => model.SetupTime)
         </div>
 
@@ -105,7 +112,7 @@
             @Html.LabelFor(model => model.ExplosionProof)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.ExplosionProof)
+            @Html.DropDownListFor(model => model.ExplosionProof, (List<SelectListItem>)ViewBag.ExplosionProofList)
             @Html.ValidationMessageFor(model => model.ExplosionProof)
         </div>
 
@@ -121,7 +128,7 @@
             @Html.LabelFor(model => model.CheckState)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.CheckState)
+            @Html.DropDownListFor(model => model.CheckState, (List<SelectListItem>)ViewBag.CheckStateList)
             @Html.ValidationMessageFor(model => model.CheckState)
         </div>
 
@@ -129,7 +136,7 @@
             @Html.LabelFor(model => model.CheckTime)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.CheckTime)
+            @Html.TextBoxFor(model => model.CheckTime, new { onclick = "WdatePicker()" })
             @Html.ValidationMessageFor(model => model.CheckTime)
         </div>
 
@@ -137,7 +144,7 @@
             @Html.LabelFor(model => model.CheckCycle)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.CheckCycle)
+            @Html.EditorFor(model => model.CheckCycle)天
             @Html.ValidationMessageFor(model => model.CheckCycle)
         </div>
 
@@ -145,7 +152,7 @@
             @Html.LabelFor(model => model.UseState)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.UseState)
+            @Html.DropDownListFor(model => model.UseState, (List<SelectListItem>)ViewBag.UseStateList)
             @Html.ValidationMessageFor(model => model.UseState)
         </div>
 
@@ -164,17 +171,15 @@
             @Html.EditorFor(model => model.Remarks)
             @Html.ValidationMessageFor(model => model.Remarks)
         </div>
-
-        <div class="editor-label">
+        @*<div class="editor-label">
             @Html.LabelFor(model => model.InputTime)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.InputTime)
+            @Html.HiddenFor(model => model.InputTime)
             @Html.ValidationMessageFor(model => model.InputTime)
-        </div>
-
+        </div>*@
         <p>
-            <input type="submit" value="Create" />
+            <input type="submit" value="添加设备" />
         </p>
     </fieldset>
 }

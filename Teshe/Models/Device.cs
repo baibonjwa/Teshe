@@ -83,14 +83,17 @@ namespace Teshe.Models
         [DisplayName("维修记录")]
         public string MaintenanceRecord { get; set; }
 
-        [DisplayName("维修记录")]
+        [DisplayName("备注")]
         public string Remarks { get; set; }
 
         [DisplayName("录入人员")]
-        UserInfo UserInfo { get; set; }
+        public UserInfo UserInfo { get; set; }
 
         [DisplayName("录入时间")]
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime InputTime { get; set; }
+
+        [DisplayName("属性")]
+        public virtual List<Attribute> Attributes { get; set; }
     }
 }

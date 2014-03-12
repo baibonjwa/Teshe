@@ -9,7 +9,7 @@ using Teshe.Models;
 
 namespace Teshe.Controllers
 {
-    public class DeviceController : Controller
+    public class DeviceController : BaseController
     {
         private TesheContext db = new TesheContext();
 
@@ -39,6 +39,23 @@ namespace Teshe.Controllers
 
         public ActionResult Create()
         {
+            List<SelectListItem> explosionProofList = new List<SelectListItem>();
+            explosionProofList.Add(new SelectListItem() { Text = "否", Value = "否" });
+            explosionProofList.Add(new SelectListItem() { Text = "是", Value = "是" });
+            ViewBag.ExplosionProofList = explosionProofList;
+
+            List<SelectListItem> checkStateList = new List<SelectListItem>();
+            checkStateList.Add(new SelectListItem() { Text = "待检", Value = "待检" });
+            checkStateList.Add(new SelectListItem() { Text = "监测有效期内", Value = "监测有效期内" });
+            checkStateList.Add(new SelectListItem() { Text = "超期", Value = "超期" });
+            ViewBag.CheckStateList = checkStateList;
+
+            List<SelectListItem> useStateList = new List<SelectListItem>();
+            useStateList.Add(new SelectListItem() { Text = "正常", Value = "正常" });
+            useStateList.Add(new SelectListItem() { Text = "故障", Value = "故障" });
+            useStateList.Add(new SelectListItem() { Text = "报废", Value = "报废" });
+            ViewBag.UseStateList = useStateList;
+
             return View();
         }
 
@@ -49,6 +66,9 @@ namespace Teshe.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Device device)
         {
+            //此处不用能GetUser()，因为在EF中db是有状态的，并且不能修改，GetUser里的db是另一个状态的db
+            //会提示“一个实体对象不能由多个 IEntityChangeTracker 实例引用。”的悲催错误
+            device.UserInfo = db.UserInfoes.FirstOrDefault(u => u.Name == User.Identity.Name);
             if (ModelState.IsValid)
             {
                 db.Devices.Add(device);
