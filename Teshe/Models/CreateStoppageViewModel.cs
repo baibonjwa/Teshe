@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Web;
 
 namespace Teshe.Models
 {
-    public class Stoppage
+    public class CreateStoppageViewModel
     {
         [Key]
         public int Id { get; set; }
 
-        [DisplayName("设备")]
-        [Required(ErrorMessage = "设备不能为空")]
-        public virtual Device Device { get; set; }
+        [DisplayName("设备条形码")]
+        [Required(ErrorMessage = "设备条形码不能为空")]
+        public String DeviceBarcode { get; set; }
 
         [DisplayName("故障描述")]
         [Required(ErrorMessage = "故障描述不能为空")]
@@ -42,6 +42,5 @@ namespace Teshe.Models
 
         [DisplayName("录入人员")]
         public virtual UserInfo UserInfo { get; set; }
-
     }
 }

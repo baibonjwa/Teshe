@@ -106,3 +106,9 @@ H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\obj\Debug\Teshe.dll
 H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\obj\Debug\Teshe.pdb
 H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\bin\EmitMapper.dll
 H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\bin\AutoMapper.dll
+H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\bin\zxing.dll
+H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\bin\zxing.presentation.dll
+H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\bin\zxing.pdb
+H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\bin\zxing.xml
+H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\bin\zxing.presentation.pdb
+H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\bin\zxing.presentation.xml

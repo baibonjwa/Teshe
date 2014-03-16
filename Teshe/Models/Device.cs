@@ -13,17 +13,17 @@ namespace Teshe.Models
         [Key]
         public int Id { get; set; }
 
-        [DisplayName("设备名称")]
-        [Required(ErrorMessage = "设备名称不能为空")]
+        [DisplayName("设备条形码")]
+        [Required(ErrorMessage = "设备条形码")]
         public string Name { get; set; }
 
         [DisplayName("设备型号")]
         [Required(ErrorMessage = "设备型号不能为空")]
-        public string Model { get; set; }
+        public string Model { get; set;                 }
 
         [DisplayName("条形码")]
         [Required(ErrorMessage = "条形码不能为空")]
-        public string BarCode { get; set; }
+        public string Barcode { get; set; }
 
         [DisplayName("设备照片")]
         public string PhotoUrl { get; set; }

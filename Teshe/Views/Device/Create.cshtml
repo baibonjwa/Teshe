@@ -10,7 +10,25 @@
 @Scripts.Render("~/Scripts/My97DatePicker/WdatePicker.js")
 @UIHelper.ShowUploadify("file_upload")
 <h2>添加设备</h2>
-
+<script>
+    function Create() {
+        var a = Math.floor(Math.random() * 100000000)
+        while (a < 10000000) {
+            a = a * 10;
+        }
+        $("#Barcode").val(a);
+        var code = $("#Barcode").val();
+        $("#BarcodeImg").attr("src", "/Device/CreateBarcode?code=" + code);
+        //$.ajax({
+        //    type: "POST",
+        //    url: "/DeviceCotroller/CreateBarcode?code=" + code,
+        //    success: function (results) {
+        //        $("Barcode").attr("src", "/Device/CreateBarcode?code=" + code);
+        //    }
+        //}
+        //)
+    }
+</script>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -36,11 +54,14 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.BarCode)
+            @Html.LabelFor(model => model.Barcode)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.BarCode)
-            @Html.ValidationMessageFor(model => model.BarCode)
+            @Html.EditorFor(model => model.Barcode)
+            @*            <input id="CreateBarcode" name="Code" type="button" onclick="CreateBarcode(GetBarcodeValue())" />*@
+            <input id="CreateBarcode" name="Code" type="button" value="生成条形码" onclick="Create()" />
+            @Html.ValidationMessageFor(model => model.Barcode)
+            <img id="BarcodeImg" width="373" height="263" alt="条形码图片" />
         </div>
 
         <div class="editor-label">
@@ -171,13 +192,21 @@
             @Html.EditorFor(model => model.Remarks)
             @Html.ValidationMessageFor(model => model.Remarks)
         </div>
-        @*<div class="editor-label">
-            @Html.LabelFor(model => model.InputTime)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Remarks)
         </div>
         <div class="editor-field">
-            @Html.HiddenFor(model => model.InputTime)
-            @Html.ValidationMessageFor(model => model.InputTime)
-        </div>*@
+            @Html.EditorFor(model => model.Remarks)
+            @Html.ValidationMessageFor(model => model.Remarks)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Attributes)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Attributes)
+            @Html.ValidationMessageFor(model => model.Attributes)
+        </div>
         <p>
             <input type="submit" value="添加设备" />
         </p>

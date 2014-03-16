@@ -1,0 +1,81 @@
+﻿@model Teshe.Models.Stoppage
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @ViewBag.Count
+    <div>Stoppage</div>
+    <div>Stoppage</div>
+    <div>Stoppage</div>
+    <fieldset>
+        <legend>Stoppage</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StoppageTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.StoppageTime)
+            @Html.ValidationMessageFor(model => model.StoppageTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RepairPeople)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RepairPeople)
+            @Html.ValidationMessageFor(model => model.RepairPeople)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RepairTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RepairTime)
+            @Html.ValidationMessageFor(model => model.RepairTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Remarks)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Remarks)
+            @Html.ValidationMessageFor(model => model.Remarks)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.InputTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.InputTime)
+            @Html.ValidationMessageFor(model => model.InputTime)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

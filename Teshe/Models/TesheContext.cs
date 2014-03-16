@@ -25,5 +25,7 @@ namespace Teshe.Models
         public DbSet<Mail> Mails { get; set; }
 
         public DbSet<UserType> UserTypes { get; set; }
+
+        public DbSet<Stoppage> Stoppages { get; set; }
     }
 }

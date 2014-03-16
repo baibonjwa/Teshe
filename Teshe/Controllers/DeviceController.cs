@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Teshe.Models;
+using ZXing;
+using ZXing.Common;
 
 namespace Teshe.Controllers
 {
     public class DeviceController : BaseController
     {
         private TesheContext db = new TesheContext();
-
+        EncodingOptions options = null;
+        BarcodeWriter writer = null;
         //
         // GET: /Device/
 
@@ -59,6 +63,22 @@ namespace Teshe.Controllers
             return View();
         }
 
+        public ActionResult CreateBarcode(String code)
+        {
+            options = new EncodingOptions
+            {
+                //DisableECI = true,  
+                //CharacterSet = "UTF-8",  
+                Width = 373,
+                Height = 263
+            };
+            writer = new BarcodeWriter();
+            writer.Format = BarcodeFormat.ITF;
+            writer.Options = options;
+            Bitmap bitmap = writer.Write(code);
+            return File(BitmapToBytes(bitmap), "application/x-MS-bmp", "barcode.bmp");
+
+        }
         //
         // POST: /Device/Create
 
@@ -132,11 +152,6 @@ namespace Teshe.Controllers
             db.Devices.Remove(device);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        public ActionResult CreateBarCode(int id)
-        {
-            return View();
         }
 
         protected override void Dispose(bool disposing)
