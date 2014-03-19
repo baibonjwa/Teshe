@@ -6,7 +6,7 @@
 <script>
     function Search() {
         $("#result").datagrid({
-            url: "/Device/Search?" + "Name=" + $("#Name").val() + "&Model=" + $("#Model").val() + "&Barcode=" + $("#Barcode").val() + "&Company=" + $("#Company").val() + "&CheckState=" + $("#CompanyCheckState").find("option:selected").text()
+            url: "/Device/Search?" + "Name=" + $("#Name").val() + "&Model=" + $("#Model").val() + "&Barcode=" + $("#Barcode").val() + "&Company=" + $("#Company").val() + "&CheckState=" + $("#CheckState").find("option:selected").text()
         })
     }
 </script>
