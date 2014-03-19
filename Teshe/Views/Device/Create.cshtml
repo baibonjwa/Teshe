@@ -1,5 +1,6 @@
 ﻿@model Teshe.Models.Device
-
+@using Teshe.Models;
+@using System.Collections.Generic;
 @{
     ViewBag.Title = "添加设备";
 }
@@ -28,8 +29,45 @@
         //}
         //)
     }
+    function AddAttribute() {
+        var name = $("#attributeName").val();
+        var value = $("#attributeValue").val();
+        var html = $("#attributes").html();
+        $("#attributes").html(html + " <tr> <td>属性名：</td><td class=\"attr\">" + name + "</td><td>属性值：</td><td class=\"attr\">" + value + "</td></tr>");
+        $("#attributesJson").val(GetAttributeJson());
+    }
+    function GetAttributeJson() {
+        var json = "[";
+        var sign = 0;
+        $("#attributes tr .attr").each(function () {
+            if (sign % 2 == 0) {
+                json += "{\"Name\":" + "\"" + $(this).html() + "\",";
+            }
+            else {
+                json += "\"Content\":" + "\"" + $(this).html() + "\"},";
+            }
+            sign++;
+        });
+        json = json.substring(0, json.length - 1);
+        json += "]";
+        return json;
+    }
+    //function Submit() {
+    //    $('#form1').form('submit', {
+    //        url: '/Device/Create',
+    //        data: "attributes=" + GetAttributeJson(),
+    //        onSubmit: function () {
+    //            return true;
+    //        },
+    //        success: function (results) {
+    //            $.messager.alert('成功', results);
+    //        }
+
+    //    }
+    //    )
+    //}
 </script>
-@using (Html.BeginForm())
+@using (Html.BeginForm("form1"))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -194,20 +232,22 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Remarks)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Remarks)
-            @Html.ValidationMessageFor(model => model.Remarks)
-        </div>
-        <div class="editor-label">
             @Html.LabelFor(model => model.Attributes)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Attributes)
-            @Html.ValidationMessageFor(model => model.Attributes)
+            @Html.Label("属性名称", new { name = "attributeName" })
+            @Html.TextBox("attributeName")
+            @Html.Label("属性值", new { name = "attributeValue" })
+            @Html.TextBox("attributeValue")
+            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="AddAttribute()">添加属性</a>
+            @Html.Hidden("attributesJson")
+        </div>
+        <div>
+            <table id="attributes">
+            </table>
         </div>
         <p>
+            @*<a class="easyui-linkbutton" href="javascript:void(0)" onclick="Submit()">添加设备</a>*@
             <input type="submit" value="添加设备" />
         </p>
     </fieldset>

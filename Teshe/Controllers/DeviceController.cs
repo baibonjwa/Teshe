@@ -1,12 +1,15 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 using Teshe.Models;
+using Teshe.Common;
 using ZXing;
 using ZXing.Common;
 
@@ -14,7 +17,27 @@ namespace Teshe.Controllers
 {
     public class DeviceController : BaseController
     {
-        private TesheContext db = new TesheContext();
+
+        public DeviceController()
+        {
+            List<SelectListItem> explosionProofList = new List<SelectListItem>();
+            explosionProofList.Add(new SelectListItem() { Text = "否", Value = "否" });
+            explosionProofList.Add(new SelectListItem() { Text = "是", Value = "是" });
+            ViewBag.ExplosionProofList = explosionProofList;
+
+            List<SelectListItem> checkStateList = new List<SelectListItem>();
+            checkStateList.Add(new SelectListItem() { Text = "待检", Value = "待检" });
+            checkStateList.Add(new SelectListItem() { Text = "监测有效期内", Value = "监测有效期内" });
+            checkStateList.Add(new SelectListItem() { Text = "超期", Value = "超期" });
+            ViewBag.CheckStateList = checkStateList;
+
+            List<SelectListItem> useStateList = new List<SelectListItem>();
+            useStateList.Add(new SelectListItem() { Text = "正常", Value = "正常" });
+            useStateList.Add(new SelectListItem() { Text = "故障", Value = "故障" });
+            useStateList.Add(new SelectListItem() { Text = "报废", Value = "报废" });
+            ViewBag.UseStateList = useStateList;
+        }
+
         EncodingOptions options = null;
         BarcodeWriter writer = null;
         //
@@ -22,8 +45,35 @@ namespace Teshe.Controllers
 
         public ActionResult Index()
         {
-            return View(db.Devices.ToList());
+            return View();
         }
+
+        [HttpPost]
+        public ActionResult Index(DeviceIndexViewModel viewModel)
+        {
+            Expression<Func<Device, bool>> where = PredicateExtensionses.True<Device>();
+            if (!String.IsNullOrEmpty(viewModel.Name)) where = where.And(u => u.Name == viewModel.Name);
+            if (!String.IsNullOrEmpty(viewModel.Model)) where = where.And(u => u.Model == viewModel.Model);
+            if (viewModel.SetupTime != null) where = where.And(u => u.SetupTime == viewModel.SetupTime);
+            if (!String.IsNullOrEmpty(viewModel.Company)) where = where.And(u => u.Company == viewModel.Company);
+            if (!String.IsNullOrEmpty(viewModel.Barcode)) where = where.And(u => u.Barcode == viewModel.Barcode);
+            if (!String.IsNullOrEmpty(viewModel.CheckState)) where = where.And(u => u.CheckState == viewModel.CheckState);
+            List<Device> results = db.Devices.Where<Device>(where).ToList();
+            return Json(results);
+        }
+
+        //public ActionResult Search(DeviceIndexViewModel viewModel)
+        //{
+        //    Expression<Func<Device, bool>> where = PredicateExtensionses.True<Device>();
+        //    if (!String.IsNullOrEmpty(viewModel.Name)) where = where.And(u => u.Name == viewModel.Name);
+        //    if (!String.IsNullOrEmpty(viewModel.Model)) where = where.And(u => u.Model == viewModel.Model);
+        //    if (viewModel.SetupTime != null) where = where.And(u => u.SetupTime == viewModel.SetupTime);
+        //    if (!String.IsNullOrEmpty(viewModel.Company)) where = where.And(u => u.Company == viewModel.Company);
+        //    if (!String.IsNullOrEmpty(viewModel.Barcode)) where = where.And(u => u.Barcode == viewModel.Barcode);
+        //    if (!String.IsNullOrEmpty(viewModel.CheckState)) where = where.And(u => u.CheckState == viewModel.CheckState);
+        //    List<Device> results = db.Devices.Where<Device>(where).ToList();
+        //    return Json(results);
+        //}
 
         //
         // GET: /Device/Details/5
@@ -43,22 +93,7 @@ namespace Teshe.Controllers
 
         public ActionResult Create()
         {
-            List<SelectListItem> explosionProofList = new List<SelectListItem>();
-            explosionProofList.Add(new SelectListItem() { Text = "否", Value = "否" });
-            explosionProofList.Add(new SelectListItem() { Text = "是", Value = "是" });
-            ViewBag.ExplosionProofList = explosionProofList;
 
-            List<SelectListItem> checkStateList = new List<SelectListItem>();
-            checkStateList.Add(new SelectListItem() { Text = "待检", Value = "待检" });
-            checkStateList.Add(new SelectListItem() { Text = "监测有效期内", Value = "监测有效期内" });
-            checkStateList.Add(new SelectListItem() { Text = "超期", Value = "超期" });
-            ViewBag.CheckStateList = checkStateList;
-
-            List<SelectListItem> useStateList = new List<SelectListItem>();
-            useStateList.Add(new SelectListItem() { Text = "正常", Value = "正常" });
-            useStateList.Add(new SelectListItem() { Text = "故障", Value = "故障" });
-            useStateList.Add(new SelectListItem() { Text = "报废", Value = "报废" });
-            ViewBag.UseStateList = useStateList;
 
             return View();
         }
@@ -84,11 +119,13 @@ namespace Teshe.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Device device)
+        public ActionResult Create(Device device, String attributesJson)
         {
             //此处不用能GetUser()，因为在EF中db是有状态的，并且不能修改，GetUser里的db是另一个状态的db
             //会提示“一个实体对象不能由多个 IEntityChangeTracker 实例引用。”的悲催错误
             device.UserInfo = db.UserInfoes.FirstOrDefault(u => u.Name == User.Identity.Name);
+            List<Teshe.Models.Attribute> attrList = JsonConvert.DeserializeObject<List<Teshe.Models.Attribute>>(attributesJson);
+            device.Attributes = attrList;
             if (ModelState.IsValid)
             {
                 db.Devices.Add(device);

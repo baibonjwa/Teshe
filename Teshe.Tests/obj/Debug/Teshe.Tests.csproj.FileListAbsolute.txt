@@ -108,3 +108,7 @@ H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Tests\bin\Debug\EmitMapper
 H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Tests\bin\Debug\zxing.dll
 H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Tests\bin\Debug\zxing.pdb
 H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Tests\bin\Debug\zxing.xml
+I:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Tests\bin\Debug\zxing.dll
+I:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Tests\bin\Debug\EmitMapper.dll
+I:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Tests\bin\Debug\zxing.pdb
+I:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Tests\bin\Debug\zxing.xml

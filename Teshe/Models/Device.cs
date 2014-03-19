@@ -13,8 +13,8 @@ namespace Teshe.Models
         [Key]
         public int Id { get; set; }
 
-        [DisplayName("设备条形码")]
-        [Required(ErrorMessage = "设备条形码")]
+        [DisplayName("设备名称")]
+        [Required(ErrorMessage = "设备名称不能为空")]
         public string Name { get; set; }
 
         [DisplayName("设备型号")]

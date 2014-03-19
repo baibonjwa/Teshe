@@ -1,15 +1,77 @@
-﻿@model IEnumerable<Teshe.Models.Device>
+﻿@model Teshe.Models.DeviceIndexViewModel
 
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
+@using (Html.BeginForm())
+{
+    <table>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Name)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.Name)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Model)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.Model)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Barcode)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.Barcode)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Company)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.Company)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.CheckState)
+            </td>
+            <td>
+                @Html.DropDownListFor(model => model.CheckState, (List<SelectListItem>)ViewBag.CheckStateList)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="查询设备" />
+            </td>
+        </tr>
+    </table>
+}
+<table class="easyui-datagrid" title="设备信息" style="width: 1000px; height: auto"
+    data-options="singleSelect:true,collapsible:true,url:'/Device/Index',method:'post',rownumbers:'true',pagination:'true'">
+    <thead>
+        <tr>
+            <th data-options="field:'Name',width:80">用户名</th>
+            <th data-options="field:'Password',width:100">密码</th>
+            <th data-options="field:'ResponsiblePerson',width:100">负责人</th>
+            <th data-options="field:'Company',width:100">所在公司</th>
+            <th data-options="field:'District',width:100">所在区（县）</th>
+            <th data-options="field:'City',width:100">所在城市</th>
+            <th data-options="field:'Province',width:100">所在省份</th>
+            <th data-options="field:'pass',width:60,formatter:pass">通过</th>
+            <th data-options="field:'del',width:60,formatter:del">删除</th>
+        </tr>
+    </thead>
+</table>
+@*<table>
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)
@@ -18,7 +80,7 @@
             @Html.DisplayNameFor(model => model.Model)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.BarCode)
+            @Html.DisplayNameFor(model => model.Barcode)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.PhotoUrl)
@@ -142,6 +204,6 @@
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>
-}
+}*@
 
 </table>
