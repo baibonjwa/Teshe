@@ -7,6 +7,7 @@ using Teshe.Models;
 using log4net;
 using System.Drawing;
 using System.IO;
+using Newtonsoft.Json.Converters;
 namespace Teshe.Controllers
 {
     public class BaseController : Controller
@@ -15,7 +16,12 @@ namespace Teshe.Controllers
         // GET: /Base/
         protected TesheContext db = new TesheContext();
         protected ILog log = LogManager.GetLogger("Log");
+        protected IsoDateTimeConverter dateTimeConverter = new IsoDateTimeConverter();
 
+        public BaseController()
+        {
+            dateTimeConverter.DateTimeFormat = "yyyy-MM-dd";
+        }
         protected UserInfo GetUser()
         {
             return db.UserInfoes.FirstOrDefault<UserInfo>(u => u.Name == User.Identity.Name);

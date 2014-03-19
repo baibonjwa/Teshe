@@ -21,7 +21,7 @@ namespace Teshe.Models
         public string Company { get; set; }
 
         [DisplayName("安装时间")]
-        public DateTime SetupTime { get; set; }
+        public DateTime? SetupTime { get; set; }
 
         [DisplayName("检测状态")]
         public string CheckState { get; set; }

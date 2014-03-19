@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace Teshe.Models
 {
@@ -12,7 +13,11 @@ namespace Teshe.Models
         // 注意: 这将在每次更改模型时销毁并重新创建数据库。
         // 
         // System.Data.Entity.Database.SetInitializer(new System.Data.Entity.DropCreateDatabaseIfModelChanges<Teshe.Models.TesheContext>());
-
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            //modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+        }
         public TesheContext()
             : base("name=TesheContext")
         {
@@ -27,5 +32,7 @@ namespace Teshe.Models
         public DbSet<UserType> UserTypes { get; set; }
 
         public DbSet<Stoppage> Stoppages { get; set; }
+
+        public DbSet<Attribute> Attributes { get; set; }
     }
 }

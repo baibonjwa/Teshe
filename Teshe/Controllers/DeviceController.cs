@@ -12,6 +12,8 @@ using Teshe.Models;
 using Teshe.Common;
 using ZXing;
 using ZXing.Common;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Teshe.Controllers
 {
@@ -48,8 +50,21 @@ namespace Teshe.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Index(DeviceIndexViewModel viewModel)
+        //[HttpPost]
+        //public ActionResult Index(DeviceIndexViewModel viewModel)
+        //{
+        //    Expression<Func<Device, bool>> where = PredicateExtensionses.True<Device>();
+        //    if (!String.IsNullOrEmpty(viewModel.Name)) where = where.And(u => u.Name == viewModel.Name);
+        //    if (!String.IsNullOrEmpty(viewModel.Model)) where = where.And(u => u.Model == viewModel.Model);
+        //    if (viewModel.SetupTime != null) where = where.And(u => u.SetupTime == viewModel.SetupTime);
+        //    if (!String.IsNullOrEmpty(viewModel.Company)) where = where.And(u => u.Company == viewModel.Company);
+        //    if (!String.IsNullOrEmpty(viewModel.Barcode)) where = where.And(u => u.Barcode == viewModel.Barcode);
+        //    //if (!String.IsNullOrEmpty(viewModel.CheckState)) where = where.And(u => u.CheckState == viewModel.CheckState);
+        //    List<Device> results = db.Devices.Where<Device>(where).ToList();
+        //    return Json(results);
+        //}
+
+        public ActionResult Search(DeviceIndexViewModel viewModel)
         {
             Expression<Func<Device, bool>> where = PredicateExtensionses.True<Device>();
             if (!String.IsNullOrEmpty(viewModel.Name)) where = where.And(u => u.Name == viewModel.Name);
@@ -59,19 +74,12 @@ namespace Teshe.Controllers
             if (!String.IsNullOrEmpty(viewModel.Barcode)) where = where.And(u => u.Barcode == viewModel.Barcode);
             if (!String.IsNullOrEmpty(viewModel.CheckState)) where = where.And(u => u.CheckState == viewModel.CheckState);
             List<Device> results = db.Devices.Where<Device>(where).ToList();
-            return Json(results);
+            return Content(JsonConvert.SerializeObject(results, dateTimeConverter));
         }
 
-        //public ActionResult Search(DeviceIndexViewModel viewModel)
+        //public ActionResult Search()
         //{
-        //    Expression<Func<Device, bool>> where = PredicateExtensionses.True<Device>();
-        //    if (!String.IsNullOrEmpty(viewModel.Name)) where = where.And(u => u.Name == viewModel.Name);
-        //    if (!String.IsNullOrEmpty(viewModel.Model)) where = where.And(u => u.Model == viewModel.Model);
-        //    if (viewModel.SetupTime != null) where = where.And(u => u.SetupTime == viewModel.SetupTime);
-        //    if (!String.IsNullOrEmpty(viewModel.Company)) where = where.And(u => u.Company == viewModel.Company);
-        //    if (!String.IsNullOrEmpty(viewModel.Barcode)) where = where.And(u => u.Barcode == viewModel.Barcode);
-        //    if (!String.IsNullOrEmpty(viewModel.CheckState)) where = where.And(u => u.CheckState == viewModel.CheckState);
-        //    List<Device> results = db.Devices.Where<Device>(where).ToList();
+        //    List<Device> results = db.Devices.ToList();
         //    return Json(results);
         //}
 
@@ -171,11 +179,15 @@ namespace Teshe.Controllers
         public ActionResult Delete(int id = 0)
         {
             Device device = db.Devices.Find(id);
-            if (device == null)
+            //级联删除
+            List<Teshe.Models.Attribute> list = new List<Models.Attribute>(device.Attributes);
+            foreach (var i in list)
             {
-                return HttpNotFound();
+                db.Attributes.Remove(i);
             }
-            return View(device);
+            db.Devices.Remove(device);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         //

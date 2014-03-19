@@ -3,74 +3,106 @@
 @{
     ViewBag.Title = "Index";
 }
-
+<script>
+    function Search() {
+        $("#result").datagrid({
+            url: "/Device/Search?" + "Name=" + $("#Name").val() + "&Model=" + $("#Model").val() + "&Barcode=" + $("#Barcode").val() + "&Company=" + $("#Company").val() + "&CheckState=" + $("#CompanyCheckState").find("option:selected").text()
+        })
+    }
+</script>
 <h2>Index</h2>
-@using (Html.BeginForm())
-{
-    <table>
-        <tr>
-            <td>
-                @Html.DisplayNameFor(model => model.Name)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.Name)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.DisplayNameFor(model => model.Model)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.Model)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.DisplayNameFor(model => model.Barcode)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.Barcode)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.DisplayNameFor(model => model.Company)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.Company)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.DisplayNameFor(model => model.CheckState)
-            </td>
-            <td>
-                @Html.DropDownListFor(model => model.CheckState, (List<SelectListItem>)ViewBag.CheckStateList)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="submit" value="查询设备" />
-            </td>
-        </tr>
-    </table>
-}
-<table class="easyui-datagrid" title="设备信息" style="width: 1000px; height: auto"
-    data-options="singleSelect:true,collapsible:true,url:'/Device/Index',method:'post',rownumbers:'true',pagination:'true'">
+<table>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Name)
+        </td>
+        <td>
+            @Html.EditorFor(model => model.Name)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Model)
+        </td>
+        <td>
+            @Html.EditorFor(model => model.Model)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Barcode)
+        </td>
+        <td>
+            @Html.EditorFor(model => model.Barcode)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Company)
+        </td>
+        <td>
+            @Html.EditorFor(model => model.Company)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.CheckState)
+        </td>
+        <td>
+            @Html.DropDownListFor(model => model.CheckState, (List<SelectListItem>)ViewBag.CheckStateList)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a class="easyui-linkbutton" href="javascript:void(0)" onclick="Search()">查询设备</a>
+        </td>
+    </tr>
+</table>
+<table id="result" class="easyui-datagrid" title="设备信息" style="width: 1000px; height: auto"
+    data-options="singleSelect:true,collapsible:true,url:'/Device/Search',method:'post',rownumbers:'true',pagination:'true'">
     <thead>
         <tr>
-            <th data-options="field:'Name',width:80">用户名</th>
-            <th data-options="field:'Password',width:100">密码</th>
-            <th data-options="field:'ResponsiblePerson',width:100">负责人</th>
+            <th data-options="field:'Name',width:80">设备名称</th>
+            <th data-options="field:'Model',width:100">设备型号</th>
+            <th data-options="field:'Barcode',width:100">条形码</th>
             <th data-options="field:'Company',width:100">所在公司</th>
             <th data-options="field:'District',width:100">所在区（县）</th>
             <th data-options="field:'City',width:100">所在城市</th>
             <th data-options="field:'Province',width:100">所在省份</th>
-            <th data-options="field:'pass',width:60,formatter:pass">通过</th>
-            <th data-options="field:'del',width:60,formatter:del">删除</th>
+            <th data-options="field:'ManufactureDate',width:100">出厂日期</th>
+            <th data-options="field:'Factory',width:100">生产厂家</th>
+            <th data-options="field:'SetupTime',width:100">安装时间</th>
+            <th data-options="field:'ExplosionProof',width:100">防爆否</th>
+            <th data-options="field:'SecurityCertificateNo',width:100">安检证号</th>
+            <th data-options="field:'CheckState',width:100">检测状态</th>
+            <th data-options="field:'CheckTime',width:100">检测时间</th>
+            <th data-options="field:'CheckCycle',width:100">检测周期</th>
+            <th data-options="field:'UseState',width:100">使用状态</th>
+            <th data-options="field:'MaintenanceRecord',width:100">维修记录</th>
+            <th data-options="field:'pass',width:60,formatter:pass">修改</th>
+            <th data-options="field:'del',width:60,formatter:del">查看详细</th>
         </tr>
     </thead>
 </table>
+<script>
+    function pass(val, row) {
+        return "<a onclick=\"passConfirm(" + row.Id + ")\" href=\"javascript:void(0)\">查看详细</a>";
+    }
+    function del(val, row) {
+        return "<a onclick=\"delConfirm(" + row.Id + ")\" href=\"javascript:void(0)\">删除</a>";
+    }
+    function passConfirm(id) {
+        window.location.href = "/Device/Details/" + id;
+    }
+    function delConfirm(id) {
+        $.messager.confirm('确认', '您确定要删除吗？', function (r) {
+            if (r) {
+                window.location.href = "/Device/Delete/" + id;
+            }
+        });
+    }
+</script>
+
 @*<table>
     <tr>
         <th>
@@ -204,6 +236,6 @@
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>
-}*@
+}
 
-</table>
+</table>*@

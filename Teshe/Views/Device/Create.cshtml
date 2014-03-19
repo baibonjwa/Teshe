@@ -148,7 +148,7 @@
             @Html.LabelFor(model => model.ManufactureDate)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.ManufactureDate, new { onclick = "WdatePicker()" })
+            @Html.TextBoxFor(model => model.ManufactureDate, new { onfocus = "WdatePicker()" })
             @Html.ValidationMessageFor(model => model.ManufactureDate)
         </div>
         <div class="editor-label">
@@ -163,7 +163,7 @@
             @Html.LabelFor(model => model.SetupTime)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.SetupTime, new { onclick = "WdatePicker()" })
+            @Html.TextBoxFor(model => model.SetupTime, new { onfocus = "WdatePicker()" })
             @Html.ValidationMessageFor(model => model.SetupTime)
         </div>
 
@@ -195,7 +195,7 @@
             @Html.LabelFor(model => model.CheckTime)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.CheckTime, new { onclick = "WdatePicker()" })
+            @Html.TextBoxFor(model => model.CheckTime, new { onfocus = "WdatePicker()" })
             @Html.ValidationMessageFor(model => model.CheckTime)
         </div>
 
