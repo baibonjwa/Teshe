@@ -1,33 +1,117 @@
-﻿@model IEnumerable<Teshe.Models.Scrap>
+﻿@model Teshe.Models.ScrapIndexViewModel
 
 @{
     ViewBag.Title = "Index";
 }
-
+<script>
+    function Search() {
+        $("#result").datagrid({
+            url: "/Scrap/Search?" + "Name=" + $("#Name").val() + "&Model=" + $("#Model").val() + "&Barcode=" + $("#Barcode").val() + "&Company=" + $("#Company").val() + "&ScrapTime=" + $("#ScrapTime").val()
+        })
+    }
+    function formatName(data, row) {
+        return row.Device.Name;
+    }
+    function formatModel(data, row) {
+        return row.Device.Model;
+    }
+    function formatBarcode(data, row) {
+        return row.Device.Barcode;
+    }
+    function formatCompany(data, row) {
+        return row.Device.Company;
+    }
+    function formatDistrict(data, row) {
+        return row.Device.District;
+    }
+    function formatCity(data, row) {
+        return row.Device.City;
+    }
+    function formatProvince(data, row) {
+        return row.Device.Province;
+    }
+</script>
 <h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table>
     <tr>
-        <th>
+        <td>
             @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th></th>
+        </td>
+        <td>
+            @Html.EditorFor(model => model.Name)
+        </td>
     </tr>
-
-@foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            @Html.DisplayNameFor(model => model.Model)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.EditorFor(model => model.Model)
         </td>
     </tr>
-}
-
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Barcode)
+        </td>
+        <td>
+            @Html.EditorFor(model => model.Barcode)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Company)
+        </td>
+        <td>
+            @Html.EditorFor(model => model.Company)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.ScrapTime)
+        </td>
+        <td>
+            @Html.TextBoxFor(model => model.ScrapTime, new { onfocus = "WdatePicker()" })
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a class="easyui-linkbutton" href="javascript:void(0)" onclick="Search()">查询故障</a>
+        </td>
+    </tr>
 </table>
+<table id="result" class="easyui-datagrid" title="故障信息" style="width: 1000px; height: auto"
+    data-options="singleSelect:true,collapsible:true,url:'/Scrap/Search',method:'post',rownumbers:'true',pagination:'true'">
+    <thead>
+        <tr>
+            <th data-options="field:'DeviceName',formatter:formatName,width:80">设备名称</th>
+            <th data-options="field:'DeviceModel',formatter:formatModel,width:100">设备型号</th>
+            <th data-options="field:'DeviceBarcode',formatter:formatBarcode,width:100">条形码</th>
+            <th data-options="field:'DeviceCompany',formatter:formatCompany,width:100">所在公司</th>
+            <th data-options="field:'DeviceDistrict',formatter:formatDistrict,width:100">所在区（县）</th>
+            <th data-options="field:'DeviceCity',formatter:formatCity,width:100">所在城市</th>
+            <th data-options="field:'DeviceProvince',formatter:formatProvince,width:100">所在省份</th>
+            <th data-options="field:'ScrapTime',width:100">故障时间</th>
+            <th data-options="field:'Description',width:100">故障描述</th>
+            <th data-options="field:'pass',width:60,formatter:pass">修改</th>
+            <th data-options="field:'del',width:60,formatter:del">查看详细</th>
+        </tr>
+    </thead>
+</table>
+<script>
+    function pass(val, row) {
+        return "<a onclick=\"passConfirm(" + row.Id + ")\" href=\"javascript:void(0)\">查看详细</a>";
+    }
+    function del(val, row) {
+        return "<a onclick=\"delConfirm(" + row.Id + ")\" href=\"javascript:void(0)\">删除</a>";
+    }
+    function passConfirm(id) {
+        window.location.href = "/Scrap/Details/" + id;
+    }
+    function delConfirm(id) {
+        $.messager.confirm('确认', '您确定要删除吗？', function (r) {
+            if (r) {
+                window.location.href = "/Scrap/Delete/" + id;
+            }
+        });
+    }
+</script>

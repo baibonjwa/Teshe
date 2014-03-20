@@ -180,6 +180,7 @@
     <Compile Include="Models\UserType.cs" />
     <Compile Include="Models\ModifyUserInfoViewModel.cs" />
     <Compile Include="Models\CreateScrapViewModel.cs" />
+    <Compile Include="Models\ScrapIndexViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

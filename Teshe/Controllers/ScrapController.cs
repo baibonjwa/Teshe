@@ -1,27 +1,37 @@
 ﻿using EmitMapper;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
+using Teshe.Common;
 using Teshe.Models;
 
 namespace Teshe.Controllers
 {
-    public class ScrapController : Controller
+    public class ScrapController : BaseController
     {
-        private TesheContext db = new TesheContext();
-
-        //
         // GET: /Scrap/
 
         public ActionResult Index()
         {
-            return View(db.Scraps.ToList());
+            return View();
         }
-
+        public ActionResult Search(ScrapIndexViewModel viewModel)
+        {
+            Expression<Func<Scrap, bool>> where = PredicateExtensionses.True<Scrap>();
+            if (!String.IsNullOrEmpty(viewModel.Name)) where = where.And(u => u.Device.Name == viewModel.Name);
+            if (!String.IsNullOrEmpty(viewModel.Model)) where = where.And(u => u.Device.Model == viewModel.Model);
+            if (!String.IsNullOrEmpty(viewModel.Company)) where = where.And(u => u.Device.Company == viewModel.Company);
+            if (!String.IsNullOrEmpty(viewModel.Barcode)) where = where.And(u => u.Device.Barcode == viewModel.Barcode);
+            if (viewModel.ScrapTime != null) where = where.And(u => u.ScrapTime == viewModel.ScrapTime);
+            List<Scrap> results = db.Scraps.Where<Scrap>(where).ToList();
+            return Content(JsonConvert.SerializeObject(results, dateTimeConverter));
+        }
         //
         // GET: /Scrap/Details/5
 
@@ -98,25 +108,23 @@ namespace Teshe.Controllers
         public ActionResult Delete(int id = 0)
         {
             Scrap scrap = db.Scraps.Find(id);
-            if (scrap == null)
-            {
-                return HttpNotFound();
-            }
-            return View(scrap);
+            db.Scraps.Remove(scrap);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         //
         // POST: /Scrap/Delete/5
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Scrap scrap = db.Scraps.Find(id);
-            db.Scraps.Remove(scrap);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    Scrap scrap = db.Scraps.Find(id);
+        //    db.Scraps.Remove(scrap);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {

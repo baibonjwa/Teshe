@@ -12,7 +12,6 @@ using Teshe.Models;
 using Teshe.Common;
 using ZXing;
 using ZXing.Common;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 namespace Teshe.Controllers

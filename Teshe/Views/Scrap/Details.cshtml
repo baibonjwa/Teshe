@@ -1,22 +1,26 @@
 ﻿@model Teshe.Models.Scrap
 
-@{
-    ViewBag.Title = "Details";
-}
-
 <h2>Details</h2>
 
 <fieldset>
-    <legend>Scrap</legend>
+    <legend>Stoppage</legend>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Name)
+        @Html.DisplayNameFor(model => model.Description)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Name)
+        @Html.DisplayFor(model => model.Description)
     </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.ScrapTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ScrapTime)
+    </div>
+
 </fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
