@@ -34,5 +34,7 @@ namespace Teshe.Models
         public DbSet<Stoppage> Stoppages { get; set; }
 
         public DbSet<Attribute> Attributes { get; set; }
+
+        public DbSet<Scrap> Scraps { get; set; }
     }
 }

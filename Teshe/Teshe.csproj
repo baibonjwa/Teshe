@@ -152,6 +152,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\DeviceController.cs" />
     <Compile Include="Controllers\MailController.cs" />
+    <Compile Include="Controllers\ScrapController.cs" />
     <Compile Include="Controllers\StoppageController.cs" />
     <Compile Include="Controllers\UserInfoController.cs" />
     <Compile Include="Global.asax.cs">
@@ -178,6 +179,7 @@
     <Compile Include="Models\UserInfoLoginViewModel.cs" />
     <Compile Include="Models\UserType.cs" />
     <Compile Include="Models\ModifyUserInfoViewModel.cs" />
+    <Compile Include="Models\CreateScrapViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -895,6 +897,11 @@
     <Content Include="Views\Stoppage\Create.cshtml" />
     <Content Include="Views\Stoppage\Edit.cshtml" />
     <Content Include="Views\Stoppage\Delete.cshtml" />
+    <Content Include="Views\Scrap\Index.cshtml" />
+    <Content Include="Views\Scrap\Details.cshtml" />
+    <Content Include="Views\Scrap\Create.cshtml" />
+    <Content Include="Views\Scrap\Edit.cshtml" />
+    <Content Include="Views\Scrap\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
