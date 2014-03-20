@@ -6,13 +6,11 @@
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
     @ViewBag.Count
-    <div>Stoppage</div>
-    <div>Stoppage</div>
-    <div>Stoppage</div>
     <fieldset>
         <legend>Stoppage</legend>
 
