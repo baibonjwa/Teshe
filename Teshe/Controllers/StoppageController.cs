@@ -7,19 +7,20 @@ using System.Web;
 using System.Web.Mvc;
 using Teshe.Models;
 using EmitMapper;
+using Teshe.Common;
+using System.Linq.Expressions;
+using Newtonsoft.Json;
 
 namespace Teshe.Controllers
 {
-    public class StoppageController : Controller
+    public class StoppageController : BaseController
     {
-        private TesheContext db = new TesheContext();
-
         //
         // GET: /Stoppage/
 
         public ActionResult Index()
         {
-            return View(db.Stoppages.ToList());
+            return View();
         }
 
         //
@@ -64,6 +65,18 @@ namespace Teshe.Controllers
             return View(model);
         }
 
+
+        public ActionResult Search(StoppageIndexViewModel viewModel)
+        {
+            Expression<Func<Stoppage, bool>> where = PredicateExtensionses.True<Stoppage>();
+            if (!String.IsNullOrEmpty(viewModel.Name)) where = where.And(u => u.Device.Name == viewModel.Name);
+            if (!String.IsNullOrEmpty(viewModel.Model)) where = where.And(u => u.Device.Model == viewModel.Model);
+            if (!String.IsNullOrEmpty(viewModel.Company)) where = where.And(u => u.Device.Company == viewModel.Company);
+            if (!String.IsNullOrEmpty(viewModel.Barcode)) where = where.And(u => u.Device.Barcode == viewModel.Barcode);
+            if (viewModel.StoppageTime != null) where = where.And(u => u.StoppageTime == viewModel.StoppageTime);
+            List<Stoppage> results = db.Stoppages.Where<Stoppage>(where).ToList();
+            return Content(JsonConvert.SerializeObject(results, dateTimeConverter));
+        }
         //
         // GET: /Stoppage/Edit/5
 
@@ -99,11 +112,9 @@ namespace Teshe.Controllers
         public ActionResult Delete(int id = 0)
         {
             Stoppage stoppage = db.Stoppages.Find(id);
-            if (stoppage == null)
-            {
-                return HttpNotFound();
-            }
-            return View(stoppage);
+            db.Stoppages.Remove(stoppage);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         //

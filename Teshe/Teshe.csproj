@@ -172,6 +172,7 @@
     <Compile Include="Models\Scrap.cs" />
     <Compile Include="Models\Stoppage.cs" />
     <Compile Include="Models\CreateStoppageViewModel.cs" />
+    <Compile Include="Models\StoppageIndexViewModel.cs" />
     <Compile Include="Models\TesheContext.cs" />
     <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Models\UserInfoLoginViewModel.cs" />
