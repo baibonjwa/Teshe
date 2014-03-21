@@ -137,6 +137,7 @@ namespace Teshe.Controllers
             {
                 db.Devices.Add(device);
                 db.SaveChanges();
+                log.Info("用户" + User.Identity.Name + "于" + DateTime.Now.ToString() + "添加设备" + device.Name);
                 return RedirectToAction("Index");
             }
 
@@ -167,6 +168,7 @@ namespace Teshe.Controllers
             {
                 db.Entry(device).State = EntityState.Modified;
                 db.SaveChanges();
+                log.Info("用户" + User.Identity.Name + "于" + DateTime.Now.ToString() + "修改设备" + device.Name);
                 return RedirectToAction("Index");
             }
             return View(device);
@@ -186,6 +188,8 @@ namespace Teshe.Controllers
             }
             db.Devices.Remove(device);
             db.SaveChanges();
+            log.Info("用户" + User.Identity.Name + "于" + DateTime.Now.ToString() + "删除设备" + device.Name);
+
             return RedirectToAction("Index");
         }
 
