@@ -59,6 +59,7 @@ namespace Teshe.Controllers
                 stoppage.UserInfo = db.UserInfoes.FirstOrDefault<UserInfo>(u => u.Name == User.Identity.Name);
                 db.Stoppages.Add(stoppage);
                 db.SaveChanges();
+                log.Info("用户" + User.Identity.Name + "于" + DateTime.Now.ToString() + "添加故障信息" + stoppage.Device.Name);
                 return RedirectToAction("Index");
 
             }
@@ -101,6 +102,7 @@ namespace Teshe.Controllers
             {
                 db.Entry(stoppage).State = EntityState.Modified;
                 db.SaveChanges();
+                log.Info("用户" + User.Identity.Name + "于" + DateTime.Now.ToString() + "修改故障信息" + stoppage.Device.Name);
                 return RedirectToAction("Index");
             }
             return View(stoppage);
@@ -114,6 +116,7 @@ namespace Teshe.Controllers
             Stoppage stoppage = db.Stoppages.Find(id);
             db.Stoppages.Remove(stoppage);
             db.SaveChanges();
+            log.Info("用户" + User.Identity.Name + "于" + DateTime.Now.ToString() + "删除故障信息" + stoppage.Device.Name);
             return RedirectToAction("Index");
         }
 

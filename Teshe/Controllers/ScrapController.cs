@@ -68,6 +68,7 @@ namespace Teshe.Controllers
                 scrap.UserInfo = db.UserInfoes.FirstOrDefault<UserInfo>(u => u.Name == User.Identity.Name);
                 db.Scraps.Add(scrap);
                 db.SaveChanges();
+                log.Info("用户" + User.Identity.Name + "于" + DateTime.Now.ToString() + "添加报废信息" + scrap.Device.Name);
                 return RedirectToAction("Index");
             }
             return View(model);
@@ -97,6 +98,7 @@ namespace Teshe.Controllers
             {
                 db.Entry(scrap).State = EntityState.Modified;
                 db.SaveChanges();
+                log.Info("用户" + User.Identity.Name + "于" + DateTime.Now.ToString() + "修改报废信息" + scrap.Device.Name);
                 return RedirectToAction("Index");
             }
             return View(scrap);
@@ -110,6 +112,7 @@ namespace Teshe.Controllers
             Scrap scrap = db.Scraps.Find(id);
             db.Scraps.Remove(scrap);
             db.SaveChanges();
+            log.Info("用户" + User.Identity.Name + "于" + DateTime.Now.ToString() + "删除报废信息" + scrap.Device.Name);
             return RedirectToAction("Index");
         }
 
