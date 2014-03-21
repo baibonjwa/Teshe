@@ -1,4 +1,7 @@
 ﻿<div id="top">
     <div id="logo"></div>
-    <div id="user">欢迎您:@this.User.Identity.Name</div>
+    @{
+        String roles = new Teshe.Models.TesheContext().UserInfoes.First(u => u.Name == this.User.Identity.Name).UserType.Name;
+    }
+    <div id="user">当前用户：<span class="bfont2">@this.User.Identity.Name</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;权限：<span class="bfont2">@roles</span></div>
 </div>

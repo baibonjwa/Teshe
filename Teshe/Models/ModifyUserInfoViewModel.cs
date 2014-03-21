@@ -42,7 +42,7 @@ namespace Teshe.Models
         [DisplayName("备注")]
         public string Remarks { get; set; }
 
-        [DisplayName("头像")]
+        [DisplayName("头像文件名")]
         public string PhotoUrl { get; set; }
 
     }

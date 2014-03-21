@@ -2,7 +2,6 @@
     ViewBag.Title = "客户信息修改";
 }
 @model Teshe.Models.ModifyUserInfoViewModel
-<h2>客户信息修改</h2>
 @Scripts.Render("~/Scripts/uploadify/jquery.uploadify.min.js")
 @Styles.Render("~/Content/uploadify.css")
 @UIHelper.ShowUploadify("file_upload")
@@ -10,87 +9,77 @@
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.PhotoUrl)
 
-    <fieldset>
-        <legend>客户信息</legend>
+    <div class="container">
+        <div class="row">
+            <div class="form-group col-sm-4">
+                @Html.LabelFor(model => model.ResponsiblePerson)
+                @Html.TextBoxFor(model => model.ResponsiblePerson, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ResponsiblePerson)
+            </div>
+            <div class="form-group col-sm-4">
+                @Html.LabelFor(model => model.Company)
+                @Html.TextBoxFor(model => model.Company, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Company)
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-sm-4">
+                @Html.LabelFor(model => model.District)
+                @Html.TextBoxFor(model => model.District, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.District)
+            </div>
+            <div class="form-group col-sm-4">
+                @Html.LabelFor(model => model.City)
+                @Html.TextBoxFor(model => model.City, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.City)
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-sm-4">
+                @Html.LabelFor(model => model.Province)
+                @Html.TextBoxFor(model => model.Province, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Province)
+            </div>
+            <div class="form-group col-sm-4">
+                @Html.LabelFor(model => model.Tel)
+                @Html.TextBoxFor(model => model.Tel, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Tel)
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-sm-4">
+                @Html.LabelFor(model => model.Email)
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+            <div class="form-group  col-sm-4">
+                @Html.LabelFor(model => model.Remarks)
+                @Html.TextBoxFor(model => model.Remarks, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Remarks)
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-sm-4">
+                @Html.LabelFor(model => model.PhotoUrl)
+                @Html.TextBox("fileName", "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PhotoUrl)
+            </div>
+            <div class="col-sm-8">
+                @Html.Label("上传头像")
+                <input type="file" name="file_upload" id="file_upload" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-sm-4">
 
-        @Html.HiddenFor(model => model.Id)
-        @Html.HiddenFor(model => model.PhotoUrl)
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ResponsiblePerson);
+                <input type="submit" value="保存修改" class="btn btn-default" />
+                @UIHelper.ModifyTips(ViewBag.ModifyInfoIsSuccess)
+            </div>
+            <div class="col-sm-8">
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ResponsiblePerson)
-            @Html.ValidationMessageFor(model => model.ResponsiblePerson)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Company)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Company)
-            @Html.ValidationMessageFor(model => model.Company)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.District)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.District)
-            @Html.ValidationMessageFor(model => model.District)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.City)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.City)
-            @Html.ValidationMessageFor(model => model.City)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Province)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Province)
-            @Html.ValidationMessageFor(model => model.Province)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Tel)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Tel)
-            @Html.ValidationMessageFor(model => model.Tel)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Email)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Email)
-            @Html.ValidationMessageFor(model => model.Email)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Remarks)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Remarks)
-            @Html.ValidationMessageFor(model => model.Remarks)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.PhotoUrl)
-        </div>
-        <div class="editor-field">
-            @Html.Editor("fileName")
-            @Html.ValidationMessageFor(model => model.PhotoUrl)
-            <input type="file" name="file_upload" id="file_upload" />
-        </div>
-        <p>
-            <input type="submit" value="保存修改" />
-            @UIHelper.ModifyTips(ViewBag.ModifyInfoIsSuccess)
-        </p>
-    </fieldset>
+    </div>
 }

@@ -11,7 +11,7 @@
 }
 
 #logo {
-    width: 357px;
+    width: 369px;
     height: 60px;
     background: url(../Images/main_02.gif);
     float: left;
@@ -178,6 +178,11 @@
     font-size: 9pt;
 }
 
+.bfont2 {
+    font-weight: bolder;
+}
+
+
 .content {
     width: 100%;
 }
@@ -194,11 +199,17 @@
 }
 
 .right {
-    margin-left: 188px;
-    width: auto;
 }
 
 .right_top {
     float: left;
     height: 67px;
+}
+
+.width300 {
+    width: 300px;
+}
+
+.form_table {
+    width: 100%;
 }

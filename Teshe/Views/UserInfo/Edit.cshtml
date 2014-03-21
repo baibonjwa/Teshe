@@ -6,7 +6,8 @@
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
@@ -18,8 +19,12 @@
         <div class="editor-label">
             @Html.LabelFor(model => model.Name)
         </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+        </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Name)
+            @Html.EditorFor(model => model.Name, new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Name)
         </div>
 

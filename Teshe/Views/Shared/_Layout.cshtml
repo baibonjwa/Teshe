@@ -19,16 +19,14 @@
     </script>
 </head>
 <body>
-    <div class="content">
-        <div class="top">
-            @Html.Partial("_BackTop")
-        </div>
-        <div class="center">
-            @Html.Partial("_BackLeft")
-            @Html.Partial("_BackRightTop")
-            <div class="right">
-                @RenderBody()
-            </div>
+    <div class="top">
+        @Html.Partial("_BackTop")
+    </div>
+    <div class="center">
+        @Html.Partial("_BackLeft")
+        @Html.Partial("_BackRightTop")
+        <div style="margin-top: 20px;" class="col-sm-8">
+            @RenderBody()
         </div>
     </div>
 
