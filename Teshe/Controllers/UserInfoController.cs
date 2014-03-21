@@ -17,6 +17,7 @@ using Teshe.Common;
 
 namespace Teshe.Controllers
 {
+    [Authorize]
     public class UserInfoController : BaseController
     {
         //
@@ -41,7 +42,7 @@ namespace Teshe.Controllers
 
         //
         // GET: /UserInfo/Create
-
+        [AllowAnonymous]
         public ActionResult Create()
         {
             return View();
@@ -51,6 +52,7 @@ namespace Teshe.Controllers
         // POST: /UserInfo/Create
 
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Exclude = "RegisterOn")] UserInfo userinfo)
         {
@@ -313,7 +315,7 @@ namespace Teshe.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
-
+        [AllowAnonymous]
         public ActionResult Login()
         {
             //ViewBag.ReturnUrl = returnUrl;
@@ -321,6 +323,7 @@ namespace Teshe.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult Login(UserInfoLoginViewModel userinfo)
         {
             if (ValidateUser(userinfo.Name, userinfo.Password))

@@ -16,9 +16,9 @@ using Newtonsoft.Json.Converters;
 
 namespace Teshe.Controllers
 {
+    [Authorize]
     public class DeviceController : BaseController
     {
-
         public DeviceController()
         {
             List<SelectListItem> explosionProofList = new List<SelectListItem>();
@@ -189,7 +189,6 @@ namespace Teshe.Controllers
             db.Devices.Remove(device);
             db.SaveChanges();
             log.Info("用户" + User.Identity.Name + "于" + DateTime.Now.ToString() + "删除设备" + device.Name);
-
             return RedirectToAction("Index");
         }
 

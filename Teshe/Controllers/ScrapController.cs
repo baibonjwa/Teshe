@@ -13,6 +13,7 @@ using Teshe.Models;
 
 namespace Teshe.Controllers
 {
+    [Authorize]
     public class ScrapController : BaseController
     {
         // GET: /Scrap/

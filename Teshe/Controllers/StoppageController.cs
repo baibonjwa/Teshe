@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 
 namespace Teshe.Controllers
 {
+    [Authorize]
     public class StoppageController : BaseController
     {
         //
