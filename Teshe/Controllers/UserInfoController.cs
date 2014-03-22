@@ -227,7 +227,7 @@ namespace Teshe.Controllers
                 log.Info("用户" + User.Identity.Name + "于" + DateTime.Now.ToString() + "修改个人信息");
                 ViewBag.ModifyInfoIsSuccess = true;
             }
-            return View();
+            return View(viewModel);
         }
 
 

@@ -14,7 +14,7 @@ namespace Teshe.Models
         [DisplayName("负责人")]
         [Required(ErrorMessage = "请输入负责人")]
         public string ResponsiblePerson { get; set; }
-   
+
         [DisplayName("所在公司")]
         [Required(ErrorMessage = "请输入所在公司")]
         public string Company { get; set; }
@@ -42,7 +42,7 @@ namespace Teshe.Models
         [DisplayName("备注")]
         public string Remarks { get; set; }
 
-        [DisplayName("头像文件名")]
+        [DisplayName("头像")]
         public string PhotoUrl { get; set; }
 
     }
