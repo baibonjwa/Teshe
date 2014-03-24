@@ -872,12 +872,10 @@
     <Content Include="Views\UserInfo\Details.cshtml" />
     <Content Include="Views\UserInfo\Create.cshtml" />
     <Content Include="Views\UserInfo\Edit.cshtml" />
-    <Content Include="Views\UserInfo\Delete.cshtml" />
     <Content Include="Views\Device\Index.cshtml" />
     <Content Include="Views\Device\Details.cshtml" />
     <Content Include="Views\Device\Create.cshtml" />
     <Content Include="Views\Device\Edit.cshtml" />
-    <Content Include="Views\Device\Delete.cshtml" />
     <Content Include="Views\Mail\Index.cshtml" />
     <Content Include="Views\Mail\Details.cshtml" />
     <Content Include="Views\Mail\Create.cshtml" />

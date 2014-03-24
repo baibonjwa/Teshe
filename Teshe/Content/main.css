@@ -46,7 +46,7 @@
 #left_tree {
     width: 184px;
     background: url(../Images/main_19.gif);
-    height: 260px;
+    height: 400px;
     padding-top: 20px;
     margin-left: 4px;
 }
@@ -100,7 +100,7 @@
 #tree_down {
     height: 17px;
     width: 184px;
-    margin-left: 4px;
+    margin-left: 0px;
     margin-bottom: 0px;
     background: url(../Images/main_21.gif);
 }
