@@ -7,59 +7,63 @@
 <script>
     function Search() {
         $("#result").datagrid({
-            url: "/Device/Search?" + "Name=" + $("#Name").val() + "&Model=" + $("#Model").val() + "&Barcode=" + $("#Barcode").val() + "&Company=" + $("#Company").val() + "&CheckState=" + $("#CheckState").find("option:selected").text()
+            url: encodeURI("/Device/Search?" + "Name=" + $("#Name").val() + "&Model=" + $("#Model").val() + "&Barcode=" + $("#Barcode").val() + "&Company=" + $("#Company").val() + "&CheckState=" + $("#CheckState").val())
         })
     }
 </script>
-<h2>Index</h2>
-<table>
-    <tr>
-        <td>
-            @Html.DisplayNameFor(model => model.Name)
-        </td>
-        <td>
-            @Html.EditorFor(model => model.Name)
-        </td>
-    </tr>
-    <tr>
-        <td>
-            @Html.DisplayNameFor(model => model.Model)
-        </td>
-        <td>
-            @Html.EditorFor(model => model.Model)
-        </td>
-    </tr>
-    <tr>
-        <td>
-            @Html.DisplayNameFor(model => model.Barcode)
-        </td>
-        <td>
-            @Html.EditorFor(model => model.Barcode)
-        </td>
-    </tr>
-    <tr>
-        <td>
-            @Html.DisplayNameFor(model => model.Company)
-        </td>
-        <td>
-            @Html.EditorFor(model => model.Company)
-        </td>
-    </tr>
-    <tr>
-        <td>
-            @Html.DisplayNameFor(model => model.CheckState)
-        </td>
-        <td>
-            @Html.DropDownListFor(model => model.CheckState, (List<SelectListItem>)ViewBag.CheckStateList)
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a class="easyui-linkbutton" href="javascript:void(0)" onclick="Search()">查询设备</a>
-        </td>
-    </tr>
-</table>
-<table id="result" class="easyui-datagrid" title="设备信息" style="width: 1000px; height: auto"
+<div class="row">
+    <div class="form-group col-sm-4">
+        @Html.DisplayNameFor(model => model.Name)
+        @Html.EditorFor(model => model.Name)
+    </div>
+    <div class="form-group col-sm-4">
+        @Html.DisplayNameFor(model => model.Model)
+        @Html.EditorFor(model => model.Model)
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-sm-4">
+        @Html.DisplayNameFor(model => model.Barcode)
+        @Html.EditorFor(model => model.Barcode)
+    </div>
+    <div class="form-group col-sm-4">
+        @Html.DisplayNameFor(model => model.Company)
+        @Html.EditorFor(model => model.Company)
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-sm-4">
+        @Html.DisplayNameFor(model => model.CheckState)
+        @Html.DropDownListFor(model => model.CheckState, (List<SelectListItem>)ViewBag.CheckStateList)
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-sm-4">
+        <a id="" class="easyui-linkbutton" href="javascript:void(0)" onclick="Search()">查询设备</a>
+    </div>
+</div>
+<div class="form-group col-sm-12">
+</div>
+
+<script>
+    function pass(val, row) {
+        return "<a onclick=\"passConfirm(" + row.Id + ")\" href=\"javascript:void(0)\">查看详细</a>";
+    }
+    function del(val, row) {
+        return "<a onclick=\"delConfirm(" + row.Id + ")\" href=\"javascript:void(0)\">删除</a>";
+    }
+    function passConfirm(id) {
+        window.location.href = "/Device/Details/" + id;
+    }
+    function delConfirm(id) {
+        $.messager.confirm('确认', '您确定要删除吗？', function (r) {
+            if (r) {
+                window.location.href = "/Device/Delete/" + id;
+            }
+        });
+    }
+</script>
+<table id="result" class="easyui-datagrid" title="设备信息" style="width: 980px; height: auto"
     data-options="singleSelect:true,collapsible:true,url:'/Device/Search',method:'post',rownumbers:'true',pagination:'true'">
     <thead>
         <tr>
@@ -80,163 +84,8 @@
             <th data-options="field:'CheckCycle',width:100">检测周期</th>
             <th data-options="field:'UseState',width:100">使用状态</th>
             <th data-options="field:'MaintenanceRecord',width:100">维修记录</th>
-            <th data-options="field:'pass',width:60,formatter:pass">修改</th>
-            <th data-options="field:'del',width:60,formatter:del">查看详细</th>
+            <th data-options="field:'pass',width:60,formatter:pass">查看详细</th>
+            <th data-options="field:'del',width:60,formatter:del">删除</th>
         </tr>
     </thead>
 </table>
-<script>
-    function pass(val, row) {
-        return "<a onclick=\"passConfirm(" + row.Id + ")\" href=\"javascript:void(0)\">查看详细</a>";
-    }
-    function del(val, row) {
-        return "<a onclick=\"delConfirm(" + row.Id + ")\" href=\"javascript:void(0)\">删除</a>";
-    }
-    function passConfirm(id) {
-        window.location.href = "/Device/Details/" + id;
-    }
-    function delConfirm(id) {
-        $.messager.confirm('确认', '您确定要删除吗？', function (r) {
-            if (r) {
-                window.location.href = "/Device/Delete/" + id;
-            }
-        });
-    }
-</script>
-
-@*<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Model)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Barcode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PhotoUrl)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Company)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.District)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.City)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Province)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ManufactureDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Factory)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SetupTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ExplosionProof)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SecurityCertificateNo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CheckState)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CheckTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CheckCycle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UseState)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MaintenanceRecord)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Remarks)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.InputTime)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Model)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Barcode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PhotoUrl)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Company)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.District)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Province)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ManufactureDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Factory)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SetupTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ExplosionProof)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SecurityCertificateNo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CheckState)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CheckTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CheckCycle)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UseState)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaintenanceRecord)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Remarks)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InputTime)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>*@

@@ -3,74 +3,59 @@
 @{
     ViewBag.Title = "Create";
 }
-
-<h2>Create</h2>
 @Scripts.Render("~/Scripts/My97DatePicker/WdatePicker.js")
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
-
-    <fieldset>
-        <legend>Stoppage</legend>
-
-        <div class="editor-label">
+    <div class="row">
+        <div class="form-group col-sm-4">
             @Html.LabelFor(model => model.DeviceBarcode)
-        </div>
-        <div class="editor-field">
             @Html.EditorFor(model => model.DeviceBarcode)
             @Html.ValidationMessageFor(model => model.DeviceBarcode)
         </div>
-
-        <div class="editor-label">
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-4">
             @Html.LabelFor(model => model.Description)
-        </div>
-        <div class="editor-field">
             @Html.EditorFor(model => model.Description)
             @Html.ValidationMessageFor(model => model.Description)
         </div>
-
-        <div class="editor-label">
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-4">
             @Html.LabelFor(model => model.StoppageTime)
-        </div>
-        <div class="editor-field">
             @Html.TextBoxFor(model => model.StoppageTime, new { onfocus = "WdatePicker()" })
             @Html.ValidationMessageFor(model => model.StoppageTime)
         </div>
-
-        <div class="editor-label">
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-4">
             @Html.LabelFor(model => model.RepairPeople)
-        </div>
-        <div class="editor-field">
             @Html.EditorFor(model => model.RepairPeople)
             @Html.ValidationMessageFor(model => model.RepairPeople)
         </div>
-
-        <div class="editor-label">
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-4">
             @Html.LabelFor(model => model.RepairTime)
-        </div>
-        <div class="editor-field">
             @Html.TextBoxFor(model => model.RepairTime, new { onfocus = "WdatePicker()" })
             @Html.ValidationMessageFor(model => model.RepairTime)
         </div>
-
-        <div class="editor-label">
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-4">
             @Html.LabelFor(model => model.Remarks)
-        </div>
-        <div class="editor-field">
             @Html.EditorFor(model => model.Remarks)
             @Html.ValidationMessageFor(model => model.Remarks)
         </div>
-
-        <p>
-            <input type="submit" value="添加故障" />
-        </p>
-    </fieldset>
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-4">
+            <input type="submit" value="添加故障" class="btn btn-default" />
+        </div>
+    </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

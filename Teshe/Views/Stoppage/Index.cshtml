@@ -32,54 +32,42 @@
         return row.Device.Province;
     }
 </script>
-<h2>Index</h2>
-<table>
-    <tr>
-        <td>
-            @Html.DisplayNameFor(model => model.Name)
+<div class="row">
+    <div class="form-group col-sm-4">
+        @Html.DisplayNameFor(model => model.Name)
+        @Html.EditorFor(model => model.Name)
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-sm-4">
+        @Html.DisplayNameFor(model => model.Model)
+        @Html.EditorFor(model => model.Model)
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-sm-4">
+        @Html.DisplayNameFor(model => model.Barcode)
+        @Html.EditorFor(model => model.Barcode)
         </td>
-        <td>
-            @Html.EditorFor(model => model.Name)
-        </td>
-    </tr>
-    <tr>
-        <td>
-            @Html.DisplayNameFor(model => model.Model)
-        </td>
-        <td>
-            @Html.EditorFor(model => model.Model)
-        </td>
-    </tr>
-    <tr>
-        <td>
-            @Html.DisplayNameFor(model => model.Barcode)
-        </td>
-        <td>
-            @Html.EditorFor(model => model.Barcode)
-        </td>
-    </tr>
-    <tr>
-        <td>
-            @Html.DisplayNameFor(model => model.Company)
-        </td>
-        <td>
-            @Html.EditorFor(model => model.Company)
-        </td>
-    </tr>
-    <tr>
-        <td>
-            @Html.DisplayNameFor(model => model.StoppageTime)
-        </td>
-        <td>
-            @Html.TextBoxFor(model => model.StoppageTime, new { onfocus = "WdatePicker()" })
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a class="easyui-linkbutton" href="javascript:void(0)" onclick="Search()">查询故障</a>
-        </td>
-    </tr>
-</table>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-sm-4">
+        @Html.DisplayNameFor(model => model.Company)
+        @Html.EditorFor(model => model.Company)
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-sm-4">
+        @Html.DisplayNameFor(model => model.StoppageTime)
+        @Html.TextBoxFor(model => model.StoppageTime, new { onfocus = "WdatePicker()" })
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-sm-4">
+        <a class="easyui-linkbutton" href="javascript:void(0)" onclick="Search()">查询故障</a>
+    </div>
+</div>
 <table id="result" class="easyui-datagrid" title="故障信息" style="width: 1000px; height: auto"
     data-options="singleSelect:true,collapsible:true,url:'/Stoppage/Search',method:'post',rownumbers:'true',pagination:'true'">
     <thead>
