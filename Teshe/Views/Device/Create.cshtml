@@ -26,11 +26,34 @@
         //}
         //)
     }
+    function getRowObj(obj) {
+        var i = 0;
+        while (obj.tagName.toLowerCase() != "tr") {
+            obj = obj.parentNode;
+            if (obj.tagName.toLowerCase() == "table")
+                return null;
+        }
+        return obj;
+    }
+    function delRow(obj) {
+        var rowNo = getRowNo(obj);
+        //$("#attributes tr").eq(1).empty();
+        $("#attributes tr").eq(rowNo).remove();
+        $("#attributesJson").val(GetAttributeJson());
+    }
+    function getRowNo(obj) {
+        var trObj = getRowObj(obj);
+        var trArr = trObj.parentNode.children;
+        for (var trNo = 0; trNo < trArr.length; trNo++) {
+            if (trObj == trObj.parentNode.children[trNo])
+            { return trNo; }
+        }
+    }
     function AddAttribute() {
         var name = $("#attributeName").val();
         var value = $("#attributeValue").val();
         var html = $("#attributes").html();
-        $("#attributes").html(html + " <tr> <td>属性名：</td><td class=\"attr\">" + name + "</td><td>属性值：</td><td class=\"attr\">" + value + "</td></tr>");
+        $("#attributes").html(html + " <tr> <td>属性名：</td><td class=\"attr\">" + name + "</td><td>属性值：</td><td class=\"attr\">" + value + "</td><td><a href=\"javascript:void(0)\" onclick=\"delRow(this)\">删除</a></td></tr>");
         $("#attributesJson").val(GetAttributeJson());
     }
     function GetAttributeJson() {
@@ -70,61 +93,61 @@
     @Html.ValidationSummary(true)
     <div class="row">
         <div class="form-group col-sm-4">
-            @Html.LabelFor(model => model.Name)
-            @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+            @Html.DisplayNameFor(model => model.Name)
+            @Html.TextBoxFor(model => model.Name)
             @Html.ValidationMessageFor(model => model.Name)
         </div>
         <div class="form-group col-sm-4">
-            @Html.LabelFor(model => model.Model)
-            @Html.TextBoxFor(model => model.Model, new { @class = "form-control" })
+            @Html.DisplayNameFor(model => model.Model)
+            @Html.TextBoxFor(model => model.Model)
             @Html.ValidationMessageFor(model => model.Model)
         </div>
     </div>
     <div class="row">
         <div class="form-group col-sm-4">
-            @Html.LabelFor(model => model.Company)
-            @Html.TextBoxFor(model => model.Company, new { @class = "form-control" })
+            @Html.DisplayNameFor(model => model.Company)
+            @Html.TextBoxFor(model => model.Company)
             @Html.ValidationMessageFor(model => model.Company)
         </div>
         <div class="form-group col-sm-4">
-            @Html.LabelFor(model => model.District)
-            @Html.TextBoxFor(model => model.District, new { @class = "form-control" })
+            @Html.DisplayNameFor(model => model.District)
+            @Html.TextBoxFor(model => model.District)
             @Html.ValidationMessageFor(model => model.District)
         </div>
     </div>
     <div class="row">
         <div class="form-group col-sm-4">
-            @Html.LabelFor(model => model.City)
-            @Html.TextBoxFor(model => model.City, new { @class = "form-control" })
+            @Html.DisplayNameFor(model => model.City)
+            @Html.TextBoxFor(model => model.City)
             @Html.ValidationMessageFor(model => model.City)
         </div>
         <div class="form-group col-sm-4">
-            @Html.LabelFor(model => model.Province)
-            @Html.TextBoxFor(model => model.Province, new { @class = "form-control" })
+            @Html.DisplayNameFor(model => model.Province)
+            @Html.TextBoxFor(model => model.Province)
             @Html.ValidationMessageFor(model => model.Province)
         </div>
     </div>
     <div class="row">
         <div class="form-group col-sm-4">
-            @Html.LabelFor(model => model.ManufactureDate)
+            @Html.DisplayNameFor(model => model.ManufactureDate)
             @Html.TextBoxFor(model => model.ManufactureDate, new { onfocus = "WdatePicker()", @class = "form-control" })
             @Html.ValidationMessageFor(model => model.ManufactureDate)
         </div>
         <div class="form-group col-sm-4">
-            @Html.LabelFor(model => model.Factory)
-            @Html.TextBoxFor(model => model.Factory, new { @class = "form-control" })
+            @Html.DisplayNameFor(model => model.Factory)
+            @Html.TextBoxFor(model => model.Factory)
             @Html.ValidationMessageFor(model => model.Factory)
         </div>
     </div>
     <div class="row">
         <div class="form-group col-sm-4">
-            @Html.LabelFor(model => model.SetupTime)
+            @Html.DisplayNameFor(model => model.SetupTime)
             @Html.TextBoxFor(model => model.SetupTime, new { onfocus = "WdatePicker()", @class = "form-control" })
             @Html.ValidationMessageFor(model => model.SetupTime)
         </div>
         <div class="form-group col-sm-4">
-            @Html.LabelFor(model => model.ExplosionProof)
-            @Html.DropDownListFor(model => model.ExplosionProof, (List<SelectListItem>)ViewBag.ExplosionProofList, new { @class = "form-control" })
+            @Html.DisplayNameFor(model => model.ExplosionProof)
+            @Html.DropDownListFor(model => model.ExplosionProof, (List<SelectListItem>)ViewBag.ExplosionProofList)
             @Html.ValidationMessageFor(model => model.ExplosionProof)
         </div>
 
@@ -132,58 +155,58 @@
     </div>
     <div class="row">
         <div class="form-group col-sm-4">
-            @Html.LabelFor(model => model.SecurityCertificateNo)
-            @Html.TextBoxFor(model => model.SecurityCertificateNo, new { @class = "form-control" })
+            @Html.DisplayNameFor(model => model.SecurityCertificateNo)
+            @Html.TextBoxFor(model => model.SecurityCertificateNo)
             @Html.ValidationMessageFor(model => model.SecurityCertificateNo)
         </div>
         <div class="form-group col-sm-4">
-            @Html.LabelFor(model => model.CheckState)
-            @Html.DropDownListFor(model => model.CheckState, (List<SelectListItem>)ViewBag.CheckStateList, new { @class = "form-control" })
+            @Html.DisplayNameFor(model => model.CheckState)
+            @Html.DropDownListFor(model => model.CheckState, (List<SelectListItem>)ViewBag.CheckStateList)
             @Html.ValidationMessageFor(model => model.CheckState)
         </div>
     </div>
     <div class="row">
         <div class="form-group col-sm-4">
-            @Html.LabelFor(model => model.CheckTime)
+            @Html.DisplayNameFor(model => model.CheckTime)
             @Html.TextBoxFor(model => model.CheckTime, new { onfocus = "WdatePicker()", @class = "form-control" })
             @Html.ValidationMessageFor(model => model.CheckTime)
         </div>
         <div class="form-group col-sm-4">
-            @Html.LabelFor(model => model.CheckCycle)
-            @Html.TextBoxFor(model => model.CheckCycle, new { @class = "form-control" })*单位为天
+            @Html.DisplayNameFor(model => model.CheckCycle)
+            @Html.TextBoxFor(model => model.CheckCycle)*单位为天
                     @Html.ValidationMessageFor(model => model.CheckCycle)
         </div>
     </div>
     <div class="row">
         <div class="form-group col-sm-4">
-            @Html.LabelFor(model => model.UseState)
-            @Html.DropDownListFor(model => model.UseState, (List<SelectListItem>)ViewBag.UseStateList, new { @class = "form-control" })
+            @Html.DisplayNameFor(model => model.UseState)
+            @Html.DropDownListFor(model => model.UseState, (List<SelectListItem>)ViewBag.UseStateList)
             @Html.ValidationMessageFor(model => model.UseState)
         </div>
         <div class="form-group col-sm-4">
-            @Html.LabelFor(model => model.MaintenanceRecord)
-            @Html.TextBoxFor(model => model.MaintenanceRecord, new { @class = "form-control" })
+            @Html.DisplayNameFor(model => model.MaintenanceRecord)
+            @Html.TextBoxFor(model => model.MaintenanceRecord)
             @Html.ValidationMessageFor(model => model.MaintenanceRecord)
         </div>
     </div>
     <div class="row">
         <div class="form-group col-sm-8">
-            @Html.LabelFor(model => model.Remarks)
-            @Html.TextBoxFor(model => model.Remarks, new { @class = "form-control" })
+            @Html.DisplayNameFor(model => model.Remarks)
+            @Html.TextBoxFor(model => model.Remarks)
             @Html.ValidationMessageFor(model => model.Remarks)
         </div>
     </div>
     <div class="row">
         <div class="form-group col-sm-4">
-            @*@Html.LabelFor(model => model.Attributes)*@
-            @Html.Label("属性名称", new { name = "attributeName" })
-            @Html.TextBox("attributeName", "", new { @class = "form-control" })
+            @*@Html.DisplayNameFor(model => model.Attributes)*@
+            @Html.Display("属性名称", new { name = "attributeName" })
+            @Html.TextBox("attributeName", "")
         </div>
         <div class="form-group col-sm-4">
-            @Html.Label("属性内容", new { name = "attributeValue" })
-            @Html.TextBox("attributeValue", "", new { @class = "form-control" })
+            @Html.Display("属性内容", new { name = "attributeValue" })
+            @Html.TextBox("attributeValue", "")
         </div>
-        <div style="padding-top: 24px;" class="form-group col-sm-2">
+        <div style="padding-top: 21px;" class="form-group col-sm-2">
             <a style="height: 33px; font-size: 14px; line-height: 29px" href="javascript:void(0)" class="easyui-linkbutton" onclick="AddAttribute()">添加属性</a>
             @Html.Hidden("attributesJson")
         </div>
@@ -196,18 +219,22 @@
     </div>
     <div class="row">
         <div class="form-group col-sm-4">
-            @Html.LabelFor(model => model.PhotoUrl)
-            @Html.TextBox("fileName", "", new { @class = "form-control" })
+            @Html.DisplayNameFor(model => model.PhotoUrl)
+            @Html.TextBox("fileName", "")
             @Html.HiddenFor(model => model.PhotoUrl)
             @Html.ValidationMessageFor(model => model.PhotoUrl)
             <input type="file" name="file_upload" id="file_upload" />
         </div>
         <div class="form-group col-sm-4">
-            @Html.LabelFor(model => model.Barcode)
-            @Html.TextBoxFor(model => model.Barcode, new { @class = "form-control" })
-            <input id="CreateBarcode" name="Code" type="button" value="生成条形码" class="btn btn-default" onclick="Create()" />
+            @Html.DisplayNameFor(model => model.Barcode)
+            @Html.TextBoxFor(model => model.Barcode)
+
             @Html.ValidationMessageFor(model => model.Barcode)
             <img id="BarcodeImg" src="" alt="条形码图片" width="187" height="131" />
+        </div>
+        <div style="padding-top: 21px;" class="form-group col-sm-4">
+            <a style="height: 33px; font-size: 14px; line-height: 29px" href="javascript:void(0)" class="easyui-linkbutton" onclick="Create()">生成条形码</a>
+            @*<input id="CreateBarcode" name="Code" type="button " value="生成条形码" class="btn " onclick="Create()" />*@
         </div>
     </div>
     <div class="row">

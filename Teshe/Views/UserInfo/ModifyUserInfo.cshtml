@@ -13,62 +13,62 @@
     @Html.HiddenFor(model => model.PhotoUrl)
     <div class="row">
         <div class="form-group col-sm-4">
-            @Html.LabelFor(model => model.ResponsiblePerson)
+            @Html.DisplayNameFor(model => model.ResponsiblePerson)
             @Html.TextBoxFor(model => model.ResponsiblePerson)
             @Html.ValidationMessageFor(model => model.ResponsiblePerson)
         </div>
         <div class="form-group col-sm-4">
-            @Html.LabelFor(model => model.Company)
+            @Html.DisplayNameFor(model => model.Company)
             @Html.TextBoxFor(model => model.Company)
             @Html.ValidationMessageFor(model => model.Company)
         </div>
     </div>
     <div class="row">
         <div class="form-group col-sm-4">
-            @Html.LabelFor(model => model.District)
+            @Html.DisplayNameFor(model => model.District)
             @Html.TextBoxFor(model => model.District)
             @Html.ValidationMessageFor(model => model.District)
         </div>
         <div class="form-group col-sm-4">
-            @Html.LabelFor(model => model.City)
+            @Html.DisplayNameFor(model => model.City)
             @Html.TextBoxFor(model => model.City)
             @Html.ValidationMessageFor(model => model.City)
         </div>
     </div>
     <div class="row">
         <div class="form-group col-sm-4">
-            @Html.LabelFor(model => model.Province)
+            @Html.DisplayNameFor(model => model.Province)
             @Html.TextBoxFor(model => model.Province)
             @Html.ValidationMessageFor(model => model.Province)
         </div>
         <div class="form-group col-sm-4">
-            @Html.LabelFor(model => model.Tel)
+            @Html.DisplayNameFor(model => model.Tel)
             @Html.TextBoxFor(model => model.Tel)
             @Html.ValidationMessageFor(model => model.Tel)
         </div>
     </div>
     <div class="row">
         <div class="form-group col-sm-4">
-            @Html.LabelFor(model => model.Email)
+            @Html.DisplayNameFor(model => model.Email)
             @Html.TextBoxFor(model => model.Email)
             @Html.ValidationMessageFor(model => model.Email)
         </div>
         <div class="form-group  col-sm-4">
-            @Html.LabelFor(model => model.Remarks)
+            @Html.DisplayNameFor(model => model.Remarks)
             @Html.TextBoxFor(model => model.Remarks)
             @Html.ValidationMessageFor(model => model.Remarks)
         </div>
     </div>
     <div class="row">
         <div class="form-group col-sm-4">
-            @Html.LabelFor(model => model.PhotoUrl)
+            @Html.DisplayNameFor(model => model.PhotoUrl)
             @Html.TextBox("fileName", "")
             @Html.ValidationMessageFor(model => model.PhotoUrl)
             <input type="file" name="file_upload" id="file_upload" />
             头像的大小为100*100
         </div>
         <div class="col-sm-8">
-            @Html.Label("头像")
+            @Html.Display("头像")
             <img width="100" height="100" src="/FileUpload/Photo/@Model.PhotoUrl" alt="头像" />
         </div>
     </div>

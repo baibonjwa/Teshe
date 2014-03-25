@@ -3,10 +3,194 @@
 @{
     ViewBag.Title = "Details";
 }
+<style>
+    .tableFirstCol {
+        width: 200px;
+    }
+</style>
+<table class="table table-striped table-hover table-bordered">
+    <tr>
+        <td class="tableFirstCol">
+            @Html.DisplayNameFor(model => model.Name)：
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Name)
+        </td>
+    </tr>
+    <tr>
+        <td class="tableFirstCol">
+            @Html.DisplayNameFor(model => model.Model)：
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Model)
+        </td>
 
-<h2>Details</h2>
+    </tr>
+    <tr>
+        <td class="tableFirstCol">
+            @Html.DisplayNameFor(model => model.Company)：
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Company)
+        </td>
+    </tr>
+    <tr>
+        <td class="tableFirstCol">
+            @Html.DisplayNameFor(model => model.District)：
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.District)
+        </td>
+    </tr>
+    <tr>
+        <td class="tableFirstCol">
+            @Html.DisplayNameFor(model => model.City)：
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.City)
+        </td>
+    </tr>
+    <tr>
+        <td class="tableFirstCol">
+            @Html.DisplayNameFor(model => model.Province)：
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Province)
+        </td>
+    </tr>
+    <tr>
+        <td class="tableFirstCol">
+            @Html.DisplayNameFor(model => model.ManufactureDate)：
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.ManufactureDate)
+        </td>
+    </tr>
+    <tr>
+        <td class="tableFirstCol">
+            @Html.DisplayNameFor(model => model.Factory)：
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Factory)
+        </td>
+    </tr>
+    <tr>
+        <td class="tableFirstCol">
+            @Html.DisplayNameFor(model => model.Barcode)：
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Barcode)
+        </td>
+    </tr>
+    <tr>
+        <td class="tableFirstCol">
+            @Html.DisplayNameFor(model => model.SetupTime)：
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.SetupTime)
+        </td>
+    </tr>
+    <tr>
+        <td class="tableFirstCol">
+            @Html.DisplayNameFor(model => model.ExplosionProof)：
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.ExplosionProof)
+        </td>
+    </tr>
+    <tr>
+        <td class="tableFirstCol">
+            @Html.DisplayNameFor(model => model.SecurityCertificateNo)：
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.SecurityCertificateNo)
+        </td>
+    </tr>
+    <tr>
+        <td class="tableFirstCol">
+            @Html.DisplayNameFor(model => model.CheckState)：
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.CheckState)
+        </td>
+    </tr>
+    <tr>
+        <td class="tableFirstCol">
+            @Html.DisplayNameFor(model => model.CheckTime)：
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.CheckTime)
+        </td>
+    </tr>
+    <tr>
+        <td class="tableFirstCol">
+            @Html.DisplayNameFor(model => model.CheckCycle)：
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.CheckCycle)
+        </td>
+    </tr>
+    <tr>
+        <td class="tableFirstCol">
+            @Html.DisplayNameFor(model => model.UseState)：
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.UseState)
+        </td>
+    </tr>
+    <tr>
+        <td class="tableFirstCol">
+            @Html.DisplayNameFor(model => model.MaintenanceRecord)：
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.MaintenanceRecord)
+        </td>
+    </tr>
+    <tr>
+        <td class="tableFirstCol">
+            @Html.DisplayNameFor(model => model.Remarks)：
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Remarks)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Attributes)：
+        </td>
+        <td>
+            <table id="attributes">
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.PhotoUrl)
+        </td>
+        <td>
+            <img src="/FileUpload/Device/@Model.PhotoUrl" alt="设备照片" />
+        </td>
+    </tr>
+</table>
+<input type="submit" value="修改该设备" class="btn btn-default" />
+<input type="submit" value="删除该设备" class="btn btn-default" />
+@*<div class="row">
+    <div class="form-group col-sm-4">
+        @Html.Label("属性名称", new { name = "attributeName" })
+        @Html.TextBox("attributeName", "")
+    </div>
+    <div class="form-group col-sm-4">
+        @Html.Label("属性内容", new { name = "attributeValue" })
+        @Html.TextBox("attributeValue", "")
+    </div>
+    <div style="padding-top: 21px;" class="form-group col-sm-2">
+        <a style="height: 33px; font-size: 14px; line-height: 29px" href="javascript:void(0)" class="easyui-linkbutton" onclick="AddAttribute()">添加属性</a>
+        @Html.Hidden("attributesJson")
+    </div>*@
 
-<fieldset>
+
+
+@*<fieldset>
     <legend>Device</legend>
 
     <div class="display-label">
@@ -152,4 +336,4 @@
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
-</p>
+</p>*@
