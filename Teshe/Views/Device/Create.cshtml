@@ -199,14 +199,14 @@
     <div class="row">
         <div class="form-group col-sm-4">
             @*@Html.DisplayNameFor(model => model.Attributes)*@
-            @Html.Display("属性名称", new { name = "attributeName" })
+            属性名称
             @Html.TextBox("attributeName", "")
         </div>
         <div class="form-group col-sm-4">
-            @Html.Display("属性内容", new { name = "attributeValue" })
+            属性内容
             @Html.TextBox("attributeValue", "")
         </div>
-        <div style="padding-top: 21px;" class="form-group col-sm-2">
+        <div style="padding-top: 16px;" class="form-group col-sm-2">
             <a style="height: 33px; font-size: 14px; line-height: 29px" href="javascript:void(0)" class="easyui-linkbutton" onclick="AddAttribute()">添加属性</a>
             @Html.Hidden("attributesJson")
         </div>
@@ -232,7 +232,7 @@
             @Html.ValidationMessageFor(model => model.Barcode)
             <img id="BarcodeImg" src="" alt="条形码图片" width="187" height="131" />
         </div>
-        <div style="padding-top: 21px;" class="form-group col-sm-4">
+        <div style="padding-top: 16px;" class="form-group col-sm-4">
             <a style="height: 33px; font-size: 14px; line-height: 29px" href="javascript:void(0)" class="easyui-linkbutton" onclick="Create()">生成条形码</a>
             @*<input id="CreateBarcode" name="Code" type="button " value="生成条形码" class="btn " onclick="Create()" />*@
         </div>

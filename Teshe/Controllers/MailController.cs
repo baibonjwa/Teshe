@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -9,13 +10,10 @@ using Teshe.Models;
 
 namespace Teshe.Controllers
 {
-    public class MailController : Controller
+    public class MailController : BaseController
     {
-        private TesheContext db = new TesheContext();
-
         //
         // GET: /Mail/
-
         public ActionResult Index()
         {
             return View(db.Mails.ToList());
@@ -112,6 +110,12 @@ namespace Teshe.Controllers
             db.Mails.Remove(mail);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Search()
+        {
+            List<Mail> list = db.Mails.Where<Mail>(u => u.ReceivedUser.Name == User.Identity.Name).ToList();
+            return Content(JsonConvert.SerializeObject(list, dateTimeConverter));
         }
 
         protected override void Dispose(bool disposing)
