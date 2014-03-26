@@ -72,5 +72,7 @@ namespace Teshe.Models
         [DisplayName("用户类型")]
         public virtual UserType UserType { get; set; }
 
+        [DisplayName("SIM卡号")]
+        public String SIMCode { get; set; }
     }
 }
