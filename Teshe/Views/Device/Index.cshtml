@@ -89,3 +89,37 @@
         </tr>
     </thead>
 </table>
+<a class="easyui-linkbutton" href="javascript:void(0)" onclick="exportExcel()">导出报表</a>
+<script>
+    function exportExcel() {
+        var data = $('#result').datagrid('getData');
+        PostSubmit("/Device/ExportExcel", JSON.stringify(data.originalRows));
+
+        ////alert(JSON.stringify(data.rows));
+        //$.ajax({
+        //    type: "POST",
+        //    url: '../Handler/ExportExam.ashx',
+        //    //返回数据的所有行rows只返回当前页的行
+        //    data: "&data=" + JSON.stringify(data.originalRows),
+        //    success: function (results) {
+        //        document.writeln(results);
+        //    }
+        //}
+        //)
+    }
+    function PostSubmit(url, data) {
+        var postUrl = url;
+        var postData = data;
+        var ExportForm = document.createElement("FORM");
+
+        document.body.appendChild(ExportForm);
+        ExportForm.method = "POST";
+        var newElement = document.createElement("input");
+        newElement.setAttribute("name", "data");
+        newElement.setAttribute("type", "hidden");
+        ExportForm.appendChild(newElement);
+        newElement.value = postData;
+        ExportForm.action = postUrl;
+        ExportForm.submit();
+    }
+</script>

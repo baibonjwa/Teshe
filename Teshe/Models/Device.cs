@@ -98,7 +98,7 @@ namespace Teshe.Models
         [DisplayName("属性")]
         public virtual List<Attribute> Attributes { get; set; }
 
-        public MemoryStream Export<T>(IList<T> list) where T : Device
+        public MemoryStream Export(List<Device> list)
         {
             //创建流对象
 

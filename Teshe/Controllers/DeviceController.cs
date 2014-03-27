@@ -205,8 +205,16 @@ namespace Teshe.Controllers
             return RedirectToAction("Index");
         }
 
-
-
+        public ActionResult ExportExcel(String data)
+        {
+            Response.ContentType = "text/plain";
+            List<Device> list = JsonConvert.DeserializeObject<List<Device>>(data, dateTimeConverter);
+            Device device = new Device();
+            //Response.ContentType = "application/vnd.ms-excel;charset=UTF-8";
+            //Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", "temp.xls"));
+            //Response.Clear();
+            return File(device.Export(list).GetBuffer(), "application/vnd.ms-excel;charset=UTF-8", "data.xls");
+        }
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
