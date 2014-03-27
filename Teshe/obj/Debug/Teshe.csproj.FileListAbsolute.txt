@@ -120,3 +120,6 @@ I:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\bin\zxing.pdb
 I:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\bin\zxing.xml
 I:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\bin\zxing.presentation.pdb
 I:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\bin\zxing.presentation.xml
+H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\bin\Ionic.Zip.dll
+H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\bin\NPOI.dll
+H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\bin\NPOI.xml

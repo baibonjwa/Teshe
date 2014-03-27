@@ -22,6 +22,7 @@ namespace Teshe.Controllers
         {
             dateTimeConverter.DateTimeFormat = "yyyy-MM-dd";
         }
+
         protected UserInfo GetUser()
         {
             return db.UserInfoes.FirstOrDefault<UserInfo>(u => u.Name == User.Identity.Name);
