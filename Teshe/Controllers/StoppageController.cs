@@ -139,5 +139,13 @@ namespace Teshe.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
+
+        public ActionResult ExportExcel(String data)
+        {
+            Response.ContentType = "text/plain";
+            List<Stoppage> list = JsonConvert.DeserializeObject<List<Stoppage>>(data, dateTimeConverter);
+            Stoppage stoppage = new Stoppage();
+            return File(stoppage.Export(list).GetBuffer(), "application/vnd.ms-excel;charset=UTF-8", "data.xls");
+        }
     }
 }

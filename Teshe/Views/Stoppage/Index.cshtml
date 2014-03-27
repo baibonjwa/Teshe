@@ -92,6 +92,9 @@
         </tr>
     </thead>
 </table>
+<a class="easyui-linkbutton" href="javascript:void(0)" onclick="exportExcel()">导出报表</a>
+@UIHelper.ExportExcel("Stoppage")
+
 <script>
     function pass(val, row) {
         return "<a onclick=\"passConfirm(" + row.Id + ")\" href=\"javascript:void(0)\">查看详细</a>";
