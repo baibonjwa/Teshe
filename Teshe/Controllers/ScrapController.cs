@@ -117,18 +117,13 @@ namespace Teshe.Controllers
             return RedirectToAction("Index");
         }
 
-        //
-        // POST: /Scrap/Delete/5
-
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(int id)
-        //{
-        //    Scrap scrap = db.Scraps.Find(id);
-        //    db.Scraps.Remove(scrap);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
+        public ActionResult ExportExcel(String data)
+        {
+            Response.ContentType = "text/plain";
+            List<Scrap> list = JsonConvert.DeserializeObject<List<Scrap>>(data, dateTimeConverter);
+            Scrap scrap = new Scrap();
+            return File(scrap.Export(list).GetBuffer(), "application/vnd.ms-excel;charset=UTF-8", "data.xls");
+        }
 
         protected override void Dispose(bool disposing)
         {

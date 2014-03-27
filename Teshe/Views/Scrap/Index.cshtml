@@ -4,6 +4,24 @@
     ViewBag.Title = "Index";
 }
 <script>
+    function pass(val, row) {
+        return "<a onclick=\"passConfirm(" + row.Id + ")\" href=\"javascript:void(0)\">查看详细</a>";
+    }
+    function del(val, row) {
+        return "<a onclick=\"delConfirm(" + row.Id + ")\" href=\"javascript:void(0)\">删除</a>";
+    }
+    function passConfirm(id) {
+        window.location.href = "/Scrap/Details/" + id;
+    }
+    function delConfirm(id) {
+        $.messager.confirm('确认', '您确定要删除吗？', function (r) {
+            if (r) {
+                window.location.href = "/Scrap/Delete/" + id;
+            }
+        });
+    }
+</script>
+<script>
     function Search() {
         $("#result").datagrid({
             url: "/Scrap/Search?" + "Name=" + $("#Name").val() + "&Model=" + $("#Model").val() + "&Barcode=" + $("#Barcode").val() + "&Company=" + $("#Company").val() + "&ScrapTime=" + $("#ScrapTime").val()
@@ -90,28 +108,12 @@
             <th data-options="field:'DeviceDistrict',formatter:formatDistrict,width:100">所在区（县）</th>
             <th data-options="field:'DeviceCity',formatter:formatCity,width:100">所在城市</th>
             <th data-options="field:'DeviceProvince',formatter:formatProvince,width:100">所在省份</th>
-            <th data-options="field:'ScrapTime',width:100">故障时间</th>
-            <th data-options="field:'Description',width:100">故障描述</th>
+            <th data-options="field:'ScrapTime',width:100">报废时间</th>
+            <th data-options="field:'Description',width:100">报废描述</th>
             <th data-options="field:'pass',width:60,formatter:pass">修改</th>
             <th data-options="field:'del',width:60,formatter:del">查看详细</th>
         </tr>
     </thead>
 </table>
-<script>
-    function pass(val, row) {
-        return "<a onclick=\"passConfirm(" + row.Id + ")\" href=\"javascript:void(0)\">查看详细</a>";
-    }
-    function del(val, row) {
-        return "<a onclick=\"delConfirm(" + row.Id + ")\" href=\"javascript:void(0)\">删除</a>";
-    }
-    function passConfirm(id) {
-        window.location.href = "/Scrap/Details/" + id;
-    }
-    function delConfirm(id) {
-        $.messager.confirm('确认', '您确定要删除吗？', function (r) {
-            if (r) {
-                window.location.href = "/Scrap/Delete/" + id;
-            }
-        });
-    }
-</script>
+<a class="easyui-linkbutton" href="javascript:void(0)" onclick="exportExcel()">导出报表</a>
+@UIHelper.ExportExcel("Scrap")
