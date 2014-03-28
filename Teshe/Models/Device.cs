@@ -98,6 +98,9 @@ namespace Teshe.Models
         [DisplayName("属性")]
         public virtual List<Attribute> Attributes { get; set; }
 
+        [DisplayName("修改记录")]
+        public virtual List<DeviceModifyRecord> ModifyRecords { get; set; }
+
         public MemoryStream Export(List<Device> list)
         {
             //创建流对象
@@ -129,22 +132,6 @@ namespace Teshe.Models
 
                 if (list.Count > 0)
                 {
-                    //通过反射得到对象的属性集合
-                    //PropertyInfo[] propertys = list[0].GetType().GetProperties();
-                    ////遍历属性集合生成excel的表头标题
-                    //for (int i = 0; i < propertys.Count(); i++)
-                    //{
-                    //    //判断此属性是否是用户定义属性
-                    //    if (propertyNameList.Count == 0)
-                    //    {
-                    //        headerRow.CreateCell(i).SetCellValue(propertys[i].Name);
-                    //    }
-                    //    else
-                    //    {
-                    //        if (propertyNameList.Contains(propertys[i].Name))
-                    //            headerRow.CreateCell(i).SetCellValue(propertys[i].Name);
-                    //    }
-                    //}
                     int rowIndex = 1;
                     //遍历集合生成excel的行集数据
                     for (int i = 0; i < list.Count; i++)
@@ -167,29 +154,7 @@ namespace Teshe.Models
                         dataRow.CreateCell(13).SetCellValue(list[i].CheckTime);
                         dataRow.CreateCell(14).SetCellValue(list[i].UseState);
                         dataRow.CreateCell(15).SetCellValue(list[i].MaintenanceRecord);
-                        //dataRow.CreateCell(16).SetCellValue(list[i].Review.ToString() == "0" ? "否" : "是");
-                        //dataRow.CreateCell(17).SetCellValue(list[i].Irrgularity == null ? "数据错误" : list[i].Irrgularity.Name);
-                        //if (propertyNameList.Count == 0)
-                        //{
-                        //    object obj = propertys[j].GetValue(list[i], null);
-                        //    if (obj == null)
-                        //    {
-                        //        dataRow.CreateCell(j).SetCellValue("无值");
-                        //    }
-                        //    else
-                        //    {
-                        //        dataRow.CreateCell(j).SetCellValue(obj.ToString());
-                        //    }
 
-                        //}
-                        //else
-                        //{
-                        //    if (propertyNameList.Contains(propertys[j].Name))
-                        //    {
-                        //        object obj = propertys[j].GetValue(list[i], null);
-                        //        dataRow.CreateCell(j).SetCellValue(obj.ToString());
-                        //    }
-                        //}
                         rowIndex++;
                     }
                 }

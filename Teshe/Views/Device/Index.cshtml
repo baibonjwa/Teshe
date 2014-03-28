@@ -67,6 +67,8 @@
     data-options="singleSelect:true,collapsible:true,url:'/Device/Search',method:'post',rownumbers:'true',pagination:'true'">
     <thead>
         <tr>
+            <th data-options="field:'pass',width:60,formatter:pass">查看详细</th>
+            <th data-options="field:'del',width:60,formatter:del">删除</th>
             <th data-options="field:'Name',width:80">设备名称</th>
             <th data-options="field:'Model',width:100">设备型号</th>
             <th data-options="field:'Barcode',width:100">条形码</th>
@@ -84,8 +86,6 @@
             <th data-options="field:'CheckCycle',width:100">检测周期</th>
             <th data-options="field:'UseState',width:100">使用状态</th>
             <th data-options="field:'MaintenanceRecord',width:100">维修记录</th>
-            <th data-options="field:'pass',width:60,formatter:pass">查看详细</th>
-            <th data-options="field:'del',width:60,formatter:del">删除</th>
         </tr>
     </thead>
 </table>

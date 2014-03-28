@@ -47,5 +47,12 @@ namespace Teshe.Controllers
                 ms.Close();
             }
         }
+
+        protected String ModifyDifference<T>(T oldObject, T newObject)
+        {
+
+            return "";
+        }
+
     }
 }

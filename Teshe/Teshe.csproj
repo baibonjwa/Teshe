@@ -177,6 +177,7 @@
     <Compile Include="Models\Mail.cs" />
     <Compile Include="Models\ModifyPasswordViewModel.cs" />
     <Compile Include="Models\CreateViewModel.cs" />
+    <Compile Include="Models\DeviceModifyRecord.cs" />
     <Compile Include="Models\Scrap.cs" />
     <Compile Include="Models\Stoppage.cs" />
     <Compile Include="Models\CreateStoppageViewModel.cs" />

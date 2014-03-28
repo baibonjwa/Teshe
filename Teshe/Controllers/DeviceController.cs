@@ -13,6 +13,9 @@ using Teshe.Common;
 using ZXing;
 using ZXing.Common;
 using Newtonsoft.Json.Converters;
+using System.Reflection;
+using System.ComponentModel;
+using System.Data.Entity.Infrastructure;
 
 namespace Teshe.Controllers
 {
@@ -49,20 +52,6 @@ namespace Teshe.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public ActionResult Index(DeviceIndexViewModel viewModel)
-        //{
-        //    Expression<Func<Device, bool>> where = PredicateExtensionses.True<Device>();
-        //    if (!String.IsNullOrEmpty(viewModel.Name)) where = where.And(u => u.Name == viewModel.Name);
-        //    if (!String.IsNullOrEmpty(viewModel.Model)) where = where.And(u => u.Model == viewModel.Model);
-        //    if (viewModel.SetupTime != null) where = where.And(u => u.SetupTime == viewModel.SetupTime);
-        //    if (!String.IsNullOrEmpty(viewModel.Company)) where = where.And(u => u.Company == viewModel.Company);
-        //    if (!String.IsNullOrEmpty(viewModel.Barcode)) where = where.And(u => u.Barcode == viewModel.Barcode);
-        //    //if (!String.IsNullOrEmpty(viewModel.CheckState)) where = where.And(u => u.CheckState == viewModel.CheckState);
-        //    List<Device> results = db.Devices.Where<Device>(where).ToList();
-        //    return Json(results);
-        //}
-
         public ActionResult Search(DeviceIndexViewModel viewModel)
         {
             Expression<Func<Device, bool>> where = PredicateExtensionses.True<Device>();
@@ -75,15 +64,6 @@ namespace Teshe.Controllers
             List<Device> results = db.Devices.Where<Device>(where).ToList();
             return Content(JsonConvert.SerializeObject(results, dateTimeConverter));
         }
-
-        //public ActionResult Search()
-        //{
-        //    List<Device> results = db.Devices.ToList();
-        //    return Json(results);
-        //}
-
-        //
-        // GET: /Device/Details/5
 
         public ActionResult Details(int id = 0)
         {
@@ -161,13 +141,60 @@ namespace Teshe.Controllers
         // POST: /Device/Edit/5
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(Device device)
+        public ActionResult Edit(Device device, String attributesJson)
         {
+            if (!String.IsNullOrEmpty(attributesJson))
+            {
+                List<Teshe.Models.Attribute> attrList = new List<Models.Attribute>(JsonConvert.DeserializeObject<List<Teshe.Models.Attribute>>(attributesJson));
+                device.Attributes = attrList;
+            }
+
+
+
             if (ModelState.IsValid)
             {
+                List<DeviceModifyRecord> recordList = new List<DeviceModifyRecord>();
+
+                //Device old = new Device();
+                //old = db.Devices.First(u => u.Id == device.Id);
+                ////Device old = new Device();
+                ////old = EmitMapper.ObjectMapperManager.DefaultInstance.GetMapper<Device, Device>().Map(old, temp);
                 db.Entry(device).State = EntityState.Modified;
+                DbPropertyValues proOld = db.Entry(device).GetDatabaseValues();
+                DbPropertyValues proNew = db.Entry(device).CurrentValues;
+                foreach (var p in proOld.PropertyNames)
+                {
+                    if (proOld[p] == null && proNew[p] != null)
+                    {
+                        DeviceModifyRecord record = new DeviceModifyRecord();
+                        record.Content = "用户" + User.Identity.Name + "于" + DateTime.Now.ToString() + "将设备" + device.Name + "的" + p + "字段由" + proOld[p] + "改为" + proNew[p];
+                    }
+                    else if (proOld[p] != null && proNew[p] != null && p != "InputTime" && proOld[p].ToString() != proNew[p].ToString())
+                    {
+                        DeviceModifyRecord record = new DeviceModifyRecord();
+                        record.Content = "用户\"" + User.Identity.Name + "\"于\"" + DateTime.Now.ToString() + "\"将设备\"" + device.Name + "\"的\"" + p + "\"字段由\"" + proOld[p] + "\"改为\"" + proNew[p] + "\"";
+                        record.Device = device;
+                        recordList.Add(record);
+                    }
+                }
+                foreach (var r in recordList)
+                {
+                    db.DeviceModifyRecords.Add(r);
+                }
                 db.SaveChanges();
+
+                //PropertyInfo[] pro = device.GetType().GetProperties();
+                //foreach (var p in pro)
+                //{
+                //    if (db.Entry(device).Property(p.Name).IsModified)
+                //    {
+
+                //    }
+                //    else
+                //    {
+                //        continue;
+                //    }
+                //}
                 log.Info("用户" + User.Identity.Name + "于" + DateTime.Now.ToString() + "修改设备" + device.Name);
                 return RedirectToAction("Index");
             }
@@ -220,5 +247,6 @@ namespace Teshe.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
+
     }
 }

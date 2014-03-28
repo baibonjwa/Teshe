@@ -17,14 +17,6 @@
         $("#Barcode").val(a);
         var code = $("#Barcode").val();
         $("#BarcodeImg").attr("src", "/Device/CreateBarcode?code=" + code);
-        //$.ajax({
-        //    type: "POST",
-        //    url: "/DeviceCotroller/CreateBarcode?code=" + code,
-        //    success: function (results) {
-        //        $("Barcode").attr("src", "/Device/CreateBarcode?code=" + code);
-        //    }
-        //}
-        //)
     }
     function getRowObj(obj) {
 
