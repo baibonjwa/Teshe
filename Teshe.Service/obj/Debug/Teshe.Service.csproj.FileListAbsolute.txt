@@ -97,3 +97,6 @@ H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Service\bin\zh-Hant\System
 H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Service\obj\Debug\Teshe.Service.csprojResolveAssemblyReference.cache
 H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Service\obj\Debug\Teshe.Service.dll
 H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Service\obj\Debug\Teshe.Service.pdb
+H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Service\bin\NPOI.dll
+H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Service\bin\Ionic.Zip.dll
+H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Service\bin\NPOI.xml

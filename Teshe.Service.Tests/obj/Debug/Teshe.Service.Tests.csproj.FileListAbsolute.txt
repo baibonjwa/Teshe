@@ -96,3 +96,6 @@ H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Service.Tests\bin\Debug\zh
 H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Service.Tests\bin\Debug\zh-Hans\EntityFramework.resources.dll
 H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Service.Tests\obj\Debug\Teshe.Service.Tests.dll
 H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Service.Tests\obj\Debug\Teshe.Service.Tests.pdb
+H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Service.Tests\bin\Debug\NPOI.dll
+H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Service.Tests\bin\Debug\Ionic.Zip.dll
+H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe.Service.Tests\bin\Debug\NPOI.xml
