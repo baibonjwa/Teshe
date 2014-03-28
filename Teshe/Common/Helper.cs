@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Web;
 
 namespace Teshe.Common
@@ -22,6 +23,19 @@ namespace Teshe.Common
             }
             return from;
         }
+        public static T GetCustomAttribute<T>(Enum source) where T : Attribute
+        {
+            Type sourceType = source.GetType();
+            string sourceName = Enum.GetName(sourceType, source);
+            FieldInfo field = sourceType.GetField(sourceName);
+            object[] attributes = field.GetCustomAttributes(typeof(T), false);
+            foreach (object attribute in attributes)
+            {
+                if (attribute is T)
+                    return (T)attribute;
+            }
+            return null;
+        }  
     }
     public static class PredicateExtensionses
     {
@@ -75,4 +89,5 @@ namespace Teshe.Common
             return this.ParameterExpression;
         }
     }   
+
 }

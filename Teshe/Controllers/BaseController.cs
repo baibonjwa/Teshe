@@ -48,11 +48,5 @@ namespace Teshe.Controllers
             }
         }
 
-        protected String ModifyDifference<T>(T oldObject, T newObject)
-        {
-
-            return "";
-        }
-
     }
 }

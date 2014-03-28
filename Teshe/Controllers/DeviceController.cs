@@ -149,31 +149,35 @@ namespace Teshe.Controllers
                 device.Attributes = attrList;
             }
 
-
-
+            //防止转换错误
             if (ModelState.IsValid)
             {
                 List<DeviceModifyRecord> recordList = new List<DeviceModifyRecord>();
-
-                //Device old = new Device();
-                //old = db.Devices.First(u => u.Id == device.Id);
-                ////Device old = new Device();
-                ////old = EmitMapper.ObjectMapperManager.DefaultInstance.GetMapper<Device, Device>().Map(old, temp);
                 db.Entry(device).State = EntityState.Modified;
                 DbPropertyValues proOld = db.Entry(device).GetDatabaseValues();
                 DbPropertyValues proNew = db.Entry(device).CurrentValues;
                 foreach (var p in proOld.PropertyNames)
                 {
+                    var pro = device.GetType().GetProperty(p);
+                    object[] attr = pro.GetCustomAttributes(typeof(System.ComponentModel.DisplayNameAttribute), false);
+                    String displayName = "";
+                    if (attr.Count(u => u.GetType() == typeof(System.ComponentModel.DisplayNameAttribute)) > 0)
+                    {
+                        displayName = ((System.ComponentModel.DisplayNameAttribute)attr[0]).DisplayName;
+                    }
                     if (proOld[p] == null && proNew[p] != null)
                     {
                         DeviceModifyRecord record = new DeviceModifyRecord();
-                        record.Content = "用户" + User.Identity.Name + "于" + DateTime.Now.ToString() + "将设备" + device.Name + "的" + p + "字段由" + proOld[p] + "改为" + proNew[p];
+                        record.Content = "用户\"" + User.Identity.Name + "\"于\"" + DateTime.Now.ToString() + "\"将设备\"" + device.Name + "\"的\"" + displayName + "\"字段由\"" + proOld[p] + "\"改为\"" + proNew[p] + "\"";
                     }
-                    else if (proOld[p] != null && proNew[p] != null && p != "InputTime" && proOld[p].ToString() != proNew[p].ToString())
+                    if (p == "InputTime")
+                    {
+                        continue;
+                    }
+                    else if (proOld[p] != null && proNew[p] != null && proOld[p].ToString() != proNew[p].ToString())
                     {
                         DeviceModifyRecord record = new DeviceModifyRecord();
-                        record.Content = "用户\"" + User.Identity.Name + "\"于\"" + DateTime.Now.ToString() + "\"将设备\"" + device.Name + "\"的\"" + p + "\"字段由\"" + proOld[p] + "\"改为\"" + proNew[p] + "\"";
-                        record.Device = device;
+                        record.Content = "用户\"" + User.Identity.Name + "\"于\"" + DateTime.Now.ToString() + "\"将设备\"" + device.Name + "\"的\"" + displayName + "\"字段由\"" + proOld[p] + "\"改为\"" + proNew[p] + "\"";
                         recordList.Add(record);
                     }
                 }
