@@ -72,6 +72,8 @@
     data-options="singleSelect:true,collapsible:true,url:'/Stoppage/Search',method:'post',rownumbers:'true',pagination:'true'">
     <thead>
         <tr>
+            <th data-options="field:'pass',width:60,formatter:pass">查看详细</th>
+            <th data-options="field:'del',width:60,formatter:del">删除</th>
 
             <th data-options="field:'DeviceName',formatter:formatName,width:80">设备名称</th>
             <th data-options="field:'DeviceModel',formatter:formatModel,width:100">设备型号</th>
@@ -85,8 +87,7 @@
             <th data-options="field:'RepairPeople',width:100">维修人员</th>
             <th data-options="field:'RepairTime',width:100">维修时间</th>
 
-            <th data-options="field:'pass',width:60,formatter:pass">修改</th>
-            <th data-options="field:'del',width:60,formatter:del">查看详细</th>
+
 
 
         </tr>

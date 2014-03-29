@@ -27,6 +27,11 @@ Teshe.Tests/[Rr]elease
 Teshe/[Tt]est[Rr]esult*/
 Teshe/[Bb]uild[Ll]og.*
 
+
+*.mdb  
+*.ldb  
+*.sln  
+*.config  
 *_i.c
 *_p.c
 *.ilk

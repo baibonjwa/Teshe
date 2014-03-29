@@ -16,7 +16,6 @@ namespace Teshe.Models
         public int Id { get; set; }
 
         [DisplayName("设备")]
-        [Required(ErrorMessage = "设备不能为空")]
         public virtual Device Device { get; set; }
 
         [DisplayName("故障描述")]
@@ -45,6 +44,8 @@ namespace Teshe.Models
         [DisplayName("录入人员")]
         public virtual UserInfo UserInfo { get; set; }
 
+        [DisplayName("修改记录")]
+        public virtual List<StoppageModifyRecord> ModifyRecords { get; set; }
 
         public MemoryStream Export(List<Stoppage> list)
         {

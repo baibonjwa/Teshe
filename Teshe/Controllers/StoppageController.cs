@@ -10,6 +10,7 @@ using EmitMapper;
 using Teshe.Common;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
+using System.Data.Entity.Infrastructure;
 
 namespace Teshe.Controllers
 {
@@ -101,9 +102,42 @@ namespace Teshe.Controllers
         {
             if (ModelState.IsValid)
             {
+                List<StoppageModifyRecord> recordList = new List<StoppageModifyRecord>();
                 db.Entry(stoppage).State = EntityState.Modified;
+                DbPropertyValues proOld = db.Entry(stoppage).GetDatabaseValues();
+                DbPropertyValues proNew = db.Entry(stoppage).CurrentValues;
+                foreach (var p in proOld.PropertyNames)
+                {
+                    var pro = stoppage.GetType().GetProperty(p);
+                    object[] attr = pro.GetCustomAttributes(typeof(System.ComponentModel.DisplayNameAttribute), false);
+                    String displayName = "";
+                    if (attr.Count(u => u.GetType() == typeof(System.ComponentModel.DisplayNameAttribute)) > 0)
+                    {
+                        displayName = ((System.ComponentModel.DisplayNameAttribute)attr[0]).DisplayName;
+                    }
+                    if (proOld[p] == null && proNew[p] != null)
+                    {
+                        StoppageModifyRecord record = new StoppageModifyRecord();
+                        record.Content = "用户\"" + User.Identity.Name + "\"于\"" + DateTime.Now.ToString() + "\"将故障信息\"" + stoppage.Description + "\"的\"" + displayName + "\"字段由\"" + proOld[p] + "\"改为\"" + proNew[p] + "\"";
+                    }
+                    if (p == "InputTime")
+                    {
+                        continue;
+                    }
+                    else if (proOld[p] != null && proNew[p] != null && proOld[p].ToString() != proNew[p].ToString())
+                    {
+                        StoppageModifyRecord record = new StoppageModifyRecord();
+                        record.Content = "用户\"" + User.Identity.Name + "\"于\"" + DateTime.Now.ToString() + "\"将故障信息\"" + stoppage.Description + "\"的\"" + displayName + "\"字段由\"" + proOld[p] + "\"改为\"" + proNew[p] + "\"";
+                        recordList.Add(record);
+                    }
+                }
+                foreach (var r in recordList)
+                {
+                    db.StoppageModifyRecords.Add(r);
+                }
+
                 db.SaveChanges();
-                log.Info("用户" + User.Identity.Name + "于" + DateTime.Now.ToString() + "修改故障信息" + stoppage.Device.Name);
+                log.Info("用户" + User.Identity.Name + "于" + DateTime.Now.ToString() + "修改故障信息");
                 return RedirectToAction("Index");
             }
             return View(stoppage);
