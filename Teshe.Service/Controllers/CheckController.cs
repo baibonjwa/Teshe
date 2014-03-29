@@ -11,14 +11,13 @@ namespace Teshe.Service.Controllers
 {
     public class CheckController : BaseController
     {
-        public bool Check(String username, String password, String simcode)
+        public bool Check(String username, String simcode)
         {
-            UserInfo user = db.UserInfoes.FirstOrDefault<UserInfo>(u => u.Name == username && u.Password == password && u.SIMCode == simcode);
+            UserInfo user = db.UserInfoes.FirstOrDefault<UserInfo>(u => u.Name == username && u.SIMCode == simcode);
             if (user != null)
                 return true;
             else
                 return false;
-
         }
     }
 }

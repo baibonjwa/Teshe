@@ -18,6 +18,6 @@ namespace Teshe.Service.Controllers
             Device device = db.Devices.FirstOrDefault<Device>(u => u.Barcode == barcode);
             return JsonConvert.SerializeObject(device, dateTimeConverter);
         }
-       
+
     }
 }

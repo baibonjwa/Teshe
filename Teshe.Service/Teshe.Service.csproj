@@ -48,6 +48,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -153,6 +154,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BindSIMController.cs" />
+    <Compile Include="Controllers\CheckBindController.cs" />
     <Compile Include="Controllers\CheckController.cs" />
     <Compile Include="Controllers\GetDeviceInfoController.cs" />
     <Compile Include="Global.asax.cs">
