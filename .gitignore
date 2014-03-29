@@ -8,20 +8,20 @@
 
 # Build results
 
-Teshe/[Dd]ebug/
-Teshe/[Rr]elease/
-Teshe/x64/
-Teshe/build/
-Teshe/[Bb]in/
-Teshe/[Oo]bj/
-Teshe.Service/[Bb]in/
-Teshe.Service/[Oo]bj/
-Teshe.Service/[Dd]ebug/
-Teshe.Service/[Rr]elease/
-Teshe.Tests/[Bb]in/
-Teshe.Tests/Oo]bj/
-Teshe.Tests/[Dd]ebug/
-Teshe.Tests/[Rr]elease/
+Teshe/[Dd]ebug
+Teshe/[Rr]elease
+Teshe/x64
+Teshe/build
+Teshe/[Bb]in
+Teshe/[Oo]bj
+Teshe.Service/[Bb]in
+Teshe.Service/[Oo]bj
+Teshe.Service/[Dd]ebug
+Teshe.Service/[Rr]elease
+Teshe.Tests/[Bb]in
+Teshe.Tests/[Oo]bj
+Teshe.Tests/[Dd]ebug
+Teshe.Tests/[Rr]elease
 
 # MSTest test Results
 Teshe/[Tt]est[Rr]esult*/
