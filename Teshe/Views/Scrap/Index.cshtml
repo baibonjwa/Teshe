@@ -49,58 +49,45 @@
         return row.Device.Province;
     }
 </script>
-<h2>Index</h2>
-<table>
-    <tr>
-        <td>
-            @Html.DisplayNameFor(model => model.Name)
-        </td>
-        <td>
-            @Html.EditorFor(model => model.Name)
-        </td>
-    </tr>
-    <tr>
-        <td>
-            @Html.DisplayNameFor(model => model.Model)
-        </td>
-        <td>
-            @Html.EditorFor(model => model.Model)
-        </td>
-    </tr>
-    <tr>
-        <td>
-            @Html.DisplayNameFor(model => model.Barcode)
-        </td>
-        <td>
-            @Html.EditorFor(model => model.Barcode)
-        </td>
-    </tr>
-    <tr>
-        <td>
-            @Html.DisplayNameFor(model => model.Company)
-        </td>
-        <td>
-            @Html.EditorFor(model => model.Company)
-        </td>
-    </tr>
-    <tr>
-        <td>
-            @Html.DisplayNameFor(model => model.ScrapTime)
-        </td>
-        <td>
-            @Html.TextBoxFor(model => model.ScrapTime, new { onfocus = "WdatePicker()" })
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a class="easyui-linkbutton" href="javascript:void(0)" onclick="Search()">查询故障</a>
-        </td>
-    </tr>
-</table>
+
+<div class="row">
+    <div class="form-group col-sm-4">
+        @Html.DisplayNameFor(model => model.Name)
+        @Html.EditorFor(model => model.Name)
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-sm-4">
+        @Html.DisplayNameFor(model => model.Model)
+        @Html.EditorFor(model => model.Model)
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-sm-4">
+        @Html.DisplayNameFor(model => model.Barcode)
+        @Html.EditorFor(model => model.Barcode)
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-sm-4">
+        @Html.DisplayNameFor(model => model.Company)
+        @Html.EditorFor(model => model.Company)
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-sm-4">
+        @Html.DisplayNameFor(model => model.ScrapTime)
+        @Html.TextBoxFor(model => model.ScrapTime, new { onfocus = "WdatePicker()" })
+    </div>
+</div>
+<a class="easyui-linkbutton" href="javascript:void(0)" onclick="Search()">查询故障</a>
 <table id="result" class="easyui-datagrid" title="故障信息" style="width: 1000px; height: auto"
     data-options="singleSelect:true,collapsible:true,url:'/Scrap/Search',method:'post',rownumbers:'true',pagination:'true'">
     <thead>
         <tr>
+            <th data-options="field:'pass',width:60,formatter:pass">查看详细</th>
+            <th data-options="field:'del',width:60,formatter:del">删除</th>
+
             <th data-options="field:'DeviceName',formatter:formatName,width:80">设备名称</th>
             <th data-options="field:'DeviceModel',formatter:formatModel,width:100">设备型号</th>
             <th data-options="field:'DeviceBarcode',formatter:formatBarcode,width:100">条形码</th>
@@ -110,8 +97,7 @@
             <th data-options="field:'DeviceProvince',formatter:formatProvince,width:100">所在省份</th>
             <th data-options="field:'ScrapTime',width:100">报废时间</th>
             <th data-options="field:'Description',width:100">报废描述</th>
-            <th data-options="field:'pass',width:60,formatter:pass">修改</th>
-            <th data-options="field:'del',width:60,formatter:del">查看详细</th>
+
         </tr>
     </thead>
 </table>

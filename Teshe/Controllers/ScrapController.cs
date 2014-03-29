@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
@@ -97,9 +98,42 @@ namespace Teshe.Controllers
         {
             if (ModelState.IsValid)
             {
+                List<ScrapModifyRecord> recordList = new List<ScrapModifyRecord>();
                 db.Entry(scrap).State = EntityState.Modified;
+                DbPropertyValues proOld = db.Entry(scrap).GetDatabaseValues();
+                DbPropertyValues proNew = db.Entry(scrap).CurrentValues;
+                foreach (var p in proOld.PropertyNames)
+                {
+                    var pro = scrap.GetType().GetProperty(p);
+                    object[] attr = pro.GetCustomAttributes(typeof(System.ComponentModel.DisplayNameAttribute), false);
+                    String displayName = "";
+                    if (attr.Count(u => u.GetType() == typeof(System.ComponentModel.DisplayNameAttribute)) > 0)
+                    {
+                        displayName = ((System.ComponentModel.DisplayNameAttribute)attr[0]).DisplayName;
+                    }
+                    if (proOld[p] == null && proNew[p] != null)
+                    {
+                        ScrapModifyRecord record = new ScrapModifyRecord();
+                        record.Content = "用户\"" + User.Identity.Name + "\"于\"" + DateTime.Now.ToString() + "\"将故障信息\"" + scrap.Description + "\"的\"" + displayName + "\"字段由\"" + proOld[p] + "\"改为\"" + proNew[p] + "\"";
+                        recordList.Add(record);
+                    }
+                    if (p == "InputTime")
+                    {
+                        continue;
+                    }
+                    else if (proOld[p] != null && proNew[p] != null && proOld[p].ToString() != proNew[p].ToString())
+                    {
+                        ScrapModifyRecord record = new ScrapModifyRecord();
+                        record.Content = "用户\"" + User.Identity.Name + "\"于\"" + DateTime.Now.ToString() + "\"将故障信息\"" + scrap.Description + "\"的\"" + displayName + "\"字段由\"" + proOld[p] + "\"改为\"" + proNew[p] + "\"";
+                        recordList.Add(record);
+                    }
+                }
+                foreach (var r in recordList)
+                {
+                    db.ScrapModifyRecords.Add(r);
+                }
                 db.SaveChanges();
-                log.Info("用户" + User.Identity.Name + "于" + DateTime.Now.ToString() + "修改报废信息" + scrap.Device.Name);
+                log.Info("用户" + User.Identity.Name + "于" + DateTime.Now.ToString() + "修改报废信息");
                 return RedirectToAction("Index");
             }
             return View(scrap);

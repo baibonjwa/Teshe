@@ -169,6 +169,7 @@ namespace Teshe.Controllers
                     {
                         DeviceModifyRecord record = new DeviceModifyRecord();
                         record.Content = "用户\"" + User.Identity.Name + "\"于\"" + DateTime.Now.ToString() + "\"将设备\"" + device.Name + "\"的\"" + displayName + "\"字段由\"" + proOld[p] + "\"改为\"" + proNew[p] + "\"";
+                        recordList.Add(record);
                     }
                     if (p == "InputTime")
                     {

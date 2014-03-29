@@ -1,26 +1,27 @@
 ﻿@model Teshe.Models.Scrap
 
-<h2>Details</h2>
-
-<fieldset>
-    <legend>Stoppage</legend>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Description)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Description)
-    </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.ScrapTime)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ScrapTime)
-    </div>
-
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+@using (Html.BeginForm("Edit", "Scrap", FormMethod.Get))
+{ 
+    <table class="table table-striped table-hover table-bordered">
+        <tr>
+            <td class="tableFirstCol">
+                @Html.DisplayNameFor(model => model.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Description)
+            </td>
+        </tr>
+        <tr>
+            <td class="tableFirstCol">
+                @Html.DisplayNameFor(model => model.ScrapTime)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.ScrapTime)
+            </td>
+        </tr>
+    </table>
+    <p>
+        @Html.ActionLink("修改", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("返回", "Index")
+    </p>
+}

@@ -40,5 +40,7 @@ namespace Teshe.Models
         public DbSet<DeviceModifyRecord> DeviceModifyRecords { get; set; }
 
         public DbSet<StoppageModifyRecord> StoppageModifyRecords { get; set; }
+
+        public DbSet<ScrapModifyRecord> ScrapModifyRecords { get; set; }
     }
 }
