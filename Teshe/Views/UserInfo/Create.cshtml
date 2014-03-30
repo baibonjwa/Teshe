@@ -12,10 +12,6 @@
     <meta name="viewport" content="width=device-width" />
     <title>用户注册</title>
     @Styles.Render("~/Content/uploadify.css")
-    @Scripts.Render("~/bundles/modernizr")
-    @Styles.Render("~/Content/main.css")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryval")
     @Styles.Render("~/Content/main.css")
     @Styles.Render("~/Content/Site.css")
     @Styles.Render("~/Content/bootstrap.min.css")
@@ -23,12 +19,12 @@
     <style>
         .register {
             margin: 0 auto;
-            width:400px;
+            width: 400px;
         }
     </style>
 </head>
 <body>
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Create", "UserInfo", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)

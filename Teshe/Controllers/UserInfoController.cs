@@ -62,7 +62,7 @@ namespace Teshe.Controllers
                 db.UserInfoes.Add(userinfo);
                 db.SaveChanges();
                 log.Info("用户" + userinfo.Name + "于" + DateTime.Now.ToString() + "申请注册");
-                return View("Login");
+                return Content("<script>alert('注册成功，请等待审核通过后即可登录！');window.location='/UserInfo/Login'</script>");
             }
 
             return View(userinfo);
@@ -369,7 +369,7 @@ namespace Teshe.Controllers
             List<UserInfo> list = db.UserInfoes.Where<UserInfo>(u => u.IsVerify == 0).ToList<UserInfo>();
             return Json(list);
         }
-
+        [AllowAnonymous]
         public ActionResult UploadPhoto(HttpPostedFileBase FileData)
         {
             //Response.HeaderEncoding = Encoding.UTF8; 
@@ -402,6 +402,7 @@ namespace Teshe.Controllers
             }
         }
 
+        [AllowAnonymous]
         private bool ValidateUser(string name, string password)
         {
             UserInfo ui = db.UserInfoes.FirstOrDefault<UserInfo>(u => u.Name == name && u.Password == password && u.IsVerify == 1);
@@ -417,6 +418,7 @@ namespace Teshe.Controllers
 
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult ValidateUserRepeat(string name)
         {
             var userInfo = db.UserInfoes.FirstOrDefault<UserInfo>(u => u.Name == name);
