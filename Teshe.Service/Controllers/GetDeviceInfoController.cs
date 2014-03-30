@@ -13,10 +13,10 @@ namespace Teshe.Service.Controllers
 {
     public class GetDeviceInfoController : BaseController
     {
-        public String GetDeviceInfo(String barcode)
+        public Device GetDeviceInfo(String barcode)
         {
             Device device = db.Devices.FirstOrDefault<Device>(u => u.Barcode == barcode);
-            return JsonConvert.SerializeObject(device, dateTimeConverter);
+            return device;
         }
 
     }
