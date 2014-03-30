@@ -2057,23 +2057,23 @@ output {
     vertical-align: middle;
 }
 /*×ÔÔö*/
-input[type=text],select:-moz-placeholder {
+input[type=text], input[type=password], input[type=email], select:-moz-placeholder {
     color: #999999;
 }
 
-input[type=text],select::-moz-placeholder {
+input[type=text], input[type=password], input[type=email], select::-moz-placeholder {
     color: #999999;
 }
 
-input[type=text],select:-ms-input-placeholder {
+input[type=text], input[type=password], input[type=email], select:-ms-input-placeholder {
     color: #999999;
 }
 
-input[type=text],select::-webkit-input-placeholder {
+input[type=text], input[type=password], input[type=email], select::-webkit-input-placeholder {
     color: #999999;
 }
 
-input[type=text],select {
+input[type=text], input[type=email], input[type=email], input[type=password], select {
     display: block;
     width: 100%;
     height: 24px;
@@ -2092,7 +2092,7 @@ input[type=text],select {
     transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
 
-    input[type=text]:focus,select:focus {
+    input[type=text]:focus, select:focus {
         border-color: #66afe9;
         outline: 0;
         -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);

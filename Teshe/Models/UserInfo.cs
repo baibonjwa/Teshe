@@ -9,8 +9,6 @@ using System.Web.Mvc;
 
 namespace Teshe.Models
 {
-    [DisplayName("用户信息")]
-    [DisplayColumn("Name")]
     public class UserInfo
     {
         [Key]
