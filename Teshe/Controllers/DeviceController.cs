@@ -67,6 +67,9 @@ namespace Teshe.Controllers
             if (!String.IsNullOrEmpty(viewModel.Company)) where = where.And(u => u.Company == viewModel.Company);
             if (!String.IsNullOrEmpty(viewModel.Barcode)) where = where.And(u => u.Barcode == viewModel.Barcode);
             if (!String.IsNullOrEmpty(viewModel.CheckState)) where = where.And(u => u.CheckState == viewModel.CheckState);
+            if (!String.IsNullOrEmpty(viewModel.District)) where = where.And(u => u.District == viewModel.District);
+            if (!String.IsNullOrEmpty(viewModel.City)) where = where.And(u => u.City == viewModel.City);
+            if (!String.IsNullOrEmpty(viewModel.Province)) where = where.And(u => u.Province == viewModel.Province);
             List<Device> results = db.Devices.Where<Device>(where).ToList();
             return Content(JsonConvert.SerializeObject(results, dateTimeConverter));
         }

@@ -7,7 +7,7 @@
 <script>
     function Search() {
         $("#result").datagrid({
-            url: encodeURI("/Device/Search?" + "Name=" + $("#Name").val() + "&Model=" + $("#Model").val() + "&Barcode=" + $("#Barcode").val() + "&Company=" + $("#Company").val() + "&CheckState=" + $("#CheckState").val())
+            url: encodeURI("/Device/Search?" + "Name=" + $("#Name").val() + "&Model=" + $("#Model").val() + "&Barcode=" + $("#Barcode").val() + "&Company=" + $("#Company").val() + "&CheckState=" + $("#CheckState").val() + "&District=" + $("#District").val() + "&City=" + $("#City").val() + "&Province=" + $("#Province").val())
         })
     }
 </script>
@@ -31,12 +31,71 @@
         @Html.EditorFor(model => model.Company)
     </div>
 </div>
-<div class="row">
-    <div class="form-group col-sm-4">
-        @Html.DisplayNameFor(model => model.CheckState)
-        @Html.DropDownListFor(model => model.CheckState, (List<SelectListItem>)ViewBag.CheckStateList)
+@if (User.IsInRole("系统管理员") || User.IsInRole("省级管理员"))
+{ 
+    <div class="row">
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.District)
+            @Html.EditorFor(model => model.District)
+        </div>
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.City)
+            @Html.EditorFor(model => model.City)
+        </div>
     </div>
-</div>
+    <div class="row">
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.Province)
+            @Html.EditorFor(model => model.Province)
+        </div>
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.CheckState)
+            @Html.DropDownListFor(model => model.CheckState, (List<SelectListItem>)ViewBag.CheckStateList)
+        </div>
+    </div>
+}
+else if (User.IsInRole("市级管理员"))
+{ 
+    <div class="row">
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.District)
+            @Html.EditorFor(model => model.District)
+        </div>
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.City)
+            @Html.EditorFor(model => model.City)
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.CheckState)
+            @Html.DropDownListFor(model => model.CheckState, (List<SelectListItem>)ViewBag.CheckStateList)
+        </div>
+    </div>
+}
+else if (User.IsInRole("区（县）级管理员"))
+{ 
+    <div class="row">
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.District)
+            @Html.EditorFor(model => model.District)
+        </div>
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.CheckState)
+            @Html.DropDownListFor(model => model.CheckState, (List<SelectListItem>)ViewBag.CheckStateList)
+        </div>
+    </div>
+}
+else if (User.IsInRole("客户"))
+{ 
+    <div class="row">
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.CheckState)
+            @Html.DropDownListFor(model => model.CheckState, (List<SelectListItem>)ViewBag.CheckStateList)
+        </div>
+    </div>
+}
+
 <div class="row">
     <div class="form-group col-sm-4">
         <a id="" class="easyui-linkbutton" href="javascript:void(0)" onclick="Search()">查询设备</a>
