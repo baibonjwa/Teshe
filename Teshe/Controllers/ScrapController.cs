@@ -30,6 +30,9 @@ namespace Teshe.Controllers
             if (!String.IsNullOrEmpty(viewModel.Model)) where = where.And(u => u.Device.Model == viewModel.Model);
             if (!String.IsNullOrEmpty(viewModel.Company)) where = where.And(u => u.Device.Company == viewModel.Company);
             if (!String.IsNullOrEmpty(viewModel.Barcode)) where = where.And(u => u.Device.Barcode == viewModel.Barcode);
+            if (!String.IsNullOrEmpty(viewModel.District)) where = where.And(u => u.Device.District == viewModel.District);
+            if (!String.IsNullOrEmpty(viewModel.City)) where = where.And(u => u.Device.City == viewModel.City);
+            if (!String.IsNullOrEmpty(viewModel.Province)) where = where.And(u => u.Device.Province == viewModel.Province);
             if (viewModel.ScrapTime != null) where = where.And(u => u.ScrapTime == viewModel.ScrapTime);
             List<Scrap> results = db.Scraps.Where<Scrap>(where).ToList();
             return Content(JsonConvert.SerializeObject(results, dateTimeConverter));

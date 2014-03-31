@@ -6,7 +6,7 @@
 <script>
     function Search() {
         $("#result").datagrid({
-            url: "/Stoppage/Search?" + "Name=" + $("#Name").val() + "&Model=" + $("#Model").val() + "&Barcode=" + $("#Barcode").val() + "&Company=" + $("#Company").val() + "&StoppageTime=" + $("#StoppageTime").val()
+            url: encodeURI("/Stoppage/Search?" + "Name=" + $("#Name").val() + "&Model=" + $("#Model").val() + "&Barcode=" + $("#Barcode").val() + "&Company=" + $("#Company").val() + "&StoppageTime=" + $("#StoppageTime").val() + "&District=" + $("#District").val() + "&City=" + $("#City").val() + "&Province=" + $("#Province").val())
         })
     }
 
@@ -52,12 +52,76 @@
         @Html.EditorFor(model => model.Company)
     </div>
 </div>
-<div class="row">
-    <div class="form-group col-sm-4">
-        @Html.DisplayNameFor(model => model.StoppageTime)
-        @Html.TextBoxFor(model => model.StoppageTime, new { onfocus = "WdatePicker()" })
+@if (User.IsInRole("系统管理员") || User.IsInRole("省级管理员"))
+{ 
+    <div class="row">
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.District)
+            @Html.EditorFor(model => model.District)
+        </div>
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.City)
+            @Html.EditorFor(model => model.City)
+        </div>
     </div>
-</div>
+    <div class="row">
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.Province)
+            @Html.EditorFor(model => model.Province)
+        </div>
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.StoppageTime)
+            @Html.TextBoxFor(model => model.StoppageTime, new { onfocus = "WdatePicker()" })
+        </div>
+    </div>
+}
+else if (User.IsInRole("市级管理员"))
+{
+    @Html.HiddenFor(model => model.Province)
+    <div class="row">
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.District)
+            @Html.EditorFor(model => model.District)
+        </div>
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.City)
+            @Html.EditorFor(model => model.City)
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.StoppageTime)
+            @Html.TextBoxFor(model => model.StoppageTime, new { onfocus = "WdatePicker()" })
+        </div>
+    </div> 
+}
+else if (User.IsInRole("区（县）级管理员"))
+{
+    @Html.HiddenFor(model => model.Province)
+    @Html.HiddenFor(model => model.City)
+    <div class="row">
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.District)
+            @Html.EditorFor(model => model.District)
+        </div>
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.StoppageTime)
+            @Html.TextBoxFor(model => model.StoppageTime, new { onfocus = "WdatePicker()" })
+        </div>
+    </div> 
+}
+else if (User.IsInRole("客户"))
+{
+    @Html.HiddenFor(model => model.Province)
+    @Html.HiddenFor(model => model.City)
+    @Html.HiddenFor(model => model.District)
+    <div class="row">
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.StoppageTime)
+            @Html.TextBoxFor(model => model.StoppageTime, new { onfocus = "WdatePicker()" })
+        </div>
+    </div> 
+}
 <div class="row">
     <div class="form-group col-sm-4">
         <a class="easyui-linkbutton" href="javascript:void(0)" onclick="Search()">查询故障</a>

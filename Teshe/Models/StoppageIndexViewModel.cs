@@ -25,6 +25,15 @@ namespace Teshe.Models
         [Required(ErrorMessage = "请输入所在公司")]
         public string Company { get; set; }
 
+        [DisplayName("所在区（县）")]
+        public string District { get; set; }
+
+        [DisplayName("所在城市")]
+        public string City { get; set; }
+
+        [DisplayName("所在省份")]
+        public string Province { get; set; }
+
         [DisplayName("故障时间")]
         [Required(ErrorMessage = "故障时间不能为空")]
         public DateTime? StoppageTime { get; set; }

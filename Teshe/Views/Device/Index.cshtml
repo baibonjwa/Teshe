@@ -56,6 +56,7 @@
 }
 else if (User.IsInRole("市级管理员"))
 { 
+    @Html.HiddenFor(model => model.Province)
     <div class="row">
         <div class="form-group col-sm-4">
             @Html.DisplayNameFor(model => model.District)
@@ -75,6 +76,8 @@ else if (User.IsInRole("市级管理员"))
 }
 else if (User.IsInRole("区（县）级管理员"))
 { 
+    @Html.HiddenFor(model => model.Province)
+    @Html.HiddenFor(model => model.City)
     <div class="row">
         <div class="form-group col-sm-4">
             @Html.DisplayNameFor(model => model.District)
@@ -87,7 +90,10 @@ else if (User.IsInRole("区（县）级管理员"))
     </div>
 }
 else if (User.IsInRole("客户"))
-{ 
+{
+    @Html.HiddenFor(model => model.Province)
+    @Html.HiddenFor(model => model.City)
+    @Html.HiddenFor(model => model.District)
     <div class="row">
         <div class="form-group col-sm-4">
             @Html.DisplayNameFor(model => model.CheckState)
