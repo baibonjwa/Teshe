@@ -26,7 +26,14 @@
         @Html.Partial("_BackTop")
     </div>
     <div class="center">
-        @Html.Partial("_BackLeft")
+        @if (User.IsInRole("客户"))
+        { 
+            @Html.Partial("_BackLeftForUser")  
+        }
+        else
+        {
+            @Html.Partial("_BackLeft")
+        }
         @Html.Partial("_BackRightTop")
         <div style="margin-top: 20px;" class="col-sm-8">
             @RenderBody()

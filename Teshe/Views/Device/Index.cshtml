@@ -76,18 +76,20 @@
             <th data-options="field:'District',width:100">所在区（县）</th>
             <th data-options="field:'City',width:100">所在城市</th>
             <th data-options="field:'Province',width:100">所在省份</th>
-            <th data-options="field:'ManufactureDate',width:100">出厂日期</th>
-            <th data-options="field:'Factory',width:100">生产厂家</th>
+            @*            <th data-options="field:'ManufactureDate',width:100">出厂日期</th>
+            <th data-options="field:'Factory',width:100">生产厂家</th>*@
             <th data-options="field:'SetupTime',width:100">安装时间</th>
-            <th data-options="field:'ExplosionProof',width:100">防爆否</th>
-            <th data-options="field:'SecurityCertificateNo',width:100">安检证号</th>
-            <th data-options="field:'CheckState',width:100">检测状态</th>
+            @*            <th data-options="field:'ExplosionProof',width:100">防爆否</th>
+            <th data-options="field:'SecurityCertificateNo',width:100">安检证号</th>*@
+            @*            <th data-options="field:'CheckState',width:100">检测状态</th>*@
             <th data-options="field:'CheckTime',width:100">检测时间</th>
-            <th data-options="field:'CheckCycle',width:100">检测周期</th>
+            @*            <th data-options="field:'CheckCycle',width:100">检测周期</th>*@
             <th data-options="field:'UseState',width:100">使用状态</th>
-            <th data-options="field:'MaintenanceRecord',width:100">维修记录</th>
+            @*            <th data-options="field:'MaintenanceRecord',width:100">维修记录</th>*@
         </tr>
     </thead>
 </table>
 <a class="easyui-linkbutton" href="javascript:void(0)" onclick="exportExcel()">导出报表</a>
+<a class="easyui-linkbutton" href="javascript:void(0)" onclick="print()">在线打印</a>
 @UIHelper.ExportExcel("Device")
+@UIHelper.Print("Device");

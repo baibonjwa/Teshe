@@ -71,6 +71,12 @@ namespace Teshe.Controllers
             return Content(JsonConvert.SerializeObject(results, dateTimeConverter));
         }
 
+        public ActionResult Print(String data)
+        {
+            List<Device> list = JsonConvert.DeserializeObject<List<Device>>(data, dateTimeConverter);
+            return View(list);
+        }
+
         public ActionResult Details(int id = 0)
         {
             Device device = db.Devices.Find(id);
@@ -86,8 +92,6 @@ namespace Teshe.Controllers
 
         public ActionResult Create()
         {
-
-
             return View();
         }
 

@@ -1,0 +1,53 @@
+﻿@model  List<Teshe.Models.Device>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Print</title>
+    @Styles.Render("~/Content/bootstrap.min.css")
+    @Scripts.Render("~/Scripts/bootstrap.min.js")
+    <script>
+        //alert("如不满意默认打印样式，可以取消打印，并单击浏览器菜单中的打印预览，可以设置横向打印、去掉页头页脚等功能。")
+        window.print();
+    </script>
+</head>
+<body>
+    <table class="table">
+        <tr>
+            <th>设备名称</th>
+            <th>设备型号</th>
+            <th>条形码</th>
+            <th>所在公司</th>
+            <th>所在区（县）</th>
+            <th>所在城市</th>
+            <th>所在省份</th>
+            <th>出厂日期</th>
+            <th>生产厂家</th>
+            <th>安装时间</th>
+            <th>检测时间</th>
+            <th>使用状态</th>
+        </tr>
+        @foreach (var i in Model)
+        {
+            <tr>
+                <td>@i.Name</td>
+                <td>@i.Model</td>
+                <td>@i.Barcode</td>
+                <td>@i.Company</td>
+                <td>@i.District</td>
+                <td>@i.City</td>
+                <td>@i.Province</td>
+                <td>@i.ManufactureDate</td>
+                <td>@i.Factory</td>
+                <td>@i.SetupTime</td>
+                <td>@i.CheckTime</td>
+                <td>@i.UseState</td>
+            </tr>
+        }
+    </table>
+</body>
+</html>
