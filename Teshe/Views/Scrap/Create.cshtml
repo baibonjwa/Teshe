@@ -12,8 +12,14 @@
     <div class="row">
         <div class="form-group col-sm-4">
             @Html.DisplayNameFor(model => model.DeviceBarcode)
-            @Html.EditorFor(model => model.DeviceBarcode)
+            @Html.TextBoxFor(model => model.DeviceBarcode, new { onchange = "GetDeviceInfo()" })
             @Html.ValidationMessageFor(model => model.DeviceBarcode)
+        </div>
+        <div id="deviceName" class="form-group col-sm-4">
+            设备名称：
+        </div>
+        <div id="deviceModel" class="form-group col-sm-4">
+            设备型号：
         </div>
     </div>
     <div class="row">
@@ -22,12 +28,24 @@
             @Html.EditorFor(model => model.Description)
             @Html.ValidationMessageFor(model => model.Description)
         </div>
+        <div id="deviceCompany" class="form-group col-sm-4">
+            所在公司：
+        </div>
+        <div id="deviceDistrict" class="form-group col-sm-4">
+            所在区（县）：
+        </div>
     </div>
     <div class="row">
         <div class="form-group col-sm-4">
             @Html.DisplayNameFor(model => model.ScrapTime)
             @Html.TextBoxFor(model => model.ScrapTime, new { onfocus = "WdatePicker()" })
             @Html.ValidationMessageFor(model => model.ScrapTime)
+        </div>
+        <div id="deviceCity" class="form-group col-sm-4">
+            所在城市：
+        </div>
+        <div id="deviceProvince" class="form-group col-sm-4">
+            所在省份：
         </div>
     </div>     
     <div class="row">
@@ -43,7 +61,7 @@
         </div>
     </div>
 }
-
+@UIHelper.GetDeviceInfo();
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

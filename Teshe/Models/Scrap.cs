@@ -19,7 +19,7 @@ namespace Teshe.Models
         public virtual Device Device { get; set; }
 
         [DisplayName("报废原因")]
-        [Required(ErrorMessage = "故障描述不能为空")]
+        [Required(ErrorMessage = "报废描述不能为空")]
         public String Description { get; set; }
 
         [DisplayName("报废时间")]

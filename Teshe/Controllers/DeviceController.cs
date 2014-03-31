@@ -243,6 +243,11 @@ namespace Teshe.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult GetDeviceByBarcode(String barcode)
+        {
+            return Content(JsonConvert.SerializeObject(db.Devices.FirstOrDefault<Device>(u => u.Barcode == barcode)));
+        }
+
         public ActionResult ExportExcel(String data)
         {
             Response.ContentType = "text/plain";

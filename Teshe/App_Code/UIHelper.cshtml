@@ -126,3 +126,30 @@
         }
     </script>
 }
+@helper GetDeviceInfo()
+{
+    <script>
+        function GetDeviceInfo() {
+            var barcode = $("#DeviceBarcode").val();
+            $.ajax({
+                type: "POST",
+                url: "/Device/GetDeviceByBarcode?barcode=" + barcode,
+                success: function (results) {
+                    if (results == "null") {
+                        $.messager.alert("信息", "该设备不存在，请检查条形码是否输入正确");
+                    }
+                    else {
+                        var obj = eval('(' + results + ')');
+                        $("#deviceName").html("设备名称：<span class=\"bfont2\">" + obj.Name + "</span>");
+                        $("#deviceModel").html("设备型号：<span class=\"bfont2\">" + obj.Model + "</span>");
+                        $("#deviceCompany").html("所在公司：<span class=\"bfont2\">" + obj.Company + "</span>");
+                        $("#deviceDistrict").html("所在区（县）：<span class=\"bfont2\">" + obj.District + "</span>");
+                        $("#deviceCity").html("所在城市：<span class=\"bfont2\">" + obj.City + "</span>");
+                        $("#deviceProvince").html("所在省份：<span class=\"bfont2\">" + obj.Province + "</span>");
+                    }
+                }
+            }
+            )
+        }
+</script>
+}
