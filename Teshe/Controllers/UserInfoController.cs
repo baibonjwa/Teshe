@@ -14,6 +14,7 @@ using EmitMapper;
 using EmitMapper.MappingConfiguration;
 using System.Reflection;
 using Teshe.Common;
+using Newtonsoft.Json;
 
 namespace Teshe.Controllers
 {
@@ -238,6 +239,11 @@ namespace Teshe.Controllers
             return View(viewModel);
         }
 
+        public ActionResult Print(String data)
+        {
+            List<UserInfo> list = JsonConvert.DeserializeObject<List<UserInfo>>(data, dateTimeConverter);
+            return View(list);
+        }
 
         // POST: /UserInfo/Edit/5
 

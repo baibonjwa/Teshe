@@ -1,10 +1,7 @@
 ﻿@{
     ViewBag.Title = "管理员用户查询";
 }
-
-<h2>管理员用户查询</h2>
-
-<table class="easyui-datagrid" title="待审核的用户" style="width: 1000px; height: auto"
+<table id="result" class="easyui-datagrid" title="待审核的用户" style="width: 1000px; height: auto"
     data-options="singleSelect:true,collapsible:true,url:'/UserInfo/GetUserInfo',method:'post',rownumbers:'true',pagination:'true'">
     <thead>
         <tr>
@@ -20,6 +17,10 @@
         </tr>
     </thead>
 </table>
+<a class="easyui-linkbutton" href="javascript:void(0)" onclick="exportExcel()">导出报表</a>
+<a class="easyui-linkbutton" href="javascript:void(0)" onclick="print()">在线打印</a>
+@UIHelper.ExportExcel("UserInfo")
+@UIHelper.Print("UserInfo")
 
 <script>
     function details(val, row) {
