@@ -154,7 +154,7 @@ namespace Teshe.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "区（县）级管理员,市级管理员,省级管理员,系统管理员")]
+        [Authorize(Roles = "市级管理员,省级管理员,系统管理员")]
         public ActionResult CreateAdmin(CreateAdminViewModel viewModel)
         {
             BindUserType();

@@ -30,6 +30,10 @@
         { 
             @Html.Partial("_BackLeftForUser")  
         }
+        else if (User.IsInRole("区（县）级管理员"))
+        {
+            @Html.Partial("_BackLeftForDistrict")
+        }
         else
         {
             @Html.Partial("_BackLeft")

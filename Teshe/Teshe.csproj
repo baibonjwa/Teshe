@@ -1221,6 +1221,7 @@
     <Content Include="Views\Device\Print.cshtml" />
     <Content Include="Views\Scrap\Print.cshtml" />
     <Content Include="Views\Stoppage\Print.cshtml" />
+    <Content Include="Views\Shared\_BackLeftForDistrict.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
