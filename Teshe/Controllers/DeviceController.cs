@@ -61,15 +61,47 @@ namespace Teshe.Controllers
         public ActionResult Search(DeviceIndexViewModel viewModel)
         {
             Expression<Func<Device, bool>> where = PredicateExtensionses.True<Device>();
-            if (!String.IsNullOrEmpty(viewModel.Name)) where = where.And(u => u.Name == viewModel.Name);
-            if (!String.IsNullOrEmpty(viewModel.Model)) where = where.And(u => u.Model == viewModel.Model);
-            if (viewModel.SetupTime != null) where = where.And(u => u.SetupTime == viewModel.SetupTime);
-            if (!String.IsNullOrEmpty(viewModel.Company)) where = where.And(u => u.Company == viewModel.Company);
-            if (!String.IsNullOrEmpty(viewModel.Barcode)) where = where.And(u => u.Barcode == viewModel.Barcode);
-            if (!String.IsNullOrEmpty(viewModel.CheckState)) where = where.And(u => u.CheckState == viewModel.CheckState);
-            if (!String.IsNullOrEmpty(viewModel.District)) where = where.And(u => u.District == viewModel.District);
-            if (!String.IsNullOrEmpty(viewModel.City)) where = where.And(u => u.City == viewModel.City);
-            if (!String.IsNullOrEmpty(viewModel.Province)) where = where.And(u => u.Province == viewModel.Province);
+            bool isfirst = true;
+            PropertyInfo[] pro = viewModel.GetType().GetProperties();
+            foreach (var p in pro)
+            {
+                if (p.GetValue(viewModel, null) != null)
+                {
+                    isfirst = false;
+                    break;
+                }
+            }
+            if (isfirst)
+            {
+                UserInfo user = GetUser();
+                if (User.IsInRole("区（县）级管理员"))
+                {
+                    where = where.And(u => u.District == user.District);
+                    where = where.And(u => u.City == user.City);
+                    where = where.And(u => u.Province == user.Province);
+                }
+                else if (User.IsInRole("市级管理员"))
+                {
+                    where = where.And(u => u.City == user.City);
+                    where = where.And(u => u.Province == user.Province);
+                }
+                else if (User.IsInRole("省级管理员"))
+                {
+                    where = where.And(u => u.Province == user.Province);
+                }
+            }
+            else
+            {
+                if (!String.IsNullOrEmpty(viewModel.Name)) where = where.And(u => u.Name == viewModel.Name);
+                if (!String.IsNullOrEmpty(viewModel.Model)) where = where.And(u => u.Model == viewModel.Model);
+                if (viewModel.SetupTime != null) where = where.And(u => u.SetupTime == viewModel.SetupTime);
+                if (!String.IsNullOrEmpty(viewModel.Company)) where = where.And(u => u.Company == viewModel.Company);
+                if (!String.IsNullOrEmpty(viewModel.Barcode)) where = where.And(u => u.Barcode == viewModel.Barcode);
+                if (!String.IsNullOrEmpty(viewModel.CheckState)) where = where.And(u => u.CheckState == viewModel.CheckState);
+                if (!String.IsNullOrEmpty(viewModel.District)) where = where.And(u => u.District == viewModel.District);
+                if (!String.IsNullOrEmpty(viewModel.City)) where = where.And(u => u.City == viewModel.City);
+                if (!String.IsNullOrEmpty(viewModel.Province)) where = where.And(u => u.Province == viewModel.Province);
+            }
             List<Device> results = db.Devices.Where<Device>(where).ToList();
             return Content(JsonConvert.SerializeObject(results, dateTimeConverter));
         }

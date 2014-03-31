@@ -7,6 +7,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using Teshe.Common;
@@ -26,14 +27,46 @@ namespace Teshe.Controllers
         public ActionResult Search(ScrapIndexViewModel viewModel)
         {
             Expression<Func<Scrap, bool>> where = PredicateExtensionses.True<Scrap>();
-            if (!String.IsNullOrEmpty(viewModel.Name)) where = where.And(u => u.Device.Name == viewModel.Name);
-            if (!String.IsNullOrEmpty(viewModel.Model)) where = where.And(u => u.Device.Model == viewModel.Model);
-            if (!String.IsNullOrEmpty(viewModel.Company)) where = where.And(u => u.Device.Company == viewModel.Company);
-            if (!String.IsNullOrEmpty(viewModel.Barcode)) where = where.And(u => u.Device.Barcode == viewModel.Barcode);
-            if (!String.IsNullOrEmpty(viewModel.District)) where = where.And(u => u.Device.District == viewModel.District);
-            if (!String.IsNullOrEmpty(viewModel.City)) where = where.And(u => u.Device.City == viewModel.City);
-            if (!String.IsNullOrEmpty(viewModel.Province)) where = where.And(u => u.Device.Province == viewModel.Province);
-            if (viewModel.ScrapTime != null) where = where.And(u => u.ScrapTime == viewModel.ScrapTime);
+            bool isfirst = true;
+            PropertyInfo[] pro = viewModel.GetType().GetProperties();
+            foreach (var p in pro)
+            {
+                if (p.GetValue(viewModel, null) != null)
+                {
+                    isfirst = false;
+                    break;
+                }
+            }
+            if (isfirst)
+            {
+                UserInfo user = GetUser();
+                if (User.IsInRole("区（县）级管理员"))
+                {
+                    where = where.And(u => u.Device.District == user.District);
+                    where = where.And(u => u.Device.City == user.City);
+                    where = where.And(u => u.Device.Province == user.Province);
+                }
+                else if (User.IsInRole("市级管理员"))
+                {
+                    where = where.And(u => u.Device.City == user.City);
+                    where = where.And(u => u.Device.Province == user.Province);
+                }
+                else if (User.IsInRole("省级管理员"))
+                {
+                    where = where.And(u => u.Device.Province == user.Province);
+                }
+            }
+            else
+            {
+                if (!String.IsNullOrEmpty(viewModel.Name)) where = where.And(u => u.Device.Name == viewModel.Name);
+                if (!String.IsNullOrEmpty(viewModel.Model)) where = where.And(u => u.Device.Model == viewModel.Model);
+                if (!String.IsNullOrEmpty(viewModel.Company)) where = where.And(u => u.Device.Company == viewModel.Company);
+                if (!String.IsNullOrEmpty(viewModel.Barcode)) where = where.And(u => u.Device.Barcode == viewModel.Barcode);
+                if (!String.IsNullOrEmpty(viewModel.District)) where = where.And(u => u.Device.District == viewModel.District);
+                if (!String.IsNullOrEmpty(viewModel.City)) where = where.And(u => u.Device.City == viewModel.City);
+                if (!String.IsNullOrEmpty(viewModel.Province)) where = where.And(u => u.Device.Province == viewModel.Province);
+                if (viewModel.ScrapTime != null) where = where.And(u => u.ScrapTime == viewModel.ScrapTime);
+            }
             List<Scrap> results = db.Scraps.Where<Scrap>(where).ToList();
             return Content(JsonConvert.SerializeObject(results, dateTimeConverter));
         }

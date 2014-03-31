@@ -11,6 +11,7 @@ using Teshe.Common;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
 using System.Data.Entity.Infrastructure;
+using System.Reflection;
 
 namespace Teshe.Controllers
 {
@@ -72,14 +73,46 @@ namespace Teshe.Controllers
         public ActionResult Search(StoppageIndexViewModel viewModel)
         {
             Expression<Func<Stoppage, bool>> where = PredicateExtensionses.True<Stoppage>();
-            if (!String.IsNullOrEmpty(viewModel.Name)) where = where.And(u => u.Device.Name == viewModel.Name);
-            if (!String.IsNullOrEmpty(viewModel.Model)) where = where.And(u => u.Device.Model == viewModel.Model);
-            if (!String.IsNullOrEmpty(viewModel.Company)) where = where.And(u => u.Device.Company == viewModel.Company);
-            if (!String.IsNullOrEmpty(viewModel.Barcode)) where = where.And(u => u.Device.Barcode == viewModel.Barcode);
-            if (!String.IsNullOrEmpty(viewModel.District)) where = where.And(u => u.Device.District == viewModel.District);
-            if (!String.IsNullOrEmpty(viewModel.City)) where = where.And(u => u.Device.City == viewModel.City);
-            if (!String.IsNullOrEmpty(viewModel.Province)) where = where.And(u => u.Device.Province == viewModel.Province);
-            if (viewModel.StoppageTime != null) where = where.And(u => u.StoppageTime == viewModel.StoppageTime);
+            bool isfirst = true;
+            PropertyInfo[] pro = viewModel.GetType().GetProperties();
+            foreach (var p in pro)
+            {
+                if (p.GetValue(viewModel, null) != null)
+                {
+                    isfirst = false;
+                    break;
+                }
+            }
+            if (isfirst)
+            {
+                UserInfo user = GetUser();
+                if (User.IsInRole("区（县）级管理员"))
+                {
+                    where = where.And(u => u.Device.District == user.District);
+                    where = where.And(u => u.Device.City == user.City);
+                    where = where.And(u => u.Device.Province == user.Province);
+                }
+                else if (User.IsInRole("市级管理员"))
+                {
+                    where = where.And(u => u.Device.City == user.City);
+                    where = where.And(u => u.Device.Province == user.Province);
+                }
+                else if (User.IsInRole("省级管理员"))
+                {
+                    where = where.And(u => u.Device.Province == user.Province);
+                }
+            }
+            else
+            {
+                if (!String.IsNullOrEmpty(viewModel.Name)) where = where.And(u => u.Device.Name == viewModel.Name);
+                if (!String.IsNullOrEmpty(viewModel.Model)) where = where.And(u => u.Device.Model == viewModel.Model);
+                if (!String.IsNullOrEmpty(viewModel.Company)) where = where.And(u => u.Device.Company == viewModel.Company);
+                if (!String.IsNullOrEmpty(viewModel.Barcode)) where = where.And(u => u.Device.Barcode == viewModel.Barcode);
+                if (!String.IsNullOrEmpty(viewModel.District)) where = where.And(u => u.Device.District == viewModel.District);
+                if (!String.IsNullOrEmpty(viewModel.City)) where = where.And(u => u.Device.City == viewModel.City);
+                if (!String.IsNullOrEmpty(viewModel.Province)) where = where.And(u => u.Device.Province == viewModel.Province);
+                if (viewModel.StoppageTime != null) where = where.And(u => u.StoppageTime == viewModel.StoppageTime);
+            }
             List<Stoppage> results = db.Stoppages.Where<Stoppage>(where).ToList();
             return Content(JsonConvert.SerializeObject(results, dateTimeConverter));
         }
