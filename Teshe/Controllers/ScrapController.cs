@@ -88,7 +88,11 @@ namespace Teshe.Controllers
             }
             return View(scrap);
         }
-
+        public ActionResult Print(String data)
+        {
+            List<Scrap> list = JsonConvert.DeserializeObject<List<Scrap>>(data, dateTimeConverter);
+            return View(list);
+        }
         //
         // POST: /Scrap/Edit/5
 

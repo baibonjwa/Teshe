@@ -1219,6 +1219,8 @@
     <Content Include="Views\Device\Barcode.cshtml" />
     <Content Include="Views\Shared\_BackLeftForUser.cshtml" />
     <Content Include="Views\Device\Print.cshtml" />
+    <Content Include="Views\Scrap\Print.cshtml" />
+    <Content Include="Views\Stoppage\Print.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

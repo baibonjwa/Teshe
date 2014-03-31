@@ -1,0 +1,53 @@
+﻿@model  List<Teshe.Models.Stoppage>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Print</title>
+    @Styles.Render("~/Content/bootstrap.min.css")
+    @Scripts.Render("~/Scripts/bootstrap.min.js")
+    <script>
+        //alert("如不满意默认打印样式，可以取消打印，并单击浏览器菜单中的打印预览，可以设置横向打印、去掉页头页脚等功能。")
+        window.print();
+    </script>
+</head>
+<body>
+    <table class="table">
+        <tr>
+            <th>设备名称</th>
+            <th>设备型号</th>
+            <th>条形码</th>
+            <th>所在公司</th>
+            <th>所在区（县）</th>
+            <th>所在城市</th>
+            <th>所在省份</th>
+            <th>故障描述</th>
+            <th>故障时间</th>
+            <th>维修人员</th>
+            <th>维修时间</th>
+            <th>备注</th>
+        </tr>
+        @foreach (var i in Model)
+        {
+            <tr>
+                <td>@i.Device.Name</td>
+                <td>@i.Device.Model</td>
+                <td>@i.Device.Barcode</td>
+                <td>@i.Device.Company</td>
+                <td>@i.Device.District</td>
+                <td>@i.Device.City</td>
+                <td>@i.Device.Province</td>
+                <td>@i.Description</td>
+                <td>@i.StoppageTime</td>
+                <td>@i.RepairPeople</td>
+                <td>@i.RepairTime</td>
+                <td>@i.Remarks</td>
+            </tr>
+        }
+    </table>
+</body>
+</html>

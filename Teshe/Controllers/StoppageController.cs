@@ -82,7 +82,11 @@ namespace Teshe.Controllers
         }
         //
         // GET: /Stoppage/Edit/5
-
+        public ActionResult Print(String data)
+        {
+            List<Stoppage> list = JsonConvert.DeserializeObject<List<Stoppage>>(data, dateTimeConverter);
+            return View(list);
+        }
         public ActionResult Edit(int id = 0)
         {
             Stoppage stoppage = db.Stoppages.Find(id);
