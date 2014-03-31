@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost:5349/" />
-<title>注册用户</title>
+<title>密码修改</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">注册用户</td></tr>
+<tr><td rowspan="1" colspan="3">密码修改</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -18,66 +18,31 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=注册</td>
+	<td>css=input[type=&quot;submit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=会员密码修改</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=Name</td>
-	<td>客户4</td>
+	<td>id=OldPassword</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=Password</td>
+	<td>1234</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=RepPassword</td>
-	<td>123</td>
+	<td>1234</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=ResponsiblePerson</td>
-	<td>天亮</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=Company</td>
-	<td>葫芦岛华慧科技有限公司</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=District</td>
-	<td>连山区</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=City</td>
-	<td>葫芦岛市</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=Province</td>
-	<td>辽宁省</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=Tel</td>
-	<td>18842930336</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=Email</td>
-	<td>bltmld@yahoo.cn</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=Remarks</td>
-	<td>123</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=Remarks</td>
-	<td>无</td>
-</tr>
-<tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>css=input.btn.btn-default</td>
 	<td></td>
 </tr>
