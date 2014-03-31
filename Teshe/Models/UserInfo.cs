@@ -6,6 +6,8 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Web.Mvc;
+using System.IO;
+using NPOI.HSSF.UserModel;
 
 namespace Teshe.Models
 {
@@ -72,5 +74,50 @@ namespace Teshe.Models
 
         [DisplayName("SIM卡号")]
         public String SIMCode { get; set; }
+
+        public MemoryStream Export(List<UserInfo> list)
+        {
+            //创建流对象
+            using (MemoryStream ms = new MemoryStream())
+            {
+                //将参数写入到一个临时集合中
+                List<string> propertyNameList = new List<string>();
+                HSSFWorkbook workbook = new HSSFWorkbook();
+                HSSFSheet sheet = (HSSFSheet)workbook.CreateSheet();
+                HSSFRow headerRow = (HSSFRow)sheet.CreateRow(0);
+
+                headerRow.CreateCell(0).SetCellValue("用户名");
+                headerRow.CreateCell(1).SetCellValue("密码");
+                headerRow.CreateCell(2).SetCellValue("负责人");
+                headerRow.CreateCell(3).SetCellValue("所在单位");
+                headerRow.CreateCell(4).SetCellValue("所在区（县）");
+                headerRow.CreateCell(5).SetCellValue("所在城市");
+                headerRow.CreateCell(6).SetCellValue("所在省份");
+
+                if (list.Count > 0)
+                {
+                    int rowIndex = 1;
+                    //遍历集合生成excel的行集数据
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        HSSFRow dataRow = (HSSFRow)sheet.CreateRow(rowIndex);
+
+                        dataRow.CreateCell(0).SetCellValue(list[i].Name);
+                        dataRow.CreateCell(1).SetCellValue(list[i].Password);
+                        dataRow.CreateCell(2).SetCellValue(list[i].ResponsiblePerson);
+                        dataRow.CreateCell(3).SetCellValue(list[i].Company);
+                        dataRow.CreateCell(4).SetCellValue(list[i].District);
+                        dataRow.CreateCell(5).SetCellValue(list[i].City);
+                        dataRow.CreateCell(6).SetCellValue(list[i].Province);
+                        rowIndex++;
+                    }
+                }
+                workbook.Write(ms);
+                ms.Flush();
+                ms.Position = 0;
+                return ms;
+            }
+
+        }
     }
 }

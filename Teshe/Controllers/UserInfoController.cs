@@ -329,6 +329,17 @@ namespace Teshe.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
+
+        public ActionResult ExportExcel(String data)
+        {
+            Response.ContentType = "text/plain";
+            List<UserInfo> list = JsonConvert.DeserializeObject<List<UserInfo>>(data, dateTimeConverter);
+            UserInfo userinfo = new UserInfo();
+            //Response.ContentType = "application/vnd.ms-excel;charset=UTF-8";
+            //Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", "temp.xls"));
+            //Response.Clear();
+            return File(userinfo.Export(list).GetBuffer(), "application/vnd.ms-excel;charset=UTF-8", "data.xls");
+        }
         [AllowAnonymous]
         public ActionResult Login()
         {
