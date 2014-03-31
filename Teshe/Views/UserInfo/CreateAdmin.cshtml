@@ -4,108 +4,84 @@
     ViewBag.Title = "建立管理员";
 }
 
-<h2>建立管理员</h2>
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>CreateAdminViewModel</legend>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Name)
-        </div>
-        <div class="editor-field">
+    <div class="row">
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.Name)
             @Html.EditorFor(model => model.Name)
             @Html.ValidationMessageFor(model => model.Name)
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.UserType.Name)
-        </div>
-        <div class="editor-field">
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.UserType.Name)
             @Html.DropDownListFor(model => model.UserType.Name, (List<SelectListItem>)ViewBag.UserTypeList)
             @Html.ValidationMessageFor(model => model.UserType.Name)
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Password)
-        </div>
-        <div class="editor-field">
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.Password)
             @Html.EditorFor(model => model.Password)
             @Html.ValidationMessageFor(model => model.Password)
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.RepPassword)
-        </div>
-        <div class="editor-field">
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.RepPassword)
             @Html.EditorFor(model => model.RepPassword)
             @Html.ValidationMessageFor(model => model.RepPassword)
         </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ResponsiblePerson)
-        </div>
-        <div class="editor-field">
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.ResponsiblePerson)
             @Html.EditorFor(model => model.ResponsiblePerson)
             @Html.ValidationMessageFor(model => model.ResponsiblePerson)
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Company)
-        </div>
-        <div class="editor-field">
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.Company)
             @Html.EditorFor(model => model.Company)
             @Html.ValidationMessageFor(model => model.Company)
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.District)
-        </div>
-        <div class="editor-field">
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.District)
             @Html.EditorFor(model => model.District)
             @Html.ValidationMessageFor(model => model.District)
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.City)
-        </div>
-        <div class="editor-field">
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.City)
             @Html.EditorFor(model => model.City)
             @Html.ValidationMessageFor(model => model.City)
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Province)
-        </div>
-        <div class="editor-field">
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.Province)
             @Html.EditorFor(model => model.Province)
             @Html.ValidationMessageFor(model => model.Province)
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Tel)
-        </div>
-        <div class="editor-field">
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.Tel)
             @Html.EditorFor(model => model.Tel)
             @Html.ValidationMessageFor(model => model.Tel)
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Email)
-        </div>
-        <div class="editor-field">
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.Email)
             @Html.EditorFor(model => model.Email)
             @Html.ValidationMessageFor(model => model.Email)
         </div>
-
-        <p>
-            <input type="submit" value="添加管理员" />
-            @UIHelper.ModifyTips(ViewBag.CreateAdminIsSuccess)
-        </p>
-    </fieldset>
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-4">
+            <input type="submit" value="添加管理员" class="btn btn-default" />
+            @UIHelper.ModifyTips(ViewBag.CreateAdminIsSuccess, "添加管理员成功")
+        </div>
+    </div>
 }
 
 @section Scripts {

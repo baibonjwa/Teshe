@@ -80,11 +80,11 @@
     </script>
     
 }
-@helper ModifyTips(dynamic sign)
+@helper ModifyTips(dynamic sign, String text)
 {
     if (sign == true)
     { 
-    <span style="color: green">修改成功</span> 
+    <span style="color: green">@text</span> 
     }
 }
 }

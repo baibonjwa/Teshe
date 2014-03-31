@@ -67,10 +67,10 @@ namespace Teshe.Controllers
 
             return View(userinfo);
         }
-        [Authorize(Roles = "区（县）级管理员,市级管理员,省级管理员,系统管理员")]
-        public ActionResult CreateAdmin()
+
+
+        private void BindUserType()
         {
-            ViewBag.CreateAdminIsSuccess = false;
             List<SelectListItem> items = new List<SelectListItem>();
             if (User.IsInRole("系统管理员"))
             {
@@ -112,10 +112,8 @@ namespace Teshe.Controllers
                     ViewBag.UserTypeList = items;
                 }
             }
-
-
-            return View();
         }
+
         public ActionResult Search()
         {
             return View();
@@ -126,17 +124,18 @@ namespace Teshe.Controllers
         public ActionResult GetUserInfo()
         {
             List<UserInfo> list = null;
+            UserInfo user = GetUser();
             if (User.IsInRole("区（县）级管理员"))
             {
-                list = db.UserInfoes.Where<UserInfo>(u => u.District == GetUser().District && u.UserType.Name == "客户" && u.IsVerify == 1).ToList<UserInfo>();
+                list = db.UserInfoes.Where<UserInfo>(u => u.District == user.District && u.UserType.Name == "客户" && u.IsVerify == 1).ToList<UserInfo>();
             }
             else if (User.IsInRole("市级管理员"))
             {
-                list = db.UserInfoes.Where<UserInfo>(u => u.City == GetUser().City && u.UserType.Name == "客户" && u.IsVerify == 1).ToList<UserInfo>();
+                list = db.UserInfoes.Where<UserInfo>(u => u.City == user.City && u.UserType.Name == "客户" && u.IsVerify == 1).ToList<UserInfo>();
             }
             else if (User.IsInRole("省级管理员"))
             {
-                list = db.UserInfoes.Where<UserInfo>(u => u.Province == GetUser().Province && u.UserType.Name == "客户" && u.IsVerify == 1).ToList<UserInfo>();
+                list = db.UserInfoes.Where<UserInfo>(u => u.Province == user.Province && u.UserType.Name == "客户" && u.IsVerify == 1).ToList<UserInfo>();
             }
             else if (User.IsInRole("系统管理员"))
             {
@@ -145,12 +144,20 @@ namespace Teshe.Controllers
             return Json(list);
         }
 
+        [Authorize(Roles = "区（县）级管理员,市级管理员,省级管理员,系统管理员")]
+        public ActionResult CreateAdmin()
+        {
+            ViewBag.CreateAdminIsSuccess = false;
+            BindUserType();
+            return View();
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "区（县）级管理员,市级管理员,省级管理员,系统管理员")]
         public ActionResult CreateAdmin(CreateAdminViewModel viewModel)
         {
+            BindUserType();
             UserInfo userinfo = ObjectMapperManager.DefaultInstance.GetMapper<CreateAdminViewModel, UserInfo>().Map
 (viewModel);
             userinfo.UserType = db.UserTypes.Find(Convert.ToInt16(viewModel.UserType.Name));
@@ -160,9 +167,10 @@ namespace Teshe.Controllers
                 db.UserInfoes.Add(userinfo);
                 db.SaveChanges();
                 log.Info("用户" + userinfo.Name + "于" + DateTime.Now.ToString() + "建立了管理员");
-                ViewBag.CreateAdminIsSuccess = false;
+                ViewBag.CreateAdminIsSuccess = true;
                 return View();
             }
+
             return View();
         }
 
