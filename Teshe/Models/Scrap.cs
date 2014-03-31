@@ -37,7 +37,7 @@ namespace Teshe.Models
         public virtual UserInfo UserInfo { get; set; }
 
         [DisplayName("修改记录")]
-        public virtual List<Scrap> ModifyRecords { get; set; }
+        public virtual List<ScrapModifyRecord> ModifyRecords { get; set; }
 
         public MemoryStream Export(List<Scrap> list)
         {

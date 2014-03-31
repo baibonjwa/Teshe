@@ -179,7 +179,11 @@
             </td>
         </tr>
     </table>
-    @Html.ActionLink("修改", "Edit", new { id = Model.Id })
+    <p>
+        @Html.ActionLink("修改", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("返回", "Index") |
+        @Html.ActionLink("查看修改记录", "ModifyRecord", new { id = Model.Id })
+    </p>
 }
 
 @*<input type="submit" value="删除该设备" class="btn btn-default" />*@

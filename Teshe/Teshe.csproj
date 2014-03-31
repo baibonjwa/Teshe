@@ -1222,6 +1222,9 @@
     <Content Include="Views\Scrap\Print.cshtml" />
     <Content Include="Views\Stoppage\Print.cshtml" />
     <Content Include="Views\Shared\_BackLeftForDistrict.cshtml" />
+    <Content Include="Views\Device\ModifyRecord.cshtml" />
+    <Content Include="Views\Scrap\ModifyRecord.cshtml" />
+    <Content Include="Views\Stoppage\ModifyRecord.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

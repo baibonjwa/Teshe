@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -19,8 +20,9 @@ namespace Teshe.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime ModifyTime { get; set; }
 
-        //[DisplayName("设备")]
-        //public virtual Device Device { get; set; }
+        [JsonIgnore]
+        [DisplayName("设备")]
+        public virtual Device Device { get; set; }
 
     }
 }

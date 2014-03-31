@@ -158,6 +158,7 @@ namespace Teshe.Controllers
                     if (proOld[p] == null && proNew[p] != null)
                     {
                         StoppageModifyRecord record = new StoppageModifyRecord();
+                        record.Stoppage = stoppage;
                         record.Content = "用户\"" + User.Identity.Name + "\"于\"" + DateTime.Now.ToString() + "\"将故障信息\"" + stoppage.Description + "\"的\"" + displayName + "\"字段由\"" + proOld[p] + "\"改为\"" + proNew[p] + "\"";
                         recordList.Add(record);
                     }
@@ -168,6 +169,7 @@ namespace Teshe.Controllers
                     else if (proOld[p] != null && proNew[p] != null && proOld[p].ToString() != proNew[p].ToString())
                     {
                         StoppageModifyRecord record = new StoppageModifyRecord();
+                        record.Stoppage = stoppage;
                         record.Content = "用户\"" + User.Identity.Name + "\"于\"" + DateTime.Now.ToString() + "\"将故障信息\"" + stoppage.Description + "\"的\"" + displayName + "\"字段由\"" + proOld[p] + "\"改为\"" + proNew[p] + "\"";
                         recordList.Add(record);
                     }
@@ -186,7 +188,11 @@ namespace Teshe.Controllers
 
         //
         // GET: /Stoppage/Delete/5
-
+        public ActionResult ModifyRecord(int id)
+        {
+            List<StoppageModifyRecord> list = db.Stoppages.FirstOrDefault<Stoppage>(u => u.Id == id).ModifyRecords;
+            return View(list);
+        }
         public ActionResult Delete(int id = 0)
         {
             Stoppage stoppage = db.Stoppages.Find(id);

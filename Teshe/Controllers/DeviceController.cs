@@ -130,6 +130,12 @@ namespace Teshe.Controllers
             return View();
         }
 
+        public ActionResult ModifyRecord(int id)
+        {
+            List<DeviceModifyRecord> list = db.Devices.FirstOrDefault<Device>(u => u.Id == id).ModifyRecords;
+            return View(list);
+        }
+
         public ActionResult CreateBarcode(String code)
         {
             options = new EncodingOptions
@@ -213,6 +219,7 @@ namespace Teshe.Controllers
                     if (proOld[p] == null && proNew[p] != null)
                     {
                         DeviceModifyRecord record = new DeviceModifyRecord();
+                        record.Device = device;
                         record.Content = "用户\"" + User.Identity.Name + "\"于\"" + DateTime.Now.ToString() + "\"将设备\"" + device.Name + "\"的\"" + displayName + "\"字段由\"" + proOld[p] + "\"改为\"" + proNew[p] + "\"";
                         recordList.Add(record);
                     }
@@ -223,6 +230,7 @@ namespace Teshe.Controllers
                     else if (proOld[p] != null && proNew[p] != null && proOld[p].ToString() != proNew[p].ToString())
                     {
                         DeviceModifyRecord record = new DeviceModifyRecord();
+                        record.Device = device;
                         record.Content = "用户\"" + User.Identity.Name + "\"于\"" + DateTime.Now.ToString() + "\"将设备\"" + device.Name + "\"的\"" + displayName + "\"字段由\"" + proOld[p] + "\"改为\"" + proNew[p] + "\"";
                         recordList.Add(record);
                     }

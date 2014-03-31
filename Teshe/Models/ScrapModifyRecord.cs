@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -18,5 +19,9 @@ namespace Teshe.Models
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime ModifyTime { get; set; }
+
+        [JsonIgnore]
+        [DisplayName("报废")]
+        public virtual Scrap Scrap { get; set; }
     }
 }

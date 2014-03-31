@@ -154,6 +154,7 @@ namespace Teshe.Controllers
                     if (proOld[p] == null && proNew[p] != null)
                     {
                         ScrapModifyRecord record = new ScrapModifyRecord();
+                        record.Scrap = scrap;
                         record.Content = "用户\"" + User.Identity.Name + "\"于\"" + DateTime.Now.ToString() + "\"将故障信息\"" + scrap.Description + "\"的\"" + displayName + "\"字段由\"" + proOld[p] + "\"改为\"" + proNew[p] + "\"";
                         recordList.Add(record);
                     }
@@ -164,6 +165,7 @@ namespace Teshe.Controllers
                     else if (proOld[p] != null && proNew[p] != null && proOld[p].ToString() != proNew[p].ToString())
                     {
                         ScrapModifyRecord record = new ScrapModifyRecord();
+                        record.Scrap = scrap;
                         record.Content = "用户\"" + User.Identity.Name + "\"于\"" + DateTime.Now.ToString() + "\"将故障信息\"" + scrap.Description + "\"的\"" + displayName + "\"字段由\"" + proOld[p] + "\"改为\"" + proNew[p] + "\"";
                         recordList.Add(record);
                     }
@@ -190,7 +192,11 @@ namespace Teshe.Controllers
             log.Info("用户" + User.Identity.Name + "于" + DateTime.Now.ToString() + "删除报废信息" + scrap.Device.Name);
             return RedirectToAction("Index");
         }
-
+        public ActionResult ModifyRecord(int id)
+        {
+            List<ScrapModifyRecord> list = db.Scraps.FirstOrDefault<Scrap>(u => u.Id == id).ModifyRecords;
+            return View(list);
+        }
         public ActionResult ExportExcel(String data)
         {
             Response.ContentType = "text/plain";

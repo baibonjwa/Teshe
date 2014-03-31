@@ -74,6 +74,7 @@
     </table>
     <p>
         @Html.ActionLink("修改", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("返回", "Index")
+        @Html.ActionLink("返回", "Index")|
+        @Html.ActionLink("查看修改记录", "ModifyRecord", new { id = Model.Id })
     </p>
 }
