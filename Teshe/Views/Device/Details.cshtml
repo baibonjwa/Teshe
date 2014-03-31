@@ -81,7 +81,8 @@
                 @Html.DisplayNameFor(model => model.Barcode)：
             </td>
             <td>
-                @Html.DisplayFor(model => model.Barcode)
+                <a href="/Device/Barcode?barcode=@Model.Barcode">@Model.Barcode</a>
+                @*@Html.ActionLink(Model.Barcode, "Barcode", "Device");*@
             </td>
         </tr>
         <tr>

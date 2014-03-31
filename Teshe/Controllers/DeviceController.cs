@@ -52,6 +52,12 @@ namespace Teshe.Controllers
             return View();
         }
 
+        public ActionResult Barcode(String barcode)
+        {
+            ViewBag.Barcode = barcode;
+            return View();
+        }
+
         public ActionResult Search(DeviceIndexViewModel viewModel)
         {
             Expression<Func<Device, bool>> where = PredicateExtensionses.True<Device>();
