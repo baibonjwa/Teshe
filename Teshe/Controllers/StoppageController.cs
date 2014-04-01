@@ -198,7 +198,7 @@ namespace Teshe.Controllers
             Stoppage stoppage = db.Stoppages.Find(id);
             db.Stoppages.Remove(stoppage);
             db.SaveChanges();
-            log.Info("用户" + User.Identity.Name + "于" + DateTime.Now.ToString() + "删除故障信息" + stoppage.Device.Name);
+            log.Info("用户" + User.Identity.Name + "于" + DateTime.Now.ToString() + "删除故障信息");
             return RedirectToAction("Index");
         }
 

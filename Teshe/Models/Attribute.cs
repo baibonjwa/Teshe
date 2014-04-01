@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -13,12 +14,14 @@ namespace Teshe.Models
         public int Id { get; set; }
 
         [DisplayName("属性名称")]
-        [Required(ErrorMessage = "设备名称不能为空")]
         public string Name { get; set; }
 
         [DisplayName("属性内容")]
-        [Required(ErrorMessage = "设备型号不能为空")]
         public string Content { get; set; }
 
+        [DisplayName("设备")]
+        [Required]
+        [JsonIgnore]
+        public virtual Device Device { get; set; }
     }
 }

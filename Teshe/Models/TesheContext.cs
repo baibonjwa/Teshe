@@ -15,6 +15,10 @@ namespace Teshe.Models
         // System.Data.Entity.Database.SetInitializer(new System.Data.Entity.DropCreateDatabaseIfModelChanges<Teshe.Models.TesheContext>());
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            //modelBuilder.Entity<Attribute>().HasRequired(l => l.Device).WithMany(u => u.Attributes).WillCascadeOnDelete(true);
+
+            //modelBuilder.Entity<DeviceModifyRecord>().HasRequired(l => l.Device).WithMany(u => u.ModifyRecords).WillCascadeOnDelete(true);
+            //modelBuilder.Entity<StoppageModifyRecord>().HasRequired(l => l.Stoppage).WithMany(u => u.ModifyRecords).WillCascadeOnDelete(true);
             //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             //modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
         }
