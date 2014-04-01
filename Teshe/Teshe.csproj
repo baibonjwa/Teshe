@@ -187,6 +187,7 @@
     <Compile Include="Models\StoppageModifyRecord.cs" />
     <Compile Include="Models\TesheContext.cs" />
     <Compile Include="Models\UserInfo.cs" />
+    <Compile Include="Models\UserInfoIndexViewModel.cs" />
     <Compile Include="Models\UserInfoLoginViewModel.cs" />
     <Compile Include="Models\UserType.cs" />
     <Compile Include="Models\ModifyUserInfoViewModel.cs" />

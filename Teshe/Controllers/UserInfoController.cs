@@ -15,6 +15,7 @@ using EmitMapper.MappingConfiguration;
 using System.Reflection;
 using Teshe.Common;
 using Newtonsoft.Json;
+using System.Linq.Expressions;
 
 namespace Teshe.Controllers
 {
@@ -122,7 +123,7 @@ namespace Teshe.Controllers
 
         [HttpPost]
         [Authorize(Roles = "区（县）级管理员,市级管理员,省级管理员,系统管理员")]
-        public ActionResult GetUserInfo()
+        public ActionResult GetUserInfo(UserInfoIndexViewModel viewModel)
         {
             List<UserInfo> list = null;
             UserInfo user = GetUser();
@@ -140,9 +141,15 @@ namespace Teshe.Controllers
             }
             else if (User.IsInRole("系统管理员"))
             {
-                list = db.UserInfoes.Where<UserInfo>(u => u.UserType.Name == "客户" && u.IsVerify == 1).ToList<UserInfo>();
+                Expression<Func<UserInfo, bool>> where = PredicateExtensionses.True<UserInfo>();
+                if (!String.IsNullOrEmpty(viewModel.District)) where = where.And(u => u.District == viewModel.District);
+                if (!String.IsNullOrEmpty(viewModel.City)) where = where.And(u => u.City == viewModel.City);
+                if (!String.IsNullOrEmpty(viewModel.Province)) where = where.And(u => u.Province == viewModel.Province);
+                where = where.And(u => u.IsVerify == 1 && u.UserType.Name == "客户");
+                list = db.UserInfoes.Where<UserInfo>(where).ToList();
+                //list = db.UserInfoes.Where<UserInfo>(u => u.UserType.Name == "客户" && u.IsVerify == 1).ToList<UserInfo>();
             }
-            return Json(list);
+            return Json(list); 
         }
 
         [Authorize(Roles = "区（县）级管理员,市级管理员,省级管理员,系统管理员")]
