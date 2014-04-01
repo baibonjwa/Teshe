@@ -151,6 +151,7 @@
     <Content Include="Common\EFHelper.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="Common\DatabaseMaintenance.cs" />
     <Compile Include="Common\Helper.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1226,9 +1227,12 @@
     <Content Include="Views\Scrap\ModifyRecord.cshtml" />
     <Content Include="Views\Stoppage\ModifyRecord.cshtml" />
     <Content Include="Views\UserInfo\Print.cshtml" />
+    <Content Include="Views\Home\DataBackup.cshtml" />
+    <Content Include="Views\Shared\_BackLeftForSystem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Data\" />
     <Folder Include="Log\" />
   </ItemGroup>
   <ItemGroup>

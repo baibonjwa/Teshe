@@ -35,6 +35,10 @@
         {
             @Html.Partial("_BackLeftForDistrict")
         }
+        else if (User.IsInRole("系统管理员"))
+        {
+            @Html.Partial("_BackLeftForSystem")
+        }
         else
         {
             @Html.Partial("_BackLeft")

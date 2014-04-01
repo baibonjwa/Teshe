@@ -23,6 +23,7 @@ Teshe.Tests/[Oo]bj
 Teshe.Tests/[Dd]ebug
 Teshe.Tests/[Rr]elease
 
+
 # MSTest test Results
 Teshe/[Tt]est[Rr]esult*/
 Teshe/[Bb]uild[Ll]og.*
@@ -62,3 +63,4 @@ Teshe/[Bb]uild[Ll]og.*
 
 Teshe/FileUpload
 Teshe/Log
+Teshe/Data
