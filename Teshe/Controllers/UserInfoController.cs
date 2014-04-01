@@ -457,6 +457,32 @@ namespace Teshe.Controllers
             }
         }
 
+
+        public ActionResult Relieve()
+        {
+            return View();
+        }
+
+        public ActionResult RelieveBind(int id)
+        {
+            UserInfo userinfo = db.UserInfoes.FirstOrDefault<UserInfo>(u => u.Id == id);
+            userinfo.SIMCode = null;
+            if (ModelState.IsValid)
+            {
+                db.Entry(userinfo).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            return View("Relieve");
+
+        }
+
+        public ActionResult GetBindUser()
+        {
+            List<UserInfo> list = new List<UserInfo>();
+            list = db.UserInfoes.Where<UserInfo>(u => u.SIMCode != null || u.SIMCode != "").ToList();
+            return Content(JsonConvert.SerializeObject(list, dateTimeConverter));
+        }
+
         public ActionResult PowerNotEnough()
         {
             return View();

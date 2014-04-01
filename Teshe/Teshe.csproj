@@ -1229,6 +1229,7 @@
     <Content Include="Views\UserInfo\Print.cshtml" />
     <Content Include="Views\Home\DataBackup.cshtml" />
     <Content Include="Views\Shared\_BackLeftForSystem.cshtml" />
+    <Content Include="Views\UserInfo\Relieve.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
