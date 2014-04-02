@@ -3,111 +3,103 @@
 @{
     ViewBag.Title = "客户详细信息";
 }
-
-<h2>详细信息</h2>
-
-<fieldset>
-    <legend>客户详细信息</legend>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Name)
-    </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Password)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Password)
-    </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.RegisterOn)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.RegisterOn)
-    </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.IsVerify)
-    </div>
-    <div class="display-field">
-        @if (Model.IsVerify == 0)
-        { 
-            @:否 
-        }
-        else
-        { 
-            @:是
-        }
-
-    </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.ResponsiblePerson)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ResponsiblePerson)
-    </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Company)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Company)
-    </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.District)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.District)
-    </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.City)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.City)
-    </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Province)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Province)
-    </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Tel)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Tel)
-    </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Email)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Email)
-    </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Remarks)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Remarks)
-    </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.PhotoUrl)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.PhotoUrl)
-    </div>
-</fieldset>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.PhotoUrl)
+    <table class="table table-striped table-hover table-bordered">
+        <tr>
+            <td class="tableFirstCol">
+                @Html.DisplayNameFor(model => model.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Name)
+            </td>
+        </tr>
+        <tr>
+            <td class="tableFirstCol">
+                @Html.DisplayNameFor(model => model.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Password)
+            </td>
+        </tr>
+        <tr>
+            <td class="tableFirstCol">
+                @Html.DisplayNameFor(model => model.ResponsiblePerson)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.ResponsiblePerson)
+            </td>
+        </tr>
+        <tr>
+            <td class="tableFirstCol">
+                @Html.DisplayNameFor(model => model.Company)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Company)
+            </td>
+        </tr>
+        <tr>
+            <td class="tableFirstCol">
+                @Html.DisplayNameFor(model => model.District)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.District)
+            </td>
+        </tr>
+        <tr>
+            <td class="tableFirstCol">
+                @Html.DisplayNameFor(model => model.City)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.City)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Province)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Province)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Tel)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Tel)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Email)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Remarks)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Remarks)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.Display("头像")
+            </td>
+            <td>
+                <img width="100" height="100" src="/FileUpload/Photo/@Model.PhotoUrl" alt="头像" />
+            </td>
+        </tr>
+    </table>
+}
 <p>
-    @Html.ActionLink("返回", "Search")
+    @Html.ActionLink("返回", "Search", "UserInfo")
 </p>

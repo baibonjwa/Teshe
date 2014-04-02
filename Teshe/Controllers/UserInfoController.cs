@@ -129,15 +129,15 @@ namespace Teshe.Controllers
             UserInfo user = GetUser();
             if (User.IsInRole("区（县）级管理员"))
             {
-                list = db.UserInfoes.Where<UserInfo>(u => u.District == user.District && u.UserType.Name == "客户" && u.IsVerify == 1).ToList<UserInfo>();
+                list = db.UserInfoes.Where<UserInfo>(u => u.District == user.District && u.IsVerify == 1).ToList<UserInfo>();
             }
             else if (User.IsInRole("市级管理员"))
             {
-                list = db.UserInfoes.Where<UserInfo>(u => u.City == user.City && u.UserType.Name == "客户" && u.IsVerify == 1).ToList<UserInfo>();
+                list = db.UserInfoes.Where<UserInfo>(u => u.City == user.City && u.IsVerify == 1).ToList<UserInfo>();
             }
             else if (User.IsInRole("省级管理员"))
             {
-                list = db.UserInfoes.Where<UserInfo>(u => u.Province == user.Province && u.UserType.Name == "客户" && u.IsVerify == 1).ToList<UserInfo>();
+                list = db.UserInfoes.Where<UserInfo>(u => u.Province == user.Province && u.IsVerify == 1).ToList<UserInfo>();
             }
             else if (User.IsInRole("系统管理员"))
             {
@@ -145,11 +145,11 @@ namespace Teshe.Controllers
                 if (!String.IsNullOrEmpty(viewModel.District)) where = where.And(u => u.District == viewModel.District);
                 if (!String.IsNullOrEmpty(viewModel.City)) where = where.And(u => u.City == viewModel.City);
                 if (!String.IsNullOrEmpty(viewModel.Province)) where = where.And(u => u.Province == viewModel.Province);
-                where = where.And(u => u.IsVerify == 1 && u.UserType.Name == "客户");
+                where = where.And(u => u.IsVerify == 1);
                 list = db.UserInfoes.Where<UserInfo>(where).ToList();
                 //list = db.UserInfoes.Where<UserInfo>(u => u.UserType.Name == "客户" && u.IsVerify == 1).ToList<UserInfo>();
             }
-            return Json(list); 
+            return Content(JsonConvert.SerializeObject(list, dateTimeConverter));
         }
 
         [Authorize(Roles = "区（县）级管理员,市级管理员,省级管理员,系统管理员")]
@@ -399,7 +399,7 @@ namespace Teshe.Controllers
         public ActionResult GetNotVerifyUserInfos()
         {
             List<UserInfo> list = db.UserInfoes.Where<UserInfo>(u => u.IsVerify == 0).ToList<UserInfo>();
-            return Json(list);
+            return Content(JsonConvert.SerializeObject(list, dateTimeConverter));
         }
         [AllowAnonymous]
         public ActionResult UploadPhoto(HttpPostedFileBase FileData)
