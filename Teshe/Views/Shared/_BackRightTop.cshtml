@@ -1,9 +1,18 @@
-﻿<div class="right">
+﻿<style>
+    .hideleft {
+        display: none;
+    }
+
+    .showleft {
+        display: block;
+    }
+</style>
+<div class="right">
     <div id="right_top">
         <div id="img">
             <img src="/Images/close.gif" />
         </div>
-        <span class="imgtext">打开/关闭左栏</span>
+        <span class="imgtext"><a href="javascript:void(0)" onclick="hideleft()">打开/关闭左栏</a></span>
         <div id="loginout">
             <div id="loginoutimg">
                 <img src="/Images/loginout.gif" />
@@ -16,3 +25,13 @@
         您现在所在的位置：首页 → <span id="title" class="bfont2">@ViewBag.Title</span>
     </div>
 </div>
+<script>
+    function hideleft() {
+        if ($("#left").css("display") == "block") {
+            $("#left").css("display", "none");
+        }
+        else {
+            $("#left").css("display", "block");
+        }
+    }
+</script>

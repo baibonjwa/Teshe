@@ -66,7 +66,7 @@
 }
 
 .tree_li {
-    margin-left:-5px;
+    margin-left: -5px;
     line-height: 25px;
     font-size: 14px;
 }
@@ -126,6 +126,17 @@
     margin-top: 8px;
     margin-left: 3px;
 }
+
+    .imgtext a {
+        color: white;
+        text-decoration: none;
+    }
+
+        .imgtext a:hover {
+            color: white;
+            text-decoration: none;
+        }
+
 
 #loginout {
     float: right;
