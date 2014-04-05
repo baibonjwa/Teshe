@@ -186,7 +186,14 @@
                 @Html.DisplayNameFor(model => model.PhotoUrl)
             </td>
             <td>
-                <img src="/FileUpload/Photo/@Model.PhotoUrl" alt="无设备照片" />
+                @if (!String.IsNullOrEmpty(Model.PhotoUrl))
+                {
+                    <img src="/FileUpload/Photo/@Model.PhotoUrl" alt="无设备照片" />
+                }
+                else
+                { 
+                    @:无设备照片
+                }
             </td>
         </tr>
     </table>

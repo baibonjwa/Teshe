@@ -82,7 +82,14 @@
                 @Html.DisplayNameFor(model => model.Device.PhotoUrl)
             </td>
             <td>
-                <img src="/FileUpload/Photo/@Model.Device.PhotoUrl" alt="无设备照片" />
+                @if (!String.IsNullOrEmpty(Model.Device.PhotoUrl))
+                {
+                    <img src="/FileUpload/Photo/@Model.Device.PhotoUrl" alt="无设备照片" />
+                }
+                else
+                { 
+                    @:无设备照片
+                }
             </td>
         </tr>
     </table>
