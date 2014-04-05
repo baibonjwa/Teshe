@@ -11,6 +11,10 @@
     {
         ViewBag.Title = "市级管理员信息修改";
     }
+    else if (User.IsInRole("省级管理员"))
+    {
+        ViewBag.Title = "省级管理员信息修改";
+    }
     else if (User.IsInRole("客户"))
     {
         ViewBag.Title = "客户信息修改";

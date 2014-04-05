@@ -129,7 +129,7 @@ namespace Teshe.Controllers
             UserInfo user = GetUser();
             if (User.IsInRole("区（县）级管理员"))
             {
-                list = db.UserInfoes.Where<UserInfo>(u => u.District == user.District && u.IsVerify == 1).ToList<UserInfo>();
+                list = db.UserInfoes.Where<UserInfo>(u => u.District == user.District && u.IsVerify == 1 && u.UserType.Name == "客户").ToList<UserInfo>();
             }
             else if (User.IsInRole("市级管理员"))
             {
@@ -146,6 +146,7 @@ namespace Teshe.Controllers
                 if (!String.IsNullOrEmpty(viewModel.City)) where = where.And(u => u.City == viewModel.City);
                 if (!String.IsNullOrEmpty(viewModel.Province)) where = where.And(u => u.Province == viewModel.Province);
                 where = where.And(u => u.IsVerify == 1);
+                where = where.And(u => u.UserType.Name != "客户");
                 list = db.UserInfoes.Where<UserInfo>(where).ToList();
                 //list = db.UserInfoes.Where<UserInfo>(u => u.UserType.Name == "客户" && u.IsVerify == 1).ToList<UserInfo>();
             }

@@ -35,6 +35,14 @@
         {
             @Html.Partial("_BackLeftForDistrict")
         }
+        else if (User.IsInRole("市级管理员"))
+        {
+            @Html.Partial("_BackLeftForCity")
+        }
+        else if (User.IsInRole("省级管理员"))
+        {
+            @Html.Partial("_BackLeftForProvince")
+        }
         else if (User.IsInRole("系统管理员"))
         {
             @Html.Partial("_BackLeftForSystem")
