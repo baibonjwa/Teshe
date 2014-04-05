@@ -7,6 +7,62 @@
     <table class="table table-striped table-hover table-bordered">
         <tr>
             <td class="tableFirstCol">
+                @Html.DisplayNameFor(model => model.Device.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Device.Name)
+            </td>
+        </tr>
+        <tr>
+            <td class="tableFirstCol">
+                @Html.DisplayNameFor(model => model.Device.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Device.Model)
+            </td>
+        </tr>
+        <tr>
+            <td class="tableFirstCol">
+                @Html.DisplayNameFor(model => model.Device.Barcode)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Device.Barcode)
+            </td>
+        </tr>
+        <tr>
+            <td class="tableFirstCol">
+                @Html.DisplayNameFor(model => model.Device.Company)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Device.Company)
+            </td>
+        </tr>
+        <tr>
+            <td class="tableFirstCol">
+                @Html.DisplayNameFor(model => model.Device.District)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Device.District)
+            </td>
+        </tr>
+        <tr>
+            <td class="tableFirstCol">
+                @Html.DisplayNameFor(model => model.Device.City)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Device.City)
+            </td>
+        </tr>
+        <tr>
+            <td class="tableFirstCol">
+                @Html.DisplayNameFor(model => model.Device.Province)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Device.Province)
+            </td>
+        </tr>
+        <tr>
+            <td class="tableFirstCol">
                 @Html.DisplayNameFor(model => model.Description)
             </td>
             <td>
@@ -19,6 +75,14 @@
             </td>
             <td>
                 @Html.DisplayFor(model => model.ScrapTime)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Device.PhotoUrl)
+            </td>
+            <td>
+                <img src="/FileUpload/Photo/@Model.Device.PhotoUrl" alt="无设备照片" />
             </td>
         </tr>
     </table>
