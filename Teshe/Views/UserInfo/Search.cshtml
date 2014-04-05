@@ -33,6 +33,7 @@
     data-options="singleSelect:true,collapsible:true,url:'/UserInfo/GetUserInfo',method:'post',rownumbers:'true',pagination:'true'">
     <thead>
         <tr>
+            <th data-options="field:'UserType',formatter:usertype,width:80">用户级别</th>
             <th data-options="field:'Name',width:80">用户名</th>
             <th data-options="field:'Password',width:100">密码</th>
             <th data-options="field:'ResponsiblePerson',width:100">负责人</th>
@@ -66,5 +67,8 @@
     }
     function detailsConfirm(id) {
         window.location.href = "/UserInfo/Details/" + id;
+    }
+    function usertype(obj) {
+        return obj.Name;
     }
 </script>
