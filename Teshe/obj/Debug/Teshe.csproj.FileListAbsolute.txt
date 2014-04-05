@@ -123,3 +123,6 @@ H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\obj\Debug\Teshe.Migrations
 H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\obj\Debug\Teshe.csproj.GenerateResource.Cache
 H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\obj\Debug\Teshe.dll
 H:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\obj\Debug\Teshe.pdb
+I:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\bin\Ionic.Zip.dll
+I:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\bin\NPOI.dll
+I:\myProject\ASP.NET\inprogress\Teshe\web\Teshe\Teshe\bin\NPOI.xml

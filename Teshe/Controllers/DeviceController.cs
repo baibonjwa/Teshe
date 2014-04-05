@@ -31,9 +31,16 @@ namespace Teshe.Controllers
 
             List<SelectListItem> checkStateList = new List<SelectListItem>();
             checkStateList.Add(new SelectListItem() { Text = "待检", Value = "待检" });
-            checkStateList.Add(new SelectListItem() { Text = "监测有效期内", Value = "监测有效期内" });
+            checkStateList.Add(new SelectListItem() { Text = "检测有效期内", Value = "检测有效期内" });
             checkStateList.Add(new SelectListItem() { Text = "超期", Value = "超期" });
             ViewBag.CheckStateList = checkStateList;
+
+            List<SelectListItem> checkStateListForSearch = new List<SelectListItem>();
+            checkStateList.Add(new SelectListItem() { Text = "全部", Value = "" });
+            checkStateList.Add(new SelectListItem() { Text = "待检", Value = "待检" });
+            checkStateList.Add(new SelectListItem() { Text = "检测有效期内", Value = "检测有效期内" });
+            checkStateList.Add(new SelectListItem() { Text = "超期", Value = "超期" });
+            ViewBag.CheckStateListForSearch = checkStateListForSearch;
 
             List<SelectListItem> useStateList = new List<SelectListItem>();
             useStateList.Add(new SelectListItem() { Text = "正常", Value = "正常" });

@@ -1,7 +1,7 @@
 ﻿@model Teshe.Models.DeviceIndexViewModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "设备查询";
 }
 
 <script>
@@ -50,7 +50,7 @@
         </div>
         <div class="form-group col-sm-4">
             @Html.DisplayNameFor(model => model.CheckState)
-            @Html.DropDownListFor(model => model.CheckState, (List<SelectListItem>)ViewBag.CheckStateList)
+            @Html.DropDownListFor(model => model.CheckState, (List<SelectListItem>)ViewBag.CheckStateListForSearch)
         </div>
     </div>
 }
@@ -70,7 +70,7 @@ else if (User.IsInRole("市级管理员"))
     <div class="row">
         <div class="form-group col-sm-4">
             @Html.DisplayNameFor(model => model.CheckState)
-            @Html.DropDownListFor(model => model.CheckState, (List<SelectListItem>)ViewBag.CheckStateList)
+            @Html.DropDownListFor(model => model.CheckState, (List<SelectListItem>)ViewBag.CheckStateListForSearch)
         </div>
     </div>
 }
@@ -85,7 +85,7 @@ else if (User.IsInRole("区（县）级管理员"))
         </div>
         <div class="form-group col-sm-4">
             @Html.DisplayNameFor(model => model.CheckState)
-            @Html.DropDownListFor(model => model.CheckState, (List<SelectListItem>)ViewBag.CheckStateList)
+            @Html.DropDownListFor(model => model.CheckState, (List<SelectListItem>)ViewBag.CheckStateListForSearch)
         </div>
     </div>
 }
@@ -97,7 +97,7 @@ else if (User.IsInRole("客户"))
     <div class="row">
         <div class="form-group col-sm-4">
             @Html.DisplayNameFor(model => model.CheckState)
-            @Html.DropDownListFor(model => model.CheckState, (List<SelectListItem>)ViewBag.CheckStateList)
+            @Html.DropDownListFor(model => model.CheckState, (List<SelectListItem>)ViewBag.CheckStateListForSearch)
         </div>
     </div>
 }

@@ -1,5 +1,20 @@
 ﻿@{
-    ViewBag.Title = "客户信息修改";
+    if (User.IsInRole("系统管理员"))
+    {
+        ViewBag.Title = "系统管理员信息修改";
+    }
+    else if (User.IsInRole("区（县）级管理员"))
+    {
+        ViewBag.Title = "区（县）级管理员信息修改";
+    }
+    else if (User.IsInRole("市级管理员"))
+    {
+        ViewBag.Title = "市级管理员信息修改";
+    }
+    else if (User.IsInRole("客户"))
+    {
+        ViewBag.Title = "客户信息修改";
+    }
 }
 @model Teshe.Models.ModifyUserInfoViewModel
 @Scripts.Render("~/Scripts/uploadify/jquery.uploadify.min.js")
