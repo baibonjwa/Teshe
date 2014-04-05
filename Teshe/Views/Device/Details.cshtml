@@ -157,7 +157,18 @@
                 @Html.DisplayFor(model => model.Remarks)
             </td>
         </tr>
-        <tr>
+        @foreach (var i in Model.Attributes)
+        {
+            <tr>
+                <td>
+                    @i.Name
+                </td>
+                <td>
+                    @i.Content
+                </td>
+            </tr>
+        }
+        @*<tr>
             <td>
                 @Html.DisplayNameFor(model => model.Attributes)：
             </td>
@@ -169,7 +180,7 @@
                     }
                 </table>
             </td>
-        </tr>
+        </tr>*@
         <tr>
             <td>
                 @Html.DisplayNameFor(model => model.PhotoUrl)
