@@ -4,6 +4,10 @@
     ViewBag.Title = "设备信息修改";
 }
 <script>
+    window.onload = function () {
+        var code = $("#Barcode").val();
+        $("#BarcodeImg").attr("src", "/Device/CreateBarcode?code=" + code);
+    }
     function Create() {
         var a = Math.floor(Math.random() * 100000000)
         while (a < 10000000) {
