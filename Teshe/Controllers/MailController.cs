@@ -92,11 +92,9 @@ namespace Teshe.Controllers
         public ActionResult Delete(int id = 0)
         {
             Mail mail = db.Mails.Find(id);
-            if (mail == null)
-            {
-                return HttpNotFound();
-            }
-            return View(mail);
+            db.Mails.Remove(mail);
+            db.SaveChanges();
+            return Content("删除成功");
         }
 
         //
