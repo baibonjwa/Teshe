@@ -53,7 +53,7 @@ namespace Teshe
             //Time_Task.Instance().Start();
             System.Timers.Timer myTimer = new System.Timers.Timer();
             myTimer.Elapsed += new System.Timers.ElapsedEventHandler(Global_ExecuteTask);
-            myTimer.Interval = 1000 * 60 * 24;
+            myTimer.Interval = 1000 * 60 * 60 * 24;
             myTimer.Enabled = true;
         }
         void Global_ExecuteTask(object sender, System.Timers.ElapsedEventArgs e)
