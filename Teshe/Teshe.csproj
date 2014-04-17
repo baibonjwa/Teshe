@@ -705,6 +705,9 @@
     <Content Include="FileUpload\Photo\201432113184602.pdf" />
     <Content Include="FileUpload\Photo\201433021513316.xls" />
     <Content Include="FileUpload\Photo\���ѧԺ�԰༶Ϊ��λ�����ҷ��䷽��.xls" />
+    <Content Include="App_Browsers\IE.browser">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Properties\PublishProfiles\Teshe.pubxml" />
     <None Include="Properties\PublishProfiles\Teshe2.pubxml" />
     <None Include="Scripts\jquery-2.0.0.intellisense.js" />
