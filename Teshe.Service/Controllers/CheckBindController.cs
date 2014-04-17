@@ -10,6 +10,7 @@ namespace Teshe.Service.Controllers
 {
     public class CheckBindController : BaseController
     {
+        [HttpGet]
         public String GetCheckBind(String username)
         {
             UserInfo user = db.UserInfoes.FirstOrDefault<UserInfo>(u => u.Name == username);

@@ -706,6 +706,7 @@
     <Content Include="FileUpload\Photo\201433021513316.xls" />
     <Content Include="FileUpload\Photo\���ѧԺ�԰༶Ϊ��λ�����ҷ��䷽��.xls" />
     <None Include="Properties\PublishProfiles\Teshe.pubxml" />
+    <None Include="Properties\PublishProfiles\Teshe2.pubxml" />
     <None Include="Scripts\jquery-2.0.0.intellisense.js" />
     <Content Include="Scripts\easyui1.3.2\datagrid-detailview.js" />
     <Content Include="Scripts\easyui1.3.2\demo\accordion\actions.html" />

@@ -11,6 +11,7 @@ namespace Teshe.Service.Controllers
 {
     public class BindSIMController : BaseController
     {
+        [HttpGet]
         public String BindSIM(String username, String password, String simcode)
         {
             UserInfo user = db.UserInfoes.FirstOrDefault<UserInfo>(u => u.Name == username && u.Password == password);

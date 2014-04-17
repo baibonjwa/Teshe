@@ -13,6 +13,7 @@ namespace Teshe.Service.Controllers
 {
     public class GetDeviceInfoController : BaseController
     {
+        [HttpGet]
         public Device GetDeviceInfo(String barcode)
         {
             Device device = db.Devices.FirstOrDefault<Device>(u => u.Barcode == barcode);
