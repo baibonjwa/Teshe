@@ -406,7 +406,7 @@ namespace Teshe.Controllers
         public ActionResult UploadPhoto(HttpPostedFileBase FileData)
         {
             //Response.HeaderEncoding = Encoding.UTF8; 
-            string oldFileName = FileData.FileName;
+            string oldFileName = HttpUtility.UrlDecode(FileData.FileName);
             var sbFileName = new StringBuilder();
             sbFileName.Append(DateTime.Now.Year);
             sbFileName.Append(DateTime.Now.Month);

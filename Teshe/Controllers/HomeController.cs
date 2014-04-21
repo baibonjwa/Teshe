@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Teshe.Common;
 
-namespace Teshe.App_Start
+namespace Teshe.Controllers
 {
     public class HomeController : Controller
     {

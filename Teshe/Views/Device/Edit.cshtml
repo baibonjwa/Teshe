@@ -3,6 +3,9 @@
 @{
     ViewBag.Title = "设备信息修改";
 }
+@Styles.Render("~/Content/uploadify.css")
+@Scripts.Render("~/Scripts/uploadify/jquery.uploadify.min.js")
+@UIHelper.ShowUploadify("file_upload")
 <script>
     window.onload = function () {
         var code = $("#Barcode").val();

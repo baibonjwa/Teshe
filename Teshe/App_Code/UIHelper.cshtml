@@ -73,12 +73,11 @@
                 'buttonText': "上传文件",
                 'onUploadSuccess': function (file, data, response) {
                     $('#fileName').val(data.split(',')[0].replace("\"", ""));
-                    $('#PhotoUrl').val(data.split(',')[1].replace("\"", ""));
+                    $('#PhotoUrl').val(data.split(',')[data.split(',').length - 1].replace("\"", ""));
                 }
             });
         });
     </script>
-    
 }
 @helper ModifyTips(dynamic sign, String text)
 {
