@@ -344,12 +344,43 @@ namespace Teshe.Controllers
         {
             Device device = db.Devices.Find(id);
             //级联删除
-            List<Teshe.Models.Attribute> list = new List<Models.Attribute>(device.Attributes);
+            var list = new List<Models.Attribute>(device.Attributes);
             foreach (var i in list)
             {
                 db.Attributes.Remove(i);
             }
             db.Devices.Remove(device);
+            var modify = new List<DeviceModifyRecord>();
+            modify = db.DeviceModifyRecords.Where(u => u.Device.Id == id).ToList();
+            foreach (var i in modify)
+            {
+                db.DeviceModifyRecords.Remove(i);
+            }
+
+            var stoppageModify = db.StoppageModifyRecords.Where(u => u.Stoppage.Device.Id == id).ToList();
+            foreach (var i in stoppageModify)
+            {
+                db.StoppageModifyRecords.Remove(i);
+            }
+
+            var stoppage = db.Stoppages.Where(u => u.Device.Id == id).ToList();
+            foreach (var i in stoppage)
+            {
+                db.Stoppages.Remove(i);
+            }
+
+            var scrapModify = db.ScrapModifyRecords.Where(u => u.Scrap.Device.Id == id).ToList();
+            foreach (var i in scrapModify)
+            {
+                db.ScrapModifyRecords.Remove(i);
+            }
+
+            var scrap = db.Scraps.Where(u => u.Device.Id == id).ToList();
+            foreach (var i in scrap)
+            {
+                db.Scraps.Remove(i);
+            }
+
             db.SaveChanges();
             log.Info("用户" + User.Identity.Name + "于" + DateTime.Now.ToString() + "删除设备" + device.Name);
             return RedirectToAction("Index");
