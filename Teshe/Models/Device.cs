@@ -85,10 +85,13 @@ namespace Teshe.Models
         [DisplayName("维修记录")]
         public string MaintenanceRecord { get; set; }
 
+        [DisplayName("报告")]
+        public string Report { get; set; }
+
         [DisplayName("备注")]
         public string Remarks { get; set; }
 
-        [DisplayName("录入人员")]
+        [DisplayName("操作员")]
         public UserInfo UserInfo { get; set; }
 
         [DisplayName("录入时间")]
@@ -100,6 +103,8 @@ namespace Teshe.Models
 
         [DisplayName("修改记录")]
         public virtual List<DeviceModifyRecord> ModifyRecords { get; set; }
+
+
 
         public MemoryStream Export(List<Device> list)
         {

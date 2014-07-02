@@ -33,7 +33,7 @@ namespace Teshe.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime InputTime { get; set; }
 
-        [DisplayName("录入人员")]
+        [DisplayName("操作员")]
         public virtual UserInfo UserInfo { get; set; }
 
         [DisplayName("修改记录")]

@@ -13,10 +13,10 @@ namespace Teshe.Models
         [Key]
         public int Id { get; set; }
 
-        [DisplayName("属性名称")]
+        [DisplayName("项目名称")]
         public string Name { get; set; }
 
-        [DisplayName("属性内容")]
+        [DisplayName("项目内容")]
         public string Content { get; set; }
 
         [DisplayName("设备")]
