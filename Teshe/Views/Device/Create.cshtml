@@ -124,7 +124,7 @@
     <div class="row">
         <div class="form-group col-sm-4">
             @Html.DisplayNameFor(model => model.ManufactureDate)
-            @Html.TextBoxFor(model => model.ManufactureDate, new { onfocus = "WdatePicker()", @class = "form-control" })
+            @Html.TextBoxFor(model => model.ManufactureDate, new { onfocus = "WdatePicker({'dateFmt':'yyyy-MM'})", @class = "form-control" })
             @Html.ValidationMessageFor(model => model.ManufactureDate)
         </div>
         <div class="form-group col-sm-4">
@@ -136,7 +136,7 @@
     <div class="row">
         <div class="form-group col-sm-4">
             @Html.DisplayNameFor(model => model.SetupTime)
-            @Html.TextBoxFor(model => model.SetupTime, new { onfocus = "WdatePicker()", @class = "form-control" })
+            @Html.TextBoxFor(model => model.SetupTime, new { onfocus = "WdatePicker({'dateFmt':'yyyy-MM'})", @class = "form-control" })
             @Html.ValidationMessageFor(model => model.SetupTime)
         </div>
         <div class="form-group col-sm-4">

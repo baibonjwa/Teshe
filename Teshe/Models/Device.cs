@@ -47,16 +47,14 @@ namespace Teshe.Models
         public string Province { get; set; }
 
         [DisplayName("出厂日期")]
-        [Required(ErrorMessage = "请输入出厂日期")]
-        public DateTime ManufactureDate { get; set; }
+        public DateTime? ManufactureDate { get; set; }
 
         [DisplayName("生产厂家")]
         [Required(ErrorMessage = "请输入生产厂家")]
         public string Factory { get; set; }
 
         [DisplayName("安装时间")]
-        [Required(ErrorMessage = "请输入安装时间")]
-        public DateTime SetupTime { get; set; }
+        public DateTime? SetupTime { get; set; }
 
         [DisplayName("防爆否")]
         [Required(ErrorMessage = "请输入防爆否")]
@@ -150,9 +148,11 @@ namespace Teshe.Models
                         dataRow.CreateCell(4).SetCellValue(list[i].District);
                         dataRow.CreateCell(5).SetCellValue(list[i].City);
                         dataRow.CreateCell(6).SetCellValue(list[i].Province);
-                        dataRow.CreateCell(7).SetCellValue(list[i].ManufactureDate);
+                        if (list[i].ManufactureDate != null)
+                            dataRow.CreateCell(7).SetCellValue(Convert.ToDateTime(list[i].ManufactureDate));
                         dataRow.CreateCell(8).SetCellValue(list[i].Factory);
-                        dataRow.CreateCell(9).SetCellValue(list[i].SetupTime);
+                        if (list[i].ManufactureDate != null)
+                            dataRow.CreateCell(9).SetCellValue(Convert.ToDateTime(list[i].SetupTime));
                         dataRow.CreateCell(10).SetCellValue(list[i].ExplosionProof);
                         dataRow.CreateCell(11).SetCellValue(list[i].SecurityCertificateNo);
                         dataRow.CreateCell(12).SetCellValue(list[i].CheckState);
