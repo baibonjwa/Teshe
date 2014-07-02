@@ -157,6 +157,14 @@
                 @Html.DisplayFor(model => model.Remarks)
             </td>
         </tr>
+        <tr>
+            <td class="tableFirstCol">
+                @Html.DisplayNameFor(model => model.Report)：
+            </td>
+            <td>
+                <a href="/FileUpload/Report/@Model.Report">点击下载</a>
+            </td>
+        </tr>
         @foreach (var i in Model.Attributes)
         {
             <tr>

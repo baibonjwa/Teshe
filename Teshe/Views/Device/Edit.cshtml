@@ -6,6 +6,7 @@
 @Styles.Render("~/Content/uploadify.css")
 @Scripts.Render("~/Scripts/uploadify/jquery.uploadify.min.js")
 @UIHelper.ShowUploadify("file_upload")
+@UIHelper.ShowUploadify("file_report", "/Device/UploadReport", "ReportName", "Report")
 <script>
     window.onload = function () {
         var code = $("#Barcode").val();
@@ -207,6 +208,15 @@
             @Html.ValidationMessageFor(model => model.PhotoUrl)
             <input type="file" name="file_upload" id="file_upload" />
         </div>
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.Report)
+            @Html.TextBox("ReportName", "")
+            @Html.HiddenFor(model => model.Report)
+            @Html.ValidationMessageFor(model => model.Report)
+            <input type="file" name="file_report" id="file_report" />
+        </div>
+    </div>
+    <div class="row">
         <div class="form-group col-sm-4">
             @Html.DisplayNameFor(model => model.Barcode)
             @Html.TextBoxFor(model => model.Barcode)

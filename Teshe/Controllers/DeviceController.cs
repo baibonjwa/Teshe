@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System.IO;
+using System.Text;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -414,6 +416,34 @@ namespace Teshe.Controllers
             //Response.Clear();
             return File(device.Export(list).GetBuffer(), "application/vnd.ms-excel;charset=UTF-8", "data.xls");
         }
+        [AllowAnonymous]
+        public ActionResult UploadReport(HttpPostedFileBase FileData)
+        {
+            //Response.HeaderEncoding = Encoding.UTF8; 
+            string oldFileName = HttpUtility.UrlDecode(FileData.FileName);
+            var sbFileName = new StringBuilder();
+            sbFileName.Append(DateTime.Now.Year);
+            sbFileName.Append(DateTime.Now.Month);
+            sbFileName.Append(DateTime.Now.Day);
+            sbFileName.Append(DateTime.Now.Hour);
+            sbFileName.Append(DateTime.Now.Minute);
+            sbFileName.Append(DateTime.Now.Second);
+            sbFileName.Append(DateTime.Now.Millisecond);
+            sbFileName.Append(Path.GetExtension(oldFileName));
+            string newFileName = sbFileName.ToString();
+
+            string strUploadPath = Server.MapPath("/FileUpload/Report/");
+
+
+            if (!Directory.Exists(strUploadPath))
+            {
+                Directory.CreateDirectory(strUploadPath);
+            }
+            FileData.SaveAs(strUploadPath + newFileName);
+            return Json(oldFileName + "," + newFileName);
+
+        }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

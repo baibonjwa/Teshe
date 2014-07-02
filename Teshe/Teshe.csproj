@@ -1289,6 +1289,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Data\" />
+    <Folder Include="FileUpload\Report\" />
     <Folder Include="Log\" />
   </ItemGroup>
   <ItemGroup>
