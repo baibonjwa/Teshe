@@ -127,6 +127,19 @@ else if (User.IsInRole("客户"))
             }
         });
     }
+    function state(val, row) {
+        if (val == "待检") {
+            return "<div style=\"color:blue\">待检</div>";
+        }
+        else if (val == "检测有效期内") {
+            return "<div>检测有效期内</div>";
+        }
+        else if (val == "超期") {
+            return "<div style=\"color:red\">超期</div>";
+        } else {
+            return "<div>" + val + "</div>";
+        }
+    }
 </script>
 <table id="result" class="easyui-datagrid" title="设备信息" style="width: 980px; height: auto"
     data-options="singleSelect:true,collapsible:true,url:'/Device/Search',method:'post',rownumbers:'true',pagination:'true'">
@@ -141,12 +154,12 @@ else if (User.IsInRole("客户"))
             <th data-options="field:'District',width:100">所在区（县）</th>
             <th data-options="field:'City',width:100">所在城市</th>
             <th data-options="field:'Province',width:100">所在省份</th>
-            @*            <th data-options="field:'ManufactureDate',width:100">出厂日期</th>
+            @*<th data-options="field:'ManufactureDate',width:100">出厂日期</th>
             <th data-options="field:'Factory',width:100">生产厂家</th>*@
             <th data-options="field:'SetupTime',width:100">安装时间</th>
             @*            <th data-options="field:'ExplosionProof',width:100">防爆否</th>
             <th data-options="field:'SecurityCertificateNo',width:100">安检证号</th>*@
-            @*            <th data-options="field:'CheckState',width:100">检测状态</th>*@
+            <th data-options="field:'CheckState',formatter:state,width:100">检测状态</th>
             <th data-options="field:'CheckTime',width:100">检测时间</th>
             @*            <th data-options="field:'CheckCycle',width:100">检测周期</th>*@
             <th data-options="field:'UseState',width:100">使用状态</th>

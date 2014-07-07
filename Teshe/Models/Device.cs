@@ -72,9 +72,9 @@ namespace Teshe.Models
         [Required(ErrorMessage = "请输入检测时间")]
         public DateTime CheckTime { get; set; }
 
-        [DisplayName("检测周期")]
-        [Required(ErrorMessage = "请输入检测周期")]
-        public int CheckCycle { get; set; }
+        [DisplayName("检测报告有效期至")]
+        [Required(ErrorMessage = "请输入检测报告有效期")]
+        public DateTime Validity { get; set; }
 
         [DisplayName("使用状态")]
         [Required(ErrorMessage = "请输入使用状态")]

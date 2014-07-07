@@ -189,14 +189,19 @@
                 </table>
             </td>
         </tr>*@
-        <tr>
+        <tr style="width:700px">
             <td>
                 @Html.DisplayNameFor(model => model.PhotoUrl)
             </td>
             <td>
                 @if (!String.IsNullOrEmpty(Model.PhotoUrl))
                 {
-                    <img src="/FileUpload/Photo/@Model.PhotoUrl" alt="无设备照片" />
+                    String[] photoList = Model.PhotoUrl.Split('|');
+                    foreach (var i in photoList)
+                    {
+                    <a href="/FileUpload/Photo/@i"><img src="/FileUpload/Photo/@i" width="160" height="120" alt="无设备照片" /></a>
+                    }
+                    @*<img src="/FileUpload/Photo/@Model.PhotoUrl" alt="无设备照片" />*@
                 }
                 else
                 { 

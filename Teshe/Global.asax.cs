@@ -72,7 +72,7 @@ namespace Teshe
 
             foreach (var i in devicelist)
             {
-                TimeSpan ts = i.CheckTime.AddDays(i.CheckCycle) - DateTime.Now;
+                TimeSpan ts = i.Validity - DateTime.Now;
                 List<UserInfo> userDistrict = userlist.Where<UserInfo>(u => u.District == i.District && u.UserType.Name == "区（县）级管理员").ToList();
                 List<UserInfo> userCity = userlist.Where<UserInfo>(u => u.City == i.City && u.UserType.Name == "市级管理员").ToList();
                 List<UserInfo> userProvince = userlist.Where<UserInfo>(u => u.Province == i.Province && u.UserType.Name == "省级管理员").ToList();
@@ -83,7 +83,7 @@ namespace Teshe
                     foreach (var j in userDistrict)
                     {
                         Mail mail = new Mail();
-                        mail.Contents = i.Company + "的" + i.Name + "(" + i.Model + ")" + "设备需要在" + i.CheckTime.AddDays(i.CheckCycle) + "前检查";
+                        mail.Contents = i.Company + "的" + i.Name + "(" + i.Model + ")" + "设备需要在" + i.Validity + "前检查";
                         mail.IsRead = 0;
                         mail.ReceivedUser = j;
                         db.Mails.Add(mail);
@@ -92,7 +92,7 @@ namespace Teshe
                     foreach (var j in userCity)
                     {
                         Mail mail = new Mail();
-                        mail.Contents = i.Company + "的" + i.Name + "(" + i.Model + ")" + "设备需要在" + i.CheckTime.AddDays(i.CheckCycle) + "前检查";
+                        mail.Contents = i.Company + "的" + i.Name + "(" + i.Model + ")" + "设备需要在" + i.Validity + "前检查";
                         mail.IsRead = 0;
                         mail.ReceivedUser = j;
                         db.Mails.Add(mail);
@@ -101,7 +101,7 @@ namespace Teshe
                     foreach (var j in userProvince)
                     {
                         Mail mail = new Mail();
-                        mail.Contents = i.City + i.District + i.Company + "的" + i.Name + "(" + i.Model + ")" + "设备需要在" + i.CheckTime.AddDays(i.CheckCycle) + "前检查";
+                        mail.Contents = i.City + i.District + i.Company + "的" + i.Name + "(" + i.Model + ")" + "设备需要在" + i.Validity + "前检查";
                         mail.IsRead = 0;
                         mail.ReceivedUser = j;
                         db.Mails.Add(mail);
@@ -110,7 +110,7 @@ namespace Teshe
                     foreach (var j in userSystem)
                     {
                         Mail mail = new Mail();
-                        mail.Contents = i.Company + "的" + i.Name + "(" + i.Model + ")" + "设备需要在" + i.CheckTime.AddDays(i.CheckCycle) + "前检查";
+                        mail.Contents = i.Company + "的" + i.Name + "(" + i.Model + ")" + "设备需要在" + i.Validity + "前检查";
                         mail.IsRead = 0;
                         mail.ReceivedUser = j;
                         db.Mails.Add(mail);

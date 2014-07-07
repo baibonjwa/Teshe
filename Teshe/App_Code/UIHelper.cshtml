@@ -1,7 +1,7 @@
 ﻿@helper ShowUploadify(string name)
 {
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#fileName').attr("readonly", true);
         });
         var uploadify_onSelectError = function (file, errorCode, errorMsg) {
@@ -29,7 +29,7 @@
         var uploadify_onUploadError = function (file, errorCode, errorMsg, errorString) {
             // 手工取消不弹出提示
             if (errorCode == SWFUpload.UPLOAD_ERROR.FILE_CANCELLED
-                    || errorCode == SWFUpload.UPLOAD_ERROR.UPLOAD_STOPPED) {
+                || errorCode == SWFUpload.UPLOAD_ERROR.UPLOAD_STOPPED) {
                 return;
             }
             var msgText = "上传失败\n";
@@ -60,7 +60,7 @@
                     break;
                 default:
                     msgText += "文件:" + file.name + "\n错误码:" + errorCode + "\n"
-                            + errorMsg + "\n" + errorString;
+                        + errorMsg + "\n" + errorString;
             }
             //alert(msgText);
         }
@@ -71,22 +71,27 @@
                 'onSelectError': uploadify_onSelectError,
                 'onUploadError': uploadify_onUploadError,
                 'buttonText': "上传文件",
-                'onUploadSuccess': function (file, data, response) {
-                    $('#fileName').val(data.split(',')[0].replace("\"", ""));
-                    $('#PhotoUrl').val(data.split(',')[data.split(',').length - 1].replace("\"", ""));
+                'muti': true,
+                'onUploadSuccess': function(file, data, response) {
+                    if ($('#fileName').val() != "") {
+                        $('#fileName').val($('#fileName').val() + "|" + data.split(',')[0].replace("\"", ""));
+                        $('#PhotoUrl').val($('#PhotoUrl').val() + "|" + data.split(',')[data.split(',').length - 1].replace("\"", ""));
+                    } else {
+                        $('#fileName').val(data.split(',')[0].replace("\"", ""));
+                        $('#PhotoUrl').val(data.split(',')[data.split(',').length - 1].replace("\"", ""));
+                    }
                 }
             });
         });
     </script>
 }
 
-@helper ShowUploadify(string name,string action,string textbox,string hidden)
+@helper ShowUploadify(string name, string action, string textbox, string hidden)
 {
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#@textbox').attr("readonly", true);
         });
-        alert("@textbox");
         var uploadify_onSelectError = function (file, errorCode, errorMsg) {
             var msgText = "上传失败\n";
             switch (errorCode) {
@@ -112,7 +117,7 @@
         var uploadify_onUploadError = function (file, errorCode, errorMsg, errorString) {
             // 手工取消不弹出提示
             if (errorCode == SWFUpload.UPLOAD_ERROR.FILE_CANCELLED
-                    || errorCode == SWFUpload.UPLOAD_ERROR.UPLOAD_STOPPED) {
+                || errorCode == SWFUpload.UPLOAD_ERROR.UPLOAD_STOPPED) {
                 return;
             }
             var msgText = "上传失败\n";
@@ -143,7 +148,7 @@
                     break;
                 default:
                     msgText += "文件:" + file.name + "\n错误码:" + errorCode + "\n"
-                            + errorMsg + "\n" + errorString;
+                        + errorMsg + "\n" + errorString;
             }
             //alert(msgText);
         }

@@ -9,8 +9,9 @@
 @UIHelper.ShowUploadify("file_upload")
 @UIHelper.ShowUploadify("file_report", "/Device/UploadReport", "ReportName", "Report")
 <script>
+
     function Create() {
-        var a = Math.floor(Math.random() * 100000000)
+        var a = Math.floor(Math.random() * 100000000);
         while (a < 10000000) {
             a = a * 10;
         }
@@ -66,6 +67,24 @@
         json += "]";
         return json;
     }
+    function useStateChange() {
+        var state = $("#UseState").val();
+        alert(state);
+        if (state == "故障" || state == "报废") {
+            $("#CheckState").val("待检");
+        }
+        else if (state == "正常") {
+            var date = new Date();
+            var checkTime = new Date($("#CheckTime").val());
+            var validity = new Date($("#Validity").val());
+            if (date < checkTime && date < validity) {
+                $("#CheckState").val("检测有效期内");
+            } else {
+                $("#CheckState").val("超期");
+            }
+        }
+    }
+
     //function Submit() {
     //    $('#form1').form('submit', {
     //        url: '/Device/Create',
@@ -154,33 +173,34 @@
             @Html.ValidationMessageFor(model => model.SecurityCertificateNo)
         </div>
         <div class="form-group col-sm-4">
-            @Html.DisplayNameFor(model => model.CheckState)
-            @Html.DropDownListFor(model => model.CheckState, (List<SelectListItem>)ViewBag.CheckStateList)
-            @Html.ValidationMessageFor(model => model.CheckState)
+            @Html.DisplayNameFor(model => model.MaintenanceRecord)
+            @Html.TextBoxFor(model => model.MaintenanceRecord)
+            @Html.ValidationMessageFor(model => model.MaintenanceRecord)
+
         </div>
     </div>
     <div class="row">
         <div class="form-group col-sm-4">
             @Html.DisplayNameFor(model => model.CheckTime)
-            @Html.TextBoxFor(model => model.CheckTime, new { onfocus = "WdatePicker()", @class = "form-control" })
+            @Html.TextBoxFor(model => model.CheckTime, new { onchange = "useStateChange()", onfocus = "WdatePicker()", @class = "form-control" })
             @Html.ValidationMessageFor(model => model.CheckTime)
         </div>
         <div class="form-group col-sm-4">
-            @Html.DisplayNameFor(model => model.CheckCycle)
-            @Html.TextBoxFor(model => model.CheckCycle)*单位为天
-                    @Html.ValidationMessageFor(model => model.CheckCycle)
+            @Html.DisplayNameFor(model => model.Validity)
+            @Html.TextBoxFor(model => model.Validity, new { onchange = "useStateChange()", onfocus = "WdatePicker()", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Validity)
         </div>
     </div>
     <div class="row">
         <div class="form-group col-sm-4">
             @Html.DisplayNameFor(model => model.UseState)
-            @Html.DropDownListFor(model => model.UseState, (List<SelectListItem>)ViewBag.UseStateList)
+            @Html.DropDownListFor(model => model.UseState, (List<SelectListItem>)ViewBag.UseStateList, new { onchange = "useStateChange()" })
             @Html.ValidationMessageFor(model => model.UseState)
         </div>
         <div class="form-group col-sm-4">
-            @Html.DisplayNameFor(model => model.MaintenanceRecord)
-            @Html.TextBoxFor(model => model.MaintenanceRecord)
-            @Html.ValidationMessageFor(model => model.MaintenanceRecord)
+            @Html.DisplayNameFor(model => model.CheckState)
+            @Html.DropDownListFor(model => model.CheckState, (List<SelectListItem>)ViewBag.CheckStateList)
+            @Html.ValidationMessageFor(model => model.CheckState)
         </div>
     </div>
     <div class="row">
