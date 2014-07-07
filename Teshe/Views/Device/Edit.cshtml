@@ -151,9 +151,9 @@
             @Html.ValidationMessageFor(model => model.CheckTime)
         </div>
         <div class="form-group col-sm-4">
-            @Html.DisplayNameFor(model => model.CheckCycle)
-            @Html.TextBoxFor(model => model.CheckCycle)*单位为天
-                    @Html.ValidationMessageFor(model => model.CheckCycle)
+            @Html.DisplayNameFor(model => model.Validity)
+            @Html.TextBoxFor(model => model.Validity, new { onfocus = "WdatePicker()", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Validity)
         </div>
     </div>
     <div class="row">

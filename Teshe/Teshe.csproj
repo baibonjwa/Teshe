@@ -181,6 +181,7 @@
     <Compile Include="Models\DeviceModifyRecord.cs" />
     <Compile Include="Models\Scrap.cs" />
     <Compile Include="Models\ScrapModifyRecord.cs" />
+    <Compile Include="Models\SharedFile.cs" />
     <Compile Include="Models\Stoppage.cs" />
     <Compile Include="Models\CreateStoppageViewModel.cs" />
     <Compile Include="Models\StoppageIndexViewModel.cs" />
@@ -1285,6 +1286,7 @@
     <Content Include="Views\UserInfo\Relieve.cshtml" />
     <Content Include="Views\Shared\_BackLeftForCity.cshtml" />
     <Content Include="Views\Shared\_BackLeftForProvince.cshtml" />
+    <Content Include="Views\Device\Verify.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

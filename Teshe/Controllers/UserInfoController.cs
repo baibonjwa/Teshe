@@ -392,7 +392,7 @@ namespace Teshe.Controllers
                 userinfo.IsVerify = 1;
                 db.Entry(userinfo).State = EntityState.Modified;
                 db.SaveChanges();
-                log.Info(User.Identity.Name + "于" + DateTime.Now.ToString() + "审核通过" + userinfo.Name + "用户");
+                log.Info(User.Identity.Name + "于" + DateTime.Now + "审核通过" + userinfo.Name + "用户");
             }
             return View("Verify");
         }

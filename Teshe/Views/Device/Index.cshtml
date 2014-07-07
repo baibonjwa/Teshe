@@ -8,7 +8,7 @@
     function Search() {
         $("#result").datagrid({
             url: encodeURI("/Device/Search?" + "Name=" + $("#Name").val() + "&Model=" + $("#Model").val() + "&Barcode=" + $("#Barcode").val() + "&Company=" + $("#Company").val() + "&CheckState=" + $("#CheckState").val() + "&District=" + $("#District").val() + "&City=" + $("#City").val() + "&Province=" + $("#Province").val())
-        })
+        });
     }
 </script>
 <div class="row">

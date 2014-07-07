@@ -67,9 +67,15 @@ namespace Teshe.Controllers
             return View();
         }
 
+        public ActionResult Verify()
+        {
+            return View();
+        }
+
         public ActionResult Search(DeviceIndexViewModel viewModel)
         {
             Expression<Func<Device, bool>> where = PredicateExtensionses.True<Device>();
+            where = where.And(u => u.IsVerify == 1);
             bool isfirst = true;
             PropertyInfo[] pro = viewModel.GetType().GetProperties();
             foreach (var p in pro)
@@ -403,19 +409,39 @@ namespace Teshe.Controllers
 
         public ActionResult GetDeviceByBarcode(String barcode)
         {
-            return Content(JsonConvert.SerializeObject(db.Devices.FirstOrDefault<Device>(u => u.Barcode == barcode)));
+            return Content(JsonConvert.SerializeObject(db.Devices.FirstOrDefault<Device>(u => u.Barcode == barcode && u.IsVerify == 1)));
         }
 
         public ActionResult ExportExcel(String data)
         {
             Response.ContentType = "text/plain";
-            List<Device> list = JsonConvert.DeserializeObject<List<Device>>(data, dateTimeConverter);
-            Device device = new Device();
+            var list = JsonConvert.DeserializeObject<List<Device>>(data, dateTimeConverter);
+            var device = new Device();
             //Response.ContentType = "application/vnd.ms-excel;charset=UTF-8";
             //Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", "temp.xls"));
             //Response.Clear();
             return File(device.Export(list).GetBuffer(), "application/vnd.ms-excel;charset=UTF-8", "data.xls");
         }
+
+        public ActionResult GetNotVerifyDevices()
+        {
+            List<Device> list = db.Devices.Where<Device>(u => u.IsVerify == 0).ToList<Device>();
+            return Content(JsonConvert.SerializeObject(list, dateTimeConverter));
+        }
+
+        public ActionResult PassVerify(int id)
+        {
+            Device device = db.Devices.Find(id);
+            if (ModelState.IsValid)
+            {
+                device.IsVerify = 1;
+                db.Entry(device).State = EntityState.Modified;
+                db.SaveChanges();
+                log.Info(User.Identity.Name + "于" + DateTime.Now + "审核通过" + device.Name + "设备");
+            }
+            return View("Verify");
+        }
+
         [AllowAnonymous]
         public ActionResult UploadReport(HttpPostedFileBase FileData)
         {

@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "等待审核的设备";
+}
+<table class="easyui-datagrid" title="等待审核的设备" style="width: 1000px; height: auto"
+    data-options="singleSelect:true,collapsible:true,url:'/Device/GetNotVerifyDevices',method:'post',rownumbers:'true',pagination:'true'">
+    <thead>
+        <tr>
+
+            <th data-options="field:'Name',width:80">用户名</th>
+            <th data-options="field:'Password',width:100">密码</th>
+            <th data-options="field:'ResponsiblePerson',width:100">负责人</th>
+            <th data-options="field:'Company',width:100">所在公司</th>
+
+            <th data-options="field:'District',width:100">所在区（县）</th>
+            <th data-options="field:'City',width:100">所在城市</th>
+
+            <th data-options="field:'Province',width:100">所在省份</th>
+            <th data-options="field:'pass',width:60,formatter:pass">通过</th>
+            <th data-options="field:'del',width:60,formatter:del">删除</th>
+
+        </tr>
+    </thead>
+</table>
+
+<script>
+    function pass(val, row) {
+        return "<a onclick=\"passConfirm(" + row.Id + ")\" href=\"javascript:void(0)\">通过</a>";
+    }
+    function del(val, row) {
+        return "<a onclick=\"delConfirm(" + row.Id + ")\" href=\"javascript:void(0)\">删除</a>";
+    }
+    function passConfirm(id) {
+        $.messager.confirm('确认', '您确定要通过审核吗？', function (r) {
+            if (r) {
+                window.location.href = "/Device/PassVerify/" + id;
+            }
+        });
+    }
+    function delConfirm(id) {
+        $.messager.confirm('确认', '您确定要删除吗？', function (r) {
+            if (r) {
+                window.location.href = "/Device/Delete/" + id + "?delType=Verify";
+            }
+        });
+    }
+</script>

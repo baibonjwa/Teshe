@@ -94,7 +94,12 @@
         </tr>
     </table>
     <p>
-        @Html.ActionLink("修改", "Edit", new { id = Model.Id }) |
+        @{
+            if (!User.IsInRole("省级管理员") && !User.IsInRole("市级管理员") && !User.IsInRole("区（县）级管理员"))
+            {
+                    Html.ActionLink("修改", "Edit", new { id = Model.Id }); @:|
+            }
+        }
         @Html.ActionLink("返回", "Index")|
         @Html.ActionLink("查看修改记录", "ModifyRecord", new { id = Model.Id })
     </p>

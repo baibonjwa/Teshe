@@ -92,6 +92,9 @@ namespace Teshe.Models
         [DisplayName("操作员")]
         public UserInfo UserInfo { get; set; }
 
+        [DisplayName("是否通过审核")]
+        public int IsVerify { get; set; }
+
         [DisplayName("录入时间")]
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime InputTime { get; set; }

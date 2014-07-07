@@ -67,7 +67,7 @@ namespace Teshe
             //int intSecond = e.SignalTime.Second;
             //int isecond = 00;
             log4net.ILog log = log4net.LogManager.GetLogger("MyLogger");
-            List<Device> devicelist = db.Devices.ToList();
+            List<Device> devicelist = db.Devices.Where(u => u.IsVerify == 1).ToList();
             List<UserInfo> userlist = db.UserInfoes.Where<UserInfo>(u => u.UserType.Name != "客户").ToList();
 
             foreach (var i in devicelist)
