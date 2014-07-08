@@ -1,0 +1,50 @@
+﻿@model Teshe.Models.CreateSharedFileViewModel
+
+@{
+    ViewBag.Title = "共享文件上传";
+}
+}
+@Styles.Render("~/Content/uploadify.css")
+@Scripts.Render("~/Scripts/uploadify/jquery.uploadify.min.js")
+@UIHelper.ShowUploadify("file_report", "/SharedFile/UploadSharedFile", "OldFileName", "NewFileName")
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="row">
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.Title)
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.Description)
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-4">
+            @Html.DisplayNameFor(model => model.OldFileName)
+            @Html.TextBox("OldFileName", "")
+            @Html.HiddenFor(model => model.NewFileName)
+            @Html.ValidationMessageFor(model => model.OldFileName)
+            <input type="file" name="file_report" id="file_report" />
+        </div>
+    </div>
+   
+    <div class="row">
+        <div class="form-group col-sm-4">
+            <input type="submit" value="添加共享文件" class="btn btn-default" />
+            @UIHelper.ModifyTips(ViewBag.CreateAdminIsSuccess, "添加共享文件")
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

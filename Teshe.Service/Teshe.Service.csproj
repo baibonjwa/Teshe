@@ -156,7 +156,9 @@
     <Compile Include="Controllers\BindSIMController.cs" />
     <Compile Include="Controllers\CheckBindController.cs" />
     <Compile Include="Controllers\CheckController.cs" />
+    <Compile Include="Controllers\DeviceSearchController.cs" />
     <Compile Include="Controllers\GetDeviceInfoController.cs" />
+    <Compile Include="Controllers\GetImageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

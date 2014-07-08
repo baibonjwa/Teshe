@@ -46,5 +46,7 @@ namespace Teshe.Models
         public DbSet<StoppageModifyRecord> StoppageModifyRecords { get; set; }
 
         public DbSet<ScrapModifyRecord> ScrapModifyRecords { get; set; }
+
+        public DbSet<SharedFile> SharedFiles { get; set; }
     }
 }

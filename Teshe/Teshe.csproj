@@ -154,12 +154,14 @@
     <Compile Include="Common\DatabaseMaintenance.cs" />
     <Compile Include="Common\Helper.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\GetImageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\DeviceController.cs" />
     <Compile Include="Controllers\MailController.cs" />
     <Compile Include="Controllers\ScrapController.cs" />
+    <Compile Include="Controllers\SharedFileController.cs" />
     <Compile Include="Controllers\StoppageController.cs" />
     <Compile Include="Controllers\UserInfoController.cs" />
     <Compile Include="Global.asax.cs">
@@ -172,6 +174,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Attribute.cs" />
     <Compile Include="Models\CreateAdminViewModel.cs" />
+    <Compile Include="Models\CreateSharedFileViewModel.cs" />
     <Compile Include="Models\Device.cs" />
     <Compile Include="Models\DeviceIndexViewModel.cs" />
     <Compile Include="Models\IExportExcel.cs" />
@@ -1287,11 +1290,14 @@
     <Content Include="Views\Shared\_BackLeftForCity.cshtml" />
     <Content Include="Views\Shared\_BackLeftForProvince.cshtml" />
     <Content Include="Views\Device\Verify.cshtml" />
+    <Content Include="Views\SharedFile\Index.cshtml" />
+    <Content Include="Views\SharedFile\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Data\" />
     <Folder Include="FileUpload\Report\" />
+    <Folder Include="FileUpload\SharedFile\" />
     <Folder Include="Log\" />
   </ItemGroup>
   <ItemGroup>
