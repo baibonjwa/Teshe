@@ -2,7 +2,7 @@
 @model Teshe.Models.DeviceIndexViewModel
 
 @{
-    ViewBag.Title = "设备查询";
+    ViewBag.Title = "共享文件下载";
 }
 
 <script>
@@ -18,7 +18,7 @@
         return val.Name;
     }
     function title(val, row) {
-        return "<a href=\"/FileUpload/SharedFile/" + row.NewFileName + "\">" + val + "</a>";
+        return "<a href=\"/FileUpload/SharedFile/" + row.NewFileName + "\">下载</a>";
     }
     function del(val, row) {
         return "<a onclick=\"delConfirm(" + row.Id + ")\" href=\"javascript:void(0)\">删除</a>";
@@ -31,11 +31,11 @@
         });
     }
 </script>
-<table id="result" class="easyui-datagrid" title="设备信息" style="width: 980px; height: auto"
+<table id="result" class="easyui-datagrid" title="共享文件下载" style="width: 980px; height: auto"
     data-options="singleSelect:true,collapsible:true,url:'/SharedFile/Search',method:'post',rownumbers:'true',pagination:'true'">
     <thead>
         <tr>
-            <th data-options="field:'Title',width:150,formatter:title">标题</th>
+            <th data-options="field:'Title',width:150">标题</th>
             <th data-options="field:'Description',width:350">描述</th>
             <th data-options="field:'OldFileName',width:150">文件名</th>
             <th data-options="field:'People',width:100,formatter:people">上传人</th>
@@ -45,6 +45,7 @@
                     <th data-options="field:'del',width:100,formatter:del">删除</th>
                 }
             }
+              <th data-options="field:'download',width:150,formatter:title">下载</th>
         </tr>
     </thead>
 </table>

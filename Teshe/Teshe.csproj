@@ -48,6 +48,18 @@
     <Reference Include="Ionic.Zip">
       <HintPath>..\packages\NPOI.1.2.5\lib\net40\Ionic.Zip.dll</HintPath>
     </Reference>
+    <Reference Include="Ivony.Core">
+      <HintPath>..\packages\Ivony.Core.1.1.0\lib\Ivony.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Ivony.Html">
+      <HintPath>..\packages\Jumony.Core.3.0.13\lib\Ivony.Html.dll</HintPath>
+    </Reference>
+    <Reference Include="Ivony.Html.Parser">
+      <HintPath>..\packages\Jumony.Core.3.0.13\lib\Ivony.Html.Parser.dll</HintPath>
+    </Reference>
+    <Reference Include="Ivony.Html.Parser.Regulars">
+      <HintPath>..\packages\Jumony.Core.3.0.13\lib\Ivony.Html.Parser.Regulars.dll</HintPath>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\..\..\Employment\website\Employment\WebApp\Bin\log4net.dll</HintPath>
     </Reference>
@@ -259,6 +271,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\tablestyle.css" />
     <Content Include="easyui\changelog.txt" />
     <Content Include="easyui\easyloader.js" />
     <Content Include="easyui\jquery.easyui.js" />
@@ -714,6 +727,7 @@
     </Content>
     <None Include="Properties\PublishProfiles\Teshe.pubxml" />
     <None Include="Properties\PublishProfiles\Teshe2.pubxml" />
+    <None Include="Properties\PublishProfiles\Teshe3.pubxml" />
     <None Include="Scripts\jquery-2.0.0.intellisense.js" />
     <Content Include="Scripts\easyui1.3.2\datagrid-detailview.js" />
     <Content Include="Scripts\easyui1.3.2\demo\accordion\actions.html" />
@@ -1292,6 +1306,14 @@
     <Content Include="Views\Device\Verify.cshtml" />
     <Content Include="Views\SharedFile\Index.cshtml" />
     <Content Include="Views\SharedFile\Create.cshtml" />
+    <Content Include="Views\Shared\_Layout2.cshtml" />
+    <Content Include="Views\Device\CreateLiftTechnique.cshtml" />
+    <Content Include="Views\Device\ViewPage1.cshtml" />
+    <Content Include="Views\Device\CreateDeliveryEquipment.cshtml" />
+    <Content Include="Views\Device\CreateSewerage.cshtml" />
+    <Content Include="Views\Device\CreateAirmovingDevice.cshtml" />
+    <Content Include="Views\Device\CreatePressureAir.cshtml" />
+    <Content Include="Views\Device\OutDate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

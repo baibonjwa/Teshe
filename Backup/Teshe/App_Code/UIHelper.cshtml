@@ -1,0 +1,302 @@
+﻿@helper ShowUploadify(string name)
+{
+    <script>
+        $(document).ready(function () {
+            $('#fileName').attr("readonly", true);
+        });
+        var uploadify_onSelectError = function (file, errorCode, errorMsg) {
+            var msgText = "上传失败\n";
+            switch (errorCode) {
+                case SWFUpload.QUEUE_ERROR.QUEUE_LIMIT_EXCEEDED:
+                    //this.queueData.errorMsg = "每次最多上传 " + this.settings.queueSizeLimit + "个文件";
+                    msgText += "每次最多上传 " + this.settings.queueSizeLimit + "个文件";
+                    break;
+                case SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT:
+                    msgText += "文件大小超过限制( " + this.settings.fileSizeLimit + " )";
+                    break;
+                case SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE:
+                    msgText += "文件大小为0";
+                    break;
+                case SWFUpload.QUEUE_ERROR.INVALID_FILETYPE:
+                    msgText += "文件格式不正确，仅限 " + this.settings.fileTypeExts;
+                    break;
+                default:
+                    msgText += "错误代码：" + errorCode + "\n" + errorMsg;
+            }
+            //alert(msgText);
+        };
+
+        var uploadify_onUploadError = function (file, errorCode, errorMsg, errorString) {
+            // 手工取消不弹出提示
+            if (errorCode == SWFUpload.UPLOAD_ERROR.FILE_CANCELLED
+                || errorCode == SWFUpload.UPLOAD_ERROR.UPLOAD_STOPPED) {
+                return;
+            }
+            var msgText = "上传失败\n";
+            switch (errorCode) {
+                case SWFUpload.UPLOAD_ERROR.HTTP_ERROR:
+                    msgText += "HTTP 错误\n" + errorMsg;
+                    break;
+                case SWFUpload.UPLOAD_ERROR.MISSING_UPLOAD_URL:
+                    msgText += "上传文件丢失，请重新上传";
+                    break;
+                case SWFUpload.UPLOAD_ERROR.IO_ERROR:
+                    msgText += "IO错误";
+                    break;
+                case SWFUpload.UPLOAD_ERROR.SECURITY_ERROR:
+                    msgText += "安全性错误\n" + errorMsg;
+                    break;
+                case SWFUpload.UPLOAD_ERROR.UPLOAD_LIMIT_EXCEEDED:
+                    msgText += "每次最多上传 " + this.settings.uploadLimit + "个";
+                    break;
+                case SWFUpload.UPLOAD_ERROR.UPLOAD_FAILED:
+                    msgText += errorMsg;
+                    break;
+                case SWFUpload.UPLOAD_ERROR.SPECIFIED_FILE_ID_NOT_FOUND:
+                    msgText += "找不到指定文件，请重新操作";
+                    break;
+                case SWFUpload.UPLOAD_ERROR.FILE_VALIDATION_FAILED:
+                    msgText += "参数错误";
+                    break;
+                default:
+                    msgText += "文件:" + file.name + "\n错误码:" + errorCode + "\n"
+                        + errorMsg + "\n" + errorString;
+            }
+            //alert(msgText);
+        }
+        $(function () {
+            $('#@name').uploadify({
+                'swf': '/Scripts/uploadify/uploadify.swf',
+                'uploader': '/UserInfo/UploadPhoto',
+                'onSelectError': uploadify_onSelectError,
+                'onUploadError': uploadify_onUploadError,
+                'buttonText': "上传文件",
+                'muti': true,
+                'onUploadSuccess': function (file, data, response) {
+                    if ($('#fileName').val() != "") {
+                        $('#fileName').val($('#fileName').val() + "|" + data.split(',')[0].replace("\"", ""));
+                        $('#PhotoUrl').val($('#PhotoUrl').val() + "|" + data.split(',')[data.split(',').length - 1].replace("\"", ""));
+                    } else {
+                        $('#fileName').val(data.split(',')[0].replace("\"", ""));
+                        $('#PhotoUrl').val(data.split(',')[data.split(',').length - 1].replace("\"", ""));
+                    }
+                }
+            });
+        });
+    </script>
+}
+
+@helper ShowUploadify(string name, string action, string textbox, string hidden)
+{
+    <script>
+        $(document).ready(function () {
+            $('#@textbox').attr("readonly", true);
+        });
+        var uploadify_onSelectError = function (file, errorCode, errorMsg) {
+            var msgText = "上传失败\n";
+            switch (errorCode) {
+                case SWFUpload.QUEUE_ERROR.QUEUE_LIMIT_EXCEEDED:
+                    //this.queueData.errorMsg = "每次最多上传 " + this.settings.queueSizeLimit + "个文件";
+                    msgText += "每次最多上传 " + this.settings.queueSizeLimit + "个文件";
+                    break;
+                case SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT:
+                    msgText += "文件大小超过限制( " + this.settings.fileSizeLimit + " )";
+                    break;
+                case SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE:
+                    msgText += "文件大小为0";
+                    break;
+                case SWFUpload.QUEUE_ERROR.INVALID_FILETYPE:
+                    msgText += "文件格式不正确，仅限 " + this.settings.fileTypeExts;
+                    break;
+                default:
+                    msgText += "错误代码：" + errorCode + "\n" + errorMsg;
+            }
+            //alert(msgText);
+        };
+
+        var uploadify_onUploadError = function (file, errorCode, errorMsg, errorString) {
+            // 手工取消不弹出提示
+            if (errorCode == SWFUpload.UPLOAD_ERROR.FILE_CANCELLED
+                || errorCode == SWFUpload.UPLOAD_ERROR.UPLOAD_STOPPED) {
+                return;
+            }
+            var msgText = "上传失败\n";
+            switch (errorCode) {
+                case SWFUpload.UPLOAD_ERROR.HTTP_ERROR:
+                    msgText += "HTTP 错误\n" + errorMsg;
+                    break;
+                case SWFUpload.UPLOAD_ERROR.MISSING_UPLOAD_URL:
+                    msgText += "上传文件丢失，请重新上传";
+                    break;
+                case SWFUpload.UPLOAD_ERROR.IO_ERROR:
+                    msgText += "IO错误";
+                    break;
+                case SWFUpload.UPLOAD_ERROR.SECURITY_ERROR:
+                    msgText += "安全性错误\n" + errorMsg;
+                    break;
+                case SWFUpload.UPLOAD_ERROR.UPLOAD_LIMIT_EXCEEDED:
+                    msgText += "每次最多上传 " + this.settings.uploadLimit + "个";
+                    break;
+                case SWFUpload.UPLOAD_ERROR.UPLOAD_FAILED:
+                    msgText += errorMsg;
+                    break;
+                case SWFUpload.UPLOAD_ERROR.SPECIFIED_FILE_ID_NOT_FOUND:
+                    msgText += "找不到指定文件，请重新操作";
+                    break;
+                case SWFUpload.UPLOAD_ERROR.FILE_VALIDATION_FAILED:
+                    msgText += "参数错误";
+                    break;
+                default:
+                    msgText += "文件:" + file.name + "\n错误码:" + errorCode + "\n"
+                        + errorMsg + "\n" + errorString;
+            }
+            //alert(msgText);
+        }
+        $(function () {
+            $('#@name').uploadify({
+                'swf': '/Scripts/uploadify/uploadify.swf',
+                'uploader': '@action',
+                'onSelectError': uploadify_onSelectError,
+                'onUploadError': uploadify_onUploadError,
+                'buttonText': "上传文件",
+                'onUploadSuccess': function (file, data, response) {
+                    $('#@textbox').val(data.split(',')[0].replace("\"", ""));
+                    $('#@hidden').val(data.split(',')[data.split(',').length - 1].replace("\"", ""));
+                }
+            });
+        });
+    </script>
+}
+
+@helper ModifyTips(dynamic sign, String text)
+{
+    if (sign == true)
+    { 
+    <span style="color: green">@text</span> 
+    }
+}
+}
+
+@helper ExportExcel(string name)
+{
+    <script>
+        function exportExcel() {
+            var data = $('#result').datagrid('getData');
+            PostSubmit("/@name/ExportExcel", JSON.stringify(data.originalRows));
+
+            ////alert(JSON.stringify(data.rows));
+            //$.ajax({
+            //    type: "POST",
+            //    url: '../Handler/ExportExam.ashx',
+            //    //返回数据的所有行rows只返回当前页的行
+            //    data: "&data=" + JSON.stringify(data.originalRows),
+            //    success: function (results) {
+            //        document.writeln(results);
+            //    }
+            //}
+            //)
+        }
+        function PostSubmit(url, data) {
+            //alert(url);
+            var postUrl = url;
+            var postData = data;
+            var ExportForm = document.createElement("FORM");
+
+            document.body.appendChild(ExportForm);
+            ExportForm.method = "POST";
+            var newElement = document.createElement("input");
+            newElement.setAttribute("name", "data");
+            newElement.setAttribute("type", "hidden");
+            ExportForm.appendChild(newElement);
+            newElement.value = postData;
+            ExportForm.action = postUrl;
+            ExportForm.submit();
+        }
+    </script>
+}
+@helper Print(string name)
+{
+    <script>
+        function print() {
+            var data = $('#result').datagrid('getData');
+            PostSubmit("/@name/Print", JSON.stringify(data.originalRows));
+
+            ////alert(JSON.stringify(data.rows));
+            //$.ajax({
+            //    type: "POST",
+            //    url: '../Handler/ExportExam.ashx',
+            //    //返回数据的所有行rows只返回当前页的行
+            //    data: "&data=" + JSON.stringify(data.originalRows),
+            //    success: function (results) {
+            //        document.writeln(results);
+            //    }
+            //}
+            //)
+        }
+        function PostSubmit(url, data) {
+            //alert(url);
+            var postUrl = url;
+            var postData = data;
+            var ExportForm = document.createElement("FORM");
+
+            document.body.appendChild(ExportForm);
+            ExportForm.method = "POST";
+            var newElement = document.createElement("input");
+            newElement.setAttribute("name", "data");
+            newElement.setAttribute("type", "hidden");
+            ExportForm.appendChild(newElement);
+            newElement.value = postData;
+            ExportForm.action = postUrl;
+            ExportForm.submit();
+        }
+    </script>
+}
+
+@helper GetDeviceInfo()
+{
+    <script>
+        function GetDeviceInfo() {
+            var barcode = $("#DeviceBarcode").val();
+            $.ajax({
+                type: "POST",
+                url: "/Device/GetDeviceByBarcode?barcode=" + barcode,
+                success: function (results) {
+                    if (results == "null") {
+                        $.messager.alert("信息", "该设备不存在，请检查条形码是否输入正确");
+                    } else {
+                        var obj = eval('(' + results + ')');
+                        $("#deviceName").html("设备名称：<span class=\"bfont2\">" + obj.Name + "</span>");
+                        $("#deviceModel").html("设备型号：<span class=\"bfont2\">" + obj.Model + "</span>");
+                        $("#deviceCompany").html("所在公司：<span class=\"bfont2\">" + obj.Company + "</span>");
+                        $("#deviceDistrict").html("所在区（县）：<span class=\"bfont2\">" + obj.District + "</span>");
+                        $("#deviceCity").html("所在城市：<span class=\"bfont2\">" + obj.City + "</span>");
+                        $("#deviceProvince").html("所在省份：<span class=\"bfont2\">" + obj.Province + "</span>");
+                    }
+                }
+            }
+            );
+        }
+    </script>
+}
+@helper CancelUser()
+{
+    <script>
+        function Cancel(name) {
+            $.messager.confirm('确认', '您确定注销用户吗？注销之后您会丢失该用户的全部信息。', function (r) {
+                if (r) {
+                    window.location.href = "/UserInfo/Cancel?name=" + name;
+                }
+            });
+        }
+    </script>
+}
+
+@helper  SubmitForm(string formId)
+{
+    <script>
+        function submitForm() {
+            $('#@formId').form('submit'
+            );
+        }
+    </script>
+}

@@ -1,15 +1,21 @@
 ﻿@model Teshe.Models.Device
-@using Teshe.Models;
-@using System.Collections.Generic;
 @{
-    ViewBag.Title = "添加设备";
+    ViewBag.Title = "添加其他设备";
 }
 @Styles.Render("~/Content/uploadify.css")
 @Scripts.Render("~/Scripts/uploadify/jquery.uploadify.min.js")
 @UIHelper.ShowUploadify("file_upload")
 @UIHelper.ShowUploadify("file_report", "/Device/UploadReport", "ReportName", "Report")
+@*<script>
+        function submitForm() {
+            var form = document.getElementById("form_createDeliveryEquipment");
+            form.submit();
+        }
+    </script>*@
+@*@UIHelper.SubmitForm("form_createLiftTechnique")*@
+@UIHelper.UseStateOnSelect()
+<link href="~/Content/tablestyle.css" rel="stylesheet" />
 <script>
-
     function Create() {
         var a = Math.floor(Math.random() * 100000000);
         while (a < 10000000) {
@@ -20,7 +26,6 @@
         $("#BarcodeImg").attr("src", "/Device/CreateBarcode?code=" + code);
     }
     function getRowObj(obj) {
-        var i = 0;
         while (obj.tagName.toLowerCase() != "tr") {
             obj = obj.parentNode;
             if (obj.tagName.toLowerCase() == "table")
@@ -41,6 +46,7 @@
             if (trObj == trObj.parentNode.children[trNo])
             { return trNo; }
         }
+        return trNo;
     }
     function AddAttribute() {
         var name = $("#attributeName").val();
@@ -66,203 +72,230 @@
         return json;
     }
     function useStateChange() {
-        var state = $("#UseState").val();
-        alert(state);
+        var state = $("#UseState").combobox('getValue');
         if (state == "故障" || state == "报废") {
-            $("#CheckState").val("待检");
+            //$("#CheckState").val("待检");
+            $('#CheckState').combobox('setValue', '待检');
         }
         else if (state == "正常") {
             var date = new Date();
             var checkTime = new Date($("#CheckTime").val());
             var validity = new Date($("#Validity").val());
             if (date < checkTime && date < validity) {
-                $("#CheckState").val("检测有效期内");
+                $('#CheckState').combobox('select', '检测有效期内');
+                //$("#CheckState").val("检测有效期内");
             } else {
-                $("#CheckState").val("超期");
+                $('#CheckState').combobox('select', '超期');
+                //$("#CheckState").val("超期");
             }
         }
     }
-
-    //function Submit() {
-    //    $('#form1').form('submit', {
-    //        url: '/Device/Create',
-    //        data: "attributes=" + GetAttributeJson(),
-    //        onSubmit: function () {
-    //            return true;
-    //        },
-    //        success: function (results) {
-    //            $.messager.alert('成功', results);
-    //        }
-
-    //    }
-    //    )
-    //}
 </script>
-@using (Html.BeginForm("form1"))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-    <div class="row">
-        <div class="form-group col-sm-4">
-            @Html.DisplayNameFor(model => model.Name)
-            @Html.TextBoxFor(model => model.Name)
-            @Html.ValidationMessageFor(model => model.Name)
-        </div>
-        <div class="form-group col-sm-4">
-            @Html.DisplayNameFor(model => model.Model)
-            @Html.TextBoxFor(model => model.Model)
-            @Html.ValidationMessageFor(model => model.Model)
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-sm-4">
-            @Html.DisplayNameFor(model => model.Company)
-            @Html.TextBoxFor(model => model.Company)
-            @Html.ValidationMessageFor(model => model.Company)
-        </div>
-        <div class="form-group col-sm-4">
-            @Html.DisplayNameFor(model => model.District)
-            @Html.TextBoxFor(model => model.District)
-            @Html.ValidationMessageFor(model => model.District)
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-sm-4">
-            @Html.DisplayNameFor(model => model.City)
-            @Html.TextBoxFor(model => model.City)
-            @Html.ValidationMessageFor(model => model.City)
-        </div>
-        <div class="form-group col-sm-4">
-            @Html.DisplayNameFor(model => model.Province)
-            @Html.TextBoxFor(model => model.Province)
-            @Html.ValidationMessageFor(model => model.Province)
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-sm-4">
-            @Html.DisplayNameFor(model => model.ManufactureDate)
-            @Html.TextBoxFor(model => model.ManufactureDate, new { onfocus = "WdatePicker({'dateFmt':'yyyy-MM'})", @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.ManufactureDate)
-        </div>
-        <div class="form-group col-sm-4">
-            @Html.DisplayNameFor(model => model.Factory)
-            @Html.TextBoxFor(model => model.Factory)
-            @Html.ValidationMessageFor(model => model.Factory)
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-sm-4">
-            @Html.DisplayNameFor(model => model.SetupTime)
-            @Html.TextBoxFor(model => model.SetupTime, new { onfocus = "WdatePicker({'dateFmt':'yyyy-MM'})", @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.SetupTime)
-        </div>
-        <div class="form-group col-sm-4">
-            @Html.DisplayNameFor(model => model.ExplosionProof)
-            @Html.DropDownListFor(model => model.ExplosionProof, (List<SelectListItem>)ViewBag.ExplosionProofList)
-            @Html.ValidationMessageFor(model => model.ExplosionProof)
-        </div>
+<div>
+    @using (Html.BeginForm("Create", "Device", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <table class="table table-condensed">
+            <tr>
+                <td class="tableFirstCol">
+                    @Html.DisplayNameFor(model => model.Name)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Name, new { @class = "combo textBoxHeight" })
+                    @Html.ValidationMessageFor(model => model.Name, null, new { style = "color:red" })
+                </td>
+                <td class="tableFirstCol">
+                    @Html.DisplayNameFor(model => model.Model)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Model, new { @class = "combo textBoxHeight" })
+                    @Html.ValidationMessageFor(model => model.Model, null, new { style = "color:red" })
+                </td>
+            </tr>
+            <tr>
+                <td class="tableFirstCol">
+                    @Html.DisplayNameFor(model => model.Province)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Province, new { @class = "combo textBoxHeight" })
+                    @Html.ValidationMessageFor(model => model.Province, null, new { style = "color:red" })
+                </td>
+                <td class="tableFirstCol">
+                    @Html.DisplayNameFor(model => model.City)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.City, new { @class = "combo textBoxHeight" })
+                    @Html.ValidationMessageFor(model => model.City, null, new { style = "color:red" })
+                </td>
+            </tr>
+            <tr>
+                <td class="tableFirstCol">
+                    @Html.LabelFor(model => model.District)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.District, new { @class = "combo textBoxHeight" })
+                    @Html.ValidationMessageFor(model => model.District, null, new { style = "color:red" })
+                </td>
+                <td class="tableFirstCol">
+                    @Html.DisplayNameFor(model => model.Company)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Company, new { @class = "combo textBoxHeight" })
+                    @Html.ValidationMessageFor(model => model.Company, null, new { style = "color:red" })
+                </td>
+            </tr>
+            <tr>
+                <td class="tableFirstCol">
+                    @Html.DisplayNameFor(model => model.ManufactureDate)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.ManufactureDate, new { onfocus = "WdatePicker({'dateFmt':'yyyy-MM'})", @class = "combo textBoxHeight" })
+                    @Html.ValidationMessageFor(model => model.ManufactureDate, null, new { style = "color:red" })
+                </td>
+                <td class="tableFirstCol">
+                    @Html.DisplayNameFor(model => model.SetupTime)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.SetupTime, new { onfocus = "WdatePicker({'dateFmt':'yyyy-MM'})", @class = "combo textBoxHeight" })
+                    @Html.ValidationMessageFor(model => model.SetupTime, null, new { style = "color:red" })
+                </td>
+            </tr>
+            <tr>
+                <td class="tableFirstCol">
+                    @Html.DisplayNameFor(model => model.Factory)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Factory, new { @class = "combo textBoxHeight" })
+                    @Html.ValidationMessageFor(model => model.Factory, null, new { style = "color:red" })
+                </td>
+                <td class="tableFirstCol">
+                    @Html.DisplayNameFor(model => model.ExplosionProof)
+                </td>
+                <td>
+                    @Html.DropDownListFor(model => model.ExplosionProof, (List<SelectListItem>)ViewBag.ExplosionProofList, new { @class = "easyui-combobox" })
+                    @Html.ValidationMessageFor(model => model.ExplosionProof, null, new { style = "color:red" })
+                </td>
+            </tr>
+            <tr>
+                <td class="tableFirstCol">
+                    @Html.DisplayNameFor(model => model.SecurityCertificateNo)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.SecurityCertificateNo, new { @class = "combo textBoxHeight" })
+                    @Html.ValidationMessageFor(model => model.SecurityCertificateNo, null, new { style = "color:red" })
+                </td>
+                <td class="tableFirstCol">
+                    @Html.DisplayNameFor(model => model.MaintenanceRecord)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.MaintenanceRecord, new { @class = "combo textBoxHeight" })
+                    @Html.ValidationMessageFor(model => model.MaintenanceRecord, null, new { style = "color:red" })
+                </td>
+            </tr>
+            <tr>
+                <td class="tableFirstCol">
+                    @Html.DisplayNameFor(model => model.CheckTime)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.CheckTime, new { onchange = "useStateChange()", onfocus = "WdatePicker()", @class = "combo textBoxHeight" })
+                    @Html.ValidationMessageFor(model => model.CheckTime, null, new { style = "color:red" })
+                </td>
+                <td class="tableFirstCol">
+                    @Html.DisplayNameFor(model => model.Validity)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Validity, new { onchange = "useStateChange()", onfocus = "WdatePicker()", @class = "combo textBoxHeight" })
+                    @Html.ValidationMessageFor(model => model.Validity, null, new { style = "color:red" })
+                </td>
+            </tr>
+            <tr>
+                <td class="tableFirstCol">
+                    @Html.DisplayNameFor(model => model.UseState)
+                </td>
+                <td>
+                    @Html.DropDownListFor(model => model.UseState, (List<SelectListItem>)ViewBag.UseStateList, new { onchange = "useStateChange()", @class = "easyui-combobox" })
+                    @Html.ValidationMessageFor(model => model.UseState, null, new { style = "color:red" })
+                </td>
+                <td class="tableFirstCol">
+                    @Html.DisplayNameFor(model => model.CheckState)
+                </td>
+                <td>
+                    @Html.DropDownListFor(model => model.CheckState, (List<SelectListItem>)ViewBag.CheckStateList, new { @class = "easyui-combobox" })
+                    @Html.ValidationMessageFor(model => model.CheckState, null, new { style = "color:red" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.Remarks)
+                </td>
+                <td colspan="3">
+                    @Html.TextAreaFor(model => model.Remarks, new { @class = "combo textBoxHeight" })
+                    @Html.ValidationMessageFor(model => model.Remarks, null, new { style = "color:red" })
+                </td>
+            </tr>
+            <tr>
+                <td class="tableFirstCol">
+                    @*@Html.DisplayNameFor(model => model.Attributes)*@
+                    项目名称
+                </td>
+                <td>
+                    @Html.TextBox("attributeName", "", new { @class = "combo textBoxHeight" })
+                </td>
 
+                <td class="tableFirstCol">
+                    项目内容
+                </td>
+                <td>
+                    @Html.TextBox("attributeValue", "", new { @class = "combo textBoxHeight" })<a href="javascript:void(0)" class="" onclick="AddAttribute()">添加项目</a>
+                    @Html.Hidden("attributesJson")
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <table class="table table-condensed" id="attributes"></table>
+                </td>
+            </tr>
+            <tr>
+                <td class="tableFirstCol">
+                    @Html.DisplayNameFor(model => model.PhotoUrl)
+                </td>
+                <td>
+                    @Html.TextBox("fileName", "", new { @class = "combo textBoxHeight" })
+                    @Html.HiddenFor(model => model.PhotoUrl)
+                    @Html.ValidationMessageFor(model => model.PhotoUrl, null, new { style = "color:red" })
+                    <input type="file" name="file_upload" id="file_upload" />
+                </td>
+                <td class="tableFirstCol">
+                    @Html.DisplayNameFor(model => model.Report)
+                </td>
+                <td>
+                    @Html.TextBox("ReportName", "", new { @class = "combo textBoxHeight" })
+                    @Html.HiddenFor(model => model.Report)
+                    @Html.ValidationMessageFor(model => model.Report, null, new { style = "color:red" })
+                    <input type="file" name="file_report" id="file_report" />
+                </td>
+            </tr>
+            <tr>
+                <td class="tableFirstCol">
+                    @Html.DisplayNameFor(model => model.Barcode)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Barcode, new { @class = "combo textBoxHeight" })
+                    @Html.ValidationMessageFor(model => model.Barcode, null, new { style = "color:red" })
 
-    </div>
-    <div class="row">
-        <div class="form-group col-sm-4">
-            @Html.DisplayNameFor(model => model.SecurityCertificateNo)
-            @Html.TextBoxFor(model => model.SecurityCertificateNo)
-            @Html.ValidationMessageFor(model => model.SecurityCertificateNo)
-        </div>
-        <div class="form-group col-sm-4">
-            @Html.DisplayNameFor(model => model.MaintenanceRecord)
-            @Html.TextBoxFor(model => model.MaintenanceRecord)
-            @Html.ValidationMessageFor(model => model.MaintenanceRecord)
-
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-sm-4">
-            @Html.DisplayNameFor(model => model.CheckTime)
-            @Html.TextBoxFor(model => model.CheckTime, new { onchange = "useStateChange()", onfocus = "WdatePicker()", @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.CheckTime)
-        </div>
-        <div class="form-group col-sm-4">
-            @Html.DisplayNameFor(model => model.Validity)
-            @Html.TextBoxFor(model => model.Validity, new { onchange = "useStateChange()", onfocus = "WdatePicker()", @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Validity)
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-sm-4">
-            @Html.DisplayNameFor(model => model.UseState)
-            @Html.DropDownListFor(model => model.UseState, (List<SelectListItem>)ViewBag.UseStateList, new { onchange = "useStateChange()" })
-            @Html.ValidationMessageFor(model => model.UseState)
-        </div>
-        <div class="form-group col-sm-4">
-            @Html.DisplayNameFor(model => model.CheckState)
-            @Html.DropDownListFor(model => model.CheckState, (List<SelectListItem>)ViewBag.CheckStateList)
-            @Html.ValidationMessageFor(model => model.CheckState)
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-sm-8">
-            @Html.DisplayNameFor(model => model.Remarks)
-            @Html.TextBoxFor(model => model.Remarks)
-            @Html.ValidationMessageFor(model => model.Remarks)
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-sm-4">
-            @*@Html.DisplayNameFor(model => model.Attributes)*@
-            项目名称
-            @Html.TextBox("attributeName", "")
-        </div>
-        <div class="form-group col-sm-4">
-            项目内容
-            @Html.TextBox("attributeValue", "")
-        </div>
-        <div style="padding-top: 16px;" class="form-group col-sm-2">
-            <a style="height: 33px; font-size: 14px; line-height: 29px" href="javascript:void(0)" class="easyui-linkbutton" onclick="AddAttribute()">添加项目</a>
-            @Html.Hidden("attributesJson")
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-sm-8">
-            <table id="attributes">
-            </table>
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-sm-4">
-            @Html.DisplayNameFor(model => model.PhotoUrl)
-            @Html.TextBox("fileName", "")
-            @Html.HiddenFor(model => model.PhotoUrl)
-            @Html.ValidationMessageFor(model => model.PhotoUrl)
-            <input type="file" name="file_upload" id="file_upload" />
-        </div>
-        <div class="form-group col-sm-4">
-            @Html.DisplayNameFor(model => model.Report)
-            @Html.TextBox("ReportName", "")
-            @Html.HiddenFor(model => model.Report)
-            @Html.ValidationMessageFor(model => model.Report)
-            <input type="file" name="file_report" id="file_report" />
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-sm-4">
-            @Html.DisplayNameFor(model => model.Barcode)
-            @Html.TextBoxFor(model => model.Barcode)
-            @Html.ValidationMessageFor(model => model.Barcode)
-            <img id="BarcodeImg" src="" alt="条形码图片" width="187" height="131" />
-        </div>
-        <div style="padding-top: 16px;" class="form-group col-sm-4">
-            <a style="height: 33px; font-size: 14px; line-height: 29px" href="javascript:void(0)" class="easyui-linkbutton" onclick="Create()">生成条形码</a>
-            @*<input id="CreateBarcode" name="Code" type="button " value="生成条形码" class="btn " onclick="Create()" />*@
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-sm-4">
-            <input type="submit" value="添加设备" class="btn btn-default" />
-        </div>
-    </div>
-}
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+                </td>
+                <td colspan="2">
+                    <a style="font-size: 14px;" href="javascript:void(0)" class="" onclick="Create()">生成条形码</a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    @*<a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">添加设备</a>*@
+                    @*<a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()" data-options="iconCls:'icon-add'">添加设备</a>*@
+                    <input type="submit" class="btn btn-default" value="添加设备" />
+                </td>
+            </tr>
+        </table>
+    }
+</div>

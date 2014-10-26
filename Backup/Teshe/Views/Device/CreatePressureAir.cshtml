@@ -1,0 +1,367 @@
+﻿@model Teshe.Models.Device
+@{
+    ViewBag.Title = "添加压风设备";
+}
+@Styles.Render("~/Content/uploadify.css")
+@Scripts.Render("~/Scripts/uploadify/jquery.uploadify.min.js")
+@UIHelper.ShowUploadify("file_upload")
+@UIHelper.ShowUploadify("file_report", "/Device/UploadReport", "ReportName", "Report")
+@*<script>
+    function submitForm() {
+        var form = document.getElementById("form_createDeliveryEquipment");
+        form.submit();
+    }
+</script>*@
+@*@UIHelper.SubmitForm("form_createLiftTechnique")*@
+<link href="~/Content/tablestyle.css" rel="stylesheet" />
+<script>
+    function Create() {
+        var a = Math.floor(Math.random() * 100000000);
+        while (a < 10000000) {
+            a = a * 10;
+        }
+        $("#Barcode").val(a);
+        var code = $("#Barcode").val();
+        $("#BarcodeImg").attr("src", "/Device/CreateBarcode?code=" + code);
+    }
+    function getRowObj(obj) {
+        var i = 0;
+        while (obj.tagName.toLowerCase() != "tr") {
+            obj = obj.parentNode;
+            if (obj.tagName.toLowerCase() == "table")
+                return null;
+        }
+        return obj;
+    }
+    function delRow(obj) {
+        var rowNo = getRowNo(obj);
+        //$("#attributes tr").eq(1).empty();
+        $("#attributes tr").eq(rowNo).remove();
+        $("#attributesJson").val(GetAttributeJson());
+    }
+    function getRowNo(obj) {
+        var trObj = getRowObj(obj);
+        var trArr = trObj.parentNode.children;
+        for (var trNo = 0; trNo < trArr.length; trNo++) {
+            if (trObj == trObj.parentNode.children[trNo])
+            { return trNo; }
+        }
+    }
+    function AddAttribute() {
+        var name = $("#attributeName").val();
+        var value = $("#attributeValue").val();
+        var html = $("#attributes").html();
+        $("#attributes").html(html + " <tr> <td>项目名称：</td><td class=\"attr\">" + name + "</td><td>属性值：</td><td class=\"attr\">" + value + "</td><td><a href=\"javascript:void(0)\" onclick=\"delRow(this)\">删除</a></td></tr>");
+        $("#attributesJson").val(GetAttributeJson());
+    }
+    function GetAttributeJson() {
+        var json = "[";
+        var sign = 0;
+        $("#attributes tr .attr").each(function () {
+            if (sign % 2 == 0) {
+                json += "{\"Name\":" + "\"" + $(this).html() + "\",";
+            }
+            else {
+                json += "\"Content\":" + "\"" + $(this).html() + "\"},";
+            }
+            sign++;
+        });
+        json = json.substring(0, json.length - 1);
+        json += "]";
+        return json;
+    }
+    function useStateChange() {
+        var state = $("#UseState").val();
+        if (state == "故障" || state == "报废") {
+            $("#CheckState").val("待检");
+        }
+        else if (state == "正常") {
+            var date = new Date();
+            var checkTime = new Date($("#CheckTime").val());
+            var validity = new Date($("#Validity").val());
+            if (date < checkTime && date < validity) {
+                $("#CheckState").val("检测有效期内");
+            } else {
+                $("#CheckState").val("超期");
+            }
+        }
+    }
+
+
+</script>
+<div>
+    @using (Html.BeginForm("CreatePressureAir", "Device", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <table class="table table-condensed">
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.Name)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Name, new { @class = "combo textBoxHeight" })
+                    @Html.ValidationMessageFor(model => model.Name, null, new { style = "color:red" })
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.Model)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Model, new { @class = "combo textBoxHeight" })
+                    @Html.ValidationMessageFor(model => model.Model, null, new { style = "color:red" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.Province)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Province, new { @class = "combo textBoxHeight" })
+                    @Html.ValidationMessageFor(model => model.Province, null, new { style = "color:red" })
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.City)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.City, new { @class = "combo textBoxHeight" })
+                    @Html.ValidationMessageFor(model => model.City, null, new { style = "color:red" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.District)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.District, new { @class = "combo textBoxHeight" })
+                    @Html.ValidationMessageFor(model => model.District, null, new { style = "color:red" })
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.Company)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Company, new { @class = "combo textBoxHeight" })
+                    @Html.ValidationMessageFor(model => model.Company, null, new { style = "color:red" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.ManufactureDate)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.ManufactureDate, new { onfocus = "WdatePicker({'dateFmt':'yyyy-MM'})", @class = "combo textBoxHeight" })
+                    @Html.ValidationMessageFor(model => model.ManufactureDate, null, new { style = "color:red" })
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.SetupTime)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.SetupTime, new { onfocus = "WdatePicker({'dateFmt':'yyyy-MM'})", @class = "combo textBoxHeight" })
+                    @Html.ValidationMessageFor(model => model.SetupTime, null, new { style = "color:red" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.Factory)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Factory, new { @class = "combo textBoxHeight" })
+                    @Html.ValidationMessageFor(model => model.Factory, null, new { style = "color:red" })
+                </td>
+                <td>@Html.DisplayNameFor(model => model.ExplosionProof)</td>
+                <td>@Html.DropDownListFor(model => model.ExplosionProof, (List<SelectListItem>)ViewBag.ExplosionProofList, new { @class = "easyui-combobox" })
+                    @Html.ValidationMessageFor(model => model.ExplosionProof, null, new { style = "color:red" })</td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.SecurityCertificateNo)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.SecurityCertificateNo, new { @class = "combo textBoxHeight" })
+                    @Html.ValidationMessageFor(model => model.SecurityCertificateNo, null, new { style = "color:red" })
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.MaintenanceRecord)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.MaintenanceRecord, new { @class = "combo textBoxHeight" })
+                    @Html.ValidationMessageFor(model => model.MaintenanceRecord, null, new { style = "color:red" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.CheckTime)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.CheckTime, new { onchange = "useStateChange()", onfocus = "WdatePicker()", @class = "combo textBoxHeight" })
+                    @Html.ValidationMessageFor(model => model.CheckTime, null, new { style = "color:red" })
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.Validity)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Validity, new { onchange = "useStateChange()", onfocus = "WdatePicker()", @class = "combo textBoxHeight" })
+                    @Html.ValidationMessageFor(model => model.Validity, null, new { style = "color:red" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.UseState)
+                </td>
+                <td>
+                    @Html.DropDownListFor(model => model.UseState, (List<SelectListItem>)ViewBag.UseStateList, new { onchange = "useStateChange()", @class = "easyui-combobox" })
+                    @Html.ValidationMessageFor(model => model.UseState, null, new { style = "color:red" })
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.CheckState)
+                </td>
+                <td>
+                    @Html.DropDownListFor(model => model.CheckState, (List<SelectListItem>)ViewBag.CheckStateList, new { @class = "easyui-combobox" })
+                    @Html.ValidationMessageFor(model => model.CheckState, null, new { style = "color:red" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.Remarks)
+                </td>
+                <td colspan="3">
+                    @Html.TextAreaFor(model => model.Remarks, new { @class = "combo textBoxHeight" })
+                    @Html.ValidationMessageFor(model => model.Remarks, null, new { style = "color:red" })
+                </td>
+            </tr>
+            <tr>
+                <td>额定流量/（m³/min）
+                </td>
+                <td>
+                    @Html.TextBox("attr1", "", new { @class = "combo textBoxHeight" })
+                </td>
+                <td>额定压力/MPa
+                </td>
+                <td>
+                    @Html.TextBox("attr2", "", new { @class = "combo textBoxHeight" })
+                </td>
+            </tr>
+            <tr>
+                <td>额定转速/（r/min）
+                </td>
+                <td>
+                    @Html.TextBox("attr3", "", new { @class = "combo textBoxHeight" })
+                </td>
+                <td>轴功率/KW
+                </td>
+                <td>
+                    @Html.TextBox("attr4", "", new { @class = "combo textBoxHeight" })
+                </td>
+            </tr>
+            <tr>
+                <td>冷却方式
+                </td>
+                <td>
+                    @Html.TextBox("attr5", "", new { @class = "combo textBoxHeight" })
+                </td>
+                <td>传动方式
+                </td>
+                <td>
+                    @Html.TextBox("attr6", "", new { @class = "combo textBoxHeight" })
+                </td>
+            </tr>
+            <tr>
+                <td>电动机型号
+                </td>
+                <td>
+                    @Html.TextBox("attr7", "", new { @class = "combo textBoxHeight" })
+                </td>
+                <td>额定功率/kw
+                </td>
+                <td>
+                    @Html.TextBox("attr8", "", new { @class = "combo textBoxHeight" })
+                </td>
+            </tr>
+            <tr>
+                <td>额定电压/V
+                </td>
+                <td>
+                    @Html.TextBox("attr9", "", new { @class = "combo textBoxHeight" })
+                </td>
+                <td>额定电流/A
+                </td>
+                <td>
+                    @Html.TextBox("attr10", "", new { @class = "combo textBoxHeight" })
+                </td>
+            </tr>
+            <tr>
+                <td>风包容积/m³
+                </td>
+                <td>
+                    @Html.TextBox("attr11", "", new { @class = "combo textBoxHeight" })
+                </td>
+                <td>工作压力/MPa
+                </td>
+                <td>
+                    @Html.TextBox("attr12", "", new { @class = "combo textBoxHeight" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @*@Html.DisplayNameFor(model => model.Attributes)*@
+                    项目名称
+                </td>
+                <td>
+                    @Html.TextBox("attributeName", "", new { @class = "combo textBoxHeight" })
+                </td>
+
+                <td>项目内容
+                </td>
+                <td>
+                    @Html.TextBox("attributeValue", "", new { @class = "combo textBoxHeight" })<a href="javascript:void(0)" class="" onclick="AddAttribute()">添加项目</a>
+                    @Html.Hidden("attributesJson")
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <table class="table table-condensed" id="attributes">
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.PhotoUrl)
+                </td>
+                <td>
+                    @Html.TextBox("fileName", "", new { @class = "combo textBoxHeight" })
+                    @Html.HiddenFor(model => model.PhotoUrl)
+                    @Html.ValidationMessageFor(model => model.PhotoUrl, null, new { style = "color:red" })
+                    <input type="file" name="file_upload" id="file_upload" />
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.Report)
+                </td>
+                <td>
+                    @Html.TextBox("ReportName", "", new { @class = "combo textBoxHeight" })
+                    @Html.HiddenFor(model => model.Report)
+                    @Html.ValidationMessageFor(model => model.Report, null, new { style = "color:red" })
+                    <input type="file" name="file_report" id="file_report" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.Barcode)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Barcode, new { @class = "combo textBoxHeight" })
+                    @Html.ValidationMessageFor(model => model.Barcode, null, new { style = "color:red" })
+
+                </td>
+                <td colspan="2">
+                    <a style="font-size: 14px;" href="javascript:void(0)" class="" onclick="Create()">生成条形码</a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    @*<a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">添加设备</a>*@
+                    @*<a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()" data-options="iconCls:'icon-add'">添加设备</a>*@
+                    <input type="submit" class="btn btn-default" value="添加设备" />
+                </td>
+            </tr>
+        </table>
+    }
+</div>

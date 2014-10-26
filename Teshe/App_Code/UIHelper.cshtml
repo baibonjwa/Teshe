@@ -72,7 +72,7 @@
                 'onUploadError': uploadify_onUploadError,
                 'buttonText': "上传文件",
                 'muti': true,
-                'onUploadSuccess': function(file, data, response) {
+                'onUploadSuccess': function (file, data, response) {
                     if ($('#fileName').val() != "") {
                         $('#fileName').val($('#fileName').val() + "|" + data.split(',')[0].replace("\"", ""));
                         $('#PhotoUrl').val($('#PhotoUrl').val() + "|" + data.split(',')[data.split(',').length - 1].replace("\"", ""));
@@ -171,8 +171,8 @@
 @helper ModifyTips(dynamic sign, String text)
 {
     if (sign == true)
-    { 
-    <span style="color: green">@text</span> 
+    {
+        <span style="color: green">@text</span>
     }
 }
 }
@@ -263,8 +263,7 @@
                 success: function (results) {
                     if (results == "null") {
                         $.messager.alert("信息", "该设备不存在，请检查条形码是否输入正确");
-                    }
-                    else {
+                    } else {
                         var obj = eval('(' + results + ')');
                         $("#deviceName").html("设备名称：<span class=\"bfont2\">" + obj.Name + "</span>");
                         $("#deviceModel").html("设备型号：<span class=\"bfont2\">" + obj.Model + "</span>");
@@ -275,7 +274,7 @@
                     }
                 }
             }
-            )
+            );
         }
     </script>
 }
@@ -289,5 +288,29 @@
                 }
             });
         }
+    </script>
+}
+
+@helper  SubmitForm(string formId)
+{
+    <script>
+        function submitForm() {
+            $('#@formId').form('submit'
+            );
+        }
+    </script>
+}
+
+@helper UseStateOnSelect()
+{
+    <script>
+        $(document).ready(function () {
+            $('#UseState').combobox({
+                onSelect: function (param) {
+                    useStateChange();
+                }
+            });
+        }
+        );
     </script>
 }

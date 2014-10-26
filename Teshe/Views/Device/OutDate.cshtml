@@ -1,0 +1,61 @@
+﻿@model Teshe.Models.DeviceIndexViewModel
+
+@{
+    ViewBag.Title = "设备查询";
+}
+
+<script>
+    function Search() {
+        $("#result").datagrid({
+            url: encodeURI("/Device/Search?CheckState=超期")
+        });
+    }
+</script>
+
+<script>
+    function pass(val, row) {
+        return "<a onclick=\"passConfirm(" + row.Id + ")\" href=\"javascript:void(0)\">查看详细</a>";
+    }
+    function state(val, row) {
+        if (val == "待检") {
+            return "<div style=\"color:blue\">待检</div>";
+        }
+        else if (val == "检测有效期内") {
+            return "<div>检测有效期内</div>";
+        }
+        else if (val == "超期") {
+            return "<div style=\"color:red\">超期</div>";
+        } else {
+            return "<div>" + val + "</div>";
+        }
+    }
+</script>
+<table id="result" class="easyui-datagrid" title="设备信息" style="width: 980px; height: auto"
+    data-options="singleSelect:true,collapsible:true,url:'/Device/Search?CheckState=超期',method:'post',rownumbers:'true',pagination:'true'">
+    <thead>
+        <tr>
+            <th data-options="field:'pass',width:60,formatter:pass">查看详细</th>
+            <th data-options="field:'Name',width:80">设备名称</th>
+            <th data-options="field:'Model',width:100">设备型号</th>
+            <th data-options="field:'Barcode',width:100">条形码</th>
+            <th data-options="field:'Company',width:100">所在公司</th>
+            <th data-options="field:'District',width:100">所在区（县）</th>
+            <th data-options="field:'City',width:100">所在城市</th>
+            <th data-options="field:'Province',width:100">所在省份</th>
+            @*<th data-options="field:'ManufactureDate',width:100">出厂日期</th>
+            <th data-options="field:'Factory',width:100">生产厂家</th>*@
+            <th data-options="field:'SetupTime',width:100">安装时间</th>
+            @*            <th data-options="field:'ExplosionProof',width:100">防爆否</th>
+            <th data-options="field:'SecurityCertificateNo',width:100">安检证号</th>*@
+            <th data-options="field:'CheckState',formatter:state,width:100">检测状态</th>
+            <th data-options="field:'CheckTime',width:100">检测时间</th>
+            @*            <th data-options="field:'CheckCycle',width:100">检测周期</th>*@
+            <th data-options="field:'UseState',width:100">使用状态</th>
+            @*            <th data-options="field:'MaintenanceRecord',width:100">维修记录</th>*@
+        </tr>
+    </thead>
+</table>
+<a class="easyui-linkbutton" href="javascript:void(0)" onclick="exportExcel()">导出报表</a>
+<a class="easyui-linkbutton" href="javascript:void(0)" onclick="print()">在线打印</a>
+@UIHelper.ExportExcel("Device")
+@UIHelper.Print("Device")

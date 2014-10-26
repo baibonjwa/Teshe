@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "解除手机用户绑定";
+}
+
+<table class="easyui-datagrid" title="待审核的用户" style="width: 1000px; height: auto"
+    data-options="singleSelect:true,collapsible:true,url:'/UserInfo/GetBindUser',method:'post',rownumbers:'true',pagination:'true'">
+    <thead>
+        <tr>
+            <th data-options="field:'pass',width:100,formatter:pass">解除绑定</th>
+            <th data-options="field:'Name',width:80">用户名</th>
+            <th data-options="field:'SIMCode',width:100">绑定SIM卡号</th>
+            <th data-options="field:'Password',width:100">密码</th>
+            <th data-options="field:'ResponsiblePerson',width:100">负责人</th>
+            <th data-options="field:'Company',width:100">所在公司</th>
+            <th data-options="field:'District',width:100">所在区（县）</th>
+            <th data-options="field:'City',width:100">所在城市</th>
+            <th data-options="field:'Province',width:100">所在省份</th>
+        </tr>
+    </thead>
+</table>
+
+<script>
+    function pass(val, row) {
+        return "<a onclick=\"passConfirm(" + row.Id + ")\" href=\"javascript:void(0)\">解除手机绑定</a>";
+    }
+    function passConfirm(id) {
+        $.messager.confirm('确认', '您确定要解除手机绑定吗？', function (r) {
+            if (r) {
+                window.location.href = "/UserInfo/RelieveBind/" + id;
+            }
+        });
+    }
+</script>

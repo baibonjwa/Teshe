@@ -1,68 +1,248 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
 
-    <title>@ViewBag.Title</title>
+    <title>欢迎使用本系统</title>
     @Scripts.Render("~/bundles/modernizr")
-    @Styles.Render("~/Content/main.css")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Styles.Render("~/Content/main.css")
-    @Styles.Render("~/Content/Site.css")
-    @Styles.Render("~/Content/bootstrap.min.css")
-    @Scripts.Render("~/Scripts/bootstrap.min.js")
     @Scripts.Render("~/Scripts/My97DatePicker/WdatePicker.js")
     <link href="~/easyui/themes/bootstrap/easyui.css" rel="stylesheet" />
     <script src="~/easyui/jquery.easyui.js"></script>
     <script src="~/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <link href="~/easyui/themes/icon.css" rel="stylesheet" />
     <script>
-        $.messager.defaults = { ok: "是", cancel: "否" };
-        window.onload = function () {
-            $(".panel-header").css("width", "auto")
+        $(document).ready(function () {
+            var strCookie = document.cookie;
+            var arrCookie = strCookie.split(";");
+            var listNum = 0;
+            //遍历cookie数组，处理每个cookie对 
+            for (var i = 0; i < arrCookie.length; i++) {
+                var arr = arrCookie[i].split("=");
+                //找到名称为userId的cookie，并返回它的值 
+                if ("listNum" == arr[0]) {
+                    listNum = arr[1];
+                    break;
+                }
+            }
+            switch (listNum) {
+                case '1':
+                    //alert(1);
+                    $("#accordion").accordion('select', "添加设备");
+                    break;
+                case '2':
+                    //alert(2);
+                    $("#accordion").accordion('select', "设备管理");
+                    break;
+                case '3':
+                    //alert(3);
+                    $("#accordion").accordion('select', "故障管理");
+                    break;
+                case '4':
+                    //alert(4);
+                    $("#accordion").accordion('select', "报废管理");
+                    break;
+                case '5':
+                    //alert(5);
+                    $("#accordion").accordion('select', "共享平台");
+                    break;
+                case '6':
+                    //alert(6);
+                    $("#accordion").accordion('select', "用户管理");
+                    break;
+                case '7':
+                    //alert(7);
+                    $("#accordion").accordion('select', "收件箱");
+                    break;
+                case '8':
+                    //alert(8);
+                    $("#accordion").accordion('select', "系统管理");
+                    break;
+            }
+        });
+        function setCookie(id) {
+            document.cookie = "listNum=" + id + ";path=/";
+        }
+        function redirect(url) {
+            window.location.href = url;
         }
     </script>
-
 </head>
+@{
+    String roles = new Teshe.Models.TesheContext().UserInfoes.First(u => u.Name == this.User.Identity.Name).UserType.Name;
+}
 <body>
-    <div class="top">
-        @Html.Partial("_BackTop")
-    </div>
-    <div class="center">
-        @if (User.IsInRole("客户"))
-        { 
-            @Html.Partial("_BackLeftForUser")  
-        }
-        else if (User.IsInRole("区（县）级管理员"))
-        {
-            @Html.Partial("_BackLeftForDistrict")
-        }
-        else if (User.IsInRole("市级管理员"))
-        {
-            @Html.Partial("_BackLeftForCity")
-        }
-        else if (User.IsInRole("省级管理员"))
-        {
-            @Html.Partial("_BackLeftForProvince")
-        }
-        else if (User.IsInRole("系统管理员"))
-        {
-            @Html.Partial("_BackLeftForSystem")
-        }
-        else
-        {
-            @Html.Partial("_BackLeft")
-        }
-        @Html.Partial("_BackRightTop")
-        <div style="margin-top: 20px;" class="col-sm-8">
-            @RenderBody()
+    <div class="easyui-layout" style="width: 100%; height: 600px">
+        <div data-options="region:'north'" style="height: 65px; background-color: #CCCCCC">
+            <h1 style="padding-left: 45px; padding-top: 3px;">矿山在用设备设施安全管理平台</h1>
+        </div>
+        <div data-options="region:'south',split:true" style="padding: 12px; height: 50px; text-align: center; color: #777777">
+            版权所有：辽宁信达检测有限公司
+                技术支持：辽宁工程技术大学
+                帮助中心：辽宁信达检测有限公司
+        </div>
+        <div data-options="region:'west',split:true" title="主菜单" style="width: 200px;">
+            <div id="accordion" class="easyui-accordion" data-options="fit:true,border:false">
+                @if (User.IsInRole("客户") || User.IsInRole("系统管理员"))
+                {
+                    <div id="list1" title="添加设备" style="padding: 10px;">
+                        <ul>
+                            <li onclick="document.cookie='listNum=1;path=/'" class="tree_li"><a href="/Device/CreateLiftTechnique">添加提升设备</a></li>
+                            <li onclick="document.cookie='listNum=1;path=/'" class="tree_li"><a href="/Device/CreateDeliveryEquipment">添加运输设备</a></li>
+                            <li onclick="document.cookie='listNum=1;path=/'" class="tree_li"><a href="/Device/CreateSewerage">添加排水设备</a></li>
+                            <li onclick="document.cookie='listNum=1;path=/'" class="tree_li"><a href="/Device/CreateAirmovingDevice">添加通风设备</a></li>
+                            <li onclick="document.cookie='listNum=1;path=/'" class="tree_li"><a href="/Device/CreatePressureAir">添加压风设备</a></li>
+                            <li onclick="document.cookie='listNum=1;path=/'" class="tree_li"><a href="/Device/Create">添加其他设备</a></li>
+                        </ul>
+                    </div>
+                }
+                <div id="list2" title="设备管理" style="padding: 10px;">
+                    <ul>
+                        @if (!User.IsInRole("客户"))
+                        {
+                            <li onclick=" setCookie(2) " class="tree_li"><a href="/Device/Verify">待审核的设备</a></li>
+                        }
+                        <li onclick="setCookie(2)" class="tree_li"><a href="/Device/Index">设备查询</a></li>
+                        <li onclick="setCookie(2)" class="tree_li"><a href="/Device/OutDate">超期设备</a></li>
+                    </ul>
+                </div>
+                <div id="list3" title="故障管理" style="padding: 10px">
+                    <ul>
+                        @if (User.IsInRole("客户") || User.IsInRole("系统管理员"))
+                        {
+                            <li onclick=" setCookie(3) " class="tree_li"><a href="/Stoppage/Create">故障登记</a></li>
+                        }
+                        <li onclick="setCookie(3)" class="tree_li"><a href="/Stoppage/Index">故障查询</a></li>
+                    </ul>
+                </div>
+                <div id="list4" title="报废管理" style="padding: 10px">
+                    <ul>
+                        @if (User.IsInRole("客户") || User.IsInRole("系统管理员"))
+                        {
+                            <li onclick=" setCookie(4) " class="tree_li"><a href="/Scrap/Create">报废登记</a></li>
+                        }
+                        <li onclick="setCookie(4)" class="tree_li"><a href="/Scrap/Index">报废查询</a></li>
+                    </ul>
+                </div>
+                <div id="list5" title="共享平台" style="padding: 10px">
+                    <ul>
+                        @if (!User.IsInRole("客户"))
+                        {
+                            <li onclick=" setCookie(5) " class="tree_li"><a href="/SharedFile/Create">共享文件上传</a></li>
+                        }
+                        <li onclick="setCookie(5)" class="tree_li"><a href="/SharedFile/Index">共享文件下载</a></li>
+                    </ul>
+                </div>
+                <div id="list6" title="用户管理" style="padding: 10px">
+                    <ul>
+                        @if (User.IsInRole("系统管理员"))
+                        {
+                            <li onclick=" setCookie(6) " class="tree_li"><a href="/UserInfo/Verify">审核注册用户</a></li>
+                            <li onclick=" setCookie(6) " class="tree_li"><a href="/UserInfo/Relieve">解除用户手机绑定</a></li>
+                        }
+                        @if (!User.IsInRole("客户"))
+                        {
+                            <li onclick=" setCookie(6) " class="tree_li"><a href="/UserInfo/CreateAdmin">创建管理员账号</a></li>
+                            <li onclick="setCookie(6)" class="tree_li"><a href="/UserInfo/Search">管理员用户查询</a></li>
+                        }
+                        @if (User.IsInRole("客户"))
+                        {
+                            <li onclick="setCookie(6)" class="tree_li"><a href="/UserInfo/ModifyUserInfo">客户信息修改</a></li>
+                            <li onclick="setCookie(6)" class="tree_li"><a href="/UserInfo/ModifyPassword">客户密码修改</a></li>
+                            <li onclick="setCookie(6)" class="tree_li"><a onclick="Cancel('@User.Identity.Name')" href="javascript:void(0)">客户注销</a></li>
+                        }
+                        @if (User.IsInRole("省级管理员"))
+                        {
+                            <li onclick="setCookie(6)" class="tree_li"><a href="/UserInfo/ModifyUserInfo">省级管理员信息修改</a></li>
+                            <li onclick="setCookie(6)" class="tree_li"><a href="/UserInfo/ModifyPassword">省级管理员密码修改</a></li>
+                            <li onclick="setCookie(6)" class="tree_li"><a onclick="Cancel('@User.Identity.Name')" href="javascript:void(0)">省级管理员注销</a></li>
+                        }
+                        @if (User.IsInRole("市级管理员"))
+                        {
+                            <li onclick="setCookie(6)" class="tree_li"><a href="/UserInfo/ModifyUserInfo">市级管理员信息修改</a></li>
+                            <li onclick="setCookie(6)" class="tree_li"><a href="/UserInfo/ModifyPassword">市级管理员密码修改</a></li>
+                            <li onclick="setCookie(6)" class="tree_li"><a onclick="Cancel('@User.Identity.Name')" href="javascript:void(0)">市级管理员注销</a></li>
+                        }
+                        @if (User.IsInRole("市级管理员"))
+                        {
+                            <li onclick="setCookie(6)" class="tree_li"><a href="/UserInfo/ModifyUserInfo">市级管理员信息修改</a></li>
+                            <li onclick="setCookie(6)" class="tree_li"><a href="/UserInfo/ModifyPassword">市级管理员密码修改</a></li>
+                            <li onclick="setCookie(6)" class="tree_li"><a onclick="Cancel('@User.Identity.Name')" href="javascript:void(0)">市级管理员注销</a></li>
+                        }
+                        @if (User.IsInRole("区（县）级管理员"))
+                        {
+                            <li onclick="setCookie(6)" class="tree_li"><a href="/UserInfo/ModifyUserInfo">区（县）级管理员信息修改</a></li>
+                            <li onclick="setCookie(6)" class="tree_li"><a href="/UserInfo/ModifyPassword">区（县）级管理员密码修改</a></li>
+                            <li onclick="setCookie(6)" class="tree_li"><a onclick="Cancel('@User.Identity.Name')" href="javascript:void(0)">区（县）级管理员注销</a></li>
+                        }
+                    </ul>
+                </div>
+                <div id="list7" title="收件箱" style="padding: 10px">
+                    <ul>
+                        <li onclick="setCookie(7)" class="tree_li"><a href="/Mail/Index">收件箱</a></li>
+                    </ul>
+                </div>
+                @if (User.IsInRole("系统管理员"))
+                {
+                    <div id="list8" title="系统管理" style="padding: 10px">
+                        <ul>
+                            <li onclick=" setCookie(8) " class="tree_li"><a href="/Home/DataBackup">数据库备份</a></li>
+                        </ul>
+                    </div>
+                }
+            </div>
+        </div>
+        <div data-options="region:'center',iconCls:'icon-ok'">
+
+            <div id="tt" class="easyui-tabs" data-options="tools:'#tab-tools'">
+                <div title="@ViewBag.Title" style="padding: 10px;">
+                    @RenderBody()
+                </div>
+            </div>
+            <div id="tab-tools">
+                <span>当前用户：@User.Identity.Name</span>&nbsp;&nbsp;&nbsp;<span>权限：@roles</span>
+                <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-back'" onclick="redirect('/Home/Index')"></a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-no'" onclick="redirect('/UserInfo/Logout')"></a>
+            </div>
         </div>
     </div>
-
-    @RenderSection("scripts", required: false)
 </body>
 </html>
+<script type="text/javascript">
+    var index = 0;
+
+    function add(title, content) {
+        $.ajax({
+            type: "GET",
+            url: content,
+            success: function (results) {
+                var tab = $('#tt').tabs('getSelected');  // get selected panel
+                $('#tt').tabs('update', {
+                    tab: tab,
+                    options: {
+                        title: title,
+                        content: results  // the new content URL
+                    }
+                });
+            }
+        }
+        );
+    }
+    function remove() {
+        var tab = $('#tt').tabs('getSelected');
+        if (tab) {
+            var index = $('#tt').tabs('getTabIndex', tab);
+            $('#tt').tabs('close', index);
+        }
+    }
+</script>
 <script>
     function pagerFilter(data) {
         if (typeof data.length == 'number' && typeof data.splice == 'function') {	// is array
@@ -98,3 +278,4 @@
         $('#result').datagrid({ loadFilter: pagerFilter }).datagrid('loadData', getData());
     });
 </script>
+@UIHelper.CancelUser()

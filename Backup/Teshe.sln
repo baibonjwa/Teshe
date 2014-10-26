@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teshe", "Teshe\Teshe.csproj", "{B819B556-692C-4D92-89E0-3FC823630E71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teshe.Tests", "Teshe.Tests\Teshe.Tests.csproj", "{34D8B567-1F25-46ED-ACCD-C2922C8A3FA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teshe.Service", "Teshe.Service\Teshe.Service.csproj", "{FB974307-4888-4182-B943-34E2E2792ED5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teshe.Service.Tests", "Teshe.Service.Tests\Teshe.Service.Tests.csproj", "{97B63DEB-C151-4102-B207-94FD6EDBB0DD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B819B556-692C-4D92-89E0-3FC823630E71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B819B556-692C-4D92-89E0-3FC823630E71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B819B556-692C-4D92-89E0-3FC823630E71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B819B556-692C-4D92-89E0-3FC823630E71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34D8B567-1F25-46ED-ACCD-C2922C8A3FA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34D8B567-1F25-46ED-ACCD-C2922C8A3FA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34D8B567-1F25-46ED-ACCD-C2922C8A3FA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34D8B567-1F25-46ED-ACCD-C2922C8A3FA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB974307-4888-4182-B943-34E2E2792ED5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB974307-4888-4182-B943-34E2E2792ED5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB974307-4888-4182-B943-34E2E2792ED5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB974307-4888-4182-B943-34E2E2792ED5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97B63DEB-C151-4102-B207-94FD6EDBB0DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97B63DEB-C151-4102-B207-94FD6EDBB0DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97B63DEB-C151-4102-B207-94FD6EDBB0DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97B63DEB-C151-4102-B207-94FD6EDBB0DD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,16 +1,182 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "主页";
 }
+<script>
+    function pass(val, row) {
+        return "<a onclick=\"passConfirm(" + row.Id + ")\" href=\"javascript:void(0)\">查看详细</a>";
+    }
+    function del(val, row) {
+        return "<a onclick=\"delConfirm(" + row.Id + ")\" href=\"javascript:void(0)\">删除</a>";
+    }
+    function passConfirm(id) {
+        window.location.href = "/Device/Details/" + id;
+    }
+    function delConfirm(id) {
+        $.messager.confirm('确认', '您确定要删除吗？', function (r) {
+            if (r) {
+                window.location.href = "/Device/Delete/" + id;
+            }
+        });
+    }
+    function state(val, row) {
+        if (val == "待检") {
+            return "<div style=\"color:blue\">待检</div>";
+        }
+        else if (val == "检测有效期内") {
+            return "<div>检测有效期内</div>";
+        }
+        else if (val == "超期") {
+            return "<div style=\"color:red\">超期</div>";
+        } else {
+            return "<div>" + val + "</div>";
+        }
+    }
+</script>
+<table>
+    <tr>
+        <td>
+            <table id="result" class="easyui-datagrid" title="待检设备信息" style="width: 460px; height: 250px"
+                data-options="singleSelect:true,collapsible:true,url:'/Device/Search?CheckState=待检',method:'post',rownumbers:'true',pagination:'true'">
+                <thead>
+                    <tr>
+                        <th data-options="field:'pass',width:60,formatter:pass">查看详细</th>
+                        <th data-options="field:'Name',width:80">设备名称</th>
+                        <th data-options="field:'CheckState',formatter:state,width:100">检测状态</th>
+                        <th data-options="field:'CheckTime',width:100">检测时间</th>
+                        @*            <th data-options="field:'CheckCycle',width:100">检测周期</th>*@
+                        <th data-options="field:'UseState',width:100">使用状态</th>
+                        @*            <th data-options="field:'MaintenanceRecord',width:100">维修记录</th>*@
+                    </tr>
+                </thead>
+            </table>
+        </td>
+        <td>
+            <table id="result" class="easyui-datagrid" title="超期设备信息" style="width: 460px; height: 250px"
+                data-options="singleSelect:true,collapsible:true,url:'/Device/Search?CheckState=超期',method:'post',rownumbers:'true',pagination:'true'">
+                <thead>
+                    <tr>
+                        <th data-options="field:'pass',width:60,formatter:pass">查看详细</th>
+                        <th data-options="field:'Name',width:80">设备名称</th>
+                        @*<th data-options="field:'ManufactureDate',width:100">出厂日期</th>
+            <th data-options="field:'Factory',width:100">生产厂家</th>*@
+                        <th data-options="field:'SetupTime',width:100">安装时间</th>
+                        @*            <th data-options="field:'ExplosionProof',width:100">防爆否</th>
+            <th data-options="field:'SecurityCertificateNo',width:100">安检证号</th>*@
+                        <th data-options="field:'CheckState',formatter:state,width:100">检测状态</th>
+                        <th data-options="field:'CheckTime',width:100">检测时间</th>
+                        @*            <th data-options="field:'CheckCycle',width:100">检测周期</th>*@
+                        @*            <th data-options="field:'MaintenanceRecord',width:100">维修记录</th>*@
+                    </tr>
+                </thead>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table id="mails" class="easyui-datagrid" title="提醒信息" style="width: 460px; height: 250px"
+                data-options="singleSelect:false,collapsible:true,url:'/Mail/Search',method:'post',rownumbers:'true',pagination:'true'">
+                <thead>
+                    <tr>
+                        <th data-options="field:'ck',checkbox:true"></th>
+                        <th data-options="field:'Contents',width:700">提醒内容</th>
+                        <th data-options="field:'SendTime',width:100">时间</th>
+                    </tr>
+                </thead>
+            </table>
+        </td>
+        <td>
+            <table id="result" class="easyui-datagrid" title="共享文件下载" style="width: 460px; height: 250px"
+                data-options="singleSelect:true,collapsible:true,url:'/SharedFile/Search',method:'post',rownumbers:'true',pagination:'true'">
+                <thead>
+                    <tr>
+                        <th data-options="field:'download',width:50,formatter:title">下载</th>
+                        <th data-options="field:'Title',width:100">标题</th>
+                        <th data-options="field:'Description',width:100">描述</th>
+                        <th data-options="field:'OldFileName',width:100">文件名</th>
+                        <th data-options="field:'People',width:100,formatter:people">上传人</th>
+                    </tr>
+                </thead>
+            </table>
+        </td>
+    </tr>
+</table>
+<script>
+    function title(val, row) {
+        return "<a href=\"/FileUpload/SharedFile/" + row.NewFileName + "\">下载</a>";
+    }
+    function people(val, row) {
+        return val.Name;
+    }
+    function del(val, row) {
+        return "<a onclick=\"delConfirm(" + row.Id + ")\" href=\"javascript:void(0)\">删除</a>";
+    }
+    function delConfirm(id) {
+        $.messager.confirm('确认', '您确定要删除吗？', function (r) {
+            if (r) {
+                window.location.href = "/SharedFile/Delete/" + id;
+            }
+        });
+    }
+</script>
 
-<!DOCTYPE html>
+<script>
+    function mailsFilter(data) {
+        if (typeof data.length == 'number' && typeof data.splice == 'function') {	// is array
+            data = {
+                total: data.length,
+                rows: data
+            }
+        }
+        var dg = $(this);
+        var opts = dg.datagrid('options');
+        var pager = dg.datagrid('getPager');
+        pager.pagination({
+            buttons: [{
+                iconCls: 'icon-cancel',
+                handler: function () {
+                    var selectedRow = $("#mails").datagrid("getSelections");
+                    $.messager.confirm('确认', '您确定要删除吗？', function (r) {
+                        for (var i = 0; i < selectedRow.length; i++) {
+                            if (r) {
+                                //alert(2);
+                                $.ajax({
+                                    type: "GET",
+                                    url: "/Mail/Delete/" + selectedRow[i].Id,
+                                    success: function (results) {
+                                        //alert(results);
+                                        //$('#mails').datagrid({ url: '/Mail/Search' });
+                                    }
+                                }
+                                )
+                            }
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>欢迎</title>
-</head>
-<body>
-    <div>
-    </div>
-</body>
-</html>
+                        }
+                        $('#mails').datagrid({ url: '/Mail/Search' });
+                    });
+                    //alert(selectedRow);
+                    //alert('批量删除功能将在下个版本完成');
+                }
+            }],
+            onSelectPage: function (pageNum, pageSize) {
+                opts.pageNumber = pageNum;
+                opts.pageSize = pageSize;
+                pager.pagination('refresh', {
+                    pageNumber: pageNum,
+                    pageSize: pageSize
+                });
+                dg.datagrid('loadData', data);
+            }
+        });
+        if (!data.originalRows) {
+            data.originalRows = (data.rows);
+        }
+        var start = (opts.pageNumber - 1) * parseInt(opts.pageSize);
+        var end = start + parseInt(opts.pageSize);
+        data.rows = (data.originalRows.slice(start, end));
+        return data;
+    }
+
+    $(function () {
+        $('#mails').datagrid({ loadFilter: mailsFilter }).datagrid('loadData', getData());
+    });
+</script>

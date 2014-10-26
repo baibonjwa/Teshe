@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Teshe.Models.Mail>
+
+@{
+    ViewBag.Title = "收件箱";
+}
+
+
+<table id="mails" class="easyui-datagrid" title="提醒信息"
+    data-options="singleSelect:false,collapsible:true,url:'/Mail/Search',method:'post',rownumbers:'true',pagination:'true'">
+    <thead>
+        <tr>
+            <th data-options="field:'ck',checkbox:true"></th>
+            <th data-options="field:'Contents',width:700">提醒内容</th>
+            <th data-options="field:'SendTime',width:100">时间</th>
+        </tr>
+    </thead>
+</table>
+<link href="~/easyui/themes/icon.css" rel="stylesheet" />
+<script>
+    function mailsFilter(data) {
+        if (typeof data.length == 'number' && typeof data.splice == 'function') {	// is array
+            data = {
+                total: data.length,
+                rows: data
+            }
+        }
+        var dg = $(this);
+        var opts = dg.datagrid('options');
+        var pager = dg.datagrid('getPager');
+        pager.pagination({
+            buttons: [{
+                iconCls: 'icon-cancel',
+                handler: function () {
+                    var selectedRow = $("#mails").datagrid("getSelections");
+                    $.messager.confirm('确认', '您确定要删除吗？', function (r) {
+                        for (var i = 0; i < selectedRow.length; i++) {
+                            if (r) {
+                                //alert(2);
+                                $.ajax({
+                                    type: "GET",
+                                    url: "/Mail/Delete/" + selectedRow[i].Id,
+                                    success: function (results) {
+                                        //alert(results);
+                                        //$('#mails').datagrid({ url: '/Mail/Search' });
+                                    }
+                                }
+                                )
+                            }
+
+                        }
+                        $('#mails').datagrid({ url: '/Mail/Search' });
+                    });
+                    //alert(selectedRow);
+                    //alert('批量删除功能将在下个版本完成');
+                }
+            }],
+            onSelectPage: function (pageNum, pageSize) {
+                opts.pageNumber = pageNum;
+                opts.pageSize = pageSize;
+                pager.pagination('refresh', {
+                    pageNumber: pageNum,
+                    pageSize: pageSize
+                });
+                dg.datagrid('loadData', data);
+            }
+        });
+        if (!data.originalRows) {
+            data.originalRows = (data.rows);
+        }
+        var start = (opts.pageNumber - 1) * parseInt(opts.pageSize);
+        var end = start + parseInt(opts.pageSize);
+        data.rows = (data.originalRows.slice(start, end));
+        return data;
+    }
+
+    $(function () {
+        $('#mails').datagrid({ loadFilter: mailsFilter }).datagrid('loadData', getData());
+    });
+</script>

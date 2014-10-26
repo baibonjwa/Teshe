@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teshe", "Teshe\Teshe.csproj", "{B819B556-692C-4D92-89E0-3FC823630E71}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teshe.Tests", "Teshe.Tests\Teshe.Tests.csproj", "{34D8B567-1F25-46ED-ACCD-C2922C8A3FA5}"

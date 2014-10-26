@@ -1,0 +1,50 @@
+﻿@using Teshe.Models
+@model Teshe.Models.DeviceIndexViewModel
+
+@{
+    ViewBag.Title = "共享文件下载";
+}
+
+<script>
+    function Search() {
+        $("#result").datagrid({
+            url: encodeURI("/Device/Search?" + "Name=" + $("#Name").val() + "&Model=" + $("#Model").val() + "&Barcode=" + $("#Barcode").val() + "&Company=" + $("#Company").val() + "&CheckState=" + $("#CheckState").val() + "&District=" + $("#District").val() + "&City=" + $("#City").val() + "&Province=" + $("#Province").val())
+        });
+    }
+</script>
+
+<script>
+    function people(val, row) {
+        return val.Name;
+    }
+    function title(val, row) {
+        return "<a href=\"/FileUpload/SharedFile/" + row.NewFileName + "\">" + val + "</a>";
+    }
+    function del(val, row) {
+        return "<a onclick=\"delConfirm(" + row.Id + ")\" href=\"javascript:void(0)\">删除</a>";
+    }
+    function delConfirm(id) {
+        $.messager.confirm('确认', '您确定要删除吗？', function (r) {
+            if (r) {
+                window.location.href = "/SharedFile/Delete/" + id;
+            }
+        });
+    }
+</script>
+<table id="result" class="easyui-datagrid" title="共享文件下载" style="width: 980px; height: auto"
+    data-options="singleSelect:true,collapsible:true,url:'/SharedFile/Search',method:'post',rownumbers:'true',pagination:'true'">
+    <thead>
+        <tr>
+            <th data-options="field:'Title',width:150,formatter:title">标题</th>
+            <th data-options="field:'Description',width:350">描述</th>
+            <th data-options="field:'OldFileName',width:150">文件名</th>
+            <th data-options="field:'People',width:100,formatter:people">上传人</th>
+            @{
+                if (!User.IsInRole("客户"))
+                {
+                    <th data-options="field:'del',width:100,formatter:del">删除</th>
+                }
+            }
+        </tr>
+    </thead>
+</table>

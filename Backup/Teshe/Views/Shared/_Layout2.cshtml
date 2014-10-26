@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>@ViewBag.Title</title>
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Styles.Render("~/Content/main.css")
+    @Scripts.Render("~/Scripts/My97DatePicker/WdatePicker.js")
+    <link href="~/easyui/themes/bootstrap/easyui.css" rel="stylesheet" />
+    <script src="~/easyui/jquery.easyui.js"></script>
+    <script src="~/easyui/locale/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+    <div class="easyui-layout" style="width: 100%; height: 600px">
+        <div data-options="region:'north'" style="height: 65px; background-color: #AAAAAA"></div>
+        <div data-options="region:'south',split:true" style="height: 50px;"></div>
+        <div data-options="region:'west',split:true" title="主菜单" style="width: 200px;">
+            <div class="easyui-accordion" data-options="fit:true,border:false">
+                <div title="添加设备" data-options="selected:true" style="padding: 10px;">
+                    <ul>
+                        <li class="tree_li"><a href="javascript:void(0)" onclick="add('添加提升设备','/Device/Index')">添加提升设备</a></li>
+                        <li class="tree_li"><a href="/Device/Create">添加运输设备</a></li>
+                        <li class="tree_li"><a href="/Device/Create">添加排水设备</a></li>
+                        <li class="tree_li"><a href="/Device/Create">添加通风设备</a></li>
+                        <li class="tree_li"><a href="/Device/Create">添加压风设备</a></li>
+                        <li class="tree_li"><a href="/Device/Create">添加其他设备</a></li>
+                    </ul>
+                </div>
+                <div title="设备管理" style="padding: 10px;">
+                    <ul>
+                        <li class="tree_li"><a href="/Device/Verify">待审核的设备</a></li>
+                        <li class="tree_li"><a href="/Device/Index">设备查询</a></li>
+                    </ul>
+                </div>
+                <div title="故障管理" style="padding: 10px">
+                    <ul>
+                        <li class="tree_li"><a href="/Stoppage/Create">故障登记</a></li>
+                        <li class="tree_li"><a href="/Stoppage/Index">故障查询</a></li>
+                    </ul>
+                </div>
+                <div title="报废管理" style="padding: 10px">
+                    <ul>
+                        <li class="tree_li"><a href="/Scrap/Create">报废登记</a></li>
+                        <li class="tree_li"><a href="/Scrap/Index">报废查询</a></li>
+                    </ul>
+                </div>
+                <div title="共享平台" style="padding: 10px">
+                    <ul>
+                        <li class="tree_li"><a href="/SharedFile/Create">共享文件上传</a></li>
+                        <li class="tree_li"><a href="/SharedFile/Index">共享文件下载</a></li>
+                    </ul>
+                </div>
+                <div title="系统管理" style="padding: 10px">
+                    <ul>
+                        <li class="tree_li"><a href="/UserInfo/Relieve">解除用户手机绑定</a></li>
+                        <li class="tree_li"><a href="/Home/DataBackup">数据库备份</a></li>
+                    </ul>
+                </div>
+                <div title="用户管理" style="padding: 10px">
+                    <ul>
+                        <li class="tree_li"><a href="/UserInfo/Verify">审核注册用户</a></li>
+                        <li class="tree_li"><a href="/UserInfo/CreateAdmin">创建管理员账号</a></li>
+                        <li class="tree_li"><a href="/UserInfo/Search">管理员用户查询</a></li>
+                        <li class="tree_li"><a href="/UserInfo/ModifyUserInfo">系统管理员信息修改</a></li>
+                        <li class="tree_li"><a href="/UserInfo/ModifyPassword">系统管理员密码修改</a></li>
+                        <li class="tree_li"><a onclick="Cancel('@User.Identity.Name')" href="javascript:void(0)">系统管理员注销</a></li>
+                    </ul>
+                </div>
+                <div title="收件箱" style="padding: 10px">
+                    <ul>
+                        <li class="tree_li"><a href="/Mail/Index">收件箱</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div data-options="region:'center',title:'Main Title',iconCls:'icon-ok'">
+            <div id="tt" class="easyui-tabs" data-options="fit:true,border:false,plain:true">
+                @*<div title="About" data-options="href:'../layout/_content.html'" style="padding: 10px"></div>*@
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    var index = 0;
+
+    function add(title, content) {
+        $.ajax({
+            type: "POST",
+            url: content,
+            success: function (results) {
+                alert(results);
+                $('#tt').tabs('add', {
+                    title: title,
+                    content: results,
+                    closable: true
+                });
+            }
+        }
+        );
+    }
+    function remove() {
+        var tab = $('#tt').tabs('getSelected');
+        if (tab) {
+            var index = $('#tt').tabs('getTabIndex', tab);
+            $('#tt').tabs('close', index);
+        }
+    }
+</script>
+@RenderSection("scripts", required: false)

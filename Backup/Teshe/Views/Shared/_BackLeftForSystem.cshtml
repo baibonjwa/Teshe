@@ -1,0 +1,29 @@
+﻿<div id="left">
+    <div id="left_menu"></div>
+    <div id="left_tree">
+        <ul>
+            <li class="tree_li"><a href="/UserInfo/ModifyUserInfo">系统管理员信息修改</a></li>
+            <li class="tree_li"><a href="/UserInfo/ModifyPassword">系统管理员密码修改</a></li>
+            <li class="tree_li"><a onclick="Cancel('@User.Identity.Name')" href="javascript:void(0)">系统管理员注销</a></li>
+            <li class="tree_li"><a href="/Device/Create">添加设备</a></li>
+            <li class="tree_li"><a href="/Device/Index">设备查询</a></li>
+            <li class="tree_li"><a href="/Device/Verify">待审核的设备</a></li>
+            <li class="tree_li"><a href="/Stoppage/Create">故障登记</a></li>
+            <li class="tree_li"><a href="/Stoppage/Index">故障查询</a></li>
+            <li class="tree_li"><a href="/Scrap/Create">报废登记</a></li>
+            <li class="tree_li"><a href="/Scrap/Index">报废查询</a></li>
+            <li class="tree_li"><a href="/Mail/Index">收件箱</a></li>
+            <li class="tree_li"><a href="/SharedFile/Create">共享文件上传</a></li>
+            <li class="tree_li"><a href="/SharedFile/Index">共享文件下载</a></li>
+            <li class="tree_li"><a href="/UserInfo/Verify">审核注册用户</a></li>
+            <li class="tree_li"><a href="/UserInfo/CreateAdmin">创建管理员账号</a></li>
+            <li class="tree_li"><a href="/UserInfo/Search">管理员用户查询</a></li>
+            <li class="tree_li"><a href="/UserInfo/Relieve">解除用户手机绑定</a></li>
+            <li class="tree_li"><a href="/Home/DataBackup">数据库备份</a></li>
+            <li class="tree_li"><a href="/Home/SystemInfo">系统信息</a></li>
+
+        </ul>
+        <div id="tree_down"></div>
+    </div>
+</div>
+@UIHelper.CancelUser()

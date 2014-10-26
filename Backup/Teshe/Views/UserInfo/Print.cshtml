@@ -1,0 +1,43 @@
+﻿@model  List<Teshe.Models.UserInfo>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Print</title>
+    @Styles.Render("~/Content/bootstrap.min.css")
+    @Scripts.Render("~/Scripts/bootstrap.min.js")
+    <script>
+        //alert("如不满意默认打印样式，可以取消打印，并单击浏览器菜单中的打印预览，可以设置横向打印、去掉页头页脚等功能。")
+        window.print();
+    </script>
+</head>
+<body>
+    <table class="table">
+        <tr>
+            <th>用户名</th>
+            <th>密码</th>
+            <th>负责人</th>
+            <th>所在单位</th>
+            <th>所在区（县）</th>
+            <th>所在城市</th>
+            <th>所在省份</th>
+        </tr>
+        @foreach (var i in Model)
+        {
+            <tr>
+                <td>@i.Name</td>
+                <td>@i.Password</td>
+                <td>@i.ResponsiblePerson</td>
+                <td>@i.Company</td>
+                <td>@i.District</td>
+                <td>@i.City</td>
+                <td>@i.Province</td>
+            </tr>
+        }
+    </table>
+</body>
+</html>

@@ -1,0 +1,187 @@
+﻿@{
+    ViewBag.Title = "主页";
+}
+<script>
+    function pass(val, row) {
+        return "<a onclick=\"passConfirm(" + row.Id + ")\" href=\"javascript:void(0)\">查看详细</a>";
+    }
+    function del(val, row) {
+        return "<a onclick=\"delConfirm(" + row.Id + ")\" href=\"javascript:void(0)\">删除</a>";
+    }
+    function passConfirm(id) {
+        window.location.href = "/Device/Details/" + id;
+    }
+    function delConfirm(id) {
+        $.messager.confirm('确认', '您确定要删除吗？', function (r) {
+            if (r) {
+                window.location.href = "/Device/Delete/" + id;
+            }
+        });
+    }
+    function state(val, row) {
+        if (val == "待检") {
+            return "<div style=\"color:blue\">待检</div>";
+        }
+        else if (val == "检测有效期内") {
+            return "<div>检测有效期内</div>";
+        }
+        else if (val == "超期") {
+            return "<div style=\"color:red\">超期</div>";
+        } else {
+            return "<div>" + val + "</div>";
+        }
+    }
+</script>
+<table id="mails" class="easyui-datagrid" title="提醒信息" style="width: 980px; height: auto"
+    data-options="singleSelect:false,collapsible:true,url:'/Mail/Search',method:'post',rownumbers:'true',pagination:'true'">
+    <thead>
+        <tr>
+            <th data-options="field:'ck',checkbox:true"></th>
+            <th data-options="field:'Contents',width:700">提醒内容</th>
+            <th data-options="field:'SendTime',width:100">时间</th>
+        </tr>
+    </thead>
+</table>
+<br />
+<table id="result" class="easyui-datagrid" title="超期设备信息" style="width: 980px; height: auto"
+    data-options="singleSelect:true,collapsible:true,url:'/Device/Search?CheckState=超期',method:'post',rownumbers:'true',pagination:'true'">
+    <thead>
+        <tr>
+            <th data-options="field:'pass',width:60,formatter:pass">查看详细</th>
+            <th data-options="field:'Name',width:80">设备名称</th>
+            <th data-options="field:'Model',width:100">设备型号</th>
+            <th data-options="field:'Barcode',width:100">条形码</th>
+            <th data-options="field:'Company',width:100">所在公司</th>
+            <th data-options="field:'District',width:100">所在区（县）</th>
+            <th data-options="field:'City',width:100">所在城市</th>
+            <th data-options="field:'Province',width:100">所在省份</th>
+            @*<th data-options="field:'ManufactureDate',width:100">出厂日期</th>
+            <th data-options="field:'Factory',width:100">生产厂家</th>*@
+            <th data-options="field:'SetupTime',width:100">安装时间</th>
+            @*            <th data-options="field:'ExplosionProof',width:100">防爆否</th>
+            <th data-options="field:'SecurityCertificateNo',width:100">安检证号</th>*@
+            <th data-options="field:'CheckState',formatter:state,width:100">检测状态</th>
+            <th data-options="field:'CheckTime',width:100">检测时间</th>
+            @*            <th data-options="field:'CheckCycle',width:100">检测周期</th>*@
+            <th data-options="field:'UseState',width:100">使用状态</th>
+            @*            <th data-options="field:'MaintenanceRecord',width:100">维修记录</th>*@
+        </tr>
+    </thead>
+</table>
+<br />
+<table id="result" class="easyui-datagrid" title="待检设备信息" style="width: 980px; height: auto"
+    data-options="singleSelect:true,collapsible:true,url:'/Device/Search?CheckState=待检',method:'post',rownumbers:'true',pagination:'true'">
+    <thead>
+        <tr>
+            <th data-options="field:'pass',width:60,formatter:pass">查看详细</th>
+            <th data-options="field:'Name',width:80">设备名称</th>
+            <th data-options="field:'Model',width:100">设备型号</th>
+            <th data-options="field:'Barcode',width:100">条形码</th>
+            <th data-options="field:'Company',width:100">所在公司</th>
+            <th data-options="field:'District',width:100">所在区（县）</th>
+            <th data-options="field:'City',width:100">所在城市</th>
+            <th data-options="field:'Province',width:100">所在省份</th>
+            @*<th data-options="field:'ManufactureDate',width:100">出厂日期</th>
+            <th data-options="field:'Factory',width:100">生产厂家</th>*@
+            <th data-options="field:'SetupTime',width:100">安装时间</th>
+            @*            <th data-options="field:'ExplosionProof',width:100">防爆否</th>
+            <th data-options="field:'SecurityCertificateNo',width:100">安检证号</th>*@
+            <th data-options="field:'CheckState',formatter:state,width:100">检测状态</th>
+            <th data-options="field:'CheckTime',width:100">检测时间</th>
+            @*            <th data-options="field:'CheckCycle',width:100">检测周期</th>*@
+            <th data-options="field:'UseState',width:100">使用状态</th>
+            @*            <th data-options="field:'MaintenanceRecord',width:100">维修记录</th>*@
+        </tr>
+    </thead>
+</table>
+<br />
+<script>
+    function people(val, row) {
+        return val.Name;
+    }
+    function title(val, row) {
+        return "<a href=\"/FileUpload/SharedFile/" + row.NewFileName + "\">" + val + "</a>";
+    }
+    function del(val, row) {
+        return "<a onclick=\"delConfirm(" + row.Id + ")\" href=\"javascript:void(0)\">删除</a>";
+    }
+    function delConfirm(id) {
+        $.messager.confirm('确认', '您确定要删除吗？', function (r) {
+            if (r) {
+                window.location.href = "/SharedFile/Delete/" + id;
+            }
+        });
+    }
+</script>
+<table id="result" class="easyui-datagrid" title="共享文件下载" style="width: 980px; height: auto"
+    data-options="singleSelect:true,collapsible:true,url:'/SharedFile/Search',method:'post',rownumbers:'true',pagination:'true'">
+    <thead>
+        <tr>
+            <th data-options="field:'Title',width:150,formatter:title">标题</th>
+            <th data-options="field:'Description',width:350">描述</th>
+            <th data-options="field:'OldFileName',width:150">文件名</th>
+            <th data-options="field:'People',width:100,formatter:people">上传人</th>
+        </tr>
+    </thead>
+</table>
+<script>
+    function mailsFilter(data) {
+        if (typeof data.length == 'number' && typeof data.splice == 'function') {	// is array
+            data = {
+                total: data.length,
+                rows: data
+            }
+        }
+        var dg = $(this);
+        var opts = dg.datagrid('options');
+        var pager = dg.datagrid('getPager');
+        pager.pagination({
+            buttons: [{
+                iconCls: 'icon-cancel',
+                handler: function () {
+                    var selectedRow = $("#mails").datagrid("getSelections");
+                    $.messager.confirm('确认', '您确定要删除吗？', function (r) {
+                        for (var i = 0; i < selectedRow.length; i++) {
+                            if (r) {
+                                //alert(2);
+                                $.ajax({
+                                    type: "GET",
+                                    url: "/Mail/Delete/" + selectedRow[i].Id,
+                                    success: function (results) {
+                                        //alert(results);
+                                        //$('#mails').datagrid({ url: '/Mail/Search' });
+                                    }
+                                }
+                                )
+                            }
+
+                        }
+                        $('#mails').datagrid({ url: '/Mail/Search' });
+                    });
+                    //alert(selectedRow);
+                    //alert('批量删除功能将在下个版本完成');
+                }
+            }],
+            onSelectPage: function (pageNum, pageSize) {
+                opts.pageNumber = pageNum;
+                opts.pageSize = pageSize;
+                pager.pagination('refresh', {
+                    pageNumber: pageNum,
+                    pageSize: pageSize
+                });
+                dg.datagrid('loadData', data);
+            }
+        });
+        if (!data.originalRows) {
+            data.originalRows = (data.rows);
+        }
+        var start = (opts.pageNumber - 1) * parseInt(opts.pageSize);
+        var end = start + parseInt(opts.pageSize);
+        data.rows = (data.originalRows.slice(start, end));
+        return data;
+    }
+
+    $(function () {
+        $('#mails').datagrid({ loadFilter: mailsFilter }).datagrid('loadData', getData());
+    });
+</script>

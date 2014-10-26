@@ -133,20 +133,20 @@ namespace Teshe.Controllers
             }
             else if (User.IsInRole("市级管理员"))
             {
-                list = db.UserInfoes.Where<UserInfo>(u => u.City == user.City && u.IsVerify == 1).ToList<UserInfo>();
+                list = db.UserInfoes.Where<UserInfo>(u => u.City == user.City && u.IsVerify == 1 && u.UserType.Name != "省级管理员" && u.UserType.Name != "市级管理员" && u.UserType.Name != "系统管理员").ToList<UserInfo>();
             }
             else if (User.IsInRole("省级管理员"))
             {
-                list = db.UserInfoes.Where<UserInfo>(u => u.Province == user.Province && u.IsVerify == 1).ToList<UserInfo>();
+                list = db.UserInfoes.Where<UserInfo>(u => u.Province == user.Province && u.IsVerify == 1 && u.UserType.Name != "系统管理员" && u.UserType.Name != "省级管理员").ToList<UserInfo>();
             }
             else if (User.IsInRole("系统管理员"))
             {
                 Expression<Func<UserInfo, bool>> where = PredicateExtensionses.True<UserInfo>();
-                if (!String.IsNullOrEmpty(viewModel.District)) where = where.And(u => u.District == viewModel.District);
-                if (!String.IsNullOrEmpty(viewModel.City)) where = where.And(u => u.City == viewModel.City);
-                if (!String.IsNullOrEmpty(viewModel.Province)) where = where.And(u => u.Province == viewModel.Province);
-                where = where.And(u => u.IsVerify == 1);
-                where = where.And(u => u.UserType.Name != "客户");
+                //if (!String.IsNullOrEmpty(viewModel.District)) where = where.And(u => u.District == viewModel.District);
+                //if (!String.IsNullOrEmpty(viewModel.City)) where = where.And(u => u.City == viewModel.City);
+                //if (!String.IsNullOrEmpty(viewModel.Province)) where = where.And(u => u.Province == viewModel.Province);
+                //where = where.And(u => u.IsVerify == 1);
+                //where = where.And(u => u.UserType.Name != "客户");
                 list = db.UserInfoes.Where<UserInfo>(where).ToList();
                 //list = db.UserInfoes.Where<UserInfo>(u => u.UserType.Name == "客户" && u.IsVerify == 1).ToList<UserInfo>();
             }
