@@ -138,15 +138,15 @@ namespace Teshe.Controllers
             }
             //else
             //{
-                if (!String.IsNullOrEmpty(viewModel.Name)) where = where.And(u => u.Name.Contains(viewModel.Name));
-                if (!String.IsNullOrEmpty(viewModel.Model)) where = where.And(u => u.Model.Contains(viewModel.Model));
-                if (viewModel.SetupTime != null) where = where.And(u => u.SetupTime == viewModel.SetupTime);
-                if (!String.IsNullOrEmpty(viewModel.Company)) where = where.And(u => u.Company.Contains(viewModel.Company));
-                if (!String.IsNullOrEmpty(viewModel.Barcode)) where = where.And(u => u.Barcode.Contains(viewModel.Barcode));
-                if (!String.IsNullOrEmpty(viewModel.CheckState)) where = where.And(u => u.CheckState.Contains(viewModel.CheckState));
-                if (!String.IsNullOrEmpty(viewModel.District)) where = where.And(u => u.District.Contains(viewModel.District));
-                if (!String.IsNullOrEmpty(viewModel.City)) where = where.And(u => u.City.Contains(viewModel.City));
-                if (!String.IsNullOrEmpty(viewModel.Province)) where = where.And(u => u.Province.Contains(viewModel.Province));
+            if (!String.IsNullOrEmpty(viewModel.Name)) where = where.And(u => u.Name.Contains(viewModel.Name));
+            if (!String.IsNullOrEmpty(viewModel.Model)) where = where.And(u => u.Model.Contains(viewModel.Model));
+            if (viewModel.SetupTime != null) where = where.And(u => u.SetupTime == viewModel.SetupTime);
+            if (!String.IsNullOrEmpty(viewModel.Company)) where = where.And(u => u.Company.Contains(viewModel.Company));
+            if (!String.IsNullOrEmpty(viewModel.Barcode)) where = where.And(u => u.Barcode.Contains(viewModel.Barcode));
+            if (!String.IsNullOrEmpty(viewModel.CheckState)) where = where.And(u => u.CheckState.Contains(viewModel.CheckState));
+            if (!String.IsNullOrEmpty(viewModel.District)) where = where.And(u => u.District.Contains(viewModel.District));
+            if (!String.IsNullOrEmpty(viewModel.City)) where = where.And(u => u.City.Contains(viewModel.City));
+            if (!String.IsNullOrEmpty(viewModel.Province)) where = where.And(u => u.Province.Contains(viewModel.Province));
             //}
             List<Device> results = db.Devices.Where<Device>(where).ToList();
             return Content(JsonConvert.SerializeObject(results, dateTimeConverter));
@@ -215,6 +215,7 @@ namespace Teshe.Controllers
             if (ModelState.IsValid)
             {
                 db.Devices.Add(device);
+                AddModifyRecord(device);
                 db.SaveChanges();
                 log.Info("用户" + User.Identity.Name + "于" + DateTime.Now.ToString() + "添加设备" + device.Name);
                 return RedirectToAction("Index");
@@ -269,6 +270,7 @@ namespace Teshe.Controllers
             if (ModelState.IsValid)
             {
                 db.Devices.Add(device);
+                AddModifyRecord(device);
                 db.SaveChanges();
                 log.Info("用户" + User.Identity.Name + "于" + DateTime.Now + "添加提升设备" + device.Name);
                 return RedirectToAction("Index");
@@ -336,6 +338,7 @@ namespace Teshe.Controllers
             if (ModelState.IsValid)
             {
                 db.Devices.Add(device);
+                AddModifyRecord(device);
                 db.SaveChanges();
                 log.Info("用户" + User.Identity.Name + "于" + DateTime.Now + "添加排水设备" + device.Name);
                 return RedirectToAction("Index");
@@ -373,6 +376,7 @@ namespace Teshe.Controllers
             if (ModelState.IsValid)
             {
                 db.Devices.Add(device);
+                AddModifyRecord(device);
                 db.SaveChanges();
                 log.Info("用户" + User.Identity.Name + "于" + DateTime.Now + "添加通风设备" + device.Name);
                 return RedirectToAction("Index");
@@ -412,6 +416,7 @@ namespace Teshe.Controllers
             if (ModelState.IsValid)
             {
                 db.Devices.Add(device);
+                AddModifyRecord(device);
                 db.SaveChanges();
                 log.Info("用户" + User.Identity.Name + "于" + DateTime.Now + "添加压风设备" + device.Name);
                 return RedirectToAction("Index");
@@ -721,6 +726,16 @@ namespace Teshe.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+
+        private void AddModifyRecord(Device device)
+        {
+            DeviceModifyRecord record = new DeviceModifyRecord();
+            record.Device = device;
+            record.ModifyTime = DateTime.Now;
+            record.Content =
+                record.Content = "用户\"" + User.Identity.Name + "\"于\"" + DateTime.Now + "\"添加设备\"" + device.Name + "\"";
+            db.DeviceModifyRecords.Add(record);
         }
 
     }
