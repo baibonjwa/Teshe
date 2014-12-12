@@ -79,14 +79,14 @@
     String roles = new Teshe.Models.TesheContext().UserInfoes.First(u => u.Name == this.User.Identity.Name).UserType.Name;
 }
 <body>
-    <div class="easyui-layout" style="width: 100%; height: 600px">
+    <div class="easyui-layout" style="width: 100%; height: 600px;" fit="true">
         <div data-options="region:'north'" style="height: 65px; background-color: #CCCCCC">
             <h1 style="padding-left: 45px; padding-top: 3px;">矿山在用设备设施安全管理平台</h1>
         </div>
         <div data-options="region:'south',split:true" style="padding: 12px; height: 50px; text-align: center; color: #777777">
             版权所有：辽宁信达检测有限公司
-                技术支持：辽宁工程技术大学
-                帮助中心：辽宁信达检测有限公司
+            技术支持：辽宁工程技术大学
+            帮助中心：辽宁信达检测有限公司
         </div>
         <div data-options="region:'west',split:true" title="主菜单" style="width: 200px;">
             <div id="accordion" class="easyui-accordion" data-options="fit:true,border:false">
@@ -200,7 +200,6 @@
             </div>
         </div>
         <div data-options="region:'center',iconCls:'icon-ok'">
-
             <div id="tt" class="easyui-tabs" data-options="tools:'#tab-tools'">
                 <div title="@ViewBag.Title" style="padding: 10px;">
                     @RenderBody()

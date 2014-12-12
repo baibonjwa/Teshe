@@ -466,3 +466,13 @@ G:\myProject\ASP.NET\finish\Teshe\web\Teshe\Teshe\obj\Debug\Teshe.Migrations.Ini
 G:\myProject\ASP.NET\finish\Teshe\web\Teshe\Teshe\obj\Debug\Teshe.csproj.GenerateResource.Cache
 G:\myProject\ASP.NET\finish\Teshe\web\Teshe\Teshe\obj\Debug\Teshe.dll
 G:\myProject\ASP.NET\finish\Teshe\web\Teshe\Teshe\obj\Debug\Teshe.pdb
+H:\myProject\ASP.NET\finish\Teshe\web\Teshe\Teshe\bin\Ivony.Core.dll
+H:\myProject\ASP.NET\finish\Teshe\web\Teshe\Teshe\bin\Ivony.Html.dll
+H:\myProject\ASP.NET\finish\Teshe\web\Teshe\Teshe\bin\Ivony.Html.Parser.dll
+H:\myProject\ASP.NET\finish\Teshe\web\Teshe\Teshe\bin\Ivony.Html.Parser.Regulars.dll
+H:\myProject\ASP.NET\finish\Teshe\web\Teshe\Teshe\bin\log4net.dll
+H:\myProject\ASP.NET\finish\Teshe\web\Teshe\Teshe\bin\Ivony.Core.xml
+H:\myProject\ASP.NET\finish\Teshe\web\Teshe\Teshe\bin\Ivony.Html.xml
+H:\myProject\ASP.NET\finish\Teshe\web\Teshe\Teshe\bin\Ivony.Html.Parser.xml
+H:\myProject\ASP.NET\finish\Teshe\web\Teshe\Teshe\bin\log4net.pdb
+H:\myProject\ASP.NET\finish\Teshe\web\Teshe\Teshe\bin\log4net.xml

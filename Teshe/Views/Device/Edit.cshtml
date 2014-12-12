@@ -80,6 +80,16 @@
         //alert(json);
         return json;
     }
+    function delImg(fileName, obj) {
+        if (fileName != "") {
+            $("#PhotoUrl").val($("#PhotoUrl").val().replace(fileName + "|", ""));
+            $("#PhotoUrl").val($("#PhotoUrl").val().replace("|" + fileName, ""));
+            $("#PhotoUrl").val($("#PhotoUrl").val().replace(fileName, ""));
+        }
+        $("#" + fileName.split('.')[0]).remove();
+        $("#" + fileName.split('.')[0] + "_del").remove();
+    }
+
 </script>
 @using (Html.BeginForm("Edit", "Device", FormMethod.Post, new { onsubmit = "GetAttr()" }))
 {
@@ -266,6 +276,27 @@
             <td colspan="4">
                 <table class="table table-condensed" id="attributes">
                 </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <label>**单击图片删除</label>
+                <br />
+                @if (!String.IsNullOrEmpty(Model.PhotoUrl))
+                {
+                    String[] photoList = Model.PhotoUrl.Split('|');
+                    foreach (var i in photoList)
+                    {
+                        String imgName = i.Split('.')[0];
+                        String delName = i.Split('.')[0] + "_del";
+                    <a href="/FileUpload/Photo/@i">
+                        <img id="@imgName" src="/FileUpload/Photo/@i" width="160" height="120" alt="无设备照片" /></a><a id="@delName" href="javascript:void(0)" onclick="delImg('@i')">删除</a>
+                    }
+                }
+                else
+                { 
+                    @:无设备照片
+                }
             </td>
         </tr>
         <tr>

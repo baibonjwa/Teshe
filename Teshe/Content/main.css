@@ -1,15 +1,18 @@
-﻿body {
+﻿body
+{
     margin: 0;
     padding: 0;
 }
 
-#top {
+#top
+{
     width: 100%;
     height: 60px;
     background: url(../Images/main_04.gif);
 }
 
-#logo {
+#logo
+{
     width: 369px;
     height: 60px;
     background: url(../Images/main_02.gif);
@@ -17,32 +20,37 @@
     margin-left: 32px;
 }
 
-#user {
+#user
+{
     margin-top: 38px;
     padding-left: 40px;
     float: left;
 }
 
-#main {
+#main
+{
     width: 100%;
     background: url(../Images/main_bg.gif) repeat-x;
 }
 
-#left {
+#left
+{
     width: 188px;
     float: left;
     background-image: url(../Images/main_bg.gif);
     background-repeat: repeat-x;
 }
 
-#left_menu {
+#left_menu
+{
     width: 184px;
     background: url(../Images/main_07.gif) no-repeat;
     height: 52px;
     margin-left: 4px;
 }
 
-#left_tree {
+#left_tree
+{
     width: 184px;
     background: url(../Images/main_19.gif);
     height: 400px;
@@ -50,7 +58,8 @@
     margin-left: 4px;
 }
 
-#tree_icon {
+#tree_icon
+{
     width: 162px;
     height: 95px;
     background: url(../Images/main_12.gif);
@@ -58,14 +67,16 @@
     text-align: center;
 }
 
-#tree_text {
+#tree_text
+{
     width: 162px;
     margin-left: 11px;
     margin-top: 10px;
     list-style: none;
 }
 
-.tree_li {
+.tree_li
+{
     margin-left: -30px;
     margin-top: -10px;
     line-height: 35px;
@@ -73,19 +84,22 @@
     list-style: none;
 }
 
-    .tree_li a {
+    .tree_li a
+    {
         color: #666666;
         font-weight: bold;
         text-decoration: none;
     }
 
-.list_img {
+.list_img
+{
     margin-right: 5px;
     width: 3px;
     margin-left: 5px;
 }
 
-#yh {
+#yh
+{
     width: 50px;
     height: 50px;
     float: left;
@@ -95,7 +109,8 @@
     color: #fff;
 }
 
-#system {
+#system
+{
     width: 50px;
     height: 50px;
     float: right;
@@ -105,7 +120,8 @@
     color: #fff;
 }
 
-#tree_down {
+#tree_down
+{
     height: 17px;
     width: 184px;
     margin-left: 0px;
@@ -113,14 +129,16 @@
     background: url(../Images/main_21.gif);
 }
 
-#right_top {
+#right_top
+{
     height: 35px;
     color: #fff;
     background-image: url(../Images/main_09.gif);
     background-repeat: repeat-x;
 }
 
-#img {
+#img
+{
     height: 26px;
     width: 35px;
     float: left;
@@ -128,112 +146,148 @@
     text-align: center;
 }
 
-.imgtext {
+.imgtext
+{
     float: left;
     display: block;
     margin-top: 8px;
     margin-left: 3px;
 }
 
-    .imgtext a {
+    .imgtext a
+    {
         color: white;
         text-decoration: none;
     }
 
-        .imgtext a:hover {
+        .imgtext a:hover
+        {
             color: white;
             text-decoration: none;
         }
 
 
-#loginout {
+#loginout
+{
     float: right;
     margin-right: 60px;
     padding-top: 5px;
     width: 150px;
 }
 
-#loginoutimg {
+#loginoutimg
+{
     width: 26px;
     height: 26px;
     float: left;
 }
 
-.logintext {
+.logintext
+{
     display: block;
     padding-top: 3px;
     margin-left: 3px;
     float: left;
 }
 
-    .logintext a {
+    .logintext a
+    {
         color: #ffffff;
         text-decoration: none;
     }
 
-        .logintext a:link {
+        .logintext a:link
+        {
             color: #ffffff;
         }
 
-        .logintext a:active {
+        .logintext a:active
+        {
             color: #ffffff;
         }
 
 
-#right_font {
+#right_font
+{
     padding-top: 10px;
     height: 28px;
     background-image: url(../Images/main_10.gif);
     background-repeat: repeat-x;
 }
 
-    #right_font img {
+    #right_font img
+    {
         padding-right: 8px;
         margin-left: 15px;
     }
 
-.bfont {
+.bfont
+{
     font-weight: bolder;
     font-size: 9pt;
 }
 
-.bfont2 {
+.bfont2
+{
     font-weight: bolder;
 }
 
 
-.content {
+.content
+{
     width: 100%;
 }
 
-.top {
+.top
+{
     float: left;
     width: 100%;
     height: 60px;
 }
 
-.center {
+.center
+{
     float: left;
     width: 100%;
 }
 
-.right {
+.right
+{
 }
 
-.right_top {
+.right_top
+{
     float: left;
     height: 67px;
 }
 
-.width300 {
+.width300
+{
     width: 300px;
 }
 
-.form_table {
+.form_table
+{
     width: 100%;
 }
 
 
-.textBoxHeight {
+.textBoxHeight
+{
     height: 20px;
+}
+
+#content
+{
+    width: 100%;
+    height: 100%;
+    border:none;
+}
+
+.zone
+{
+    float: left;
+    width: 48%;
+    height: 48%;
+    margin: 3px;
 }
