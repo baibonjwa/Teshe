@@ -1,0 +1,72 @@
+﻿@model Teshe.Models.UserInfoLoginViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>矿山在用设备设施安全管理平台</title>
+    @Styles.Render("~/Content/login.css")
+</head>
+<body>
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <div id="login">
+        @Html.AntiForgeryToken()
+        <div id="top">
+            <div id="top_left">
+                <img src="/Images/login_03.gif" />
+            </div>
+            <div id="top_center"></div>
+        </div>
+        @using (Html.BeginForm())
+        {
+            <div id="center">
+                <div id="center_left"></div>
+                <div id="center_middle">
+                    <div id="user">
+                        @Html.LabelFor(model => model.Name)：
+                        @Html.EditorFor(model => model.Name)
+                        <br />
+                        <span class="red">@Html.ValidationMessageFor(model => model.Name)</span>
+                    </div>
+                    <div id="password">
+                        @Html.LabelFor(model => model.Password)：
+                        @Html.EditorFor(model => model.Password)
+                        <br />
+                        <span class="red">@Html.ValidationMessageFor(model => model.Password)</span>
+                    </div>
+                    <div id="btn">
+                        <input type="submit" value="登陆"  />
+                        <a href="/UserInfo/Create">注册</a>
+                        <span class="red">@Html.ValidationSummary(true)</span>
+                    </div>
+
+                </div>
+                <div id="center_right"></div>
+            </div>
+        }
+        <div id="down">
+            <div id="down_left">
+                <div id="inf">
+                    <span class="inf_text">版本信息</span>
+                    <span class="copyright">管理信息系统 2014 beta v1.4</span>
+                </div>
+            </div>
+            <div id="down_center"></div>
+        </div>
+    </div>
+
+
+
+
+    @* <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
+</body>
+</html>

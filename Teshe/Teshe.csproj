@@ -662,6 +662,7 @@
     <Content Include="Images\page_next.gif" />
     <Content Include="Images\system.gif" />
     <Content Include="Images\sz.gif" />
+    <Content Include="Images\title.gif" />
     <Content Include="Images\upload.gif" />
     <Content Include="Images\user.gif" />
     <Content Include="Images\user_all_bg.gif" />
@@ -1249,6 +1250,9 @@
     <Content Include="Views\Shared\_BackRightTop.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\UserInfo\Login--exclude.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1274,7 +1278,6 @@
     <Content Include="Views\Mail\Create.cshtml" />
     <Content Include="Views\Mail\Edit.cshtml" />
     <Content Include="Views\Mail\Delete.cshtml" />
-    <Content Include="Views\UserInfo\Login.cshtml" />
     <Content Include="Views\Shared\_BackTop.cshtml" />
     <Content Include="Views\Shared\_BackLeft.cshtml" />
     <Content Include="Views\Shared\_BackRight.cshtml" />
@@ -1331,7 +1334,7 @@
     <Content Include="Views\Device\CreateAirmovingDevice.cshtml" />
     <Content Include="Views\Device\CreatePressureAir.cshtml" />
     <Content Include="Views\Device\OutDate.cshtml" />
-    <Content Include="Views\UserInfo\Login2.cshtml" />
+    <Content Include="Views\UserInfo\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

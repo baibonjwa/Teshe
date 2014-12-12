@@ -1,72 +1,95 @@
-锘緻model Teshe.Models.UserInfoLoginViewModel
+@model Teshe.Models.UserInfoLoginViewModel
 
 @{
     Layout = null;
 }
 
-<!DOCTYPE html>
-
+<!DOCTYPE >
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>鐭垮北鍦ㄧ敤璁惧璁炬柦瀹夊叏绠＄悊骞冲彴</title>
-    @Styles.Render("~/Content/login.css")
+    <title>用户登录</title>
+    <link
+        href="/Content/Default.css" type="text/css" rel="stylesheet">
+    <link
+        href="/Content/xtree.css" type="text/css" rel="stylesheet">
+    <link
+        href="/Content/User_Login.css" type="text/css" rel="stylesheet">
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <meta content="MSHTML 6.00.6000.16674" name="GENERATOR">
 </head>
-<body>
-    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-    <div id="login">
-        @Html.AntiForgeryToken()
-        <div id="top">
-            <div id="top_left">
-                <img src="/Images/login_03.gif" />
-            </div>
-            <div id="top_center"></div>
+<body id="userlogin_body">
+    <div></div>
+    @Html.AntiForgeryToken()
+    @using (Html.BeginForm())
+    {
+        <div id="title">
+            
         </div>
-        @using (Html.BeginForm())
-        {
-            <div id="center">
-                <div id="center_left"></div>
-                <div id="center_middle">
-                    <div id="user">
-                        @Html.LabelFor(model => model.Name)锛�
-                        @Html.EditorFor(model => model.Name)
-                        <br />
-                        <span class="red">@Html.ValidationMessageFor(model => model.Name)</span>
-                    </div>
-                    <div id="password">
-                        @Html.LabelFor(model => model.Password)锛�
-                        @Html.EditorFor(model => model.Password)
-                        <br />
-                        <span class="red">@Html.ValidationMessageFor(model => model.Password)</span>
-                    </div>
-                    <div id="btn">
-                        <input type="submit" value="鐧婚檰"  />
-                        <a href="/UserInfo/Create">娉ㄥ唽</a>
-                        <span class="red">@Html.ValidationSummary(true)</span>
-                    </div>
+        <div id="user_login">
+            <dl>
+                <dd id="user_top">
+                    <ul>
+                        <li class="user_top_l"></li>
+                        <li class="user_top_c"></li>
+                        <li class="user_top_r"></li>
+                    </ul>
+                    <dd id="user_main">
+                        <ul>
+                            <li class="user_main_l"></li>
+                            <li class="user_main_c">
+                                <div class="user_main_box">
+                                    <ul>
+                                        <li class="user_main_text">用户名： </li>
+                                        <li class="user_main_input">
+                                            @Html.EditorFor(model => model.Name)
+                                            <br />
 
-                </div>
-                <div id="center_right"></div>
-            </div>
-        }
-        <div id="down">
-            <div id="down_left">
-                <div id="inf">
-                    <span class="inf_text">鐗堟湰淇℃伅</span>
-                    <span class="copyright">绠＄悊淇℃伅绯荤粺 2014 beta v1.4</span>
-                </div>
-            </div>
-            <div id="down_center"></div>
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li class="user_main_text">密 码： </li>
+                                        <li class="user_main_input">
+                                            @Html.EditorFor(model => model.Password)
+                                            <br />
+                                            <span class="red">@Html.ValidationMessageFor(model => model.Name)</span>
+                                            <span class="red">@Html.ValidationMessageFor(model => model.Password)
+                                                <span class="red">@Html.ValidationSummary(true)</span>
+                                                <a href="/UserInfo/Create">注册用户</a>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li class="user_main_text"></li>
+                                        <li class="user_main_input"></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="user_main_r">
+                                @*                                <input type="submit" value="登陆" />*@
+                                @*                                <a href="/UserInfo/Create">注册</a>*@
+
+                                <input class="IbtnEnterCssClass" id="IbtnEnter"
+                                    style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px"
+                                    @*onclick=' javascript: WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions("IbtnEnter", "", true, "", "", false, false)) '*@
+                                    type="image" src="images/user_botton.gif" name="IbtnEnter">
+                            </li>
+                        </ul>
+                        <dd id="user_bottom">
+                            <ul>
+                                <li class="user_bottom_l"></li>
+                                <li class="user_bottom_c"><span style="MARGIN-TOP: 40px"></span></li>
+                                <li class="user_bottom_r"></li>
+                            </ul>
+                        </dd>
+            </dl>
         </div>
-    </div>
+    }
+    <span id="ValrUserName"
+        style="DISPLAY: none; COLOR: red"></span><span id="ValrPassword"
+            style="DISPLAY: none; COLOR: red"></span><span id="ValrValidateCode"
+                style="DISPLAY: none; COLOR: red"></span>
+    <div id="ValidationSummary1" style="DISPLAY: none; COLOR: red"></div>
 
-
-
-
-    @* <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>*@
+    <div></div>
 </body>
 </html>
