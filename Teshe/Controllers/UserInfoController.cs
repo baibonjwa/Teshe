@@ -355,9 +355,31 @@ namespace Teshe.Controllers
             return View();
         }
 
+        [AllowAnonymous]
+        public ActionResult Login2()
+        {
+            //ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
+
         [HttpPost]
         [AllowAnonymous]
         public ActionResult Login(UserInfoLoginViewModel userinfo)
+        {
+            if (ValidateUser(userinfo.Name, userinfo.Password))
+            {
+                FormsAuthentication.SetAuthCookie(userinfo.Name, false);
+                return RedirectToAction("Index", "Home");
+            }
+
+            ModelState.AddModelError("", "您输入的账号或密码有错误");
+            return View();
+        }
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult Login2(UserInfoLoginViewModel userinfo)
         {
             if (ValidateUser(userinfo.Name, userinfo.Password))
             {

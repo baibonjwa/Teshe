@@ -17,7 +17,7 @@ namespace Teshe
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "UserInfo", action = "Login", id = UrlParameter.Optional }
+                defaults: new { controller = "UserInfo", action = "Login2", id = UrlParameter.Optional }
             );       
         }
     }

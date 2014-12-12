@@ -216,6 +216,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Default.css" />
     <Content Include="Content\main.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -272,6 +273,8 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\tablestyle.css" />
+    <Content Include="Content\User_Login.css" />
+    <Content Include="Content\xtree.css" />
     <Content Include="easyui\changelog.txt" />
     <Content Include="easyui\easyloader.js" />
     <Content Include="easyui\jquery.easyui.js" />
@@ -661,6 +664,20 @@
     <Content Include="Images\sz.gif" />
     <Content Include="Images\upload.gif" />
     <Content Include="Images\user.gif" />
+    <Content Include="Images\user_all_bg.gif" />
+    <Content Include="Images\user_bottom_c.gif" />
+    <Content Include="Images\user_bottom_l.gif" />
+    <Content Include="Images\user_bottom_r.gif" />
+    <Content Include="Images\user_botton.gif" />
+    <Content Include="Images\user_login_name.gif" />
+    <Content Include="Images\user_login_password.gif" />
+    <Content Include="Images\user_login_validatecode.gif" />
+    <Content Include="Images\user_main_c.gif" />
+    <Content Include="Images\user_main_l.gif" />
+    <Content Include="Images\user_main_r.gif" />
+    <Content Include="Images\user_top_c.gif" />
+    <Content Include="Images\user_top_l.gif" />
+    <Content Include="Images\user_top_r.gif" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="log4net.config" />
@@ -1314,6 +1331,7 @@
     <Content Include="Views\Device\CreateAirmovingDevice.cshtml" />
     <Content Include="Views\Device\CreatePressureAir.cshtml" />
     <Content Include="Views\Device\OutDate.cshtml" />
+    <Content Include="Views\UserInfo\Login2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
